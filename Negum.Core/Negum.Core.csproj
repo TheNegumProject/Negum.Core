@@ -18,4 +18,11 @@
         <NeutralLanguage>en</NeutralLanguage>
     </PropertyGroup>
 
+    <ItemGroup>
+      <Folder Include="Configurations\Selections" />
+      <Folder Include="Configurations\Systems" />
+      <Folder Include="Parsers" />
+      <Folder Include="Readers" />
+    </ItemGroup>
+
 </Project>
