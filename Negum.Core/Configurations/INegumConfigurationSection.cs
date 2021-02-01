@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Negum.Core.Configurations
 {
     /// <summary>
@@ -23,5 +25,10 @@ namespace Negum.Core.Configurations
         /// <param name="newValue"></param>
         /// <typeparam name="TValue"></typeparam>
         void SetNewValue<TValue>(string key, TValue newValue);
+
+        /// <summary>
+        /// </summary>
+        /// <returns>Enumerable which contains all pairs of currently known elements.</returns>
+        IEnumerable<KeyValuePair<string, object>> GetAll();
     }
 }
