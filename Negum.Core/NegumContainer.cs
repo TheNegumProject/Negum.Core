@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Negum.Core.Configurations;
+using Negum.Core.Configurations.Selections;
 using Negum.Core.Configurations.Settings;
 
 namespace Negum.Core
@@ -61,7 +62,7 @@ namespace Negum.Core
 
             // Configurations
             Register<INegumSettings, NegumSettings>();
-            // Register<INegumSelection, >();
+            Register<INegumSelection, NegumSelection>();
             // Register<INegumSystem, >();
 
             // Sections -> Settings
@@ -75,6 +76,13 @@ namespace Negum.Core
             Register<INegumConfigurationArcadeSection, NegumSettingsSection>();
             Register<INegumConfigurationInputSection, NegumSettingsSection>();
             Register<INegumConfigurationPlayerKeysSection, NegumSettingsSection>();
+            
+            // Sections -> Selection
+            Register<INegumConfigurationCharactersSection, NegumSelectionSection>();
+            Register<INegumConfigurationExtraStagesSection, NegumSelectionSection>();
+            Register<INegumConfigurationSelectionOptionsSection, NegumSelectionSection>();
+            
+            // Section -> System
         }
     }
 

@@ -1,3 +1,5 @@
+using Negum.Core.Configurations.Selections;
+
 namespace Negum.Core.Configurations
 {
     /// <summary>
@@ -9,5 +11,19 @@ namespace Negum.Core.Configurations
     /// </author>
     public interface INegumSelection : INegumConfigurationElement
     {
+        /// <summary>
+        /// Characters section.
+        /// </summary>
+        INegumConfigurationCharactersSection Characters { get; }
+
+        /// <summary>
+        /// Extra Stages section.
+        /// </summary>
+        INegumConfigurationExtraStagesSection ExtraStages { get; }
+
+        /// <summary>
+        /// Options section.
+        /// </summary>
+        INegumConfigurationSelectionOptionsSection Options { get; }
     }
 }
