@@ -82,15 +82,36 @@ namespace Negum.Core
     {
         /// <summary>
         /// Contains all types registered for the application.
+        /// 
+        /// Parameters:
+        /// Interface Type, Implementation Type
         /// </summary>
         private static IDictionary<Type, Type> Types { get; } = new Dictionary<Type, Type>();
+
+        /// <summary>
+        /// Contains already created instances. Dummy way to keep singletons.
+        /// 
+        /// Parameters:
+        /// Interface Type, Implementation Type Instance
+        /// 
+        /// REMEMBER:
+        /// When registering an instance in different IoC framework try to make sure it's registered as singleton.
+        /// </summary>
+        private static IDictionary<Type, object> Instances { get; } = new Dictionary<Type, object>();
 
         static NegumDummyContainer()
         {
         }
 
-        public static object Resolve(Type type) =>
-            Types.ContainsKey(type) ? Activator.CreateInstance(Types[type]) : null;
+        public static object Resolve(Type interfaceType)
+        {
+            if (!Instances.ContainsKey(interfaceType) && Types.ContainsKey(interfaceType))
+            {
+                Instances.Add(interfaceType, Activator.CreateInstance(Types[interfaceType]));
+            }
+
+            return Instances.ContainsKey(interfaceType) ? Instances[interfaceType] : null;
+        }
 
         public static void Register(Type interfaceType, Type implementationType) =>
             Types.Add(interfaceType, implementationType);
