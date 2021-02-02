@@ -1,8 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Negum.Core.Configurations;
-using Negum.Core.Configurations.Selections;
-using Negum.Core.Configurations.Settings;
 
 namespace Negum.Core
 {
@@ -43,7 +40,7 @@ namespace Negum.Core
 
         /// <summary>
         /// </summary>
-        /// <typeparam name="TInterface"></typeparam>
+        /// <typeparam name="TInterface">Interface type.</typeparam>
         /// <returns>Resolved interface type or null if no found.</returns>
         public static TInterface Resolve<TInterface>() =>
             (TInterface) Resolver(typeof(TInterface));
@@ -52,37 +49,10 @@ namespace Negum.Core
         /// Registers known types to container.
         ///
         /// REMEMBER:
-        /// Call it at least once before calling NegumEngine.Instance
+        /// Call it at least once before using the engine.
         /// </summary>
         public static void RegisterKnownTypes()
         {
-            // Core interfaces
-            Register<INegumEngine, NegumEngine>();
-            Register<INegumConfiguration, NegumConfiguration>();
-
-            // Configurations
-            Register<INegumSettings, NegumSettings>();
-            Register<INegumSelection, NegumSelection>();
-            Register<INegumSystem, >();
-
-            // Sections -> Settings
-            Register<INegumConfigurationOptionsSection, NegumSettingsSection>();
-            Register<INegumConfigurationRulesSection, NegumSettingsSection>();
-            Register<INegumConfigurationConfigSection, NegumSettingsSection>();
-            Register<INegumConfigurationDebugSection, NegumSettingsSection>();
-            Register<INegumConfigurationVideoSection, NegumSettingsSection>();
-            Register<INegumConfigurationSoundSection, NegumSettingsSection>();
-            Register<INegumConfigurationMiscSection, NegumSettingsSection>();
-            Register<INegumConfigurationArcadeSection, NegumSettingsSection>();
-            Register<INegumConfigurationInputSection, NegumSettingsSection>();
-            Register<INegumConfigurationPlayerKeysSection, NegumSettingsSection>();
-            
-            // Sections -> Selection
-            Register<INegumConfigurationCharactersSection, NegumSelectionSection>();
-            Register<INegumConfigurationExtraStagesSection, NegumSelectionSection>();
-            Register<INegumConfigurationSelectionOptionsSection, NegumSelectionSection>();
-            
-            // Section -> System
         }
     }
 
