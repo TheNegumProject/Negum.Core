@@ -119,10 +119,20 @@ namespace Negum.Core.Containers
         {
             if (lifetime == NegumObjectLifetime.Singleton)
             {
+                if (Instances.ContainsKey(interfaceType))
+                {
+                    Instances.Remove(interfaceType);
+                }
+                
                 Instances.Add(interfaceType, Activator.CreateInstance(implementationType));
             }
             else
             {
+                if (Types.ContainsKey(interfaceType))
+                {
+                    Types.Remove(interfaceType);
+                }
+                
                 Types.Add(interfaceType, implementationType);
             }
         }
