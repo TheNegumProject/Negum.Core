@@ -18,9 +18,4 @@
         <NeutralLanguage>en</NeutralLanguage>
     </PropertyGroup>
 
-    <ItemGroup>
-      <Folder Include="Parsers" />
-      <Folder Include="Readers" />
-    </ItemGroup>
-
 </Project>

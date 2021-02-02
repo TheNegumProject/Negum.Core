@@ -1,7 +1,11 @@
 using System;
 using System.Collections.Generic;
+using Negum.Core.Cleaners;
+using Negum.Core.Configurations;
+using Negum.Core.Parsers;
+using Negum.Core.Readers;
 
-namespace Negum.Core
+namespace Negum.Core.Containers
 {
     /// <summary>
     /// Container which is used throughout the Negum Engine.
@@ -18,8 +22,8 @@ namespace Negum.Core
         /// 
         /// Entry point for binding any desired IoC container; by default will use dummy container.
         /// </summary>
-        public static Action<Type, Type> Registerer { get; set; } = (interfaceType, implementationType) =>
-            NegumDummyContainer.Register(interfaceType, implementationType);
+        public static Action<NegumObjectLifetime, Type, Type> Registerer { get; set; } = (lifetime, interfaceType, implementationType) =>
+            NegumDummyContainer.Register(lifetime, interfaceType, implementationType);
 
         /// <summary>
         /// DO NOT USE IT DIRECTLY !!!
@@ -35,8 +39,8 @@ namespace Negum.Core
         /// </summary>
         /// <typeparam name="TInterface">Interface type.</typeparam>
         /// <typeparam name="TClass">Implementation type.</typeparam>
-        public static void Register<TInterface, TClass>() where TClass : class, TInterface =>
-            Registerer(typeof(TInterface), typeof(TClass));
+        public static void Register<TInterface, TClass>(NegumObjectLifetime lifetime = NegumObjectLifetime.Transient) where TClass : class, TInterface =>
+            Registerer(lifetime, typeof(TInterface), typeof(TClass));
 
         /// <summary>
         /// </summary>
@@ -53,9 +57,29 @@ namespace Negum.Core
         /// </summary>
         public static void RegisterKnownTypes()
         {
+            // Readers
+            Register<IConfigurationReader, ConfigurationReader>(NegumObjectLifetime.Singleton);
+            
+            // Cleaners
+            Register<IConfigurationCleaner, ConfigurationCleaner>(NegumObjectLifetime.Singleton);
+            
+            // Parsers
+            Register<IConfigurationParser, ConfigurationParser>(NegumObjectLifetime.Singleton);
+            
+            // Configurations
+            Register<IConfigurationSectionEntry, ConfigurationSectionEntry>();
+            Register<IConfigurationSection, ConfigurationSection>();
+            Register<IConfigurationDefinition, ConfigurationDefinition>();
         }
     }
 
+    /// <summary>
+    /// Dummy container used as a default solution for the engine.
+    /// </summary>
+    /// 
+    /// <author>
+    /// https://github.com/TheNegumProject/Negum.Core
+    /// </author>
     internal static class NegumDummyContainer
     {
         /// <summary>
@@ -83,15 +107,24 @@ namespace Negum.Core
 
         public static object Resolve(Type interfaceType)
         {
-            if (!Instances.ContainsKey(interfaceType) && Types.ContainsKey(interfaceType))
+            if (Instances.ContainsKey(interfaceType))
             {
-                Instances.Add(interfaceType, Activator.CreateInstance(Types[interfaceType]));
+                return Instances[interfaceType];
             }
 
-            return Instances.ContainsKey(interfaceType) ? Instances[interfaceType] : null;
+            return Types.ContainsKey(interfaceType) ? Activator.CreateInstance(Types[interfaceType]) : null;
         }
 
-        public static void Register(Type interfaceType, Type implementationType) =>
-            Types.Add(interfaceType, implementationType);
+        public static void Register(NegumObjectLifetime lifetime, Type interfaceType, Type implementationType)
+        {
+            if (lifetime == NegumObjectLifetime.Singleton)
+            {
+                Instances.Add(interfaceType, Activator.CreateInstance(implementationType));
+            }
+            else
+            {
+                Types.Add(interfaceType, implementationType);
+            }
+        }
     }
 }
