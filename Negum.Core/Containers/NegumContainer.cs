@@ -65,11 +65,13 @@ namespace Negum.Core.Containers
             
             // Parsers
             Register<IConfigurationParser, ConfigurationParser>(NegumObjectLifetime.Singleton);
+            Register<INegumConfigurationParser, NegumConfigurationParser>(NegumObjectLifetime.Singleton);
             
             // Configurations
             Register<IConfigurationSectionEntry, ConfigurationSectionEntry>();
             Register<IConfigurationSection, ConfigurationSection>();
             Register<IConfigurationDefinition, ConfigurationDefinition>();
+            Register<INegumConfiguration, NegumConfiguration>(NegumObjectLifetime.Singleton);
         }
     }
 
