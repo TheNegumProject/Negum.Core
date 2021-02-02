@@ -63,7 +63,7 @@ namespace Negum.Core
             // Configurations
             Register<INegumSettings, NegumSettings>();
             Register<INegumSelection, NegumSelection>();
-            // Register<INegumSystem, >();
+            Register<INegumSystem, >();
 
             // Sections -> Settings
             Register<INegumConfigurationOptionsSection, NegumSettingsSection>();

@@ -19,7 +19,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Configurations\Systems" />
       <Folder Include="Parsers" />
       <Folder Include="Readers" />
     </ItemGroup>
