@@ -58,8 +58,15 @@ namespace Negum.Core.Parsers
             if (line.Contains(equalsChar))
             {
                 var index = line.IndexOf(equalsChar, StringComparison.Ordinal);
-                entry.Key = line.Substring(0, index).Trim();
-                entry.Value = line.Substring(index + 1, line.Length - index - 1).Trim();
+                
+                entry.Key = line
+                    .Substring(0, index)
+                    .Trim();
+                
+                entry.Value = line
+                    .Substring(index + 1, line.Length - index - 1)
+                    .Replace("\"", "")
+                    .Trim();
             }
             else
             {
