@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using Negum.Core.Cleaners;
-using Negum.Core.Configurations.Managers;
 using Negum.Core.Containers;
+using Negum.Core.Managers;
 using Negum.Core.Parsers;
 using Negum.Core.Readers;
 using Xunit;

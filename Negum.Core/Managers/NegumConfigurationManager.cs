@@ -1,6 +1,7 @@
+using Negum.Core.Configurations;
 using Negum.Core.Containers;
 
-namespace Negum.Core.Configurations.Managers
+namespace Negum.Core.Managers
 {
     /// <summary>
     /// Manager which provides helper methods for INegumConfiguration.
