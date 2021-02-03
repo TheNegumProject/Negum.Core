@@ -1,3 +1,4 @@
+using System;
 using Negum.Core.Configurations;
 using Negum.Core.Containers;
 
@@ -31,5 +32,14 @@ namespace Negum.Core.Scrappers
 
         public string GetString(string sectionName, string fieldKey) =>
             this.ConfigDef.Sections[sectionName][fieldKey];
+
+        public DateTime GetDate(string sectionName, string fieldKey) =>
+            DateTime.Parse(this.GetString(sectionName, fieldKey));
+
+        public IFileEntry GetFile(string sectionName, string fieldKey) =>
+            NegumContainer.Resolve<IFileEntry>().From(this.GetString(sectionName, fieldKey));
+
+        public IEntryCollection<TEntry> GetCollection<TEntry>(string sectionName, string fieldKey) =>
+            NegumContainer.Resolve<IEntryCollection<TEntry>>().From(this.ConfigDef.Sections[sectionName], fieldKey);
     }
 }

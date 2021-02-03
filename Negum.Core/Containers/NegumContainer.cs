@@ -71,6 +71,8 @@ namespace Negum.Core.Containers
             
             // Scrappers
             Register<IConfigurationScrapper, ConfigurationScrapper>();
+            Register<IFileEntry, FileEntry>();
+            Register<IEntryCollection<IFileEntry>, EntryCollection<IFileEntry>>();
             
             // Configurations
             Register<IConfigurationSectionEntry, ConfigurationSectionEntry>();

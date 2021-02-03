@@ -39,7 +39,7 @@ namespace Negum.Core.Managers
             /// you may need to set the motif line to use data/system.def instead.
             /// motif = data/system.def  - Use this line if using a motif that overwrites system files.
             /// </summary>
-            public static string Motif => Scrapper.GetString(SectionKey, "motif");
+            public static IFileEntry Motif => Scrapper.GetFile(SectionKey, "motif");
         }
 
         public static class Rules
@@ -47,23 +47,20 @@ namespace Negum.Core.Managers
             public const string SectionKey = "Rules";
 
             /// <summary>
-            /// Keep this set at VS. It's the only option supported for now...
-            /// </summary>
-            public static string GameType => Scrapper.GetString(SectionKey, "GameType");
-
-            /// <summary>
             /// This is the amount of power the attacker gets when an attack successfully hits the opponent.
             /// It's a multiplier of the damage done.
             /// For example, for a value of 3, a hit that does 10 damage will give 30 power.
             /// </summary>
-            public static float DefaultAttackLifeToPowerMul => Scrapper.GetFloat(SectionKey, "Default.Attack.LifeToPowerMul");
+            public static float DefaultAttackLifeToPowerMul =>
+                Scrapper.GetFloat(SectionKey, "Default.Attack.LifeToPowerMul");
 
             /// <summary>
             /// This is like the above, but it's for the person getting hit.
             /// These two multipliers can be overridden in the Hitdef controller in the
             /// CNS by using the "getpower" and "givepower" options.
             /// </summary>
-            public static float DefaultGetHitLifeToPowerMul => Scrapper.GetFloat(SectionKey, "Default.GetHit.LifeToPowerMul");
+            public static float DefaultGetHitLifeToPowerMul =>
+                Scrapper.GetFloat(SectionKey, "Default.GetHit.LifeToPowerMul");
 
             /// <summary>
             /// This controls how much damage a super does when you combo into it.
@@ -131,7 +128,8 @@ namespace Negum.Core.Managers
             /// Minimum 256 for acceptable performance.
             /// If you set this too large you may also experience performance degredation.
             /// </summary>
-            public static int SpriteDecompressionBufferSize => Scrapper.GetInt(SectionKey, "SpriteDecompressionBufferSize");
+            public static int SpriteDecompressionBufferSize =>
+                Scrapper.GetInt(SectionKey, "SpriteDecompressionBufferSize");
 
             /// <summary>
             /// Maximum number of explods allowed in total.
@@ -198,7 +196,8 @@ namespace Negum.Core.Managers
             /// <summary>
             /// Set to true to hide the development build banner that shows on startup.
             /// </summary>
-            public static bool HideDevelopmentBuildBanner => Scrapper.GetBoolean(SectionKey, "HideDevelopmentBuildBanner");
+            public static bool HideDevelopmentBuildBanner =>
+                Scrapper.GetBoolean(SectionKey, "HideDevelopmentBuildBanner");
         }
 
         public static class Video
@@ -397,35 +396,35 @@ namespace Negum.Core.Managers
         public static class P1Keys
         {
             public const string SectionKey = "P1 Keys";
-            
+
             public static Keys Keys { get; } = new Keys(SectionKey);
         }
 
         public static class P2Keys
         {
             public const string SectionKey = "P2 Keys";
-            
+
             public static Keys Keys { get; } = new Keys(SectionKey);
         }
 
         public static class P1Joystick
         {
             public const string SectionKey = "P1 Joystick";
-            
+
             public static Keys Keys { get; } = new Keys(SectionKey);
         }
 
         public static class P2Joystick
         {
             public const string SectionKey = "P2 Joystick";
-            
+
             public static Keys Keys { get; } = new Keys(SectionKey);
         }
 
         public class Keys
         {
             private string SectionName { get; }
-            
+
             public int Jump => Scrapper.GetInt(SectionName, "Jump");
             public int Crouch => Scrapper.GetInt(SectionName, "Crouch");
             public int Left => Scrapper.GetInt(SectionName, "Left");
@@ -437,7 +436,7 @@ namespace Negum.Core.Managers
             public int Y => Scrapper.GetInt(SectionName, "Y");
             public int Z => Scrapper.GetInt(SectionName, "Z");
             public int Start => Scrapper.GetInt(SectionName, "Start");
-            
+
             public Keys(string sectionName)
             {
                 this.SectionName = sectionName;
