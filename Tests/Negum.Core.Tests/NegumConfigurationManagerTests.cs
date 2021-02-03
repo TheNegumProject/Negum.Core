@@ -1,9 +1,7 @@
 using System.Threading.Tasks;
-using Negum.Core.Cleaners;
-using Negum.Core.Containers;
+using Negum.Core.Configurations;
 using Negum.Core.Managers;
 using Negum.Core.Parsers;
-using Negum.Core.Readers;
 using Xunit;
 
 namespace Negum.Core.Tests
@@ -22,16 +20,9 @@ namespace Negum.Core.Tests
         {
             this.InitializeContainer();
             
-            var reader = NegumContainer.Resolve<IConfigurationReader>();
-            var data = await reader.ReadAsync(path);
-
-            var cleaner = NegumContainer.Resolve<IConfigurationCleaner>();
-            var cleaned = await cleaner.CleanAsync(data);
-
-            var parser = NegumContainer.Resolve<INegumConfigurationParser>();
-            var result = await parser.ParseAsync(cleaned);
-            
+            var result = await this.Parse<INegumConfigurationParser, INegumConfiguration>(path);
             var key = NegumConfigurationManager.P1Keys.Keys.X;
+            
             Assert.True(key == 108);
         }
     }
