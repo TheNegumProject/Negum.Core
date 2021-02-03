@@ -4,6 +4,7 @@ using Negum.Core.Cleaners;
 using Negum.Core.Configurations;
 using Negum.Core.Parsers;
 using Negum.Core.Readers;
+using Negum.Core.Scrappers;
 
 namespace Negum.Core.Containers
 {
@@ -67,6 +68,9 @@ namespace Negum.Core.Containers
             Register<IConfigurationParser, ConfigurationParser>(NegumObjectLifetime.Singleton);
             Register<INegumConfigurationParser, NegumConfigurationParser>(NegumObjectLifetime.Singleton);
             Register<IMotifConfigurationParser, MotifConfigurationParser>(NegumObjectLifetime.Singleton);
+            
+            // Scrappers
+            Register<IConfigurationScrapper, ConfigurationScrapper>();
             
             // Configurations
             Register<IConfigurationSectionEntry, ConfigurationSectionEntry>();
