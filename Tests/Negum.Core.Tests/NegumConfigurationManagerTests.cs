@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using Negum.Core.Cleaners;
+using Negum.Core.Configurations.Managers;
 using Negum.Core.Containers;
 using Negum.Core.Parsers;
 using Negum.Core.Readers;
@@ -13,23 +14,25 @@ namespace Negum.Core.Tests
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public class ConfigurationParserTests : TestBase
+    public class NegumConfigurationManagerTests : TestBase
     {
         [Theory]
         [InlineData("/Users/kdobrzynski/Downloads/mugen-1.1b1/data/mugen.cfg")]
-        [InlineData("/Users/kdobrzynski/Downloads/mugen-1.1b1/data/mugen1/system.def")]
-        public async Task Should_Clean_Read_Configuration(string path)
+        public async Task Should_Get_Appropriate_Key(string path)
         {
+            this.InitializeContainer();
+            
             var reader = NegumContainer.Resolve<IConfigurationReader>();
             var data = await reader.ReadAsync(path);
 
             var cleaner = NegumContainer.Resolve<IConfigurationCleaner>();
             var cleaned = await cleaner.CleanAsync(data);
 
-            var parser = NegumContainer.Resolve<IConfigurationParser>();
+            var parser = NegumContainer.Resolve<INegumConfigurationParser>();
             var result = await parser.ParseAsync(cleaned);
             
-            Assert.True(result != null);
+            var key = NegumConfigurationManager.P1Keys.Keys.X;
+            Assert.True(key == 108);
         }
     }
 }
