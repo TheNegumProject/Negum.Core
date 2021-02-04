@@ -73,6 +73,7 @@ namespace Negum.Core.Containers
             Register<IConfigurationScrapper, ConfigurationScrapper>();
             Register<IFileEntry, FileEntry>();
             Register<IEntryCollection<IFileEntry>, EntryCollection<IFileEntry>>();
+            Register<IAudioEntry, AudioEntry>();
             
             // Configurations
             Register<IConfigurationSectionEntry, ConfigurationSectionEntry>();

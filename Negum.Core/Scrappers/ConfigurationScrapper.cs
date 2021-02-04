@@ -41,5 +41,8 @@ namespace Negum.Core.Scrappers
 
         public IEntryCollection<TEntry> GetCollection<TEntry>(string sectionName, string fieldKey) =>
             NegumContainer.Resolve<IEntryCollection<TEntry>>().From(this.ConfigDef.Sections[sectionName], fieldKey);
+
+        public IAudioEntry GetAudio(string sectionName, string fieldKey) =>
+            NegumContainer.Resolve<IAudioEntry>().From(this.GetString(sectionName, fieldKey));
     }
 }

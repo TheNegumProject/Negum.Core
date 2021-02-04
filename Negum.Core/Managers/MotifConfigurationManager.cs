@@ -88,6 +88,26 @@ namespace Negum.Core.Managers
         public static class Music
         {
             public const string SectionKey = "Music";
+
+            /// <summary>
+            /// Music to play at title screen.
+            /// </summary>
+            public static IAudioEntry Title => Scrapper.GetAudio(SectionKey, "title.bgm");
+
+            /// <summary>
+            /// Music to play at char select screen.
+            /// </summary>
+            public static IAudioEntry Select => Scrapper.GetAudio(SectionKey, "select.bgm");
+
+            /// <summary>
+            /// Music to play at versus screen.
+            /// </summary>
+            public static IAudioEntry Vs => Scrapper.GetAudio(SectionKey, "vs.bgm");
+
+            /// <summary>
+            /// Music to play at victory screen.
+            /// </summary>
+            public static IAudioEntry Victory => Scrapper.GetAudio(SectionKey, "victory.bgm");
         }
 
         public static class TitleInfo

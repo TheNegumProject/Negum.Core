@@ -68,5 +68,12 @@ namespace Negum.Core.Scrappers
         /// <typeparam name="TEntry"></typeparam>
         /// <returns>Collection of values which starts from selected key from configuration.</returns>
         IEntryCollection<TEntry> GetCollection<TEntry>(string sectionName, string fieldKey);
+
+        /// <summary>
+        /// </summary>
+        /// <param name="sectionName"></param>
+        /// <param name="fieldKey"></param>
+        /// <returns>Audio value from selected configuration.</returns>
+        IAudioEntry GetAudio(string sectionName, string fieldKey);
     }
 }
