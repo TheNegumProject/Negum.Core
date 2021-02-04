@@ -1,4 +1,4 @@
-namespace Negum.Core.Scrappers
+namespace Negum.Core.Scrappers.Entries
 {
     /// <summary>
     /// </summary>

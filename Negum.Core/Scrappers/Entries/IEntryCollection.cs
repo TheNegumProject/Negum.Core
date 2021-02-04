@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Negum.Core.Configurations;
 
-namespace Negum.Core.Scrappers
+namespace Negum.Core.Scrappers.Entries
 {
     /// <summary>
     /// Represents a collection of objects taken from configuration.

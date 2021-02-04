@@ -5,6 +5,7 @@ using Negum.Core.Configurations;
 using Negum.Core.Parsers;
 using Negum.Core.Readers;
 using Negum.Core.Scrappers;
+using Negum.Core.Scrappers.Entries;
 
 namespace Negum.Core.Containers
 {
@@ -71,6 +72,8 @@ namespace Negum.Core.Containers
             
             // Scrappers
             Register<IConfigurationScrapper, ConfigurationScrapper>();
+            
+            // Scrapper Entries
             Register<IFileEntry, FileEntry>();
             Register<IEntryCollection<IFileEntry>, EntryCollection<IFileEntry>>();
             Register<IAudioEntry, AudioEntry>();

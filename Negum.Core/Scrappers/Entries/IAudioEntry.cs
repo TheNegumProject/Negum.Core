@@ -1,6 +1,6 @@
 using Negum.Core.Configurations;
 
-namespace Negum.Core.Scrappers
+namespace Negum.Core.Scrappers.Entries
 {
     /// <summary>
     /// Represents a scrapped entry which should represent an Audio.

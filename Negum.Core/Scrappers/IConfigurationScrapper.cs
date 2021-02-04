@@ -1,5 +1,6 @@
 using System;
 using Negum.Core.Configurations;
+using Negum.Core.Scrappers.Entries;
 
 namespace Negum.Core.Scrappers
 {

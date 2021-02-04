@@ -1,6 +1,7 @@
 using Negum.Core.Configurations;
 using Negum.Core.Containers;
 using Negum.Core.Scrappers;
+using Negum.Core.Scrappers.Entries;
 
 namespace Negum.Core.Managers
 {

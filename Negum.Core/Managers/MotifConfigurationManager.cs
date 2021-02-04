@@ -2,6 +2,7 @@ using System;
 using Negum.Core.Configurations;
 using Negum.Core.Containers;
 using Negum.Core.Scrappers;
+using Negum.Core.Scrappers.Entries;
 
 namespace Negum.Core.Managers
 {
@@ -146,12 +147,12 @@ namespace Negum.Core.Managers
             public static string CancelSound => Scrapper.GetString(SectionKey, "cancel.snd");
         }
 
-        public static class TitleBgDef // Enumerable inside
+        public static class TitleBgDef // TODO: Enumerable inside
         {
             public const string SectionKey = "TitleBGdef";
         }
 
-        public static class Infobox
+        public static class Infobox // TODO: What is this ??? Get an example
         {
             public const string SectionKey = "Infobox";
         }
@@ -161,12 +162,12 @@ namespace Negum.Core.Managers
             public const string SectionKey = "Select Info";
         }
 
-        public static class SelectBgDef // Enumerable inside
+        public static class SelectBgDef // TODO: Enumerable inside
         {
             public const string SectionKey = "SelectBGdef";
         }
 
-        public static class VsScreen // Enumerable inside
+        public static class VsScreen // TODO: Enumerable inside
         {
             public const string SectionKey = "VS Screen";
         }
@@ -191,7 +192,7 @@ namespace Negum.Core.Managers
             public const string SectionKey = "Game Over Screen";
         }
 
-        public static class VictoryScreen // Enumerable inside
+        public static class VictoryScreen // TODO: Enumerable inside
         {
             public const string SectionKey = "Victory Screen";
         }
@@ -216,7 +217,7 @@ namespace Negum.Core.Managers
             public const string SectionKey = "Survival Results Screen";
         }
 
-        public static class OptionInfo // Enumerable inside
+        public static class OptionInfo // TODO: Enumerable inside
         {
             public const string SectionKey = "Optio nInfo";
         }
