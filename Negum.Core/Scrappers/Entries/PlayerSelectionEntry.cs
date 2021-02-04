@@ -9,5 +9,6 @@ namespace Negum.Core.Scrappers.Entries
     public class PlayerSelectionEntry : ScrappedEntry<IPlayerSelectionEntry>, IPlayerSelectionEntry
     {
         public IPlayerSelectionCursorEntry Cursor => Scrapper.GetPlayerSelectionCursor(this.Section.Name, this.KeyPrefix + ".cursor");
+        public IMovementEntry RandomMove => Scrapper.GetMovement(this.Section.Name, ".random");
     }
 }

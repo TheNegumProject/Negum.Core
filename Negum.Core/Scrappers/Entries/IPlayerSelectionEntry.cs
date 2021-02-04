@@ -10,7 +10,7 @@ namespace Negum.Core.Scrappers.Entries
     public interface IPlayerSelectionEntry : IScrapperEntry<IPlayerSelectionEntry>
     {
         IPlayerSelectionCursorEntry Cursor { get; }
-        // IPlayerSelectionRandomEntry Random { get; }
+        IMovementEntry RandomMove { get; }
         // IPlayerSelectionImageEntry Face { get; }
         // IPlayerSelectionImageEntry Name { get; }
         // IPlayerSelectionTeamMenuEntry MenuEntry { get; }

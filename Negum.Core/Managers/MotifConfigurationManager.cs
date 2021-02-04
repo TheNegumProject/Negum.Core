@@ -215,6 +215,10 @@ namespace Negum.Core.Managers
             /// Player 2 selection.
             /// </summary>
             public static IPlayerSelectionEntry Player2 => Scrapper.GetPlayerSelection(SectionKey, "p2");
+
+            public static IMovementEntry Random => Scrapper.GetMovement(SectionKey, "random");
+            public static IMovementEntry Stage => Scrapper.GetMovement(SectionKey, "stage");
+            public static ISpriteSoundEntry Cancel => Scrapper.GetSpriteSound(SectionKey, "cancel");
         }
 
         public static class SelectBgDef // TODO: Enumerable inside

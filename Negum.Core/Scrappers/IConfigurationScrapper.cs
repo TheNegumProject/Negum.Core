@@ -111,5 +111,12 @@ namespace Negum.Core.Scrappers
         /// <param name="fieldKey"></param>
         /// <returns>Player selection cursor value from selected configuration.</returns>
         IPlayerSelectionCursorEntry GetPlayerSelectionCursor(string sectionName, string fieldKey);
+
+        /// <summary>
+        /// </summary>
+        /// <param name="sectionName"></param>
+        /// <param name="fieldKey"></param>
+        /// <returns>Movement value from selected configuration.</returns>
+        IMovementEntry GetMovement(string sectionName, string fieldKey);
     }
 }

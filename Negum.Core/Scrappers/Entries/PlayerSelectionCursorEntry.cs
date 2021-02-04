@@ -10,7 +10,6 @@ namespace Negum.Core.Scrappers.Entries
     {
         public string StartCell => this.Scrapper.GetString(this.Section.Name, this.KeyPrefix + ".startcell");
         public IAnimationEntry Animation => this.Scrapper.GetAnimation(this.Section.Name, this.KeyPrefix + ".active");
-        public ISpriteSoundEntry Done => this.Scrapper.GetSpriteSound(this.Section.Name, this.KeyPrefix + ".done");
-        public ISpriteSoundEntry Move => this.Scrapper.GetSpriteSound(this.Section.Name, ".move");
+        public IMovementEntry Movement => this.Scrapper.GetMovement(this.Section.Name, this.KeyPrefix);
     }
 }

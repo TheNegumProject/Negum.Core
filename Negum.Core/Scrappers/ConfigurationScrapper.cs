@@ -60,5 +60,8 @@ namespace Negum.Core.Scrappers
 
         public IPlayerSelectionCursorEntry GetPlayerSelectionCursor(string sectionName, string fieldKey) =>
             NegumContainer.Resolve<IPlayerSelectionCursorEntry>().From(this, this.ConfigDef[sectionName], fieldKey);
+
+        public IMovementEntry GetMovement(string sectionName, string fieldKey) =>
+            NegumContainer.Resolve<IMovementEntry>().From(this, this.ConfigDef[sectionName], fieldKey);
     }
 }

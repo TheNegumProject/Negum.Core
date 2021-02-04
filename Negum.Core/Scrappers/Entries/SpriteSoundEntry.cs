@@ -10,5 +10,6 @@ namespace Negum.Core.Scrappers.Entries
     {
         public string Sprite => this.Scrapper.GetString(this.Section.Name, this.KeyPrefix + ".spr");
         public string Sound => this.Scrapper.GetString(this.Section.Name, this.KeyPrefix + ".snd");
+        public string SoundCanceled => this.Scrapper.GetString(this.Section.Name, this.KeyPrefix + ".snd.cancel");
     }
 }

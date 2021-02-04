@@ -11,7 +11,6 @@ namespace Negum.Core.Scrappers.Entries
     {
         string StartCell { get; }
         IAnimationEntry Animation { get; }
-        ISpriteSoundEntry Done { get; }
-        ISpriteSoundEntry Move { get; }
+        IMovementEntry Movement { get; }
     }
 }

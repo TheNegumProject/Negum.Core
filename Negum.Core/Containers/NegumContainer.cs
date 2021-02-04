@@ -82,6 +82,7 @@ namespace Negum.Core.Containers
             Register<IAnimationEntry, AnimationEntry>();
             Register<IPlayerSelectionCursorEntry, PlayerSelectionCursorEntry>();
             Register<IPlayerSelectionEntry, PlayerSelectionEntry>();
+            Register<IMovementEntry, MovementEntry>();
             
             // Configurations
             Register<IConfigurationSectionEntry, ConfigurationSectionEntry>();
