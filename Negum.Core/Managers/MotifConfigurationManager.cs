@@ -113,6 +113,37 @@ namespace Negum.Core.Managers
         public static class TitleInfo
         {
             public const string SectionKey = "Title Info";
+
+            public static int FadeInTime => Scrapper.GetInt(SectionKey, "fadein.time");
+            public static int FadeOutTime => Scrapper.GetInt(SectionKey, "fadeout.time");
+            public static string MenuPos => Scrapper.GetString(SectionKey, "menu.pos");
+            public static string MenuItemFont => Scrapper.GetString(SectionKey, "menu.item.font");
+            public static string MenuItemActiveFont => Scrapper.GetString(SectionKey, "menu.item.active.font");
+            public static string MenuItemSpacing => Scrapper.GetString(SectionKey, "menu.item.spacing");
+            public static string MenuItemNameArcade => Scrapper.GetString(SectionKey, "menu.itemname.arcade");
+            public static string MenuItemNameVersus => Scrapper.GetString(SectionKey, "menu.itemname.versus");
+            public static string MenuItemNameTeamArcade => Scrapper.GetString(SectionKey, "menu.itemname.teamarcade");
+            public static string MenuItemNameTeamVersus => Scrapper.GetString(SectionKey, "menu.itemname.teamversus");
+            public static string MenuItemNameTeamCoop => Scrapper.GetString(SectionKey, "menu.itemname.teamcoop");
+            public static string MenuItemNameSurvival => Scrapper.GetString(SectionKey, "menu.itemname.survival");
+            public static string MenuItemNameSurvivalCoop => Scrapper.GetString(SectionKey, "menu.itemname.survivalcoop");
+            public static string MenuItemNameTraining => Scrapper.GetString(SectionKey, "menu.itemname.training");
+            public static string MenuItemNameWatch => Scrapper.GetString(SectionKey, "menu.itemname.watch");
+            public static string MenuItemNameOptions => Scrapper.GetString(SectionKey, "menu.itemname.options");
+            public static string MenuItemNameExit => Scrapper.GetString(SectionKey, "menu.itemname.exit");
+            public static string MenuWindowMarginsY => Scrapper.GetString(SectionKey, "menu.window.margins.y");
+            public static int MenuWindowVisibleItems => Scrapper.GetInt(SectionKey, "menu.window.visibleitems");
+
+            /// <summary>
+            /// Set it to true to enable default cursor display.
+            /// Set it to false to disable default cursor display.
+            /// </summary>
+            public static bool IsMenuBoxCursorVisible => Scrapper.GetBoolean(SectionKey, "menu.boxcursor.visible");
+
+            public static string MenuBoxCursorCoords => Scrapper.GetString(SectionKey, "menu.boxcursor.coords");
+            public static string CursorMoveSound => Scrapper.GetString(SectionKey, "cursor.move.snd");
+            public static string CursorDoneSound => Scrapper.GetString(SectionKey, "cursor.done.snd");
+            public static string CancelSound => Scrapper.GetString(SectionKey, "cancel.snd");
         }
 
         public static class TitleBgDef // Enumerable inside
