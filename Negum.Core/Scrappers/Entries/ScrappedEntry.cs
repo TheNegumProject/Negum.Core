@@ -15,7 +15,7 @@ namespace Negum.Core.Scrappers.Entries
         protected IConfigurationSection Section { get; set; }
         protected string KeyPrefix { get; set; }
 
-        public TEntry From(IConfigurationScrapper scrapper, IConfigurationSection section, string keyPrefix)
+        public virtual TEntry From(IConfigurationScrapper scrapper, IConfigurationSection section, string keyPrefix)
         {
             this.Scrapper = scrapper;
             this.Section = section;

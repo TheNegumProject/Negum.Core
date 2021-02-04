@@ -10,5 +10,6 @@ namespace Negum.Core.Scrappers.Entries
     public interface IAnimationEntry : IScrapperEntry<IAnimationEntry>
     {
         int Animation { get; }
+        IPositionEntry Offset { get; }
     }
 }

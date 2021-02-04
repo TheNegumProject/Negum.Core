@@ -11,8 +11,8 @@ namespace Negum.Core.Scrappers.Entries
     {
         IPlayerSelectionCursorEntry Cursor { get; }
         IMovementEntry RandomMove { get; }
-        // IPlayerSelectionImageEntry Face { get; }
-        // IPlayerSelectionImageEntry Name { get; }
+        IImageEntry Face { get; }
+        ITextEntry Name { get; }
         // IPlayerSelectionTeamMenuEntry MenuEntry { get; }
     }
 }

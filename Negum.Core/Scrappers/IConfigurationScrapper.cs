@@ -118,5 +118,46 @@ namespace Negum.Core.Scrappers
         /// <param name="fieldKey"></param>
         /// <returns>Movement value from selected configuration.</returns>
         IMovementEntry GetMovement(string sectionName, string fieldKey);
+
+        /// <summary>
+        /// </summary>
+        /// <param name="sectionName"></param>
+        /// <param name="fieldKey"></param>
+        /// <returns>Image value from selected configuration.</returns>
+        IImageEntry GetImage(string sectionName, string fieldKey);
+        
+        /// <summary>
+        /// </summary>
+        /// <param name="sectionName"></param>
+        /// <param name="fieldKey"></param>
+        /// <returns>Position value from selected configuration.</returns>
+        IPositionEntry GetPosition(string sectionName, string fieldKey);
+
+        /// <summary>
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns>Position from specified value directly.</returns>
+        IPositionEntry GetPosition(string value);
+
+        /// <summary>
+        /// </summary>
+        /// <param name="sectionName"></param>
+        /// <param name="fieldKey"></param>
+        /// <returns>Box value from selected configuration.</returns>
+        IBoxEntry GetBox(string sectionName, string fieldKey);
+
+        /// <summary>
+        /// </summary>
+        /// <param name="sectionName"></param>
+        /// <param name="fieldKey"></param>
+        /// <returns>Text value from selected configuration.</returns>
+        ITextEntry GetText(string sectionName, string fieldKey);
+
+        /// <summary>
+        /// </summary>
+        /// <param name="sectionName"></param>
+        /// <param name="fieldKey"></param>
+        /// <returns>Font value from selected configuration.</returns>
+        IFontEntry GetFont(string sectionName, string fieldKey);
     }
 }

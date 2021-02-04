@@ -219,6 +219,8 @@ namespace Negum.Core.Managers
             public static IMovementEntry Random => Scrapper.GetMovement(SectionKey, "random");
             public static IMovementEntry Stage => Scrapper.GetMovement(SectionKey, "stage");
             public static ISpriteSoundEntry Cancel => Scrapper.GetSpriteSound(SectionKey, "cancel");
+            public static IImageEntry Portrait => Scrapper.GetImage(SectionKey, "portrait");
+            public static ITextEntry Title => Scrapper.GetText(SectionKey, "title");
         }
 
         public static class SelectBgDef // TODO: Enumerable inside

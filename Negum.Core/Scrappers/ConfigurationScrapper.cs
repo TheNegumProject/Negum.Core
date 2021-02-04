@@ -63,5 +63,23 @@ namespace Negum.Core.Scrappers
 
         public IMovementEntry GetMovement(string sectionName, string fieldKey) =>
             NegumContainer.Resolve<IMovementEntry>().From(this, this.ConfigDef[sectionName], fieldKey);
+
+        public IImageEntry GetImage(string sectionName, string fieldKey) =>
+            NegumContainer.Resolve<IImageEntry>().From(this, this.ConfigDef[sectionName], fieldKey);
+
+        public IPositionEntry GetPosition(string sectionName, string fieldKey) =>
+            NegumContainer.Resolve<IPositionEntry>().From(this, this.ConfigDef[sectionName], fieldKey);
+        
+        public IPositionEntry GetPosition(string position) =>
+            NegumContainer.Resolve<IPositionEntry>().From(position);
+
+        public IBoxEntry GetBox(string sectionName, string fieldKey) =>
+            NegumContainer.Resolve<IBoxEntry>().From(this, this.ConfigDef[sectionName], fieldKey);
+
+        public ITextEntry GetText(string sectionName, string fieldKey) =>
+            NegumContainer.Resolve<ITextEntry>().From(this, this.ConfigDef[sectionName], fieldKey);
+
+        public IFontEntry GetFont(string sectionName, string fieldKey) =>
+            NegumContainer.Resolve<IFontEntry>().From(this, this.ConfigDef[sectionName], fieldKey);
     }
 }

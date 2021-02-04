@@ -9,5 +9,6 @@ namespace Negum.Core.Scrappers.Entries
     public class AnimationEntry : ScrappedEntry<IAnimationEntry>, IAnimationEntry
     {
         public int Animation => this.Scrapper.GetInt(this.Section.Name, this.KeyPrefix + ".anim");
+        public IPositionEntry Offset => this.Scrapper.GetPosition(this.Section.Name, this.KeyPrefix + ".offset");
     }
 }
