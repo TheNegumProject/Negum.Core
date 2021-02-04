@@ -18,6 +18,11 @@ namespace Negum.Core.Configurations
         string this[string key] { get; set; }
         
         /// <summary>
+        /// Name of the current section.
+        /// </summary>
+        string Name { get; set; }
+        
+        /// <summary>
         /// Contains all read entries.
         /// </summary>
         ICollection<IConfigurationSectionEntry> Entries { get; }

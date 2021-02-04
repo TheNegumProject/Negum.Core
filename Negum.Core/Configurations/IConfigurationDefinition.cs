@@ -12,6 +12,12 @@ namespace Negum.Core.Configurations
     public interface IConfigurationDefinition
     {
         /// <summary>
+        /// Returns section from the specified key.
+        /// </summary>
+        /// <param name="sectionName"></param>
+        IConfigurationSection this[string sectionName] { get; }
+        
+        /// <summary>
         /// Sections available in the current configuration.
         ///
         /// Key - Name of the section.

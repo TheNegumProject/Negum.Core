@@ -1,3 +1,5 @@
+using Negum.Core.Configurations;
+
 namespace Negum.Core.Scrappers
 {
     /// <summary>
@@ -8,11 +10,24 @@ namespace Negum.Core.Scrappers
     /// </author>
     public class AudioEntry : IAudioEntry
     {
-        private string Value { get; set; }
+        private IConfigurationScrapper Scrapper { get; set; }
+        private IConfigurationSection Section { get; set; }
+        private string KeyPrefix { get; set; }
+
+        public IFileEntry File => this.Scrapper.GetFile(this.Section.Name, this.KeyPrefix);
+        public int Volume => this.Scrapper.GetInt(this.Section.Name, this.KeyPrefix);
+        public bool Loop => this.Scrapper.GetBoolean(this.Section.Name, this.KeyPrefix);
+        public int LoopStart => this.Scrapper.GetInt(this.Section.Name, this.KeyPrefix);
+        public int LoopEnd => this.Scrapper.GetInt(this.Section.Name, this.KeyPrefix);
         
-        public IAudioEntry From(string value)
+        public IAudioEntry From(
+            IConfigurationScrapper scrapper,
+            IConfigurationSection section, 
+            string keyPrefix)
         {
-            this.Value = value;
+            this.Scrapper = scrapper;
+            this.Section = section;
+            this.KeyPrefix = keyPrefix;
             return this;
         }
     }

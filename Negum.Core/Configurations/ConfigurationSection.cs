@@ -23,6 +23,8 @@ namespace Negum.Core.Configurations
             }
         }
 
+        public string Name { get; set; }
+
         public ICollection<IConfigurationSectionEntry> Entries { get; } = 
             new List<IConfigurationSectionEntry>();
     }

@@ -10,6 +10,8 @@ namespace Negum.Core.Configurations
     /// </author>
     public class ConfigurationDefinition : IConfigurationDefinition
     {
+        public IConfigurationSection this[string sectionName] => this.Sections[sectionName];
+
         public IDictionary<string, IConfigurationSection> Sections { get; } =
             new Dictionary<string, IConfigurationSection>();
     }

@@ -31,7 +31,7 @@ namespace Negum.Core.Scrappers
             bool.Parse(this.GetString(sectionName, fieldKey));
 
         public string GetString(string sectionName, string fieldKey) =>
-            this.ConfigDef.Sections[sectionName][fieldKey];
+            this.ConfigDef[sectionName][fieldKey];
 
         public DateTime GetDate(string sectionName, string fieldKey) =>
             DateTime.Parse(this.GetString(sectionName, fieldKey));
@@ -40,9 +40,9 @@ namespace Negum.Core.Scrappers
             NegumContainer.Resolve<IFileEntry>().From(this.GetString(sectionName, fieldKey));
 
         public IEntryCollection<TEntry> GetCollection<TEntry>(string sectionName, string fieldKey) =>
-            NegumContainer.Resolve<IEntryCollection<TEntry>>().From(this.ConfigDef.Sections[sectionName], fieldKey);
+            NegumContainer.Resolve<IEntryCollection<TEntry>>().From(this.ConfigDef[sectionName], fieldKey);
 
         public IAudioEntry GetAudio(string sectionName, string fieldKey) =>
-            NegumContainer.Resolve<IAudioEntry>().From(this.GetString(sectionName, fieldKey));
+            NegumContainer.Resolve<IAudioEntry>().From(this, this.ConfigDef[sectionName], fieldKey);
     }
 }

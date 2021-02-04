@@ -39,6 +39,7 @@ namespace Negum.Core.Parsers
                         .Trim();
 
                     section = NegumContainer.Resolve<IConfigurationSection>();
+                    section.Name = sectionName;
 
                     configuration.Sections.Add(sectionName, section);
                 }
