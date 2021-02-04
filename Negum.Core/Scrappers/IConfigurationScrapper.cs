@@ -90,5 +90,26 @@ namespace Negum.Core.Scrappers
         /// <param name="fieldKey"></param>
         /// <returns>Sprite and Sound values from selected configuration.</returns>
         ISpriteSoundEntry GetSpriteSound(string sectionName, string fieldKey);
+
+        /// <summary>
+        /// </summary>
+        /// <param name="sectionName"></param>
+        /// <param name="fieldKey"></param>
+        /// <returns>Animation value from selected configuration.</returns>
+        IAnimationEntry GetAnimation(string sectionName, string fieldKey);
+
+        /// <summary>
+        /// </summary>
+        /// <param name="sectionName"></param>
+        /// <param name="fieldKey"></param>
+        /// <returns>Player selection value from selected configuration.</returns>
+        IPlayerSelectionEntry GetPlayerSelection(string sectionName, string fieldKey);
+
+        /// <summary>
+        /// </summary>
+        /// <param name="sectionName"></param>
+        /// <param name="fieldKey"></param>
+        /// <returns>Player selection cursor value from selected configuration.</returns>
+        IPlayerSelectionCursorEntry GetPlayerSelectionCursor(string sectionName, string fieldKey);
     }
 }

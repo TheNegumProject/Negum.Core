@@ -79,6 +79,9 @@ namespace Negum.Core.Containers
             Register<IAudioEntry, AudioEntry>();
             Register<IKeysEntry, KeysEntry>();
             Register<ISpriteSoundEntry, SpriteSoundEntry>();
+            Register<IAnimationEntry, AnimationEntry>();
+            Register<IPlayerSelectionCursorEntry, PlayerSelectionCursorEntry>();
+            Register<IPlayerSelectionEntry, PlayerSelectionEntry>();
             
             // Configurations
             Register<IConfigurationSectionEntry, ConfigurationSectionEntry>();

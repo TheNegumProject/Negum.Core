@@ -127,7 +127,10 @@ namespace Negum.Core.Managers
             public static string MenuItemNameTeamVersus => Scrapper.GetString(SectionKey, "menu.itemname.teamversus");
             public static string MenuItemNameTeamCoop => Scrapper.GetString(SectionKey, "menu.itemname.teamcoop");
             public static string MenuItemNameSurvival => Scrapper.GetString(SectionKey, "menu.itemname.survival");
-            public static string MenuItemNameSurvivalCoop => Scrapper.GetString(SectionKey, "menu.itemname.survivalcoop");
+
+            public static string MenuItemNameSurvivalCoop =>
+                Scrapper.GetString(SectionKey, "menu.itemname.survivalcoop");
+
             public static string MenuItemNameTraining => Scrapper.GetString(SectionKey, "menu.itemname.training");
             public static string MenuItemNameWatch => Scrapper.GetString(SectionKey, "menu.itemname.watch");
             public static string MenuItemNameOptions => Scrapper.GetString(SectionKey, "menu.itemname.options");
@@ -160,6 +163,58 @@ namespace Negum.Core.Managers
         public static class SelectInfo
         {
             public const string SectionKey = "Select Info";
+
+            public static int FadeInTime => Scrapper.GetInt(SectionKey, "fadein.time");
+            public static int FadeOutTime => Scrapper.GetInt(SectionKey, "fadeout.time");
+            public static int Rows => Scrapper.GetInt(SectionKey, "rows");
+            public static int Columns => Scrapper.GetInt(SectionKey, "columns");
+
+            /// <summary>
+            /// Values:
+            /// 0 - default
+            /// 1 - cursor wraps around
+            /// </summary>
+            public static int Wrapping => Scrapper.GetInt(SectionKey, "wrapping");
+
+            /// <summary>
+            /// Position to draw to.
+            /// </summary>
+            public static string Pos => Scrapper.GetString(SectionKey, "pos");
+
+            public static bool ShowEmptyBoxes => Scrapper.GetBoolean(SectionKey, "showemptyboxes");
+            public static bool CanMoveOverEmptyBoxes => Scrapper.GetBoolean(SectionKey, "moveoveremptyboxes");
+
+            /// <summary>
+            /// (x,y) size of each cell in pixels.
+            /// </summary>
+            public static string CellSize => Scrapper.GetString(SectionKey, "cell.size");
+
+            /// <summary>
+            /// Space between each cell.
+            /// </summary>
+            public static int CellSpacing => Scrapper.GetInt(SectionKey, "cell.spacing");
+
+            public static string CellBgSpr => Scrapper.GetString(SectionKey, "cell.bg.spr");
+
+            /// <summary>
+            /// Icon for random select.
+            /// </summary>
+            public static string CellRandomSpr => Scrapper.GetString(SectionKey, "cell.random.spr");
+
+            /// <summary>
+            /// Time to wait before changing to another random portrait.
+            /// </summary>
+            public static string CellRandomSwitchTime => Scrapper.GetString(SectionKey, "cell.random.switchtime");
+
+            /// <summary>
+            /// Player 1 selection.
+            /// </summary>
+            public static IPlayerSelectionEntry Player1 => Scrapper.GetPlayerSelection(SectionKey, "p1");
+
+            /// <summary>
+            /// Player 2 selection.
+            /// </summary>
+            public static IPlayerSelectionEntry Player2 => Scrapper.GetPlayerSelection(SectionKey, "p2");
         }
 
         public static class SelectBgDef // TODO: Enumerable inside
