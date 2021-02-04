@@ -15,14 +15,14 @@ namespace Negum.Core.Scrappers
         private string KeyPrefix { get; set; }
 
         public IFileEntry File => this.Scrapper.GetFile(this.Section.Name, this.KeyPrefix);
-        public int Volume => this.Scrapper.GetInt(this.Section.Name, this.KeyPrefix);
-        public bool Loop => this.Scrapper.GetBoolean(this.Section.Name, this.KeyPrefix);
-        public int LoopStart => this.Scrapper.GetInt(this.Section.Name, this.KeyPrefix);
-        public int LoopEnd => this.Scrapper.GetInt(this.Section.Name, this.KeyPrefix);
-        
+        public int Volume => this.Scrapper.GetInt(this.Section.Name, this.KeyPrefix + ".volume");
+        public bool Loop => this.Scrapper.GetBoolean(this.Section.Name, this.KeyPrefix + ".loop");
+        public int LoopStart => this.Scrapper.GetInt(this.Section.Name, this.KeyPrefix + ".loopstart");
+        public int LoopEnd => this.Scrapper.GetInt(this.Section.Name, this.KeyPrefix + ".loopend");
+
         public IAudioEntry From(
             IConfigurationScrapper scrapper,
-            IConfigurationSection section, 
+            IConfigurationSection section,
             string keyPrefix)
         {
             this.Scrapper = scrapper;
