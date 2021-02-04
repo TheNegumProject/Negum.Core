@@ -52,32 +52,32 @@ namespace Negum.Core.Managers
             /// <summary>
             /// Filename of sprite data.
             /// </summary>
-            public static IFileEntry Sprite => Scrapper.GetFile(SectionKey, "");
+            public static IFileEntry Sprite => Scrapper.GetFile(SectionKey, "spr");
 
             /// <summary>
             /// Filename of sound data.
             /// </summary>
-            public static IFileEntry Sound => Scrapper.GetFile(SectionKey, "");
+            public static IFileEntry Sound => Scrapper.GetFile(SectionKey, "snd");
 
             /// <summary>
             /// Logo storyboard definition (optional).
             /// </summary>
-            public static string LogoStoryboardDefinition => Scrapper.GetString(SectionKey, "");
+            public static string LogoStoryboardDefinition => Scrapper.GetString(SectionKey, "logo.storyboard");
 
             /// <summary>
             /// Intro storyboard definition (optional).
             /// </summary>
-            public static string IntroStoryboardDefinition => Scrapper.GetString(SectionKey, "");
+            public static string IntroStoryboardDefinition => Scrapper.GetString(SectionKey, "intro.storyboard");
 
             /// <summary>
             /// Character and stage selection list.
             /// </summary>
-            public static IFileEntry Selection => Scrapper.GetFile(SectionKey, "");
+            public static IFileEntry Selection => Scrapper.GetFile(SectionKey, "select");
 
             /// <summary>
             /// Fight definition filename.
             /// </summary>
-            public static IFileEntry Fight => Scrapper.GetFile(SectionKey, "");
+            public static IFileEntry Fight => Scrapper.GetFile(SectionKey, "fight");
 
             /// <summary>
             /// System fonts.
