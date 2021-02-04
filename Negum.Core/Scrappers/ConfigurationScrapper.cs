@@ -14,8 +14,8 @@ namespace Negum.Core.Scrappers
     public class ConfigurationScrapper : IConfigurationScrapper
     {
         private IConfigurationDefinition ConfigDef { get; set; }
-        
-        public IConfigurationScrapper Use<TConfiguration>() 
+
+        public IConfigurationScrapper Use<TConfiguration>()
             where TConfiguration : IConfigurationDefinition
         {
             this.ConfigDef = NegumContainer.Resolve<TConfiguration>();
@@ -38,12 +38,18 @@ namespace Negum.Core.Scrappers
             DateTime.Parse(this.GetString(sectionName, fieldKey));
 
         public IFileEntry GetFile(string sectionName, string fieldKey) =>
-            NegumContainer.Resolve<IFileEntry>().From(this.GetString(sectionName, fieldKey));
+            NegumContainer.Resolve<IFileEntry>().From(this, this.ConfigDef[sectionName], fieldKey);
 
         public IEntryCollection<TEntry> GetCollection<TEntry>(string sectionName, string fieldKey) =>
-            NegumContainer.Resolve<IEntryCollection<TEntry>>().From(this.ConfigDef[sectionName], fieldKey);
+            NegumContainer.Resolve<IEntryCollection<TEntry>>().From(this, this.ConfigDef[sectionName], fieldKey);
 
         public IAudioEntry GetAudio(string sectionName, string fieldKey) =>
             NegumContainer.Resolve<IAudioEntry>().From(this, this.ConfigDef[sectionName], fieldKey);
+
+        public IKeysEntry GetKeys(string sectionName, string fieldKey) =>
+            NegumContainer.Resolve<IKeysEntry>().From(this, this.ConfigDef[sectionName], fieldKey);
+
+        public ISpriteSoundEntry GetSpriteSound(string sectionName, string fieldKey) =>
+            NegumContainer.Resolve<ISpriteSoundEntry>().From(this, this.ConfigDef[sectionName], fieldKey);
     }
 }

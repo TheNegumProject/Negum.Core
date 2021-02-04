@@ -398,50 +398,28 @@ namespace Negum.Core.Managers
         {
             public const string SectionKey = "P1 Keys";
 
-            public static Keys Keys { get; } = new Keys(SectionKey);
+            public static IKeysEntry Keys => Scrapper.GetKeys(SectionKey, string.Empty);
         }
 
         public static class P2Keys
         {
             public const string SectionKey = "P2 Keys";
 
-            public static Keys Keys { get; } = new Keys(SectionKey);
+            public static IKeysEntry Keys => Scrapper.GetKeys(SectionKey, string.Empty);
         }
 
         public static class P1Joystick
         {
             public const string SectionKey = "P1 Joystick";
 
-            public static Keys Keys { get; } = new Keys(SectionKey);
+            public static IKeysEntry Keys => Scrapper.GetKeys(SectionKey, string.Empty);
         }
 
         public static class P2Joystick
         {
             public const string SectionKey = "P2 Joystick";
 
-            public static Keys Keys { get; } = new Keys(SectionKey);
-        }
-
-        public class Keys
-        {
-            private string SectionName { get; }
-
-            public int Jump => Scrapper.GetInt(SectionName, "Jump");
-            public int Crouch => Scrapper.GetInt(SectionName, "Crouch");
-            public int Left => Scrapper.GetInt(SectionName, "Left");
-            public int Right => Scrapper.GetInt(SectionName, "Right");
-            public int A => Scrapper.GetInt(SectionName, "A");
-            public int B => Scrapper.GetInt(SectionName, "B");
-            public int C => Scrapper.GetInt(SectionName, "C");
-            public int X => Scrapper.GetInt(SectionName, "X");
-            public int Y => Scrapper.GetInt(SectionName, "Y");
-            public int Z => Scrapper.GetInt(SectionName, "Z");
-            public int Start => Scrapper.GetInt(SectionName, "Start");
-
-            public Keys(string sectionName)
-            {
-                this.SectionName = sectionName;
-            }
+            public static IKeysEntry Keys => Scrapper.GetKeys(SectionKey, string.Empty);
         }
     }
 }

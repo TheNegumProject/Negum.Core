@@ -76,5 +76,19 @@ namespace Negum.Core.Scrappers
         /// <param name="fieldKey"></param>
         /// <returns>Audio value from selected configuration.</returns>
         IAudioEntry GetAudio(string sectionName, string fieldKey);
+
+        /// <summary>
+        /// </summary>
+        /// <param name="sectionName"></param>
+        /// <param name="fieldKey"></param>
+        /// <returns>Keys value from selected configuration.</returns>
+        IKeysEntry GetKeys(string sectionName, string fieldKey);
+        
+        /// <summary>
+        /// </summary>
+        /// <param name="sectionName"></param>
+        /// <param name="fieldKey"></param>
+        /// <returns>Sprite and Sound values from selected configuration.</returns>
+        ISpriteSoundEntry GetSpriteSound(string sectionName, string fieldKey);
     }
 }

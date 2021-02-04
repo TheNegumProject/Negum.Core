@@ -6,14 +6,7 @@ namespace Negum.Core.Scrappers.Entries
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public class FileEntry : IFileEntry
+    public class FileEntry : ScrappedEntry<IFileEntry>, IFileEntry
     {
-        private string Value { get; set; }
-        
-        public IFileEntry From(string value)
-        {
-            this.Value = value;
-            return this;
-        }
     }
 }
