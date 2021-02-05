@@ -18,7 +18,7 @@ namespace Negum.Core.Scrappers
         /// </summary>
         /// <typeparam name="TConfiguration"></typeparam>
         /// <returns>Returns this scrapper.</returns>
-        IConfigurationScrapper Use<TConfiguration>() where TConfiguration : IConfigurationDefinition;
+        IConfigurationScrapper Use(IConfigurationDefinition def);
 
         /// <summary>
         /// </summary>

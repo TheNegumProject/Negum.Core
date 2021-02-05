@@ -15,10 +15,9 @@ namespace Negum.Core.Scrappers
     {
         private IConfigurationDefinition ConfigDef { get; set; }
 
-        public IConfigurationScrapper Use<TConfiguration>()
-            where TConfiguration : IConfigurationDefinition
+        public IConfigurationScrapper Use(IConfigurationDefinition def)
         {
-            this.ConfigDef = NegumContainer.Resolve<TConfiguration>();
+            this.ConfigDef = def;
             return this;
         }
 

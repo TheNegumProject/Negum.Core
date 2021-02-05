@@ -15,10 +15,16 @@ namespace Negum.Core.Managers
     public static class NegumConfigurationManager
     {
         /// <summary>
+        /// Configuration used by Manager.
+        /// </summary>
+        public static INegumConfiguration Configuration { get; set; } =
+            NegumContainer.Resolve<INegumConfiguration>();
+        
+        /// <summary>
         /// Scrapper which is used to gather appropriate parsed data from given configuration.
         /// </summary>
-        private static IConfigurationScrapper Scrapper { get; } =
-            NegumContainer.Resolve<IConfigurationScrapper>().Use<INegumConfiguration>();
+        public static IConfigurationScrapper Scrapper { get; set; } =
+            NegumContainer.Resolve<IConfigurationScrapper>().Use(Configuration);
 
         public static class Options
         {

@@ -16,10 +16,16 @@ namespace Negum.Core.Managers
     public static class MotifConfigurationManager
     {
         /// <summary>
+        /// Configuration used by Manager.
+        /// </summary>
+        public static IMotifConfiguration Configuration { get; set; } =
+            NegumContainer.Resolve<IMotifConfiguration>();
+        
+        /// <summary>
         /// Scrapper which is used to gather appropriate parsed data from given configuration.
         /// </summary>
-        private static IConfigurationScrapper Scrapper { get; } =
-            NegumContainer.Resolve<IConfigurationScrapper>().Use<IMotifConfiguration>();
+        public static IConfigurationScrapper Scrapper { get; } =
+            NegumContainer.Resolve<IConfigurationScrapper>().Use(Configuration);
 
         public static class Info
         {
