@@ -19,6 +19,6 @@ namespace Negum.Core.Scrappers.Entries
         /// <param name="section">Section which contains details for entry.</param>
         /// <param name="keyPrefix">Prefix for the entry details.</param>
         /// <returns>Current entry with assigned value.</returns>
-        TEntry From(IConfigurationScrapper scrapper, IConfigurationSection section, string keyPrefix);
+        TEntry Setup(IConfigurationScrapper scrapper, IConfigurationSection section, string keyPrefix);
     }
 }

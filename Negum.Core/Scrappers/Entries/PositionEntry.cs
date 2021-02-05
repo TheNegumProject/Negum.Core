@@ -21,10 +21,10 @@ namespace Negum.Core.Scrappers.Entries
             return this;
         }
 
-        public override IPositionEntry From(IConfigurationScrapper scrapper, IConfigurationSection section,
+        public override IPositionEntry Setup(IConfigurationScrapper scrapper, IConfigurationSection section,
             string keyPrefix)
         {
-            base.From(scrapper, section, keyPrefix);
+            base.Setup(scrapper, section, keyPrefix);
 
             this.Value = this.Scrapper
                 .GetString(this.Section.Name, this.KeyPrefix)
