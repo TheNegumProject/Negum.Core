@@ -215,7 +215,7 @@ namespace Negum.Core.Managers
         /// <summary>
         /// Position to draw to.
         /// </summary>
-        string Pos => Scrapper.GetString(SectionName, "pos");
+        IPositionEntry Pos => Scrapper.GetPosition(SectionName, "pos");
 
         bool ShowEmptyBoxes => Scrapper.GetBoolean(SectionName, "showemptyboxes");
         bool CanMoveOverEmptyBoxes => Scrapper.GetBoolean(SectionName, "moveoveremptyboxes");
@@ -223,7 +223,7 @@ namespace Negum.Core.Managers
         /// <summary>
         /// (x,y) size of each cell in pixels.
         /// </summary>
-        string CellSize => Scrapper.GetString(SectionName, "cell.size");
+        IPositionEntry CellSize => Scrapper.GetPosition(SectionName, "cell.size");
 
         /// <summary>
         /// Space between each cell.
