@@ -25,7 +25,7 @@ namespace Negum.Core.Managers
         /// Scrapper which is used to gather appropriate parsed data from given configuration.
         /// </summary>
         public static IConfigurationScrapper Scrapper { get; } =
-            NegumContainer.Resolve<IConfigurationScrapper>().Use(Configuration);
+            NegumContainer.Resolve<IConfigurationScrapper>().Setup(Configuration);
 
         public static class Info
         {

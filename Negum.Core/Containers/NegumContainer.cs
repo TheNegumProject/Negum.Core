@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Negum.Core.Cleaners;
 using Negum.Core.Configurations;
+using Negum.Core.Managers;
 using Negum.Core.Parsers;
 using Negum.Core.Readers;
 using Negum.Core.Scrappers;
@@ -70,8 +71,12 @@ namespace Negum.Core.Containers
             Register<INegumConfigurationParser, NegumConfigurationParser>(NegumObjectLifetime.Singleton);
             Register<IMotifConfigurationParser, MotifConfigurationParser>(NegumObjectLifetime.Singleton);
             
-            // Scrappers
-            Register<IConfigurationScrapper, ConfigurationScrapper>();
+            // Configurations
+            Register<IConfigurationSectionEntry, ConfigurationSectionEntry>();
+            Register<IConfigurationSection, ConfigurationSection>();
+            Register<IConfigurationDefinition, ConfigurationDefinition>();
+            Register<INegumConfiguration, NegumConfiguration>();
+            Register<IMotifConfiguration, MotifConfiguration>();
             
             // Scrapper Entries
             Register<IFileEntry, FileEntry>();
@@ -89,12 +94,26 @@ namespace Negum.Core.Containers
             Register<ITextEntry, TextEntry>();
             Register<IFontEntry, FontEntry>();
             
-            // Configurations
-            Register<IConfigurationSectionEntry, ConfigurationSectionEntry>();
-            Register<IConfigurationSection, ConfigurationSection>();
-            Register<IConfigurationDefinition, ConfigurationDefinition>();
-            Register<INegumConfiguration, NegumConfiguration>(NegumObjectLifetime.Singleton);
-            Register<IMotifConfiguration, MotifConfiguration>(NegumObjectLifetime.Singleton);
+            // Scrappers
+            Register<IConfigurationScrapper, ConfigurationScrapper>();
+            
+            // Managers
+            Register<INegumConfigurationManager, NegumConfigurationManager>();
+            // Register<IMotifConfigurationManager, MotifConfigurationManager>();
+
+            // Negum Configuration Types
+            Register<INegumConfigurationOptions, NegumConfigurationManagerSection>();
+            Register<INegumConfigurationRules, NegumConfigurationManagerSection>();
+            Register<INegumConfigurationConfig, NegumConfigurationManagerSection>();
+            Register<INegumConfigurationDebug, NegumConfigurationManagerSection>();
+            Register<INegumConfigurationVideo, NegumConfigurationManagerSection>();
+            Register<INegumConfigurationSound, NegumConfigurationManagerSection>();
+            Register<INegumConfigurationMisc, NegumConfigurationManagerSection>();
+            Register<INegumConfigurationArcade, NegumConfigurationManagerSection>();
+            Register<INegumConfigurationInput, NegumConfigurationManagerSection>();
+            Register<INegumConfigurationKeys, NegumConfigurationManagerSection>();
+
+            // Motif Configuration Types
         }
     }
 
