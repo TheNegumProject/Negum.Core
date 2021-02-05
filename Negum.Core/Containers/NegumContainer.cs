@@ -25,8 +25,9 @@ namespace Negum.Core.Containers
         /// 
         /// Entry point for binding any desired IoC container; by default will use dummy container.
         /// </summary>
-        public static Action<NegumObjectLifetime, Type, Type> Registerer { get; set; } = (lifetime, interfaceType, implementationType) =>
-            NegumDummyContainer.Register(lifetime, interfaceType, implementationType);
+        public static Action<NegumObjectLifetime, Type, Type> Registerer { get; set; } =
+            (lifetime, interfaceType, implementationType) =>
+                NegumDummyContainer.Register(lifetime, interfaceType, implementationType);
 
         /// <summary>
         /// DO NOT USE IT DIRECTLY !!!
@@ -42,7 +43,8 @@ namespace Negum.Core.Containers
         /// </summary>
         /// <typeparam name="TInterface">Interface type.</typeparam>
         /// <typeparam name="TClass">Implementation type.</typeparam>
-        public static void Register<TInterface, TClass>(NegumObjectLifetime lifetime = NegumObjectLifetime.Transient) where TClass : class, TInterface =>
+        public static void Register<TInterface, TClass>(NegumObjectLifetime lifetime = NegumObjectLifetime.Transient)
+            where TClass : class, TInterface =>
             Registerer(lifetime, typeof(TInterface), typeof(TClass));
 
         /// <summary>
@@ -62,22 +64,22 @@ namespace Negum.Core.Containers
         {
             // Readers
             Register<IConfigurationReader, ConfigurationReader>(NegumObjectLifetime.Singleton);
-            
+
             // Cleaners
             Register<IConfigurationCleaner, ConfigurationCleaner>(NegumObjectLifetime.Singleton);
-            
+
             // Parsers
             Register<IConfigurationParser, ConfigurationParser>(NegumObjectLifetime.Singleton);
             Register<INegumConfigurationParser, NegumConfigurationParser>(NegumObjectLifetime.Singleton);
             Register<IMotifConfigurationParser, MotifConfigurationParser>(NegumObjectLifetime.Singleton);
-            
+
             // Configurations
             Register<IConfigurationSectionEntry, ConfigurationSectionEntry>();
             Register<IConfigurationSection, ConfigurationSection>();
             Register<IConfigurationDefinition, ConfigurationDefinition>();
             Register<INegumConfiguration, NegumConfiguration>();
             Register<IMotifConfiguration, MotifConfiguration>();
-            
+
             // Scrapper Entries
             Register<IFileEntry, FileEntry>();
             Register<IEntryCollection<IFileEntry>, EntryCollection<IFileEntry>>();
@@ -93,13 +95,13 @@ namespace Negum.Core.Containers
             Register<IBoxEntry, BoxEntry>();
             Register<ITextEntry, TextEntry>();
             Register<IFontEntry, FontEntry>();
-            
+
             // Scrappers
             Register<IConfigurationScrapper, ConfigurationScrapper>();
-            
+
             // Managers
             Register<INegumConfigurationManager, NegumConfigurationManager>();
-            // Register<IMotifConfigurationManager, MotifConfigurationManager>();
+            Register<IMotifConfigurationManager, MotifConfigurationManager>();
 
             // Negum Configuration Types
             Register<INegumConfigurationOptions, NegumConfigurationManagerSection>();
@@ -114,6 +116,25 @@ namespace Negum.Core.Containers
             Register<INegumConfigurationKeys, NegumConfigurationManagerSection>();
 
             // Motif Configuration Types
+            Register<IMotifConfigurationInfo, MoticConfigurationManagerSection>();
+            Register<IMotifConfigurationFiles, MoticConfigurationManagerSection>();
+            Register<IMotifConfigurationMusic, MoticConfigurationManagerSection>();
+            Register<IMotifConfigurationTitleInfo, MoticConfigurationManagerSection>();
+            Register<IMotifConfigurationTitleBgDef, MoticConfigurationManagerSection>();
+            Register<IMotifConfigurationInfobox, MoticConfigurationManagerSection>();
+            Register<IMotifConfigurationSelectInfo, MoticConfigurationManagerSection>();
+            Register<IMotifConfigurationSelectBgDef, MoticConfigurationManagerSection>();
+            Register<IMotifConfigurationVsScreen, MoticConfigurationManagerSection>();
+            Register<IMotifConfigurationVsBgDef, MoticConfigurationManagerSection>();
+            Register<IMotifConfigurationDemoMode, MoticConfigurationManagerSection>();
+            Register<IMotifConfigurationContinueScreen, MoticConfigurationManagerSection>();
+            Register<IMotifConfigurationGameOverScreen, MoticConfigurationManagerSection>();
+            Register<IMotifConfigurationVictoryScreen, MoticConfigurationManagerSection>();
+            Register<IMotifConfigurationWinScreen, MoticConfigurationManagerSection>();
+            Register<IMotifConfigurationDefaultEnding, MoticConfigurationManagerSection>();
+            Register<IMotifConfigurationEndCredits, MoticConfigurationManagerSection>();
+            Register<IMotifConfigurationSurvivalResultsScreen, MoticConfigurationManagerSection>();
+            Register<IMotifConfigurationOptionInfo, MoticConfigurationManagerSection>();
         }
     }
 
@@ -167,7 +188,7 @@ namespace Negum.Core.Containers
                 {
                     Instances.Remove(interfaceType);
                 }
-                
+
                 Instances.Add(interfaceType, Activator.CreateInstance(implementationType));
             }
             else
@@ -176,7 +197,7 @@ namespace Negum.Core.Containers
                 {
                     Types.Remove(interfaceType);
                 }
-                
+
                 Types.Add(interfaceType, implementationType);
             }
         }

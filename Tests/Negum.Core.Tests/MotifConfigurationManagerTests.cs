@@ -1,7 +1,9 @@
 using System.Threading.Tasks;
 using Negum.Core.Configurations;
+using Negum.Core.Containers;
 using Negum.Core.Managers;
 using Negum.Core.Parsers;
+using Negum.Core.Scrappers;
 using Xunit;
 
 namespace Negum.Core.Tests
@@ -20,8 +22,10 @@ namespace Negum.Core.Tests
         {
             this.InitializeContainer();
 
-            var parsed = await this.Parse<IMotifConfigurationParser, IMotifConfiguration>(path);
-            var animation = MotifConfigurationManager.SelectInfo.Player1.Cursor.Animation.Animation;
+            var config = await this.Parse<IMotifConfigurationParser, IMotifConfiguration>(path);
+            var scrapper = NegumContainer.Resolve<IConfigurationScrapper>().Setup(config);
+            var manager = NegumContainer.Resolve<IMotifConfigurationManager>().Setup(scrapper);
+            var animation = manager.SelectInfo.Player1.Cursor.Animation.Animation;
             
             Assert.True(animation == 160);
         }

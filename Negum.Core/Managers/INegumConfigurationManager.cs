@@ -12,19 +12,44 @@ namespace Negum.Core.Managers
     /// </author>
     public interface INegumConfigurationManager : IConfigurationManager<INegumConfigurationManager>
     {
-        public INegumConfigurationOptions Options => NegumContainer.Resolve<INegumConfigurationOptions>().Setup(this.Scrapper, "Options");
-        public INegumConfigurationRules Rules => NegumContainer.Resolve<INegumConfigurationRules>().Setup(this.Scrapper, "Rules");
-        public INegumConfigurationConfig Config => NegumContainer.Resolve<INegumConfigurationConfig>().Setup(this.Scrapper, "Config");
-        public INegumConfigurationDebug Debug => NegumContainer.Resolve<INegumConfigurationDebug>().Setup(this.Scrapper, "Debug");
-        public INegumConfigurationVideo Video => NegumContainer.Resolve<INegumConfigurationVideo>().Setup(this.Scrapper, "Video");
-        public INegumConfigurationSound Sound => NegumContainer.Resolve<INegumConfigurationSound>().Setup(this.Scrapper, "Sound");
-        public INegumConfigurationMisc Misc => NegumContainer.Resolve<INegumConfigurationMisc>().Setup(this.Scrapper, "Misc");
-        public INegumConfigurationArcade Arcade => NegumContainer.Resolve<INegumConfigurationArcade>().Setup(this.Scrapper, "Arcade");
-        public INegumConfigurationInput Input => NegumContainer.Resolve<INegumConfigurationInput>().Setup(this.Scrapper, "Input");
-        public INegumConfigurationKeys P1Keys => NegumContainer.Resolve<INegumConfigurationKeys>().Setup(this.Scrapper, "P1 Keys");
-        public INegumConfigurationKeys P2Keys => NegumContainer.Resolve<INegumConfigurationKeys>().Setup(this.Scrapper, "P2 Keys");
-        public INegumConfigurationKeys P1Joystick => NegumContainer.Resolve<INegumConfigurationKeys>().Setup(this.Scrapper, "P1 Joystick");
-        public INegumConfigurationKeys P2Joystick => NegumContainer.Resolve<INegumConfigurationKeys>().Setup(this.Scrapper, "P2 Joystick");
+        INegumConfigurationOptions Options =>
+            NegumContainer.Resolve<INegumConfigurationOptions>().Setup(this.Scrapper, "Options");
+
+        INegumConfigurationRules Rules =>
+            NegumContainer.Resolve<INegumConfigurationRules>().Setup(this.Scrapper, "Rules");
+
+        INegumConfigurationConfig Config =>
+            NegumContainer.Resolve<INegumConfigurationConfig>().Setup(this.Scrapper, "Config");
+
+        INegumConfigurationDebug Debug =>
+            NegumContainer.Resolve<INegumConfigurationDebug>().Setup(this.Scrapper, "Debug");
+
+        INegumConfigurationVideo Video =>
+            NegumContainer.Resolve<INegumConfigurationVideo>().Setup(this.Scrapper, "Video");
+
+        INegumConfigurationSound Sound =>
+            NegumContainer.Resolve<INegumConfigurationSound>().Setup(this.Scrapper, "Sound");
+
+        INegumConfigurationMisc Misc => 
+            NegumContainer.Resolve<INegumConfigurationMisc>().Setup(this.Scrapper, "Misc");
+
+        INegumConfigurationArcade Arcade =>
+            NegumContainer.Resolve<INegumConfigurationArcade>().Setup(this.Scrapper, "Arcade");
+
+        INegumConfigurationInput Input =>
+            NegumContainer.Resolve<INegumConfigurationInput>().Setup(this.Scrapper, "Input");
+
+        INegumConfigurationKeys P1Keys =>
+            NegumContainer.Resolve<INegumConfigurationKeys>().Setup(this.Scrapper, "P1 Keys");
+
+        INegumConfigurationKeys P2Keys =>
+            NegumContainer.Resolve<INegumConfigurationKeys>().Setup(this.Scrapper, "P2 Keys");
+
+        INegumConfigurationKeys P1Joystick =>
+            NegumContainer.Resolve<INegumConfigurationKeys>().Setup(this.Scrapper, "P1 Joystick");
+
+        INegumConfigurationKeys P2Joystick =>
+            NegumContainer.Resolve<INegumConfigurationKeys>().Setup(this.Scrapper, "P2 Joystick");
     }
 
     public interface INegumConfigurationOptions : IConfigurationManagerSection<INegumConfigurationOptions>
