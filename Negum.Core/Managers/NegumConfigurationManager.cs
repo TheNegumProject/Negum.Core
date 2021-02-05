@@ -192,7 +192,7 @@ namespace Negum.Core.Managers
             /// <summary>
             /// Default starting stage for quick versus.
             /// </summary>
-            public static string StartStage => Scrapper.GetString(SectionKey, "StartStage");
+            public static IFileEntry StartStage => Scrapper.GetFile(SectionKey, "StartStage");
 
             /// <summary>
             /// Set to true to hide the development build banner that shows on startup.
@@ -358,24 +358,24 @@ namespace Negum.Core.Managers
             /// For 6 matches at level 4, the difficulty will be (by match):
             ///     4,4,4,5,6,6
             /// </summary>
-            public static string ArcadeAiRampStart => Scrapper.GetString(SectionKey, "arcade.AIramp.start");
+            public static IPositionEntry ArcadeAiRampStart => Scrapper.GetPosition(SectionKey, "arcade.AIramp.start");
 
-            public static string ArcadeAiRampEnd => Scrapper.GetString(SectionKey, "arcade.AIramp.end");
+            public static IPositionEntry ArcadeAiRampEnd => Scrapper.GetPosition(SectionKey, "arcade.AIramp.end");
 
 
             /// <summary>
             /// Team Mode AI ramping.
             /// </summary>
-            public static string TeamAiRampStart => Scrapper.GetString(SectionKey, "team.AIramp.start");
+            public static IPositionEntry TeamAiRampStart => Scrapper.GetPosition(SectionKey, "team.AIramp.start");
 
-            public static string TeamAiRampEnd => Scrapper.GetString(SectionKey, "team.AIramp.end");
+            public static IPositionEntry TeamAiRampEnd => Scrapper.GetPosition(SectionKey, "team.AIramp.end");
 
             /// <summary>
             /// Survival Mode AI ramping.
             /// </summary>
-            public static string SurvivalAiRampStart => Scrapper.GetString(SectionKey, "survival.AIramp.start");
+            public static IPositionEntry SurvivalAiRampStart => Scrapper.GetPosition(SectionKey, "survival.AIramp.start");
 
-            public static string SurvivalAiRampEnd => Scrapper.GetString(SectionKey, "survival.AIramp.end");
+            public static IPositionEntry SurvivalAiRampEnd => Scrapper.GetPosition(SectionKey, "survival.AIramp.end");
         }
 
         public static class Input
