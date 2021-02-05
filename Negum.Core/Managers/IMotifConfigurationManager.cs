@@ -22,20 +22,20 @@ namespace Negum.Core.Managers
         public IMotifConfigurationMusic Music =>
             NegumContainer.Resolve<IMotifConfigurationMusic>().Setup(this.Scrapper, "Music");
 
-        public IMotifConfigurationTitleInfo TitleInfo => NegumContainer.Resolve<IMotifConfigurationTitleInfo>()
-            .Setup(this.Scrapper, "Title Info");
+        public IMotifConfigurationTitleInfo TitleInfo => 
+            NegumContainer.Resolve<IMotifConfigurationTitleInfo>().Setup(this.Scrapper, "Title Info");
 
-        public IMotifConfigurationTitleBgDef TitleBgDef => NegumContainer.Resolve<IMotifConfigurationTitleBgDef>()
-            .Setup(this.Scrapper, "TitleBGdef");
+        public IMotifConfigurationTitleBgDef TitleBgDef => 
+            NegumContainer.Resolve<IMotifConfigurationTitleBgDef>().Setup(this.Scrapper, "TitleBGdef");
 
         public IMotifConfigurationInfobox Infobox =>
             NegumContainer.Resolve<IMotifConfigurationInfobox>().Setup(this.Scrapper, "Infobox");
 
-        public IMotifConfigurationSelectInfo SelectInfo => NegumContainer.Resolve<IMotifConfigurationSelectInfo>()
-            .Setup(this.Scrapper, "Select Info");
+        public IMotifConfigurationSelectInfo SelectInfo => 
+            NegumContainer.Resolve<IMotifConfigurationSelectInfo>().Setup(this.Scrapper, "Select Info");
 
-        public IMotifConfigurationSelectBgDef SelectBgDef => NegumContainer.Resolve<IMotifConfigurationSelectBgDef>()
-            .Setup(this.Scrapper, "SelectBGdef");
+        public IMotifConfigurationSelectBgDef SelectBgDef => 
+            NegumContainer.Resolve<IMotifConfigurationSelectBgDef>().Setup(this.Scrapper, "SelectBGdef");
 
         public IMotifConfigurationVsScreen VsScreen =>
             NegumContainer.Resolve<IMotifConfigurationVsScreen>().Setup(this.Scrapper, "VS Screen");
@@ -46,29 +46,29 @@ namespace Negum.Core.Managers
         public IMotifConfigurationDemoMode DemoMode =>
             NegumContainer.Resolve<IMotifConfigurationDemoMode>().Setup(this.Scrapper, "Demo Mode");
 
-        public IMotifConfigurationContinueScreen ContinueScreen => NegumContainer
-            .Resolve<IMotifConfigurationContinueScreen>().Setup(this.Scrapper, "Continue Screen");
+        public IMotifConfigurationContinueScreen ContinueScreen => 
+            NegumContainer.Resolve<IMotifConfigurationContinueScreen>().Setup(this.Scrapper, "Continue Screen");
 
-        public IMotifConfigurationGameOverScreen GameOverScreen => NegumContainer
-            .Resolve<IMotifConfigurationGameOverScreen>().Setup(this.Scrapper, "Game Over Screen");
+        public IMotifConfigurationGameOverScreen GameOverScreen => 
+            NegumContainer.Resolve<IMotifConfigurationGameOverScreen>().Setup(this.Scrapper, "Game Over Screen");
 
-        public IMotifConfigurationVictoryScreen VictoryScreen => NegumContainer
-            .Resolve<IMotifConfigurationVictoryScreen>().Setup(this.Scrapper, "Victory Screen");
+        public IMotifConfigurationVictoryScreen VictoryScreen => 
+            NegumContainer.Resolve<IMotifConfigurationVictoryScreen>().Setup(this.Scrapper, "Victory Screen");
 
-        public IMotifConfigurationWinScreen WinScreen => NegumContainer.Resolve<IMotifConfigurationWinScreen>()
-            .Setup(this.Scrapper, "Win Screen");
+        public IMotifConfigurationWinScreen WinScreen => 
+            NegumContainer.Resolve<IMotifConfigurationWinScreen>().Setup(this.Scrapper, "Win Screen");
 
-        public IMotifConfigurationDefaultEnding DefaultEnding => NegumContainer
-            .Resolve<IMotifConfigurationDefaultEnding>().Setup(this.Scrapper, "Default Ending");
+        public IMotifConfigurationDefaultEnding DefaultEnding => 
+            NegumContainer.Resolve<IMotifConfigurationDefaultEnding>().Setup(this.Scrapper, "Default Ending");
 
-        public IMotifConfigurationEndCredits EndCredits => NegumContainer.Resolve<IMotifConfigurationEndCredits>()
-            .Setup(this.Scrapper, "End Credits");
+        public IMotifConfigurationEndCredits EndCredits => 
+            NegumContainer.Resolve<IMotifConfigurationEndCredits>().Setup(this.Scrapper, "End Credits");
 
-        public IMotifConfigurationSurvivalResultsScreen SurvivalResultsScreen => NegumContainer
-            .Resolve<IMotifConfigurationSurvivalResultsScreen>().Setup(this.Scrapper, "Survival Results Screen");
+        public IMotifConfigurationSurvivalResultsScreen SurvivalResultsScreen => 
+            NegumContainer.Resolve<IMotifConfigurationSurvivalResultsScreen>().Setup(this.Scrapper, "Survival Results Screen");
 
-        public IMotifConfigurationOptionInfo OptionInfo => NegumContainer.Resolve<IMotifConfigurationOptionInfo>()
-            .Setup(this.Scrapper, "Option Info");
+        public IMotifConfigurationOptionInfo OptionInfo => 
+            NegumContainer.Resolve<IMotifConfigurationOptionInfo>().Setup(this.Scrapper, "Option Info");
     }
 
     public interface IMotifConfigurationInfo : IConfigurationManagerSection<IMotifConfigurationInfo>
@@ -159,10 +159,9 @@ namespace Negum.Core.Managers
     {
         int FadeInTime => Scrapper.GetInt(SectionName, "fadein.time");
         int FadeOutTime => Scrapper.GetInt(SectionName, "fadeout.time");
-        string MenuPos => Scrapper.GetString(SectionName, "menu.pos");
-        string MenuItemFont => Scrapper.GetString(SectionName, "menu.item.font");
-        string MenuItemActiveFont => Scrapper.GetString(SectionName, "menu.item.active.font");
-        string MenuItemSpacing => Scrapper.GetString(SectionName, "menu.item.spacing");
+        IPositionEntry MenuPos => Scrapper.GetPosition(SectionName, "menu.pos");
+        ITextEntry MenuItem => Scrapper.GetText(SectionName, "menu.item");
+        ITextEntry MenuItemActive => Scrapper.GetText(SectionName, "menu.item.active");
         string MenuItemNameArcade => Scrapper.GetString(SectionName, "menu.itemname.arcade");
         string MenuItemNameVersus => Scrapper.GetString(SectionName, "menu.itemname.versus");
         string MenuItemNameTeamArcade => Scrapper.GetString(SectionName, "menu.itemname.teamarcade");
@@ -177,7 +176,7 @@ namespace Negum.Core.Managers
         string MenuItemNameWatch => Scrapper.GetString(SectionName, "menu.itemname.watch");
         string MenuItemNameOptions => Scrapper.GetString(SectionName, "menu.itemname.options");
         string MenuItemNameExit => Scrapper.GetString(SectionName, "menu.itemname.exit");
-        string MenuWindowMarginsY => Scrapper.GetString(SectionName, "menu.window.margins.y");
+        IPositionEntry MenuWindowMarginsY => Scrapper.GetPosition(SectionName, "menu.window.margins.y");
         int MenuWindowVisibleItems => Scrapper.GetInt(SectionName, "menu.window.visibleitems");
 
         /// <summary>
@@ -186,28 +185,21 @@ namespace Negum.Core.Managers
         /// </summary>
         bool IsMenuBoxCursorVisible => Scrapper.GetBoolean(SectionName, "menu.boxcursor.visible");
 
-        string MenuBoxCursorCoords => Scrapper.GetString(SectionName, "menu.boxcursor.coords");
-        string CursorMoveSound => Scrapper.GetString(SectionName, "cursor.move.snd");
-        string CursorDoneSound => Scrapper.GetString(SectionName, "cursor.done.snd");
-        string CancelSound => Scrapper.GetString(SectionName, "cancel.snd");
+        IBoxEntry MenuBoxCursorCoords => Scrapper.GetBox(SectionName, "menu.boxcursor.coords");
+        IMovementEntry Cursor => Scrapper.GetMovement(SectionName, "cursor");
+        ISpriteSoundEntry Cancel => Scrapper.GetSpriteSound(SectionName, "cancel");
     }
 
-    public interface
-        IMotifConfigurationTitleBgDef : IConfigurationManagerSection<IMotifConfigurationTitleBgDef
-        > // TODO: Enumerable inside
+    public interface IMotifConfigurationTitleBgDef : IConfigurationManagerSection<IMotifConfigurationTitleBgDef> // TODO: Enumerable inside
     {
     }
 
-    public interface
-        IMotifConfigurationInfobox : IConfigurationManagerSection<IMotifConfigurationInfobox
-        > // TODO: What is this ??? Get an example
+    public interface IMotifConfigurationInfobox : IConfigurationManagerSection<IMotifConfigurationInfobox> // TODO: What is this ??? Get an example
     {
     }
 
     public interface IMotifConfigurationSelectInfo : IConfigurationManagerSection<IMotifConfigurationSelectInfo>
     {
-        const string SectionName = "Select Info";
-
         int FadeInTime => Scrapper.GetInt(SectionName, "fadein.time");
         int FadeOutTime => Scrapper.GetInt(SectionName, "fadeout.time");
         int Rows => Scrapper.GetInt(SectionName, "rows");

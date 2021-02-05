@@ -9,7 +9,7 @@ namespace Negum.Core.Scrappers.Entries
     /// </author>
     public interface ISpriteSoundEntry : IScrapperEntry<ISpriteSoundEntry>
     {
-        string Sprite { get; }
-        string Sound { get; }
+        IPositionEntry Sprite { get; }
+        IPositionEntry Sound { get; }
     }
 }
