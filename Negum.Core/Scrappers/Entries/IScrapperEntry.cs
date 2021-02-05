@@ -13,6 +13,21 @@ namespace Negum.Core.Scrappers.Entries
         where TEntry : IScrapperEntry<TEntry>
     {
         /// <summary>
+        /// Scrapper used by the current entry.
+        /// </summary>
+        IConfigurationScrapper Scrapper { get; }
+        
+        /// <summary>
+        /// Section of the current entry.
+        /// </summary>
+        IConfigurationSection Section { get; }
+        
+        /// <summary>
+        /// Key prefix of the current entry.
+        /// </summary>
+        string KeyPrefix { get; }
+        
+        /// <summary>
         /// Initializes current entry with a value.
         /// </summary>
         /// <param name="scrapper">Scrapper used to get the entry.</param>

@@ -9,7 +9,7 @@ namespace Negum.Core.Scrappers.Entries
     /// </author>
     public interface IAnimationEntry : IScrapperEntry<IAnimationEntry>
     {
-        int Animation { get; }
-        IPositionEntry Offset { get; }
+        int Animation => this.Scrapper.GetInt(this.Section.Name, this.KeyPrefix + ".anim");
+        IPositionEntry Offset => this.Scrapper.GetPosition(this.Section.Name, this.KeyPrefix + ".offset");
     }
 }

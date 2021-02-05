@@ -9,10 +9,10 @@ namespace Negum.Core.Scrappers.Entries
     /// </author>
     public interface IImageEntry : IScrapperEntry<IImageEntry>
     {
-        IPositionEntry Sprite { get; }
-        IPositionEntry Offset { get; }
-        IPositionEntry Scale { get; }
-        int Facing { get; }
-        IBoxEntry Window { get; }
+        IPositionEntry Sprite => this.Scrapper.GetPosition(this.Section.Name, this.KeyPrefix + ".spr");
+        IPositionEntry Offset => this.Scrapper.GetPosition(this.Section.Name, this.KeyPrefix + ".offset");
+        IPositionEntry Scale => this.Scrapper.GetPosition(this.Section.Name, this.KeyPrefix + ".scale");
+        int Facing => this.Scrapper.GetInt(this.Section.Name, this.KeyPrefix + ".facing");
+        IBoxEntry Window => this.Scrapper.GetBox(this.Section.Name, this.KeyPrefix + ".window");
     }
 }

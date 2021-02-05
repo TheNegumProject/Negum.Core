@@ -8,7 +8,5 @@ namespace Negum.Core.Scrappers.Entries
     /// </author>
     public class MovementEntry : ScrappedEntry<IMovementEntry>, IMovementEntry
     {
-        public ISpriteSoundEntry Move => this.Scrapper.GetSpriteSound(this.Section.Name, this.KeyPrefix + ".move");
-        public ISpriteSoundEntry Done => this.Scrapper.GetSpriteSound(this.Section.Name, this.KeyPrefix + ".done");
     }
 }

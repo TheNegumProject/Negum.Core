@@ -12,15 +12,15 @@ namespace Negum.Core.Scrappers.Entries
         /// <summary>
         /// Position of the text.
         /// </summary>
-        IPositionEntry Offset { get; }
+        IPositionEntry Offset => this.Scrapper.GetPosition(this.Section.Name, this.KeyPrefix + ".offset");
 
         /// <summary>
         /// Font the text.
         /// Set for -1 for none / no display.
         /// </summary>
-        IFontEntry Font { get; }
+        IFontEntry Font => this.Scrapper.GetFont(this.Section.Name, this.KeyPrefix + ".font");
 
-        IPositionEntry Spacing { get; }
-        string Text { get; }
+        IPositionEntry Spacing => this.Scrapper.GetPosition(this.Section.Name, this.KeyPrefix + ".spacing");
+        string Text => this.Scrapper.GetString(this.Section.Name, this.KeyPrefix + ".text");
     }
 }

@@ -11,9 +11,9 @@ namespace Negum.Core.Scrappers.Entries
     public abstract class ScrappedEntry<TEntry> : IScrapperEntry<TEntry>
         where TEntry : IScrapperEntry<TEntry>
     {
-        protected IConfigurationScrapper Scrapper { get; set; }
-        protected IConfigurationSection Section { get; set; }
-        protected string KeyPrefix { get; set; }
+        public IConfigurationScrapper Scrapper { get; protected set; }
+        public IConfigurationSection Section { get; protected set; }
+        public string KeyPrefix { get; protected set; }
 
         public virtual TEntry Setup(IConfigurationScrapper scrapper, IConfigurationSection section, string keyPrefix)
         {

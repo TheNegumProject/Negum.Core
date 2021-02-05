@@ -12,22 +12,22 @@ namespace Negum.Core.Scrappers.Entries
         /// <summary>
         /// Audio file.
         /// </summary>
-        IFileEntry File { get; }
+        IFileEntry File => this.Scrapper.GetFile(this.Section.Name, this.KeyPrefix);
 
         /// <summary>
         /// Volume scaling factor in percent.
         /// 100 is default.
         /// </summary>
-        int Volume { get; }
+        int Volume => this.Scrapper.GetInt(this.Section.Name, this.KeyPrefix + ".volume");
 
         /// <summary>
         /// Set to true to allow looping.
         /// Set to false to prevent looping.
         /// </summary>
-        bool Loop { get; }
+        bool Loop => this.Scrapper.GetBoolean(this.Section.Name, this.KeyPrefix + ".loop");
 
-        int LoopStart { get; }
+        int LoopStart => this.Scrapper.GetInt(this.Section.Name, this.KeyPrefix + ".loopstart");
 
-        int LoopEnd { get; }
+        int LoopEnd => this.Scrapper.GetInt(this.Section.Name, this.KeyPrefix + ".loopend");
     }
 }
