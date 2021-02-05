@@ -15,7 +15,7 @@ namespace Negum.Core.Scrappers
     {
         private IConfigurationDefinition ConfigDef { get; set; }
 
-        public IConfigurationScrapper Use(IConfigurationDefinition def)
+        public IConfigurationScrapper Setup(IConfigurationDefinition def)
         {
             this.ConfigDef = def;
             return this;
