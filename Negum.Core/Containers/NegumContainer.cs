@@ -116,25 +116,25 @@ namespace Negum.Core.Containers
             Register<INegumConfigurationKeys, NegumConfigurationManagerSection>();
 
             // Motif Configuration Types
-            Register<IMotifConfigurationInfo, MoticConfigurationManagerSection>();
-            Register<IMotifConfigurationFiles, MoticConfigurationManagerSection>();
-            Register<IMotifConfigurationMusic, MoticConfigurationManagerSection>();
-            Register<IMotifConfigurationTitleInfo, MoticConfigurationManagerSection>();
-            Register<IMotifConfigurationTitleBgDef, MoticConfigurationManagerSection>();
-            Register<IMotifConfigurationInfobox, MoticConfigurationManagerSection>();
-            Register<IMotifConfigurationSelectInfo, MoticConfigurationManagerSection>();
-            Register<IMotifConfigurationSelectBgDef, MoticConfigurationManagerSection>();
-            Register<IMotifConfigurationVsScreen, MoticConfigurationManagerSection>();
-            Register<IMotifConfigurationVsBgDef, MoticConfigurationManagerSection>();
-            Register<IMotifConfigurationDemoMode, MoticConfigurationManagerSection>();
-            Register<IMotifConfigurationContinueScreen, MoticConfigurationManagerSection>();
-            Register<IMotifConfigurationGameOverScreen, MoticConfigurationManagerSection>();
-            Register<IMotifConfigurationVictoryScreen, MoticConfigurationManagerSection>();
-            Register<IMotifConfigurationWinScreen, MoticConfigurationManagerSection>();
-            Register<IMotifConfigurationDefaultEnding, MoticConfigurationManagerSection>();
-            Register<IMotifConfigurationEndCredits, MoticConfigurationManagerSection>();
-            Register<IMotifConfigurationSurvivalResultsScreen, MoticConfigurationManagerSection>();
-            Register<IMotifConfigurationOptionInfo, MoticConfigurationManagerSection>();
+            Register<IMotifConfigurationInfo, MotifConfigurationManagerSection>();
+            Register<IMotifConfigurationFiles, MotifConfigurationManagerSection>();
+            Register<IMotifConfigurationMusic, MotifConfigurationManagerSection>();
+            Register<IMotifConfigurationTitleInfo, MotifConfigurationManagerSection>();
+            Register<IMotifConfigurationTitleBgDef, MotifConfigurationManagerSection>();
+            Register<IMotifConfigurationInfobox, MotifConfigurationManagerSection>();
+            Register<IMotifConfigurationSelectInfo, MotifConfigurationManagerSection>();
+            Register<IMotifConfigurationSelectBgDef, MotifConfigurationManagerSection>();
+            Register<IMotifConfigurationVsScreen, MotifConfigurationManagerSection>();
+            Register<IMotifConfigurationVsBgDef, MotifConfigurationManagerSection>();
+            Register<IMotifConfigurationDemoMode, MotifConfigurationManagerSection>();
+            Register<IMotifConfigurationContinueScreen, MotifConfigurationManagerSection>();
+            Register<IMotifConfigurationGameOverScreen, MotifConfigurationManagerSection>();
+            Register<IMotifConfigurationVictoryScreen, MotifConfigurationManagerSection>();
+            Register<IMotifConfigurationWinScreen, MotifConfigurationManagerSection>();
+            Register<IMotifConfigurationDefaultEnding, MotifConfigurationManagerSection>();
+            Register<IMotifConfigurationEndCredits, MotifConfigurationManagerSection>();
+            Register<IMotifConfigurationSurvivalResultsScreen, MotifConfigurationManagerSection>();
+            Register<IMotifConfigurationOptionInfo, MotifConfigurationManagerSection>();
         }
     }
 

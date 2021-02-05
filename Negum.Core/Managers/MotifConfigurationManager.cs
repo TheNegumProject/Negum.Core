@@ -14,8 +14,8 @@ namespace Negum.Core.Managers
     {
     }
 
-    public class MoticConfigurationManagerSection :
-        ConfigurationManagerSection<MoticConfigurationManagerSection>,
+    public class MotifConfigurationManagerSection :
+        ConfigurationManagerSection<MotifConfigurationManagerSection>,
         IMotifConfigurationInfo,
         IMotifConfigurationFiles,
         IMotifConfigurationMusic,
