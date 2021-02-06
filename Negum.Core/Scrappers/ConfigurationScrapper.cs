@@ -92,5 +92,14 @@ namespace Negum.Core.Scrappers
 
         public ISoundEntry GetSound(string sectionName, string fieldKey) =>
             NegumContainer.Resolve<ISoundEntry>().Setup(this, this.ConfigDef[sectionName], fieldKey);
+
+        public IPlayerSelectionTeamMenuItemEntry GetPlayerSelectionTeamMenuItem(string sectionName, string fieldKey) =>
+            NegumContainer.Resolve<IPlayerSelectionTeamMenuItemEntry>().Setup(this, this.ConfigDef[sectionName], fieldKey);
+
+        public IPlayerSelectionTeamMenuEntry GetPlayerSelectionTeamMenu(string sectionName, string fieldKey) =>
+            NegumContainer.Resolve<IPlayerSelectionTeamMenuEntry>().Setup(this, this.ConfigDef[sectionName], fieldKey);
+
+        public IPlayerSelectionTeamMenuValueEntry GetPlayerSelectionTeamMenuValue(string sectionName, string fieldKey) =>
+            NegumContainer.Resolve<IPlayerSelectionTeamMenuValueEntry>().Setup(this, this.ConfigDef[sectionName], fieldKey);
     }
 }

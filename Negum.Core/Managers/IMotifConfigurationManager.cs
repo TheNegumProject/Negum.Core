@@ -237,6 +237,7 @@ namespace Negum.Core.Managers
         IImageEntry Portrait => Scrapper.GetImage(SectionName, "portrait");
         ITextEntry Title => Scrapper.GetText(SectionName, "title");
         IStageSelectionEntry Stage => Scrapper.GetStage(SectionName, "stage");
+        bool TeamMenuMoveWrapping => Scrapper.GetBoolean(SectionName, "teammenu.move.wrapping");
     }
 
     public interface

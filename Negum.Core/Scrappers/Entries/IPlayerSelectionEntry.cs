@@ -13,6 +13,6 @@ namespace Negum.Core.Scrappers.Entries
         IMovementEntry RandomMove => this.Scrapper.GetMovement(this.Section.Name, this.KeyPrefix + ".random");
         IImageEntry Face => this.Scrapper.GetImage(this.Section.Name, this.KeyPrefix + ".face");
         ITextEntry Name => this.Scrapper.GetText(this.Section.Name, this.KeyPrefix + ".name");
-        // IPlayerSelectionTeamMenuEntry MenuEntry { get; }
+        IPlayerSelectionTeamMenuEntry MenuEntry => this.Scrapper.GetPlayerSelectionTeamMenu(this.Section.Name, this.KeyPrefix + ".teammenu");
     }
 }

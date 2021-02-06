@@ -187,5 +187,26 @@ namespace Negum.Core.Scrappers
         /// <param name="fieldKey"></param>
         /// <returns>Sound value from selected configuration.</returns>
         ISoundEntry GetSound(string sectionName, string fieldKey);
+        
+        /// <summary>
+        /// </summary>
+        /// <param name="sectionName"></param>
+        /// <param name="fieldKey"></param>
+        /// <returns>Player Selection Team Menu Item value from selected configuration.</returns>
+        IPlayerSelectionTeamMenuItemEntry GetPlayerSelectionTeamMenuItem(string sectionName, string fieldKey);
+        
+        /// <summary>
+        /// </summary>
+        /// <param name="sectionName"></param>
+        /// <param name="fieldKey"></param>
+        /// <returns>Sound value from selected configuration.</returns>
+        IPlayerSelectionTeamMenuEntry GetPlayerSelectionTeamMenu(string sectionName, string fieldKey);
+        
+        /// <summary>
+        /// </summary>
+        /// <param name="sectionName"></param>
+        /// <param name="fieldKey"></param>
+        /// <returns>Sound value from selected configuration.</returns>
+        IPlayerSelectionTeamMenuValueEntry GetPlayerSelectionTeamMenuValue(string sectionName, string fieldKey);
     }
 }
