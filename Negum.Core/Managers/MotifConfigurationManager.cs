@@ -20,12 +20,9 @@ namespace Negum.Core.Managers
         IMotifConfigurationFiles,
         IMotifConfigurationMusic,
         IMotifConfigurationTitleInfo,
-        IMotifConfigurationTitleBgDef,
         IMotifConfigurationInfobox,
         IMotifConfigurationSelectInfo,
-        IMotifConfigurationSelectBgDef,
         IMotifConfigurationVsScreen,
-        IMotifConfigurationVsBgDef,
         IMotifConfigurationDemoMode,
         IMotifConfigurationContinueScreen,
         IMotifConfigurationGameOverScreen,
@@ -34,8 +31,8 @@ namespace Negum.Core.Managers
         IMotifConfigurationDefaultEnding,
         IMotifConfigurationEndCredits,
         IMotifConfigurationSurvivalResultsScreen,
-        IMotifConfigurationOptionInfo,
-        IMotifConfigurationScreenBg
+        IMotifConfigurationScreenBg,
+        IMotifConfigurationScreenBgDef
     {
         IMotifConfigurationInfo IConfigurationManagerSection<IMotifConfigurationInfo>.Setup(
             IConfigurationSectionScrapper scrapper) => this.Setup(scrapper);
@@ -49,7 +46,7 @@ namespace Negum.Core.Managers
         IMotifConfigurationTitleInfo IConfigurationManagerSection<IMotifConfigurationTitleInfo>.Setup(
             IConfigurationSectionScrapper scrapper) => this.Setup(scrapper);
 
-        IMotifConfigurationTitleBgDef IConfigurationManagerSection<IMotifConfigurationTitleBgDef>.Setup(
+        IMotifConfigurationScreenBgDef IConfigurationManagerSection<IMotifConfigurationScreenBgDef>.Setup(
             IConfigurationSectionScrapper scrapper) => this.Setup(scrapper);
 
         IMotifConfigurationInfobox IConfigurationManagerSection<IMotifConfigurationInfobox>.Setup(
@@ -58,13 +55,7 @@ namespace Negum.Core.Managers
         IMotifConfigurationSelectInfo IConfigurationManagerSection<IMotifConfigurationSelectInfo>.Setup(
             IConfigurationSectionScrapper scrapper) => this.Setup(scrapper);
 
-        IMotifConfigurationSelectBgDef IConfigurationManagerSection<IMotifConfigurationSelectBgDef>.Setup(
-            IConfigurationSectionScrapper scrapper) => this.Setup(scrapper);
-
         IMotifConfigurationVsScreen IConfigurationManagerSection<IMotifConfigurationVsScreen>.Setup(
-            IConfigurationSectionScrapper scrapper) => this.Setup(scrapper);
-
-        IMotifConfigurationVsBgDef IConfigurationManagerSection<IMotifConfigurationVsBgDef>.Setup(
             IConfigurationSectionScrapper scrapper) => this.Setup(scrapper);
 
         IMotifConfigurationDemoMode IConfigurationManagerSection<IMotifConfigurationDemoMode>.Setup(
@@ -90,9 +81,6 @@ namespace Negum.Core.Managers
 
         IMotifConfigurationSurvivalResultsScreen IConfigurationManagerSection<IMotifConfigurationSurvivalResultsScreen>.
             Setup(IConfigurationSectionScrapper scrapper) => this.Setup(scrapper);
-
-        IMotifConfigurationOptionInfo IConfigurationManagerSection<IMotifConfigurationOptionInfo>.Setup(
-            IConfigurationSectionScrapper scrapper) => this.Setup(scrapper);
 
         IMotifConfigurationScreenBg IConfigurationManagerSection<IMotifConfigurationScreenBg>.Setup(
             IConfigurationSectionScrapper scrapper) => this.Setup(scrapper);

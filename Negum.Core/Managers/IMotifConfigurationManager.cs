@@ -26,8 +26,8 @@ namespace Negum.Core.Managers
         public IMotifConfigurationTitleInfo TitleInfo =>
             NegumContainer.Resolve<IMotifConfigurationTitleInfo>().Setup(this.Scrapper.GetSection("Title Info"));
 
-        public IMotifConfigurationTitleBgDef TitleBgDef =>
-            NegumContainer.Resolve<IMotifConfigurationTitleBgDef>().Setup(this.Scrapper.GetSection("TitleBGdef"));
+        public IMotifConfigurationScreenBgDef TitleBgDef =>
+            NegumContainer.Resolve<IMotifConfigurationScreenBgDef>().Setup(this.Scrapper.GetSection("TitleBGdef"));
 
         public IEnumerable<IMotifConfigurationScreenBg> TitleBgs =>
             NegumContainer.Resolve<ISectionCollectionProvider>()
@@ -39,18 +39,18 @@ namespace Negum.Core.Managers
         public IMotifConfigurationSelectInfo SelectInfo =>
             NegumContainer.Resolve<IMotifConfigurationSelectInfo>().Setup(this.Scrapper.GetSection("Select Info"));
 
-        public IMotifConfigurationSelectBgDef SelectBgDef =>
-            NegumContainer.Resolve<IMotifConfigurationSelectBgDef>().Setup(this.Scrapper.GetSection("SelectBGdef"));
+        public IMotifConfigurationScreenBgDef SelectBgDef =>
+            NegumContainer.Resolve<IMotifConfigurationScreenBgDef>().Setup(this.Scrapper.GetSection("SelectBGdef"));
 
         public IEnumerable<IMotifConfigurationScreenBg> SelectBgs =>
             NegumContainer.Resolve<ISectionCollectionProvider>()
                 .SetupMultiple<IMotifConfigurationScreenBg>(this.Scrapper.GetSections("SelectBG "));
-        
+
         public IMotifConfigurationVsScreen VsScreen =>
             NegumContainer.Resolve<IMotifConfigurationVsScreen>().Setup(this.Scrapper.GetSection("VS Screen"));
 
-        public IMotifConfigurationVsBgDef VersusBgDef =>
-            NegumContainer.Resolve<IMotifConfigurationVsBgDef>().Setup(this.Scrapper.GetSection("VersusBGdef"));
+        public IMotifConfigurationScreenBgDef VersusBgDef =>
+            NegumContainer.Resolve<IMotifConfigurationScreenBgDef>().Setup(this.Scrapper.GetSection("VersusBGdef"));
 
         public IEnumerable<IMotifConfigurationScreenBg> VersusBgs =>
             NegumContainer.Resolve<ISectionCollectionProvider>()
@@ -70,6 +70,9 @@ namespace Negum.Core.Managers
         public IMotifConfigurationVictoryScreen VictoryScreen =>
             NegumContainer.Resolve<IMotifConfigurationVictoryScreen>()
                 .Setup(this.Scrapper.GetSection("Victory Screen"));
+        
+        public IMotifConfigurationScreenBgDef VictoryBgDef =>
+            NegumContainer.Resolve<IMotifConfigurationScreenBgDef>().Setup(this.Scrapper.GetSection("VictoryBGdef"));
 
         public IEnumerable<IMotifConfigurationScreenBg> VictoryBgs =>
             NegumContainer.Resolve<ISectionCollectionProvider>()
@@ -89,12 +92,18 @@ namespace Negum.Core.Managers
             NegumContainer.Resolve<IMotifConfigurationSurvivalResultsScreen>()
                 .Setup(this.Scrapper.GetSection("Survival Results Screen"));
 
-        public IMotifConfigurationOptionInfo OptionInfo =>
-            NegumContainer.Resolve<IMotifConfigurationOptionInfo>().Setup(this.Scrapper.GetSection("Option Info"));
-        
+        public IMotifConfigurationScreenBgDef OptionInfo =>
+            NegumContainer.Resolve<IMotifConfigurationScreenBgDef>().Setup(this.Scrapper.GetSection("Option Info"));
+
         public IEnumerable<IMotifConfigurationScreenBg> OptionBgs =>
             NegumContainer.Resolve<ISectionCollectionProvider>()
                 .SetupMultiple<IMotifConfigurationScreenBg>(this.Scrapper.GetSections("OptionBG "));
+    }
+
+    public interface IMotifConfigurationScreenBgDef : IConfigurationManagerSection<IMotifConfigurationScreenBgDef>
+    {
+        IFileEntry Sprite => Scrapper.GetFile("spr");
+        string BgClearColor => Scrapper.GetString("bgclearcolor");
     }
 
     public interface IMotifConfigurationInfo : IConfigurationManagerSection<IMotifConfigurationInfo>
@@ -216,11 +225,6 @@ namespace Negum.Core.Managers
         ISpriteSoundEntry Cancel => Scrapper.GetSpriteSound("cancel");
     }
 
-    public interface IMotifConfigurationTitleBgDef : IConfigurationManagerSection<IMotifConfigurationTitleBgDef>
-    {
-        string BgClearColor => Scrapper.GetString("bgclearcolor");
-    }
-
     public interface IMotifConfigurationScreenBg : IConfigurationManagerSection<IMotifConfigurationScreenBg>
     {
         string Type => Scrapper.GetString("type");
@@ -282,11 +286,6 @@ namespace Negum.Core.Managers
         bool TeamMenuMoveWrapping => Scrapper.GetBoolean("teammenu.move.wrapping");
     }
 
-    public interface IMotifConfigurationSelectBgDef : IConfigurationManagerSection<IMotifConfigurationSelectBgDef>
-    {
-        // TODO: Enumerable inside
-    }
-
     public interface IMotifConfigurationVsScreen : IConfigurationManagerSection<IMotifConfigurationVsScreen>
     {
         ITimeEntry Time => Scrapper.GetTime("time");
@@ -295,11 +294,6 @@ namespace Negum.Core.Managers
         ITextEntry Match => Scrapper.GetText("match");
         IPlayerSelectionEntry Player1 => Scrapper.GetPlayerSelection("p1");
         IPlayerSelectionEntry Player2 => Scrapper.GetPlayerSelection("p2");
-    }
-
-    public interface IMotifConfigurationVsBgDef : IConfigurationManagerSection<IMotifConfigurationVsBgDef>
-    {
-        // TODO: Enumerable inside
     }
 
     public interface IMotifConfigurationDemoMode : IConfigurationManagerSection<IMotifConfigurationDemoMode>
@@ -373,10 +367,5 @@ namespace Negum.Core.Managers
         /// Number of rounds to get win pose (lose pose otherwise).
         /// </summary>
         int RoundsToWin => Scrapper.GetInt("roundstowin");
-    }
-
-    public interface IMotifConfigurationOptionInfo : IConfigurationManagerSection<IMotifConfigurationOptionInfo>
-    {
-        // TODO: Enumerable inside
     }
 }

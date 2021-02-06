@@ -112,7 +112,7 @@ namespace Negum.Core.Containers
             // Managers
             Register<INegumConfigurationManager, NegumConfigurationManager>();
             Register<IMotifConfigurationManager, MotifConfigurationManager>();
-            
+
             // Managers others
             Register<ISectionCollectionProvider, SectionCollectionProvider>();
 
@@ -133,12 +133,10 @@ namespace Negum.Core.Containers
             Register<IMotifConfigurationFiles, MotifConfigurationManagerSection>();
             Register<IMotifConfigurationMusic, MotifConfigurationManagerSection>();
             Register<IMotifConfigurationTitleInfo, MotifConfigurationManagerSection>();
-            Register<IMotifConfigurationTitleBgDef, MotifConfigurationManagerSection>();
+            Register<IMotifConfigurationScreenBgDef, MotifConfigurationManagerSection>();
             Register<IMotifConfigurationInfobox, MotifConfigurationManagerSection>();
             Register<IMotifConfigurationSelectInfo, MotifConfigurationManagerSection>();
-            Register<IMotifConfigurationSelectBgDef, MotifConfigurationManagerSection>();
             Register<IMotifConfigurationVsScreen, MotifConfigurationManagerSection>();
-            Register<IMotifConfigurationVsBgDef, MotifConfigurationManagerSection>();
             Register<IMotifConfigurationDemoMode, MotifConfigurationManagerSection>();
             Register<IMotifConfigurationContinueScreen, MotifConfigurationManagerSection>();
             Register<IMotifConfigurationGameOverScreen, MotifConfigurationManagerSection>();
@@ -147,7 +145,6 @@ namespace Negum.Core.Containers
             Register<IMotifConfigurationDefaultEnding, MotifConfigurationManagerSection>();
             Register<IMotifConfigurationEndCredits, MotifConfigurationManagerSection>();
             Register<IMotifConfigurationSurvivalResultsScreen, MotifConfigurationManagerSection>();
-            Register<IMotifConfigurationOptionInfo, MotifConfigurationManagerSection>();
             Register<IMotifConfigurationScreenBg, MotifConfigurationManagerSection>();
         }
     }
