@@ -102,6 +102,7 @@ namespace Negum.Core.Containers
             Register<IPlayerSelectionTeamMenuEntry, PlayerSelectionTeamMenuEntry>();
             Register<IPlayerSelectionTeamMenuItemEntry, PlayerSelectionTeamMenuItemEntry>();
             Register<IPlayerSelectionTeamMenuValueEntry, PlayerSelectionTeamMenuValueEntry>();
+            Register<ITimeEntry, TimeEntry>();
 
             // Scrappers
             Register<IConfigurationScrapper, ConfigurationScrapper>();

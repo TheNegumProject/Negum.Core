@@ -22,19 +22,19 @@ namespace Negum.Core.Managers
         public IMotifConfigurationMusic Music =>
             NegumContainer.Resolve<IMotifConfigurationMusic>().Setup(this.Scrapper, "Music");
 
-        public IMotifConfigurationTitleInfo TitleInfo => 
+        public IMotifConfigurationTitleInfo TitleInfo =>
             NegumContainer.Resolve<IMotifConfigurationTitleInfo>().Setup(this.Scrapper, "Title Info");
 
-        public IMotifConfigurationTitleBgDef TitleBgDef => 
+        public IMotifConfigurationTitleBgDef TitleBgDef =>
             NegumContainer.Resolve<IMotifConfigurationTitleBgDef>().Setup(this.Scrapper, "TitleBGdef");
 
         public IMotifConfigurationInfobox Infobox =>
             NegumContainer.Resolve<IMotifConfigurationInfobox>().Setup(this.Scrapper, "Infobox");
 
-        public IMotifConfigurationSelectInfo SelectInfo => 
+        public IMotifConfigurationSelectInfo SelectInfo =>
             NegumContainer.Resolve<IMotifConfigurationSelectInfo>().Setup(this.Scrapper, "Select Info");
 
-        public IMotifConfigurationSelectBgDef SelectBgDef => 
+        public IMotifConfigurationSelectBgDef SelectBgDef =>
             NegumContainer.Resolve<IMotifConfigurationSelectBgDef>().Setup(this.Scrapper, "SelectBGdef");
 
         public IMotifConfigurationVsScreen VsScreen =>
@@ -46,28 +46,29 @@ namespace Negum.Core.Managers
         public IMotifConfigurationDemoMode DemoMode =>
             NegumContainer.Resolve<IMotifConfigurationDemoMode>().Setup(this.Scrapper, "Demo Mode");
 
-        public IMotifConfigurationContinueScreen ContinueScreen => 
+        public IMotifConfigurationContinueScreen ContinueScreen =>
             NegumContainer.Resolve<IMotifConfigurationContinueScreen>().Setup(this.Scrapper, "Continue Screen");
 
-        public IMotifConfigurationGameOverScreen GameOverScreen => 
+        public IMotifConfigurationGameOverScreen GameOverScreen =>
             NegumContainer.Resolve<IMotifConfigurationGameOverScreen>().Setup(this.Scrapper, "Game Over Screen");
 
-        public IMotifConfigurationVictoryScreen VictoryScreen => 
+        public IMotifConfigurationVictoryScreen VictoryScreen =>
             NegumContainer.Resolve<IMotifConfigurationVictoryScreen>().Setup(this.Scrapper, "Victory Screen");
 
-        public IMotifConfigurationWinScreen WinScreen => 
+        public IMotifConfigurationWinScreen WinScreen =>
             NegumContainer.Resolve<IMotifConfigurationWinScreen>().Setup(this.Scrapper, "Win Screen");
 
-        public IMotifConfigurationDefaultEnding DefaultEnding => 
+        public IMotifConfigurationDefaultEnding DefaultEnding =>
             NegumContainer.Resolve<IMotifConfigurationDefaultEnding>().Setup(this.Scrapper, "Default Ending");
 
-        public IMotifConfigurationEndCredits EndCredits => 
+        public IMotifConfigurationEndCredits EndCredits =>
             NegumContainer.Resolve<IMotifConfigurationEndCredits>().Setup(this.Scrapper, "End Credits");
 
-        public IMotifConfigurationSurvivalResultsScreen SurvivalResultsScreen => 
-            NegumContainer.Resolve<IMotifConfigurationSurvivalResultsScreen>().Setup(this.Scrapper, "Survival Results Screen");
+        public IMotifConfigurationSurvivalResultsScreen SurvivalResultsScreen =>
+            NegumContainer.Resolve<IMotifConfigurationSurvivalResultsScreen>()
+                .Setup(this.Scrapper, "Survival Results Screen");
 
-        public IMotifConfigurationOptionInfo OptionInfo => 
+        public IMotifConfigurationOptionInfo OptionInfo =>
             NegumContainer.Resolve<IMotifConfigurationOptionInfo>().Setup(this.Scrapper, "Option Info");
     }
 
@@ -157,8 +158,8 @@ namespace Negum.Core.Managers
 
     public interface IMotifConfigurationTitleInfo : IConfigurationManagerSection<IMotifConfigurationTitleInfo>
     {
-        int FadeInTime => Scrapper.GetInt(SectionName, "fadein.time");
-        int FadeOutTime => Scrapper.GetInt(SectionName, "fadeout.time");
+        ITimeEntry FadeInTime => Scrapper.GetTime(SectionName, "fadein.time");
+        ITimeEntry FadeOutTime => Scrapper.GetTime(SectionName, "fadeout.time");
         IPositionEntry MenuPos => Scrapper.GetPosition(SectionName, "menu.pos");
         ITextEntry MenuItem => Scrapper.GetText(SectionName, "menu.item");
         ITextEntry MenuItemActive => Scrapper.GetText(SectionName, "menu.item.active");
@@ -190,18 +191,20 @@ namespace Negum.Core.Managers
         ISpriteSoundEntry Cancel => Scrapper.GetSpriteSound(SectionName, "cancel");
     }
 
-    public interface IMotifConfigurationTitleBgDef : IConfigurationManagerSection<IMotifConfigurationTitleBgDef> // TODO: Enumerable inside
+    public interface IMotifConfigurationTitleBgDef : IConfigurationManagerSection<IMotifConfigurationTitleBgDef>
     {
+        // TODO: Enumerable inside
     }
 
-    public interface IMotifConfigurationInfobox : IConfigurationManagerSection<IMotifConfigurationInfobox> // TODO: What is this ??? Get an example
+    public interface IMotifConfigurationInfobox : IConfigurationManagerSection<IMotifConfigurationInfobox>
     {
+        // TODO: What is this ??? Get an example
     }
 
     public interface IMotifConfigurationSelectInfo : IConfigurationManagerSection<IMotifConfigurationSelectInfo>
     {
-        int FadeInTime => Scrapper.GetInt(SectionName, "fadein.time");
-        int FadeOutTime => Scrapper.GetInt(SectionName, "fadeout.time");
+        ITimeEntry FadeInTime => Scrapper.GetTime(SectionName, "fadein.time");
+        ITimeEntry FadeOutTime => Scrapper.GetTime(SectionName, "fadeout.time");
         int Rows => Scrapper.GetInt(SectionName, "rows");
         int Columns => Scrapper.GetInt(SectionName, "columns");
 
@@ -221,7 +224,7 @@ namespace Negum.Core.Managers
         bool CanMoveOverEmptyBoxes => Scrapper.GetBoolean(SectionName, "moveoveremptyboxes");
 
         ICellSelectionEntry Cell => Scrapper.GetCell(SectionName, "cell");
-        
+
         /// <summary>
         /// Player 1 selection.
         /// </summary>
@@ -240,20 +243,21 @@ namespace Negum.Core.Managers
         bool TeamMenuMoveWrapping => Scrapper.GetBoolean(SectionName, "teammenu.move.wrapping");
     }
 
-    public interface
-        IMotifConfigurationSelectBgDef : IConfigurationManagerSection<IMotifConfigurationSelectBgDef
-        > // TODO: Enumerable inside
+    public interface IMotifConfigurationSelectBgDef : IConfigurationManagerSection<IMotifConfigurationSelectBgDef>
     {
+        // TODO: Enumerable inside
     }
 
-    public interface
-        IMotifConfigurationVsScreen : IConfigurationManagerSection<IMotifConfigurationVsScreen
-        > // TODO: Enumerable inside
+    public interface IMotifConfigurationVsScreen : IConfigurationManagerSection<IMotifConfigurationVsScreen>
     {
+        ITimeEntry Time => Scrapper.GetTime(this.SectionName, "time");
+        ITimeEntry FadeInTime => Scrapper.GetTime(SectionName, "fadein.time");
+        ITimeEntry FadeOutTime => Scrapper.GetTime(SectionName, "fadeout.time");
     }
 
     public interface IMotifConfigurationVsBgDef : IConfigurationManagerSection<IMotifConfigurationVsBgDef>
     {
+        // TODO: Enumerable inside
     }
 
     public interface IMotifConfigurationDemoMode : IConfigurationManagerSection<IMotifConfigurationDemoMode>
@@ -268,10 +272,9 @@ namespace Negum.Core.Managers
     {
     }
 
-    public interface
-        IMotifConfigurationVictoryScreen : IConfigurationManagerSection<IMotifConfigurationVictoryScreen
-        > // TODO: Enumerable inside
+    public interface IMotifConfigurationVictoryScreen : IConfigurationManagerSection<IMotifConfigurationVictoryScreen>
     {
+        // TODO: Enumerable inside
     }
 
     public interface IMotifConfigurationWinScreen : IConfigurationManagerSection<IMotifConfigurationWinScreen>
@@ -292,9 +295,8 @@ namespace Negum.Core.Managers
     {
     }
 
-    public interface
-        IMotifConfigurationOptionInfo : IConfigurationManagerSection<IMotifConfigurationOptionInfo
-        > // TODO: Enumerable inside
+    public interface IMotifConfigurationOptionInfo : IConfigurationManagerSection<IMotifConfigurationOptionInfo> 
     {
+        // TODO: Enumerable inside
     }
 }

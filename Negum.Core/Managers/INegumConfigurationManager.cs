@@ -56,7 +56,7 @@ namespace Negum.Core.Managers
     {
         int Difficulty => Scrapper.GetInt(SectionName, "Difficulty");
         int Life => Scrapper.GetInt(SectionName, "Life");
-        int Time => Scrapper.GetInt(SectionName, "Time");
+        ITimeEntry Time => Scrapper.GetTime(SectionName, "Time");
         int GameSpeed => Scrapper.GetInt(SectionName, "GameSpeed");
         int Team1VS2Life => Scrapper.GetInt(SectionName, "Team.1VS2Life");
         bool TeamLoseOnKO => Scrapper.GetBoolean(SectionName, "Team.LoseOnKO");

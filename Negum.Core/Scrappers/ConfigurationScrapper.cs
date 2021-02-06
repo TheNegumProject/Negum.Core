@@ -101,5 +101,8 @@ namespace Negum.Core.Scrappers
 
         public IPlayerSelectionTeamMenuValueEntry GetPlayerSelectionTeamMenuValue(string sectionName, string fieldKey) =>
             NegumContainer.Resolve<IPlayerSelectionTeamMenuValueEntry>().Setup(this, this.ConfigDef[sectionName], fieldKey);
+
+        public ITimeEntry GetTime(string sectionName, string fieldKey) =>
+            NegumContainer.Resolve<ITimeEntry>().Setup(this, this.ConfigDef[sectionName], fieldKey);
     }
 }

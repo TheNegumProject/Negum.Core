@@ -208,5 +208,12 @@ namespace Negum.Core.Scrappers
         /// <param name="fieldKey"></param>
         /// <returns>Sound value from selected configuration.</returns>
         IPlayerSelectionTeamMenuValueEntry GetPlayerSelectionTeamMenuValue(string sectionName, string fieldKey);
+        
+        /// <summary>
+        /// </summary>
+        /// <param name="sectionName"></param>
+        /// <param name="fieldKey"></param>
+        /// <returns>Time value from selected configuration.</returns>
+        ITimeEntry GetTime(string sectionName, string fieldKey);
     }
 }
