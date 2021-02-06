@@ -27,7 +27,11 @@ namespace Negum.Core.Managers
             NegumContainer.Resolve<IMotifConfigurationTitleInfo>().Setup(this.Scrapper.GetSection("Title Info"));
 
         public IMotifConfigurationTitleBgDef TitleBgDef =>
-            NegumContainer.Resolve<IMotifConfigurationTitleBgDef>().Setup(this.Scrapper.ForSection("TitleBGdef"));
+            NegumContainer.Resolve<IMotifConfigurationTitleBgDef>().Setup(this.Scrapper.GetSection("TitleBGdef"));
+
+        public IEnumerable<IMotifConfigurationScreenBg> TitleBgs =>
+            NegumContainer.Resolve<ISectionCollectionProvider>()
+                .SetupMultiple<IMotifConfigurationScreenBg>(this.Scrapper.GetSections("TitleBG "));
 
         public IMotifConfigurationInfobox Infobox =>
             NegumContainer.Resolve<IMotifConfigurationInfobox>().Setup(this.Scrapper.GetSection("Infobox"));
@@ -38,11 +42,19 @@ namespace Negum.Core.Managers
         public IMotifConfigurationSelectBgDef SelectBgDef =>
             NegumContainer.Resolve<IMotifConfigurationSelectBgDef>().Setup(this.Scrapper.GetSection("SelectBGdef"));
 
+        public IEnumerable<IMotifConfigurationScreenBg> SelectBgs =>
+            NegumContainer.Resolve<ISectionCollectionProvider>()
+                .SetupMultiple<IMotifConfigurationScreenBg>(this.Scrapper.GetSections("SelectBG "));
+        
         public IMotifConfigurationVsScreen VsScreen =>
             NegumContainer.Resolve<IMotifConfigurationVsScreen>().Setup(this.Scrapper.GetSection("VS Screen"));
 
-        public IMotifConfigurationVsBgDef VsBgDef =>
+        public IMotifConfigurationVsBgDef VersusBgDef =>
             NegumContainer.Resolve<IMotifConfigurationVsBgDef>().Setup(this.Scrapper.GetSection("VersusBGdef"));
+
+        public IEnumerable<IMotifConfigurationScreenBg> VersusBgs =>
+            NegumContainer.Resolve<ISectionCollectionProvider>()
+                .SetupMultiple<IMotifConfigurationScreenBg>(this.Scrapper.GetSections("VersusBG "));
 
         public IMotifConfigurationDemoMode DemoMode =>
             NegumContainer.Resolve<IMotifConfigurationDemoMode>().Setup(this.Scrapper.GetSection("Demo Mode"));
@@ -58,6 +70,10 @@ namespace Negum.Core.Managers
         public IMotifConfigurationVictoryScreen VictoryScreen =>
             NegumContainer.Resolve<IMotifConfigurationVictoryScreen>()
                 .Setup(this.Scrapper.GetSection("Victory Screen"));
+
+        public IEnumerable<IMotifConfigurationScreenBg> VictoryBgs =>
+            NegumContainer.Resolve<ISectionCollectionProvider>()
+                .SetupMultiple<IMotifConfigurationScreenBg>(this.Scrapper.GetSections("VictoryBG "));
 
         public IMotifConfigurationWinScreen WinScreen =>
             NegumContainer.Resolve<IMotifConfigurationWinScreen>().Setup(this.Scrapper.GetSection("Win Screen"));
@@ -75,6 +91,10 @@ namespace Negum.Core.Managers
 
         public IMotifConfigurationOptionInfo OptionInfo =>
             NegumContainer.Resolve<IMotifConfigurationOptionInfo>().Setup(this.Scrapper.GetSection("Option Info"));
+        
+        public IEnumerable<IMotifConfigurationScreenBg> OptionBgs =>
+            NegumContainer.Resolve<ISectionCollectionProvider>()
+                .SetupMultiple<IMotifConfigurationScreenBg>(this.Scrapper.GetSections("OptionBG "));
     }
 
     public interface IMotifConfigurationInfo : IConfigurationManagerSection<IMotifConfigurationInfo>
@@ -198,7 +218,21 @@ namespace Negum.Core.Managers
 
     public interface IMotifConfigurationTitleBgDef : IConfigurationManagerSection<IMotifConfigurationTitleBgDef>
     {
-        // TODO: Enumerable inside
+        string BgClearColor => Scrapper.GetString("bgclearcolor");
+    }
+
+    public interface IMotifConfigurationScreenBg : IConfigurationManagerSection<IMotifConfigurationScreenBg>
+    {
+        string Type => Scrapper.GetString("type");
+        IPositionEntry SpriteNumber => Scrapper.GetPosition("spriteno");
+        int LayerNumber => Scrapper.GetInt("layerno");
+        IPositionEntry Start => Scrapper.GetPosition("start");
+        IPositionEntry Tile => Scrapper.GetPosition("tile");
+        IPositionEntry Velocity => Scrapper.GetPosition("velocity");
+        IBoxEntry Window => Scrapper.GetBox("window");
+        string Trans => Scrapper.GetString("trans");
+        int Mask => Scrapper.GetInt("mask");
+        IPositionEntry Delta => Scrapper.GetPosition("delta");
     }
 
     public interface IMotifConfigurationInfobox : IConfigurationManagerSection<IMotifConfigurationInfobox>

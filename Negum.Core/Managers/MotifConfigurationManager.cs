@@ -34,7 +34,8 @@ namespace Negum.Core.Managers
         IMotifConfigurationDefaultEnding,
         IMotifConfigurationEndCredits,
         IMotifConfigurationSurvivalResultsScreen,
-        IMotifConfigurationOptionInfo
+        IMotifConfigurationOptionInfo,
+        IMotifConfigurationScreenBg
     {
         IMotifConfigurationInfo IConfigurationManagerSection<IMotifConfigurationInfo>.Setup(
             IConfigurationSectionScrapper scrapper) => this.Setup(scrapper);
@@ -91,6 +92,9 @@ namespace Negum.Core.Managers
             Setup(IConfigurationSectionScrapper scrapper) => this.Setup(scrapper);
 
         IMotifConfigurationOptionInfo IConfigurationManagerSection<IMotifConfigurationOptionInfo>.Setup(
+            IConfigurationSectionScrapper scrapper) => this.Setup(scrapper);
+
+        IMotifConfigurationScreenBg IConfigurationManagerSection<IMotifConfigurationScreenBg>.Setup(
             IConfigurationSectionScrapper scrapper) => this.Setup(scrapper);
     }
 }

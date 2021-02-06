@@ -112,6 +112,9 @@ namespace Negum.Core.Containers
             // Managers
             Register<INegumConfigurationManager, NegumConfigurationManager>();
             Register<IMotifConfigurationManager, MotifConfigurationManager>();
+            
+            // Managers others
+            Register<ISectionCollectionProvider, SectionCollectionProvider>();
 
             // Negum Configuration Types
             Register<INegumConfigurationOptions, NegumConfigurationManagerSection>();
@@ -145,6 +148,7 @@ namespace Negum.Core.Containers
             Register<IMotifConfigurationEndCredits, MotifConfigurationManagerSection>();
             Register<IMotifConfigurationSurvivalResultsScreen, MotifConfigurationManagerSection>();
             Register<IMotifConfigurationOptionInfo, MotifConfigurationManagerSection>();
+            Register<IMotifConfigurationScreenBg, MotifConfigurationManagerSection>();
         }
     }
 

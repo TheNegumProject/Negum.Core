@@ -27,6 +27,7 @@ namespace Negum.Core.Scrappers
         public IEnumerable<IConfigurationSectionScrapper> GetSections(string sectionNamePrefix) =>
             this.ConfigDef.Sections
                 .Where(section => section.Key.StartsWith(sectionNamePrefix))
-                .Select(entry => this.GetSection(entry.Key));
+                .Select(entry => this.GetSection(entry.Key))
+                .ToList();
     }
 }

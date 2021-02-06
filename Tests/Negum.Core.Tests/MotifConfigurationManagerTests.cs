@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Threading.Tasks;
 using Negum.Core.Configurations;
 using Negum.Core.Containers;
@@ -28,6 +29,20 @@ namespace Negum.Core.Tests
             var animation = manager.SelectInfo.Player1.Cursor.Animation.Animation;
             
             Assert.True(animation == 160);
+        }
+        
+        [Theory]
+        [InlineData("/Users/kdobrzynski/Downloads/mugen-1.1b1/data/mugen1/system.def")]
+        public async Task Should_return_Collection_Of_Sections(string path)
+        {
+            this.InitializeContainer();
+
+            var config = await this.Parse<IMotifConfigurationParser, IMotifConfiguration>(path);
+            var scrapper = NegumContainer.Resolve<IConfigurationScrapper>().Setup(config);
+            var manager = NegumContainer.Resolve<IMotifConfigurationManager>().Setup(scrapper);
+            var titleBgsSections = manager.TitleBgs;
+            
+            Assert.True(titleBgsSections.Count() == 6);
         }
     }
 }
