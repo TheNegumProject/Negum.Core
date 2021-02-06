@@ -95,6 +95,10 @@ namespace Negum.Core.Containers
             Register<IBoxEntry, BoxEntry>();
             Register<ITextEntry, TextEntry>();
             Register<IFontEntry, FontEntry>();
+            Register<ICellSelectionEntry, CellSelectionEntry>();
+            Register<IStageSelectionEntry, StageSelectionEntry>();
+            Register<ISpriteEntry, SpriteEntry>();
+            Register<ISoundEntry, SoundEntry>();
 
             // Scrappers
             Register<IConfigurationScrapper, ConfigurationScrapper>();

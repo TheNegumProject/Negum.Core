@@ -159,5 +159,33 @@ namespace Negum.Core.Scrappers
         /// <param name="fieldKey"></param>
         /// <returns>Font value from selected configuration.</returns>
         IFontEntry GetFont(string sectionName, string fieldKey);
+        
+        /// <summary>
+        /// </summary>
+        /// <param name="sectionName"></param>
+        /// <param name="fieldKey"></param>
+        /// <returns>Cell value from selected configuration.</returns>
+        ICellSelectionEntry GetCell(string sectionName, string fieldKey);
+        
+        /// <summary>
+        /// </summary>
+        /// <param name="sectionName"></param>
+        /// <param name="fieldKey"></param>
+        /// <returns>Stage value from selected configuration.</returns>
+        IStageSelectionEntry GetStage(string sectionName, string fieldKey);
+        
+        /// <summary>
+        /// </summary>
+        /// <param name="sectionName"></param>
+        /// <param name="fieldKey"></param>
+        /// <returns>Sprite value from selected configuration.</returns>
+        ISpriteEntry GetSprite(string sectionName, string fieldKey);
+        
+        /// <summary>
+        /// </summary>
+        /// <param name="sectionName"></param>
+        /// <param name="fieldKey"></param>
+        /// <returns>Sound value from selected configuration.</returns>
+        ISoundEntry GetSound(string sectionName, string fieldKey);
     }
 }

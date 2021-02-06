@@ -80,5 +80,17 @@ namespace Negum.Core.Scrappers
 
         public IFontEntry GetFont(string sectionName, string fieldKey) =>
             NegumContainer.Resolve<IFontEntry>().Setup(this, this.ConfigDef[sectionName], fieldKey);
+
+        public ICellSelectionEntry GetCell(string sectionName, string fieldKey) =>
+            NegumContainer.Resolve<ICellSelectionEntry>().Setup(this, this.ConfigDef[sectionName], fieldKey);
+
+        public IStageSelectionEntry GetStage(string sectionName, string fieldKey) =>
+            NegumContainer.Resolve<IStageSelectionEntry>().Setup(this, this.ConfigDef[sectionName], fieldKey);
+
+        public ISpriteEntry GetSprite(string sectionName, string fieldKey) =>
+            NegumContainer.Resolve<ISpriteEntry>().Setup(this, this.ConfigDef[sectionName], fieldKey);
+
+        public ISoundEntry GetSound(string sectionName, string fieldKey) =>
+            NegumContainer.Resolve<ISoundEntry>().Setup(this, this.ConfigDef[sectionName], fieldKey);
     }
 }

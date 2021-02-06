@@ -220,28 +220,8 @@ namespace Negum.Core.Managers
         bool ShowEmptyBoxes => Scrapper.GetBoolean(SectionName, "showemptyboxes");
         bool CanMoveOverEmptyBoxes => Scrapper.GetBoolean(SectionName, "moveoveremptyboxes");
 
-        /// <summary>
-        /// (x,y) size of each cell in pixels.
-        /// </summary>
-        IPositionEntry CellSize => Scrapper.GetPosition(SectionName, "cell.size");
-
-        /// <summary>
-        /// Space between each cell.
-        /// </summary>
-        int CellSpacing => Scrapper.GetInt(SectionName, "cell.spacing");
-
-        string CellBgSpr => Scrapper.GetString(SectionName, "cell.bg.spr");
-
-        /// <summary>
-        /// Icon for random select.
-        /// </summary>
-        string CellRandomSpr => Scrapper.GetString(SectionName, "cell.random.spr");
-
-        /// <summary>
-        /// Time to wait before changing to another random portrait.
-        /// </summary>
-        string CellRandomSwitchTime => Scrapper.GetString(SectionName, "cell.random.switchtime");
-
+        ICellSelectionEntry Cell => Scrapper.GetCell(SectionName, "cell");
+        
         /// <summary>
         /// Player 1 selection.
         /// </summary>
@@ -253,10 +233,10 @@ namespace Negum.Core.Managers
         IPlayerSelectionEntry Player2 => Scrapper.GetPlayerSelection(SectionName, "p2");
 
         IMovementEntry Random => Scrapper.GetMovement(SectionName, "random");
-        IMovementEntry Stage => Scrapper.GetMovement(SectionName, "stage");
         ISpriteSoundEntry Cancel => Scrapper.GetSpriteSound(SectionName, "cancel");
         IImageEntry Portrait => Scrapper.GetImage(SectionName, "portrait");
         ITextEntry Title => Scrapper.GetText(SectionName, "title");
+        IStageSelectionEntry Stage => Scrapper.GetStage(SectionName, "stage");
     }
 
     public interface

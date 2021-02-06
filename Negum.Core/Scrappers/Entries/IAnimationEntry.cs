@@ -3,6 +3,10 @@ namespace Negum.Core.Scrappers.Entries
     /// <summary>
     /// Represents a scrapped entry which should represent Animation.
     /// </summary>
+    ///
+    /// <docs>
+    /// http://www.elecbyte.com/mugendocs/air.html
+    /// </docs>
     /// 
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core

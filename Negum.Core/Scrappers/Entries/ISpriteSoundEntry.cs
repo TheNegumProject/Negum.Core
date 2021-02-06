@@ -9,8 +9,7 @@ namespace Negum.Core.Scrappers.Entries
     /// </author>
     public interface ISpriteSoundEntry : IScrapperEntry<ISpriteSoundEntry>
     {
-        IPositionEntry Sprite => this.Scrapper.GetPosition(this.Section.Name, this.KeyPrefix + ".spr");
-        IPositionEntry Sound => this.Scrapper.GetPosition(this.Section.Name, this.KeyPrefix + ".snd");
-        string SoundCanceled => this.Scrapper.GetString(this.Section.Name, this.KeyPrefix + ".snd.cancel");
+        ISpriteEntry Sprite => this.Scrapper.GetSprite(this.Section.Name, this.KeyPrefix + ".spr");
+        ISoundEntry Sound => this.Scrapper.GetSound(this.Section.Name, this.KeyPrefix + ".snd");
     }
 }
