@@ -13,5 +13,6 @@ namespace Negum.Core.Scrappers.Entries
     /// </author>
     public interface IFontEntry : IScrapperEntry<IFontEntry>
     {
+        // TODO: Set values
     }
 }

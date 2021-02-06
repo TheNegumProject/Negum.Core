@@ -1,4 +1,7 @@
 using System;
+using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Linq;
 using Negum.Core.Configurations;
 using Negum.Core.Containers;
 using Negum.Core.Scrappers.Entries;
@@ -20,7 +23,10 @@ namespace Negum.Core.Scrappers
             this.ConfigSection = configSection;
             return this;
         }
-        
+
+        public IEnumerable<IConfigurationSectionEntry> GetAll() =>
+            this.ConfigSection.Entries.ToImmutableList();
+
         public int GetInt(string fieldKey) =>
             int.Parse(this.GetString(fieldKey));
 
@@ -38,6 +44,10 @@ namespace Negum.Core.Scrappers
 
         public IFileEntry GetFile(string fieldKey) =>
             NegumContainer.Resolve<IFileEntry>().Setup(this, fieldKey);
+
+        public IEnumerable<IFileEntry> GetFiles(IEnumerable<string> keys) =>
+            keys.Select(key => NegumContainer.Resolve<IFileEntry>().Setup(this, key))
+                .ToImmutableList();
 
         public IEntryCollection<TEntry> GetCollection<TEntry>(string fieldKey) =>
             NegumContainer.Resolve<IEntryCollection<TEntry>>().Setup(this, fieldKey);
@@ -104,5 +114,10 @@ namespace Negum.Core.Scrappers
 
         public IDemoModeFightEntry GetDemoModeFight(string fieldKey) =>
             NegumContainer.Resolve<IDemoModeFightEntry>().Setup(this, fieldKey);
+
+        public IEnumerable<ICharacterEntry> GetCharacters() =>
+            this.GetAll()
+                .Select(entry => NegumContainer.Resolve<ICharacterEntry>().Setup(this, entry.Value))
+                .ToImmutableList();
     }
 }

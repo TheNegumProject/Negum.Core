@@ -9,5 +9,6 @@ namespace Negum.Core.Scrappers.Entries
     /// </author>
     public interface ITimeEntry : IScrapperEntry<ITimeEntry>
     {
+        // TODO: Set values
     }
 }

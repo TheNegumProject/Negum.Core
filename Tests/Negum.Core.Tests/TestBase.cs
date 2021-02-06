@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Negum.Core.Cleaners;
 using Negum.Core.Configurations;
@@ -23,9 +22,7 @@ namespace Negum.Core.Tests
             NegumContainer.RegisterKnownTypes();
         }
 
-        protected async Task<TConfiguration> Parse<TParser, TConfiguration>(string path)
-            where TConfiguration : IConfigurationDefinition
-            where TParser : IParser<IEnumerable<string>, TConfiguration>
+        protected async Task<IConfigurationDefinition> Parse(string path)
         {
             var reader = NegumContainer.Resolve<IConfigurationReader>();
             var data = await reader.ReadAsync(path);
@@ -33,7 +30,7 @@ namespace Negum.Core.Tests
             var cleaner = NegumContainer.Resolve<IConfigurationCleaner>();
             var cleaned = await cleaner.CleanAsync(data);
 
-            var parser = NegumContainer.Resolve<TParser>();
+            var parser = NegumContainer.Resolve<IConfigurationParser>();
             var result = await parser.ParseAsync(cleaned);
 
             return result;

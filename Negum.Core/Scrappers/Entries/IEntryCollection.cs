@@ -11,5 +11,6 @@ namespace Negum.Core.Scrappers.Entries
     /// </author>
     public interface IEntryCollection<out TEntry> : IScrapperEntry<IEntryCollection<TEntry>>, IEnumerable<TEntry>
     {
+        // TODO: Set values
     }
 }

@@ -70,15 +70,11 @@ namespace Negum.Core.Containers
 
             // Parsers
             Register<IConfigurationParser, ConfigurationParser>(NegumObjectLifetime.Singleton);
-            Register<INegumConfigurationParser, NegumConfigurationParser>(NegumObjectLifetime.Singleton);
-            Register<IMotifConfigurationParser, MotifConfigurationParser>(NegumObjectLifetime.Singleton);
 
             // Configurations
             Register<IConfigurationSectionEntry, ConfigurationSectionEntry>();
             Register<IConfigurationSection, ConfigurationSection>();
             Register<IConfigurationDefinition, ConfigurationDefinition>();
-            Register<INegumConfiguration, NegumConfiguration>();
-            Register<IMotifConfiguration, MotifConfiguration>();
 
             // Scrapper Entries
             Register<IFileEntry, FileEntry>();
@@ -104,6 +100,7 @@ namespace Negum.Core.Containers
             Register<IPlayerSelectionTeamMenuValueEntry, PlayerSelectionTeamMenuValueEntry>();
             Register<ITimeEntry, TimeEntry>();
             Register<IDemoModeFightEntry, DemoModeFightEntry>();
+            Register<ICharacterEntry, CharacterEntry>();
 
             // Scrappers
             Register<IConfigurationSectionScrapper, ConfigurationSectionScrapper>();
@@ -112,6 +109,7 @@ namespace Negum.Core.Containers
             // Managers
             Register<INegumConfigurationManager, NegumConfigurationManager>();
             Register<IMotifConfigurationManager, MotifConfigurationManager>();
+            Register<ISelectionConfigurationManager, SelectionConfigurationManager>();
 
             // Managers others
             Register<ISectionCollectionProvider, SectionCollectionProvider>();
@@ -146,6 +144,11 @@ namespace Negum.Core.Containers
             Register<IMotifConfigurationEndCredits, MotifConfigurationManagerSection>();
             Register<IMotifConfigurationSurvivalResultsScreen, MotifConfigurationManagerSection>();
             Register<IMotifConfigurationScreenBg, MotifConfigurationManagerSection>();
+
+            // Selection Configuration Types
+            Register<ISelectionConfigurationCharacters, SelectionConfigurationManagerSection>();
+            Register<ISelectionConfigurationExtraStages, SelectionConfigurationManagerSection>();
+            Register<ISelectionConfigurationOptions, SelectionConfigurationManagerSection>();
         }
     }
 
