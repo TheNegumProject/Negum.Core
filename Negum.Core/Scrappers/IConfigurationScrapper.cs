@@ -215,5 +215,12 @@ namespace Negum.Core.Scrappers
         /// <param name="fieldKey"></param>
         /// <returns>Time value from selected configuration.</returns>
         ITimeEntry GetTime(string sectionName, string fieldKey);
+        
+        /// <summary>
+        /// </summary>
+        /// <param name="sectionName"></param>
+        /// <param name="fieldKey"></param>
+        /// <returns>Demo Mode Fight value from selected configuration.</returns>
+        IDemoModeFightEntry GetDemoModeFight(string sectionName, string fieldKey);
     }
 }

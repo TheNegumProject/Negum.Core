@@ -104,5 +104,8 @@ namespace Negum.Core.Scrappers
 
         public ITimeEntry GetTime(string sectionName, string fieldKey) =>
             NegumContainer.Resolve<ITimeEntry>().Setup(this, this.ConfigDef[sectionName], fieldKey);
+
+        public IDemoModeFightEntry GetDemoModeFight(string sectionName, string fieldKey) =>
+            NegumContainer.Resolve<IDemoModeFightEntry>().Setup(this, this.ConfigDef[sectionName], fieldKey);
     }
 }

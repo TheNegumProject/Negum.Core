@@ -265,6 +265,11 @@ namespace Negum.Core.Managers
 
     public interface IMotifConfigurationDemoMode : IConfigurationManagerSection<IMotifConfigurationDemoMode>
     {
+        bool IsEnabled => Scrapper.GetBoolean(SectionName, "enabled");
+        ITimeEntry WaitTime => Scrapper.GetTime(SectionName, "title.waittime");
+        IDemoModeFightEntry Fight => Scrapper.GetDemoModeFight(SectionName, "fight");
+        int IntroWaitCycles => Scrapper.GetInt(SectionName, "intro.waitcycles");
+        bool ShowDebugInfo => Scrapper.GetBoolean(SectionName, "debuginfo");
     }
 
     public interface IMotifConfigurationContinueScreen : IConfigurationManagerSection<IMotifConfigurationContinueScreen>
@@ -298,7 +303,7 @@ namespace Negum.Core.Managers
     {
     }
 
-    public interface IMotifConfigurationOptionInfo : IConfigurationManagerSection<IMotifConfigurationOptionInfo> 
+    public interface IMotifConfigurationOptionInfo : IConfigurationManagerSection<IMotifConfigurationOptionInfo>
     {
         // TODO: Enumerable inside
     }
