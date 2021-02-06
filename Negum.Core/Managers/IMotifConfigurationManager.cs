@@ -253,6 +253,9 @@ namespace Negum.Core.Managers
         ITimeEntry Time => Scrapper.GetTime(this.SectionName, "time");
         ITimeEntry FadeInTime => Scrapper.GetTime(SectionName, "fadein.time");
         ITimeEntry FadeOutTime => Scrapper.GetTime(SectionName, "fadeout.time");
+        ITextEntry Match => Scrapper.GetText(SectionName, "match");
+        IPlayerSelectionEntry Player1 => Scrapper.GetPlayerSelection(SectionName, "p1");
+        IPlayerSelectionEntry Player2 => Scrapper.GetPlayerSelection(SectionName, "p2");
     }
 
     public interface IMotifConfigurationVsBgDef : IConfigurationManagerSection<IMotifConfigurationVsBgDef>
