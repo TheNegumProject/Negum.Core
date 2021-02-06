@@ -278,33 +278,66 @@ namespace Negum.Core.Managers
 
     public interface IMotifConfigurationContinueScreen : IConfigurationManagerSection<IMotifConfigurationContinueScreen>
     {
+        bool IsEnabled => Scrapper.GetBoolean("enabled");
+        IPositionEntry Position => Scrapper.GetPosition("pos");
+        ITextEntry ContinueText => Scrapper.GetText("continue");
+        ITextEntry YesText => Scrapper.GetText("yes");
+        ITextEntry YesActiveText => Scrapper.GetText("yes.active");
+        ITextEntry NoText => Scrapper.GetText("no");
+        ITextEntry NoActiveText => Scrapper.GetText("no.active");
     }
 
     public interface IMotifConfigurationGameOverScreen : IConfigurationManagerSection<IMotifConfigurationGameOverScreen>
     {
+        bool IsEnabled => Scrapper.GetBoolean("enabled");
+        IFileEntry Storyboard => Scrapper.GetFile("storyboard");
     }
 
     public interface IMotifConfigurationVictoryScreen : IConfigurationManagerSection<IMotifConfigurationVictoryScreen>
     {
-        // TODO: Enumerable inside
+        bool IsEnabled => Scrapper.GetBoolean("enabled");
+        ITimeEntry Time => Scrapper.GetTime("time");
+        ITimeEntry FadeInTime => Scrapper.GetTime("fadein.time");
+        ITimeEntry FadeOutTime => Scrapper.GetTime("fadeout.time");
+        IPlayerSelectionEntry Player1 => Scrapper.GetPlayerSelection("p1");
+        ITextEntry WinQuote => Scrapper.GetText("winquote");
     }
 
     public interface IMotifConfigurationWinScreen : IConfigurationManagerSection<IMotifConfigurationWinScreen>
     {
+        bool IsEnabled => Scrapper.GetBoolean("enabled");
+        ITextEntry WinText => Scrapper.GetText("wintext");
+        ITimeEntry FadeInTime => Scrapper.GetTime("fadein.time");
+        ITimeEntry FadeOutTime => Scrapper.GetTime("fadeout.time");
+        ITimeEntry PoseTime => Scrapper.GetTime("pos.time");
     }
 
     public interface IMotifConfigurationDefaultEnding : IConfigurationManagerSection<IMotifConfigurationDefaultEnding>
     {
+        bool IsEnabled => Scrapper.GetBoolean("enabled");
+        IFileEntry Storyboard => Scrapper.GetFile("storyboard");
     }
 
     public interface IMotifConfigurationEndCredits : IConfigurationManagerSection<IMotifConfigurationEndCredits>
     {
+        bool IsEnabled => Scrapper.GetBoolean("enabled");
+        IFileEntry Storyboard => Scrapper.GetFile("storyboard");
     }
 
     public interface
         IMotifConfigurationSurvivalResultsScreen : IConfigurationManagerSection<IMotifConfigurationSurvivalResultsScreen
         >
     {
+        bool IsEnabled => Scrapper.GetBoolean("enabled");
+        ITextEntry WinText => Scrapper.GetText("wintext");
+        ITimeEntry FadeInTime => Scrapper.GetTime("fadein.time");
+        ITimeEntry FadeOutTime => Scrapper.GetTime("fadeout.time");
+        ITimeEntry ShowTime => Scrapper.GetTime("show.time");
+        
+        /// <summary>
+        /// Number of rounds to get win pose (lose pose otherwise).
+        /// </summary>
+        int RoundsToWin => Scrapper.GetInt("roundstowin");
     }
 
     public interface IMotifConfigurationOptionInfo : IConfigurationManagerSection<IMotifConfigurationOptionInfo>
