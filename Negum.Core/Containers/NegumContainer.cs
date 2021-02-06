@@ -106,6 +106,7 @@ namespace Negum.Core.Containers
             Register<IDemoModeFightEntry, DemoModeFightEntry>();
 
             // Scrappers
+            Register<IConfigurationSectionScrapper, ConfigurationSectionScrapper>();
             Register<IConfigurationScrapper, ConfigurationScrapper>();
 
             // Managers

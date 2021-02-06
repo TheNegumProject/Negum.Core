@@ -1,3 +1,5 @@
+using Negum.Core.Containers;
+
 namespace Negum.Core.Scrappers.Entries
 {
     /// <summary>
@@ -8,13 +10,13 @@ namespace Negum.Core.Scrappers.Entries
     /// </author>
     public class BoxEntry : ScrappedEntry<IBoxEntry>, IBoxEntry
     {
-        public IPositionEntry Start => this.Scrapper.GetPosition(this.GetValue(0, 1));
-        public IPositionEntry End => this.Scrapper.GetPosition(this.GetValue(2, 3));
+        public IPositionEntry Start => NegumContainer.Resolve<IPositionEntry>().From(this.GetValue(0, 1));
+        public IPositionEntry End => NegumContainer.Resolve<IPositionEntry>().From(this.GetValue(2, 3));
 
         private string GetValue(int startIndex, int endIndex)
         {
             var value = this.Scrapper
-                .GetString(this.Section.Name, this.KeyPrefix)
+                .GetString(this.KeyPrefix)
                 .Replace(" ", "")
                 .Trim();
             var parts = value.Split(",");

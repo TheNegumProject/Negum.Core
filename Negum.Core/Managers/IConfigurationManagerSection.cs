@@ -15,19 +15,13 @@ namespace Negum.Core.Managers
         /// <summary>
         /// Scrapper used by this section.
         /// </summary>
-        IConfigurationScrapper Scrapper { get; }
-        
-        /// <summary>
-        /// Name of the current section.
-        /// </summary>
-        string SectionName { get; }
+        IConfigurationSectionScrapper Scrapper { get; }
 
         /// <summary>
         /// Setups current section.
         /// </summary>
         /// <param name="scrapper"></param>
-        /// <param name="sectionName"></param>
         /// <returns>Current section.</returns>
-        TConfigurationManagerSection Setup(IConfigurationScrapper scrapper, string sectionName);
+        TConfigurationManagerSection Setup(IConfigurationSectionScrapper scrapper);
     }
 }

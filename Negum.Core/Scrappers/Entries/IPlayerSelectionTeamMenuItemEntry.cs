@@ -9,9 +9,9 @@ namespace Negum.Core.Scrappers.Entries
     /// </author>
     public interface IPlayerSelectionTeamMenuItemEntry : IScrapperEntry<IPlayerSelectionTeamMenuItemEntry>
     {
-        ITextEntry Item => Scrapper.GetText(this.Section.Name, this.KeyPrefix);
-        IFontEntry Active => Scrapper.GetFont(this.Section.Name, this.KeyPrefix + ".active");
-        IFontEntry Active2 => Scrapper.GetFont(this.Section.Name, this.KeyPrefix + ".active2");
-        IAnimationEntry Cursor => Scrapper.GetAnimation(this.Section.Name, this.KeyPrefix + ".cursor");
+        ITextEntry Item => Scrapper.GetText(this.KeyPrefix);
+        IFontEntry Active => Scrapper.GetFont(this.KeyPrefix + ".active");
+        IFontEntry Active2 => Scrapper.GetFont(this.KeyPrefix + ".active2");
+        IAnimationEntry Cursor => Scrapper.GetAnimation(this.KeyPrefix + ".cursor");
     }
 }

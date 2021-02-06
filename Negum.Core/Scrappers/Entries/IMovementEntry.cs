@@ -9,7 +9,7 @@ namespace Negum.Core.Scrappers.Entries
     /// </author>
     public interface IMovementEntry : IScrapperEntry<IMovementEntry>
     {
-        ISpriteSoundEntry Move => this.Scrapper.GetSpriteSound(this.Section.Name, this.KeyPrefix + ".move");
-        ISpriteSoundEntry Done => this.Scrapper.GetSpriteSound(this.Section.Name, this.KeyPrefix + ".done");
+        ISpriteSoundEntry Move => this.Scrapper.GetSpriteSound(this.KeyPrefix + ".move");
+        ISpriteSoundEntry Done => this.Scrapper.GetSpriteSound(this.KeyPrefix + ".done");
     }
 }

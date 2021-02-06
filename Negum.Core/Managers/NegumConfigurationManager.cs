@@ -28,33 +28,33 @@ namespace Negum.Core.Managers
         INegumConfigurationKeys
     {
         INegumConfigurationOptions IConfigurationManagerSection<INegumConfigurationOptions>.Setup(
-            IConfigurationScrapper scrapper, string sectionName) => this.Setup(scrapper, sectionName);
+            IConfigurationSectionScrapper scrapper) => this.Setup(scrapper);
 
         INegumConfigurationRules IConfigurationManagerSection<INegumConfigurationRules>.Setup(
-            IConfigurationScrapper scrapper, string sectionName) => this.Setup(scrapper, sectionName);
+            IConfigurationSectionScrapper scrapper) => this.Setup(scrapper);
 
         INegumConfigurationConfig IConfigurationManagerSection<INegumConfigurationConfig>.Setup(
-            IConfigurationScrapper scrapper, string sectionName) => this.Setup(scrapper, sectionName);
+            IConfigurationSectionScrapper scrapper) => this.Setup(scrapper);
 
         INegumConfigurationDebug IConfigurationManagerSection<INegumConfigurationDebug>.Setup(
-            IConfigurationScrapper scrapper, string sectionName) => this.Setup(scrapper, sectionName);
+            IConfigurationSectionScrapper scrapper) => this.Setup(scrapper);
 
         INegumConfigurationVideo IConfigurationManagerSection<INegumConfigurationVideo>.Setup(
-            IConfigurationScrapper scrapper, string sectionName) => this.Setup(scrapper, sectionName);
+            IConfigurationSectionScrapper scrapper) => this.Setup(scrapper);
 
         INegumConfigurationSound IConfigurationManagerSection<INegumConfigurationSound>.Setup(
-            IConfigurationScrapper scrapper, string sectionName) => this.Setup(scrapper, sectionName);
+            IConfigurationSectionScrapper scrapper) => this.Setup(scrapper);
 
         INegumConfigurationMisc IConfigurationManagerSection<INegumConfigurationMisc>.Setup(
-            IConfigurationScrapper scrapper, string sectionName) => this.Setup(scrapper, sectionName);
+            IConfigurationSectionScrapper scrapper) => this.Setup(scrapper);
 
         INegumConfigurationArcade IConfigurationManagerSection<INegumConfigurationArcade>.Setup(
-            IConfigurationScrapper scrapper, string sectionName) => this.Setup(scrapper, sectionName);
+            IConfigurationSectionScrapper scrapper) => this.Setup(scrapper);
 
         INegumConfigurationInput IConfigurationManagerSection<INegumConfigurationInput>.Setup(
-            IConfigurationScrapper scrapper, string sectionName) => this.Setup(scrapper, sectionName);
+            IConfigurationSectionScrapper scrapper) => this.Setup(scrapper);
 
         INegumConfigurationKeys IConfigurationManagerSection<INegumConfigurationKeys>.Setup(
-            IConfigurationScrapper scrapper, string sectionName) => this.Setup(scrapper, sectionName);
+            IConfigurationSectionScrapper scrapper) => this.Setup(scrapper);
     }
 }

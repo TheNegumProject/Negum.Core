@@ -1,5 +1,3 @@
-using Negum.Core.Configurations;
-
 namespace Negum.Core.Scrappers.Entries
 {
     /// <summary>
@@ -21,13 +19,12 @@ namespace Negum.Core.Scrappers.Entries
             return this;
         }
 
-        public override IPositionEntry Setup(IConfigurationScrapper scrapper, IConfigurationSection section,
-            string keyPrefix)
+        public override IPositionEntry Setup(IConfigurationSectionScrapper scrapper, string keyPrefix)
         {
-            base.Setup(scrapper, section, keyPrefix);
+            base.Setup(scrapper, keyPrefix);
 
             this.Value = this.Scrapper
-                .GetString(this.Section.Name, this.KeyPrefix)
+                .GetString(this.KeyPrefix)
                 .Replace(" ", "")
                 .Trim();
 

@@ -9,9 +9,9 @@ namespace Negum.Core.Scrappers.Entries
     /// </author>
     public interface IStageSelectionEntry : IScrapperEntry<IStageSelectionEntry>
     {
-        IPositionEntry Position => Scrapper.GetPosition(this.Section.Name, this.KeyPrefix + ".pos");
-        ITextEntry Active => Scrapper.GetText(this.Section.Name, this.KeyPrefix + ".active");
-        ITextEntry Active2 => Scrapper.GetText(this.Section.Name, this.KeyPrefix + ".active2");
-        ITextEntry Done => Scrapper.GetText(this.Section.Name, this.KeyPrefix + ".done");
+        IPositionEntry Position => Scrapper.GetPosition(this.KeyPrefix + ".pos");
+        ITextEntry Active => Scrapper.GetText(this.KeyPrefix + ".active");
+        ITextEntry Active2 => Scrapper.GetText(this.KeyPrefix + ".active2");
+        ITextEntry Done => Scrapper.GetText(this.KeyPrefix + ".done");
     }
 }

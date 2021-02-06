@@ -37,60 +37,60 @@ namespace Negum.Core.Managers
         IMotifConfigurationOptionInfo
     {
         IMotifConfigurationInfo IConfigurationManagerSection<IMotifConfigurationInfo>.Setup(
-            IConfigurationScrapper scrapper, string sectionName) => this.Setup(scrapper, sectionName);
+            IConfigurationSectionScrapper scrapper) => this.Setup(scrapper);
 
         IMotifConfigurationFiles IConfigurationManagerSection<IMotifConfigurationFiles>.Setup(
-            IConfigurationScrapper scrapper, string sectionName) => this.Setup(scrapper, sectionName);
+            IConfigurationSectionScrapper scrapper) => this.Setup(scrapper);
 
         IMotifConfigurationMusic IConfigurationManagerSection<IMotifConfigurationMusic>.Setup(
-            IConfigurationScrapper scrapper, string sectionName) => this.Setup(scrapper, sectionName);
+            IConfigurationSectionScrapper scrapper) => this.Setup(scrapper);
 
         IMotifConfigurationTitleInfo IConfigurationManagerSection<IMotifConfigurationTitleInfo>.Setup(
-            IConfigurationScrapper scrapper, string sectionName) => this.Setup(scrapper, sectionName);
+            IConfigurationSectionScrapper scrapper) => this.Setup(scrapper);
 
         IMotifConfigurationTitleBgDef IConfigurationManagerSection<IMotifConfigurationTitleBgDef>.Setup(
-            IConfigurationScrapper scrapper, string sectionName) => this.Setup(scrapper, sectionName);
+            IConfigurationSectionScrapper scrapper) => this.Setup(scrapper);
 
         IMotifConfigurationInfobox IConfigurationManagerSection<IMotifConfigurationInfobox>.Setup(
-            IConfigurationScrapper scrapper, string sectionName) => this.Setup(scrapper, sectionName);
+            IConfigurationSectionScrapper scrapper) => this.Setup(scrapper);
 
         IMotifConfigurationSelectInfo IConfigurationManagerSection<IMotifConfigurationSelectInfo>.Setup(
-            IConfigurationScrapper scrapper, string sectionName) => this.Setup(scrapper, sectionName);
+            IConfigurationSectionScrapper scrapper) => this.Setup(scrapper);
 
         IMotifConfigurationSelectBgDef IConfigurationManagerSection<IMotifConfigurationSelectBgDef>.Setup(
-            IConfigurationScrapper scrapper, string sectionName) => this.Setup(scrapper, sectionName);
+            IConfigurationSectionScrapper scrapper) => this.Setup(scrapper);
 
         IMotifConfigurationVsScreen IConfigurationManagerSection<IMotifConfigurationVsScreen>.Setup(
-            IConfigurationScrapper scrapper, string sectionName) => this.Setup(scrapper, sectionName);
+            IConfigurationSectionScrapper scrapper) => this.Setup(scrapper);
 
         IMotifConfigurationVsBgDef IConfigurationManagerSection<IMotifConfigurationVsBgDef>.Setup(
-            IConfigurationScrapper scrapper, string sectionName) => this.Setup(scrapper, sectionName);
+            IConfigurationSectionScrapper scrapper) => this.Setup(scrapper);
 
         IMotifConfigurationDemoMode IConfigurationManagerSection<IMotifConfigurationDemoMode>.Setup(
-            IConfigurationScrapper scrapper, string sectionName) => this.Setup(scrapper, sectionName);
+            IConfigurationSectionScrapper scrapper) => this.Setup(scrapper);
 
         IMotifConfigurationContinueScreen IConfigurationManagerSection<IMotifConfigurationContinueScreen>.Setup(
-            IConfigurationScrapper scrapper, string sectionName) => this.Setup(scrapper, sectionName);
+            IConfigurationSectionScrapper scrapper) => this.Setup(scrapper);
 
         IMotifConfigurationGameOverScreen IConfigurationManagerSection<IMotifConfigurationGameOverScreen>.Setup(
-            IConfigurationScrapper scrapper, string sectionName) => this.Setup(scrapper, sectionName);
+            IConfigurationSectionScrapper scrapper) => this.Setup(scrapper);
 
         IMotifConfigurationVictoryScreen IConfigurationManagerSection<IMotifConfigurationVictoryScreen>.Setup(
-            IConfigurationScrapper scrapper, string sectionName) => this.Setup(scrapper, sectionName);
+            IConfigurationSectionScrapper scrapper) => this.Setup(scrapper);
 
         IMotifConfigurationWinScreen IConfigurationManagerSection<IMotifConfigurationWinScreen>.Setup(
-            IConfigurationScrapper scrapper, string sectionName) => this.Setup(scrapper, sectionName);
+            IConfigurationSectionScrapper scrapper) => this.Setup(scrapper);
 
         IMotifConfigurationDefaultEnding IConfigurationManagerSection<IMotifConfigurationDefaultEnding>.Setup(
-            IConfigurationScrapper scrapper, string sectionName) => this.Setup(scrapper, sectionName);
+            IConfigurationSectionScrapper scrapper) => this.Setup(scrapper);
 
         IMotifConfigurationEndCredits IConfigurationManagerSection<IMotifConfigurationEndCredits>.Setup(
-            IConfigurationScrapper scrapper, string sectionName) => this.Setup(scrapper, sectionName);
+            IConfigurationSectionScrapper scrapper) => this.Setup(scrapper);
 
         IMotifConfigurationSurvivalResultsScreen IConfigurationManagerSection<IMotifConfigurationSurvivalResultsScreen>.
-            Setup(IConfigurationScrapper scrapper, string sectionName) => this.Setup(scrapper, sectionName);
+            Setup(IConfigurationSectionScrapper scrapper) => this.Setup(scrapper);
 
         IMotifConfigurationOptionInfo IConfigurationManagerSection<IMotifConfigurationOptionInfo>.Setup(
-            IConfigurationScrapper scrapper, string sectionName) => this.Setup(scrapper, sectionName);
+            IConfigurationSectionScrapper scrapper) => this.Setup(scrapper);
     }
 }

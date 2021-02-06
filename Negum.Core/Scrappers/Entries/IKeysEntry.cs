@@ -9,16 +9,16 @@ namespace Negum.Core.Scrappers.Entries
     /// </author>
     public interface IKeysEntry : IScrapperEntry<IKeysEntry>
     {
-        int Jump => Scrapper.GetInt(this.Section.Name, "Jump");
-        int Crouch => Scrapper.GetInt(this.Section.Name, "Crouch");
-        int Left => Scrapper.GetInt(this.Section.Name, "Left");
-        int Right => Scrapper.GetInt(this.Section.Name, "Right");
-        int A => Scrapper.GetInt(this.Section.Name, "A");
-        int B => Scrapper.GetInt(this.Section.Name, "B");
-        int C => Scrapper.GetInt(this.Section.Name, "C");
-        int X => Scrapper.GetInt(this.Section.Name, "X");
-        int Y => Scrapper.GetInt(this.Section.Name, "Y");
-        int Z => Scrapper.GetInt(this.Section.Name, "Z");
-        int Start => Scrapper.GetInt(this.Section.Name, "Start");
+        int Jump => Scrapper.GetInt("Jump");
+        int Crouch => Scrapper.GetInt("Crouch");
+        int Left => Scrapper.GetInt("Left");
+        int Right => Scrapper.GetInt("Right");
+        int A => Scrapper.GetInt("A");
+        int B => Scrapper.GetInt("B");
+        int C => Scrapper.GetInt("C");
+        int X => Scrapper.GetInt("X");
+        int Y => Scrapper.GetInt("Y");
+        int Z => Scrapper.GetInt("Z");
+        int Start => Scrapper.GetInt("Start");
     }
 }

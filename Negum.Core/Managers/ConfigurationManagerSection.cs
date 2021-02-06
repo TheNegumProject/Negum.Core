@@ -11,13 +11,11 @@ namespace Negum.Core.Managers
     public class ConfigurationManagerSection<TConfigurationManagerSection> : IConfigurationManagerSection<TConfigurationManagerSection>
         where TConfigurationManagerSection : IConfigurationManagerSection<TConfigurationManagerSection>
     {
-        public IConfigurationScrapper Scrapper { get; protected set; }
-        public string SectionName { get; protected set; }
+        public IConfigurationSectionScrapper Scrapper { get; protected set; }
         
-        public TConfigurationManagerSection Setup(IConfigurationScrapper scrapper, string sectionName)
+        public TConfigurationManagerSection Setup(IConfigurationSectionScrapper scrapper)
         {
             this.Scrapper = scrapper;
-            this.SectionName = sectionName;
             return (TConfigurationManagerSection) (IConfigurationManagerSection<TConfigurationManagerSection>) this;
         }
     }

@@ -9,6 +9,6 @@ namespace Negum.Core.Scrappers.Entries
     /// </author>
     public interface ISoundEntry : IScrapperEntry<ISoundEntry>
     {
-        string SoundCanceled => this.Scrapper.GetString(this.Section.Name, this.KeyPrefix + ".cancel");
+        string SoundCanceled => this.Scrapper.GetString(this.KeyPrefix + ".cancel");
     }
 }
