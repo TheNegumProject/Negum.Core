@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Negum.Core.Configurations;
 
 namespace Negum.Core.Scrappers
@@ -15,14 +16,21 @@ namespace Negum.Core.Scrappers
         /// Sets configuration which should be scrapped.
         /// </summary>
         /// <typeparam name="TConfiguration"></typeparam>
-        /// <returns>Returns this scrapper.</returns>
+        /// <returns>This scrapper.</returns>
         IConfigurationScrapper Setup(IConfigurationDefinition def);
 
         /// <summary>
         /// Creates new Configuration Section Scrapper for specified section.
         /// </summary>
         /// <param name="sectionName"></param>
-        /// <returns>Returns new Configuration Section Scrapper</returns>
-        IConfigurationSectionScrapper ForSection(string sectionName);
+        /// <returns>New Configuration Section Scrapper</returns>
+        IConfigurationSectionScrapper GetSection(string sectionName);
+
+        /// <summary>
+        /// Creates new Configuration Section Scrapper enumerable for specified section prefix.
+        /// </summary>
+        /// <param name="sectionNamePrefix"></param>
+        /// <returns>Collection of Scrappers.</returns>
+        IEnumerable<IConfigurationSectionScrapper> GetSections(string sectionNamePrefix);
     }
 }

@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using Negum.Core.Configurations;
 using Negum.Core.Containers;
 
@@ -19,7 +21,12 @@ namespace Negum.Core.Scrappers
             return this;
         }
 
-        public IConfigurationSectionScrapper ForSection(string sectionName) =>
+        public IConfigurationSectionScrapper GetSection(string sectionName) =>
             NegumContainer.Resolve<IConfigurationSectionScrapper>().Setup(this.ConfigDef[sectionName]);
+
+        public IEnumerable<IConfigurationSectionScrapper> GetSections(string sectionNamePrefix) =>
+            this.ConfigDef.Sections
+                .Where(section => section.Key.StartsWith(sectionNamePrefix))
+                .Select(entry => this.GetSection(entry.Key));
     }
 }
