@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Negum.Core.Tests
+namespace Negum.Core.Tests.Parsers
 {
     /// <summary>
     /// </summary>

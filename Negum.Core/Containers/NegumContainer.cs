@@ -134,6 +134,7 @@ namespace Negum.Core.Containers
             Register<IMotifConfigurationManager, MotifConfigurationManager>();
             Register<ISelectionConfigurationManager, SelectionConfigurationManager>();
             Register<IFightConfigurationManager, FightConfigurationManager>();
+            Register<IFontConfigurationManager, FontConfigurationManager>();
 
             // Managers others
             Register<ISectionCollectionProvider, SectionCollectionProvider>();
@@ -191,6 +192,10 @@ namespace Negum.Core.Containers
             Register<IFightConfigurationCombo, FightConfigurationManagerSection>();
             Register<IFightConfigurationRound, FightConfigurationManagerSection>();
             Register<IFightConfigurationWinIcon, FightConfigurationManagerSection>();
+
+            // Font Configuration Types
+            Register<IFontConfigurationFontV2, FontConfigurationManagerSection>();
+            Register<IFontConfigurationDef, FontConfigurationManagerSection>();
         }
 
         /// <summary>
@@ -200,9 +205,10 @@ namespace Negum.Core.Containers
         {
             Assembly.GetExecutingAssembly()
                 .GetTypes()
-                .Where(type => 
+                .Where(type =>
                     type.IsInterface &&
-                    type.GetInterfaces().Any(t => t.GenericTypeArguments.Length > 0 && t.GetGenericTypeDefinition() == typeof(IScrapperEntry<>)))
+                    type.GetInterfaces().Any(t =>
+                        t.GenericTypeArguments.Length > 0 && t.GetGenericTypeDefinition() == typeof(IScrapperEntry<>)))
                 .ToList()
                 .ForEach(type =>
                 {

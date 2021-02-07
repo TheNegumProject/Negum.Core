@@ -14,13 +14,13 @@ namespace Negum.Core.Managers
     /// </author>
     public interface ISelectionConfigurationManager : IConfigurationManager<ISelectionConfigurationManager>
     {
-        public ISelectionConfigurationCharacters Characters =>
+        ISelectionConfigurationCharacters Characters =>
             NegumContainer.Resolve<ISelectionConfigurationCharacters>().Setup(this.Scrapper.GetSection("Characters"));
 
-        public ISelectionConfigurationExtraStages Stages =>
+        ISelectionConfigurationExtraStages Stages =>
             NegumContainer.Resolve<ISelectionConfigurationExtraStages>().Setup(this.Scrapper.GetSection("ExtraStages"));
 
-        public ISelectionConfigurationOptions Options =>
+        ISelectionConfigurationOptions Options =>
             NegumContainer.Resolve<ISelectionConfigurationOptions>().Setup(this.Scrapper.GetSection("Options"));
     }
 

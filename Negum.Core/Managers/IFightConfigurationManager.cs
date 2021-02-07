@@ -13,52 +13,52 @@ namespace Negum.Core.Managers
     /// </author>
     public interface IFightConfigurationManager : IConfigurationManager<IFightConfigurationManager>
     {
-        public IFightConfigurationFiles Files =>
+        IFightConfigurationFiles Files =>
             NegumContainer.Resolve<IFightConfigurationFiles>().Setup(this.Scrapper.GetSection("Files"));
 
-        public IFightConfigurationFightFx FightFx =>
+        IFightConfigurationFightFx FightFx =>
             NegumContainer.Resolve<IFightConfigurationFightFx>().Setup(this.Scrapper.GetSection("FightFx"));
 
-        public IFightConfigurationLifebar Lifebar =>
+        IFightConfigurationLifebar Lifebar =>
             NegumContainer.Resolve<IFightConfigurationLifebar>().Setup(this.Scrapper.GetSection("Lifebar"));
 
-        public IFightConfigurationSimulLifebar SimulLifebar =>
+        IFightConfigurationSimulLifebar SimulLifebar =>
             NegumContainer.Resolve<IFightConfigurationSimulLifebar>().Setup(this.Scrapper.GetSection("Simul Lifebar"));
 
-        public IFightConfigurationTurnsLifebar TurnsLifebar =>
+        IFightConfigurationTurnsLifebar TurnsLifebar =>
             NegumContainer.Resolve<IFightConfigurationTurnsLifebar>().Setup(this.Scrapper.GetSection("Turns Lifebar"));
 
-        public IFightConfigurationPowerbar Powerbar =>
+        IFightConfigurationPowerbar Powerbar =>
             NegumContainer.Resolve<IFightConfigurationPowerbar>().Setup(this.Scrapper.GetSection("Powerbar"));
 
-        public IFightConfigurationFace Face =>
+        IFightConfigurationFace Face =>
             NegumContainer.Resolve<IFightConfigurationFace>().Setup(this.Scrapper.GetSection("Face"));
 
-        public IFightConfigurationSimulFace SimulFace =>
+        IFightConfigurationSimulFace SimulFace =>
             NegumContainer.Resolve<IFightConfigurationSimulFace>().Setup(this.Scrapper.GetSection("Simul Face"));
 
-        public IFightConfigurationTurnsFace TurnsFace =>
+        IFightConfigurationTurnsFace TurnsFace =>
             NegumContainer.Resolve<IFightConfigurationTurnsFace>().Setup(this.Scrapper.GetSection("Turns Face"));
 
-        public IFightConfigurationName Name =>
+        IFightConfigurationName Name =>
             NegumContainer.Resolve<IFightConfigurationName>().Setup(this.Scrapper.GetSection("Name"));
 
-        public IFightConfigurationSimulName SimulName =>
+        IFightConfigurationSimulName SimulName =>
             NegumContainer.Resolve<IFightConfigurationSimulName>().Setup(this.Scrapper.GetSection("Simul Name"));
 
-        public IFightConfigurationTurnsName TurnsName =>
+        IFightConfigurationTurnsName TurnsName =>
             NegumContainer.Resolve<IFightConfigurationTurnsName>().Setup(this.Scrapper.GetSection("Turns Name"));
 
-        public IFightConfigurationTime Time =>
+        IFightConfigurationTime Time =>
             NegumContainer.Resolve<IFightConfigurationTime>().Setup(this.Scrapper.GetSection("Time"));
 
-        public IFightConfigurationCombo Combo =>
+        IFightConfigurationCombo Combo =>
             NegumContainer.Resolve<IFightConfigurationCombo>().Setup(this.Scrapper.GetSection("Combo"));
 
-        public IFightConfigurationRound Round =>
+        IFightConfigurationRound Round =>
             NegumContainer.Resolve<IFightConfigurationRound>().Setup(this.Scrapper.GetSection("Round"));
 
-        public IFightConfigurationWinIcon WinIcon =>
+        IFightConfigurationWinIcon WinIcon =>
             NegumContainer.Resolve<IFightConfigurationWinIcon>().Setup(this.Scrapper.GetSection("WinIcon"));
     }
 

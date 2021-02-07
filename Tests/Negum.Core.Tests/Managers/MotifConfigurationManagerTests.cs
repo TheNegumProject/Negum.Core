@@ -5,7 +5,7 @@ using Negum.Core.Managers;
 using Negum.Core.Scrappers;
 using Xunit;
 
-namespace Negum.Core.Tests
+namespace Negum.Core.Tests.Managers
 {
     /// <summary>
     /// </summary>
