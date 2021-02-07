@@ -26,5 +26,6 @@ namespace Negum.Core.Scrappers.Entries
         string TextWrap => Scrapper.GetString(this.KeyPrefix + ".textwrap");
         ITimeEntry DisplayTime => Scrapper.GetTime(this.KeyPrefix + ".displaytime");
         int Layer => Scrapper.GetInt(this.KeyPrefix + ".layerno");
+        IPositionEntry Scale => Scrapper.GetPosition(this.KeyPrefix + ".scale");
     }
 }

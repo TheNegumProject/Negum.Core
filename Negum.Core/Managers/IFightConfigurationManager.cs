@@ -103,30 +103,54 @@ namespace Negum.Core.Managers
 
     public interface IFightConfigurationFace : IConfigurationManagerSection<IFightConfigurationFace>
     {
+        IFightConfigurationPlayerEntry Player1 => Scrapper.GetFightConfigurationPlayer("p1");
+        IFightConfigurationPlayerEntry Player2 => Scrapper.GetFightConfigurationPlayer("p2");
     }
 
     public interface IFightConfigurationSimulFace : IConfigurationManagerSection<IFightConfigurationSimulFace>
     {
+        IFightConfigurationPlayerEntry Player1 => Scrapper.GetFightConfigurationPlayer("p1");
+        IFightConfigurationPlayerEntry Player2 => Scrapper.GetFightConfigurationPlayer("p2");
+        IFightConfigurationPlayerEntry Player3 => Scrapper.GetFightConfigurationPlayer("p3");
+        IFightConfigurationPlayerEntry Player4 => Scrapper.GetFightConfigurationPlayer("p4");
     }
 
     public interface IFightConfigurationTurnsFace : IConfigurationManagerSection<IFightConfigurationTurnsFace>
     {
+        IFightConfigurationPlayerEntry Player1 => Scrapper.GetFightConfigurationPlayer("p1");
+        IFightConfigurationPlayerEntry Player2 => Scrapper.GetFightConfigurationPlayer("p2");
     }
 
     public interface IFightConfigurationName : IConfigurationManagerSection<IFightConfigurationName>
     {
+        IFightConfigurationPlayerEntry Player1 => Scrapper.GetFightConfigurationPlayer("p1");
+        IFightConfigurationPlayerEntry Player2 => Scrapper.GetFightConfigurationPlayer("p2");
     }
 
     public interface IFightConfigurationSimulName : IConfigurationManagerSection<IFightConfigurationSimulName>
     {
+        IFightConfigurationPlayerEntry Player1 => Scrapper.GetFightConfigurationPlayer("p1");
+        IFightConfigurationPlayerEntry Player2 => Scrapper.GetFightConfigurationPlayer("p2");
+        IFightConfigurationPlayerEntry Player3 => Scrapper.GetFightConfigurationPlayer("p3");
+        IFightConfigurationPlayerEntry Player4 => Scrapper.GetFightConfigurationPlayer("p4");
     }
 
     public interface IFightConfigurationTurnsName : IConfigurationManagerSection<IFightConfigurationTurnsName>
     {
+        IFightConfigurationPlayerEntry Player1 => Scrapper.GetFightConfigurationPlayer("p1");
+        IFightConfigurationPlayerEntry Player2 => Scrapper.GetFightConfigurationPlayer("p2");
     }
 
     public interface IFightConfigurationTime : IConfigurationManagerSection<IFightConfigurationTime>
     {
+        IPositionEntry Position => Scrapper.GetPosition("pos");
+        ITextEntry Counter => Scrapper.GetText("counter");
+        IImageEntry Background => Scrapper.GetImage(".bg");
+
+        /// <summary>
+        /// Ticks for each count.
+        /// </summary>
+        int FramesPerCount => Scrapper.GetInt("framespercount");
     }
 
     public interface IFightConfigurationCombo : IConfigurationManagerSection<IFightConfigurationCombo>
