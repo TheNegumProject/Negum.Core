@@ -110,6 +110,7 @@ namespace Negum.Core.Containers
             Register<INegumConfigurationManager, NegumConfigurationManager>();
             Register<IMotifConfigurationManager, MotifConfigurationManager>();
             Register<ISelectionConfigurationManager, SelectionConfigurationManager>();
+            Register<IFightConfigurationManager, FightConfigurationManager>();
 
             // Managers others
             Register<ISectionCollectionProvider, SectionCollectionProvider>();
@@ -149,6 +150,24 @@ namespace Negum.Core.Containers
             Register<ISelectionConfigurationCharacters, SelectionConfigurationManagerSection>();
             Register<ISelectionConfigurationExtraStages, SelectionConfigurationManagerSection>();
             Register<ISelectionConfigurationOptions, SelectionConfigurationManagerSection>();
+            
+            // Fight Configuration Types
+            Register<IFightConfigurationFiles, FightConfigurationManagerSection>();
+            Register<IFightConfigurationFightFx, FightConfigurationManagerSection>();
+            Register<IFightConfigurationLifebar, FightConfigurationManagerSection>();
+            Register<IFightConfigurationSimulLifebar, FightConfigurationManagerSection>();
+            Register<IFightConfigurationTurnsLifebar, FightConfigurationManagerSection>();
+            Register<IFightConfigurationPowerbar, FightConfigurationManagerSection>();
+            Register<IFightConfigurationFace, FightConfigurationManagerSection>();
+            Register<IFightConfigurationSimulFace, FightConfigurationManagerSection>();
+            Register<IFightConfigurationTurnsFace, FightConfigurationManagerSection>();
+            Register<IFightConfigurationName, FightConfigurationManagerSection>();
+            Register<IFightConfigurationSimulName, FightConfigurationManagerSection>();
+            Register<IFightConfigurationTurnsName, FightConfigurationManagerSection>();
+            Register<IFightConfigurationTime, FightConfigurationManagerSection>();
+            Register<IFightConfigurationCombo, FightConfigurationManagerSection>();
+            Register<IFightConfigurationRound, FightConfigurationManagerSection>();
+            Register<IFightConfigurationWinIcon, FightConfigurationManagerSection>();
         }
     }
 
