@@ -7,6 +7,12 @@ using Xunit;
 
 namespace Negum.Core.Tests
 {
+    /// <summary>
+    /// </summary>
+    /// 
+    /// <author>
+    /// https://github.com/TheNegumProject/Negum.Core
+    /// </author>
     public class SelectionConfigurationManagerTests : TestBase
     {
         [Theory]
