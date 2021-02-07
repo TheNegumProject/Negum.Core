@@ -44,12 +44,13 @@ namespace Negum.Core.Scrappers
 
         public IFileEntry GetFile(string fieldKey) =>
             NegumContainer.Resolve<IFileEntry>().Setup(this, fieldKey);
+        
+        public IEntryCollection<TEntry> GetCollection<TEntry>(IEnumerable<string> keys)
+            where TEntry : IScrapperEntry<TEntry> => 
+            NegumContainer.Resolve<IEntryCollection<TEntry>>().Setup(this, keys);
 
-        public IEnumerable<IFileEntry> GetFiles(IEnumerable<string> keys) =>
-            keys.Select(key => NegumContainer.Resolve<IFileEntry>().Setup(this, key))
-                .ToImmutableList();
-
-        public IEntryCollection<TEntry> GetCollection<TEntry>(string fieldKey) =>
+        public IEntryCollection<TEntry> GetCollection<TEntry>(string fieldKey)
+            where TEntry : IScrapperEntry<TEntry> => 
             NegumContainer.Resolve<IEntryCollection<TEntry>>().Setup(this, fieldKey);
 
         public IAudioEntry GetAudio(string fieldKey) =>

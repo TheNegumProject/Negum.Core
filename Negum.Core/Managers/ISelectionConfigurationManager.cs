@@ -33,7 +33,7 @@ namespace Negum.Core.Managers
         ISelectionConfigurationExtraStages : IConfigurationManagerSection<ISelectionConfigurationExtraStages>
     {
         IEnumerable<IFileEntry> Stages =>
-            Scrapper.GetFiles(Scrapper.GetAll().Select(x => x.Key).ToList());
+            Scrapper.GetCollection<IFileEntry>(Scrapper.GetAll().Select(x => x.Key).ToList());
     }
 
     public interface ISelectionConfigurationOptions : IConfigurationManagerSection<ISelectionConfigurationOptions>

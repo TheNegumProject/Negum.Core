@@ -1,4 +1,5 @@
 using Negum.Core.Containers;
+using Negum.Core.Scrappers.Entries;
 
 namespace Negum.Core.Managers
 {
@@ -62,6 +63,12 @@ namespace Negum.Core.Managers
 
     public interface IFightConfigurationFiles : IConfigurationManagerSection<IFightConfigurationFiles>
     {
+        IFileEntry Sprite => Scrapper.GetFile("sff");
+        IFileEntry Sound => Scrapper.GetFile("snd");
+        IEntryCollection<IFileEntry> Fonts => Scrapper.GetCollection<IFileEntry>("font");
+        IFileEntry FightFxSff => Scrapper.GetFile("fightfx.sff");
+        IFileEntry FightFxAir => Scrapper.GetFile("fightfx.air");
+        IFileEntry CommonSound => Scrapper.GetFile("common.snd");
     }
 
     public interface IFightConfigurationFightFx : IConfigurationManagerSection<IFightConfigurationFightFx>

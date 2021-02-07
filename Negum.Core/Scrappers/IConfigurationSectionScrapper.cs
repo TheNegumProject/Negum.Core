@@ -64,16 +64,16 @@ namespace Negum.Core.Scrappers
 
         /// <summary>
         /// </summary>
-        /// <param name="paths"></param>
-        /// <returns>Collection of Files from specified entries.</returns>
-        IEnumerable<IFileEntry> GetFiles(IEnumerable<string> paths);
+        /// <param name="keys">Keys which should be used to take values from current Section.</param>
+        /// <returns>Collection of entries from specified keys.</returns>
+        IEntryCollection<TEntry> GetCollection<TEntry>(IEnumerable<string> keys) where TEntry : IScrapperEntry<TEntry>;
 
         /// <summary>
         /// </summary>
         /// <param name="fieldKey"></param>
         /// <typeparam name="TEntry"></typeparam>
         /// <returns>Collection of values which starts from selected key from configuration.</returns>
-        IEntryCollection<TEntry> GetCollection<TEntry>(string fieldKey);
+        IEntryCollection<TEntry> GetCollection<TEntry>(string fieldKey) where TEntry : IScrapperEntry<TEntry>;
 
         /// <summary>
         /// </summary>
