@@ -121,6 +121,7 @@ namespace Negum.Core.Containers
             Register<IFightConfigurationPlayerEntry, FightConfigurationPlayerEntry>();
             Register<IFightConfigurationTeamEntry, FightConfigurationTeamEntry>();
             Register<IFightConfigurationWinEntry, FightConfigurationWinEntry>();
+            Register<IScreenElementEntry, ScreenElementEntry>();
 
             RegisterEntryCollections();
 

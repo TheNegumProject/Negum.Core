@@ -126,5 +126,8 @@ namespace Negum.Core.Scrappers
 
         public IFightConfigurationWinEntry GetFightConfigurationWin(string fieldKey) =>
             NegumContainer.Resolve<IFightConfigurationWinEntry>().Setup(this, fieldKey);
+
+        public IScreenElementEntry GetScreenElement(string fieldKey) =>
+            NegumContainer.Resolve<IScreenElementEntry>().Setup(this, fieldKey);
     }
 }

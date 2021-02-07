@@ -1,3 +1,4 @@
+using System.Linq;
 using Negum.Core.Containers;
 using Negum.Core.Scrappers.Entries;
 
@@ -161,6 +162,111 @@ namespace Negum.Core.Managers
 
     public interface IFightConfigurationRound : IConfigurationManagerSection<IFightConfigurationRound>
     {
+        /// <summary>
+        /// Rounds needed to win a match.
+        /// </summary>
+        int MatchWins => Scrapper.GetInt("match.wins");
+
+        /// <summary>
+        /// Max number of drawgames allowed (-1 for infinite).
+        /// </summary>
+        int MatchMaxDrawGames => Scrapper.GetInt("match.maxdrawgames");
+
+        /// <summary>
+        /// Time to wait before starting intro.
+        /// </summary>
+        ITimeEntry StartWaitTime => Scrapper.GetTime("start.waittime");
+
+        /// <summary>
+        /// Default position for all components.
+        /// </summary>
+        IPositionEntry Position => Scrapper.GetPosition("pos");
+
+        /// <summary>
+        /// Time to show round display.
+        /// </summary>
+        ITimeEntry RoundTime => Scrapper.GetTime("round.time");
+
+        /// <summary>
+        /// Default component to show for each round.
+        /// Text can include a %i to the round number.
+        /// </summary>
+        ITextEntry RoundText => Scrapper.GetText("round.default");
+
+        /// <summary>
+        /// Sounds to play for each round (optional).
+        /// </summary>
+        IEntryCollection<ISoundEntry> RoundSounds => Scrapper.GetCollection<ISoundEntry>(
+            Scrapper
+                .GetAll()
+                .Where(entry => entry.Key.StartsWith("round") && !entry.Key.StartsWith("round."))
+                .Select(entry => entry.Key)
+                .ToList());
+
+        /// <summary>
+        /// Components to show for each round.
+        /// </summary>
+        IEntryCollection<IImageEntry> RoundAnimations => Scrapper.GetCollection<IImageEntry>(
+            Scrapper
+                .GetAll()
+                .Where(entry => entry.Key.StartsWith("round") && !entry.Key.StartsWith("round."))
+                .Select(entry => entry.Key)
+                .ToList());
+
+        /// <summary>
+        /// Time players get control after "Fight".
+        /// </summary>
+        ITimeEntry ControlTime => Scrapper.GetTime("ctrl.time");
+
+        IScreenElementEntry FightElement => Scrapper.GetScreenElement("fight");
+        IScreenElementEntry KoElement => Scrapper.GetScreenElement("KO");
+        IScreenElementEntry DoubleKoElement => Scrapper.GetScreenElement("DKO");
+        IScreenElementEntry TimeOverElement => Scrapper.GetScreenElement("TO");
+
+        /// <summary>
+        /// Time for KO slowdown (in ticks).
+        /// </summary>
+        ITimeEntry SlowTime => Scrapper.GetTime("slow.time");
+
+        /// <summary>
+        /// Time to wait after KO before player control is stopped.
+        /// </summary>
+        ITimeEntry GameOverWaitTime => Scrapper.GetTime("over.waittime");
+
+        /// <summary>
+        /// Time after KO that players can still damage each other (for double KO).
+        /// </summary>
+        ITimeEntry GameOverHitTime => Scrapper.GetTime("over.hittime");
+
+        /// <summary>
+        /// Time to wait before players change to win states.
+        /// </summary>
+        ITimeEntry GameOverWinTime => Scrapper.GetTime("over.wintime");
+
+        /// <summary>
+        /// Time to wait before round ends.
+        /// </summary>
+        ITimeEntry GameOverTime => Scrapper.GetTime("over.time");
+
+        /// <summary>
+        /// Time to wait before showing win/draw message.
+        /// </summary>
+        ITimeEntry WinTime => Scrapper.GetTime("win.time");
+
+        /// <summary>
+        /// Win text.
+        /// </summary>
+        ITextEntry WinText => Scrapper.GetText("win");
+
+        /// <summary>
+        /// 2-player win text.
+        /// </summary>
+        ITextEntry Win2Text => Scrapper.GetText("win2");
+
+        /// <summary>
+        /// Draw text.
+        /// </summary>
+        ITextEntry DrawText => Scrapper.GetText("draw");
     }
 
     public interface IFightConfigurationWinIcon : IConfigurationManagerSection<IFightConfigurationWinIcon>

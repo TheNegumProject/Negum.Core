@@ -217,5 +217,11 @@ namespace Negum.Core.Scrappers
         /// <param name="fieldKey"></param>
         /// <returns>Fighting Player Win value from current configuration.</returns>
         IFightConfigurationWinEntry GetFightConfigurationWin(string fieldKey);
+        
+        /// <summary>
+        /// </summary>
+        /// <param name="fieldKey"></param>
+        /// <returns>Screen Element value from current configuration.</returns>
+        IScreenElementEntry GetScreenElement(string fieldKey);
     }
 }
