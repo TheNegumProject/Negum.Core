@@ -44,13 +44,13 @@ namespace Negum.Core.Scrappers
 
         public IFileEntry GetFile(string fieldKey) =>
             NegumContainer.Resolve<IFileEntry>().Setup(this, fieldKey);
-        
+
         public IEntryCollection<TEntry> GetCollection<TEntry>(IEnumerable<string> keys)
-            where TEntry : IScrapperEntry<TEntry> => 
+            where TEntry : IScrapperEntry<TEntry> =>
             NegumContainer.Resolve<IEntryCollection<TEntry>>().Setup(this, keys);
 
         public IEntryCollection<TEntry> GetCollection<TEntry>(string fieldKey)
-            where TEntry : IScrapperEntry<TEntry> => 
+            where TEntry : IScrapperEntry<TEntry> =>
             NegumContainer.Resolve<IEntryCollection<TEntry>>().Setup(this, fieldKey);
 
         public IAudioEntry GetAudio(string fieldKey) =>
@@ -123,5 +123,8 @@ namespace Negum.Core.Scrappers
 
         public IFightConfigurationTeamEntry GetFightConfigurationTeam(string fieldKey) =>
             NegumContainer.Resolve<IFightConfigurationTeamEntry>().Setup(this, fieldKey);
+
+        public IFightConfigurationWinEntry GetFightConfigurationWin(string fieldKey) =>
+            NegumContainer.Resolve<IFightConfigurationWinEntry>().Setup(this, fieldKey);
     }
 }

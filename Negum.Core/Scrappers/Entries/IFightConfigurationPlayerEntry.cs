@@ -18,5 +18,7 @@ namespace Negum.Core.Scrappers.Entries
         ITextEntry Counter => Scrapper.GetText(this.KeyPrefix + ".counter");
         IImageEntry Face => Scrapper.GetImage(this.KeyPrefix + ".face");
         ITextEntry Name => Scrapper.GetText(this.KeyPrefix + ".name");
+        IPositionEntry IconOffset => Scrapper.GetPosition(this.KeyPrefix + ".iconoffset");
+        IFightConfigurationWinEntry Win => Scrapper.GetFightConfigurationWin(this.KeyPrefix);
     }
 }

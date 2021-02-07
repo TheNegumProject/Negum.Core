@@ -209,7 +209,13 @@ namespace Negum.Core.Scrappers
         /// <summary>
         /// </summary>
         /// <param name="fieldKey"></param>
-        /// <returns>Fighting Team Entry value from current configuration.</returns>
+        /// <returns>Fighting Team value from current configuration.</returns>
         IFightConfigurationTeamEntry GetFightConfigurationTeam(string fieldKey);
+        
+        /// <summary>
+        /// </summary>
+        /// <param name="fieldKey"></param>
+        /// <returns>Fighting Player Win value from current configuration.</returns>
+        IFightConfigurationWinEntry GetFightConfigurationWin(string fieldKey);
     }
 }

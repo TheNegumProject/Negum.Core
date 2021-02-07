@@ -165,5 +165,12 @@ namespace Negum.Core.Managers
 
     public interface IFightConfigurationWinIcon : IConfigurationManagerSection<IFightConfigurationWinIcon>
     {
+        IFightConfigurationPlayerEntry Player1 => Scrapper.GetFightConfigurationPlayer("p1");
+        IFightConfigurationPlayerEntry Player2 => Scrapper.GetFightConfigurationPlayer("p2");
+
+        /// <summary>
+        /// Use icons up until this number of wins.
+        /// </summary>
+        int UseIconUpTo => Scrapper.GetInt("useiconupto");
     }
 }
