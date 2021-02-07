@@ -101,6 +101,7 @@ namespace Negum.Core.Containers
             Register<ITimeEntry, TimeEntry>();
             Register<IDemoModeFightEntry, DemoModeFightEntry>();
             Register<ICharacterEntry, CharacterEntry>();
+            Register<IFightConfigurationPlayerEntry, FightConfigurationPlayerEntry>();
 
             // Scrappers
             Register<IConfigurationSectionScrapper, ConfigurationSectionScrapper>();

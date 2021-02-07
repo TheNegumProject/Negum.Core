@@ -205,5 +205,11 @@ namespace Negum.Core.Scrappers
         /// </summary>
         /// <returns>Character collection from current configuration.</returns>
         IEnumerable<ICharacterEntry> GetCharacters();
+
+        /// <summary>
+        /// </summary>
+        /// <param name="fieldKey"></param>
+        /// <returns>Fighting Player Entry value from current configuration.</returns>
+        IFightConfigurationPlayerEntry GetFightConfigurationPlayer(string fieldKey);
     }
 }

@@ -73,10 +73,13 @@ namespace Negum.Core.Managers
 
     public interface IFightConfigurationFightFx : IConfigurationManagerSection<IFightConfigurationFightFx>
     {
+        int Scale => Scrapper.GetInt("scale");
     }
 
     public interface IFightConfigurationLifebar : IConfigurationManagerSection<IFightConfigurationLifebar>
     {
+        IFightConfigurationPlayerEntry Player1 => Scrapper.GetFightConfigurationPlayer("p1");
+        IFightConfigurationPlayerEntry Player2 => Scrapper.GetFightConfigurationPlayer("p2");
     }
 
     public interface IFightConfigurationSimulLifebar : IConfigurationManagerSection<IFightConfigurationSimulLifebar>

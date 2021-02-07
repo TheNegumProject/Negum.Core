@@ -120,5 +120,8 @@ namespace Negum.Core.Scrappers
             this.GetAll()
                 .Select(entry => NegumContainer.Resolve<ICharacterEntry>().Setup(this, entry.Value))
                 .ToImmutableList();
+
+        public IFightConfigurationPlayerEntry GetFightConfigurationPlayer(string fieldKey) =>
+            NegumContainer.Resolve<IFightConfigurationPlayerEntry>().Setup(this, fieldKey);
     }
 }
