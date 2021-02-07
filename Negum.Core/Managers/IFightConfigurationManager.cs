@@ -155,6 +155,8 @@ namespace Negum.Core.Managers
 
     public interface IFightConfigurationCombo : IConfigurationManagerSection<IFightConfigurationCombo>
     {
+        IFightConfigurationTeamEntry Team1 => Scrapper.GetFightConfigurationTeam("team1");
+        IFightConfigurationTeamEntry Team2 => Scrapper.GetFightConfigurationTeam("team2");
     }
 
     public interface IFightConfigurationRound : IConfigurationManagerSection<IFightConfigurationRound>

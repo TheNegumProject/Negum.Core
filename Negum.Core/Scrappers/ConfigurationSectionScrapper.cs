@@ -120,5 +120,8 @@ namespace Negum.Core.Scrappers
 
         public IFightConfigurationPlayerEntry GetFightConfigurationPlayer(string fieldKey) =>
             NegumContainer.Resolve<IFightConfigurationPlayerEntry>().Setup(this, fieldKey);
+
+        public IFightConfigurationTeamEntry GetFightConfigurationTeam(string fieldKey) =>
+            NegumContainer.Resolve<IFightConfigurationTeamEntry>().Setup(this, fieldKey);
     }
 }

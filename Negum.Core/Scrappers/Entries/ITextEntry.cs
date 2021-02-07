@@ -27,5 +27,10 @@ namespace Negum.Core.Scrappers.Entries
         ITimeEntry DisplayTime => Scrapper.GetTime(this.KeyPrefix + ".displaytime");
         int Layer => Scrapper.GetInt(this.KeyPrefix + ".layerno");
         IPositionEntry Scale => Scrapper.GetPosition(this.KeyPrefix + ".scale");
+        
+        /// <summary>
+        /// Set to true to shake the text.
+        /// </summary>
+        bool Shake => Scrapper.GetBoolean(this.KeyPrefix + ".shake");
     }
 }
