@@ -14,5 +14,6 @@ namespace Negum.Core.Scrappers.Entries
         IPositionEntry Scale => this.Scrapper.GetPosition(this.KeyPrefix + ".scale");
         int Facing => this.Scrapper.GetInt(this.KeyPrefix + ".facing");
         IBoxEntry Window => this.Scrapper.GetBox(this.KeyPrefix + ".window");
+        int Animation => this.Scrapper.GetInt(this.KeyPrefix + ".anim");
     }
 }

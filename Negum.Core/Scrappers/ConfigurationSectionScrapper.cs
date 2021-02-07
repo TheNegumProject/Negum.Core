@@ -62,9 +62,6 @@ namespace Negum.Core.Scrappers
         public ISpriteSoundEntry GetSpriteSound(string fieldKey) =>
             NegumContainer.Resolve<ISpriteSoundEntry>().Setup(this, fieldKey);
 
-        public IAnimationEntry GetAnimation(string fieldKey) =>
-            NegumContainer.Resolve<IAnimationEntry>().Setup(this, fieldKey);
-
         public IPlayerSelectionEntry GetPlayerSelection(string fieldKey) =>
             NegumContainer.Resolve<IPlayerSelectionEntry>().Setup(this, fieldKey);
 

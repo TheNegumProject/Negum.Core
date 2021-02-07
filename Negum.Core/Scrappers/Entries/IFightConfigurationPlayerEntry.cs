@@ -10,9 +10,9 @@ namespace Negum.Core.Scrappers.Entries
     public interface IFightConfigurationPlayerEntry : IScrapperEntry<IFightConfigurationPlayerEntry>
     {
         IPositionEntry Position => Scrapper.GetPosition(this.KeyPrefix + ".pos");
-        IAnimationEntry Bg0 => Scrapper.GetAnimation(this.KeyPrefix + ".bg0");
+        IImageEntry Bg0 => Scrapper.GetImage(this.KeyPrefix + ".bg0");
         IImageEntry Bg1 => Scrapper.GetImage(this.KeyPrefix + ".bg1");
-        IAnimationEntry Mid => Scrapper.GetAnimation(this.KeyPrefix + ".mid");
+        IImageEntry Mid => Scrapper.GetImage(this.KeyPrefix + ".mid");
         IImageEntry Front => Scrapper.GetImage(this.KeyPrefix + ".front");
         IPositionEntry RangeX => Scrapper.GetPosition(this.KeyPrefix + ".range.x");
     }

@@ -96,12 +96,6 @@ namespace Negum.Core.Scrappers
         /// <summary>
         /// </summary>
         /// <param name="fieldKey"></param>
-        /// <returns>Animation value from current configuration.</returns>
-        IAnimationEntry GetAnimation(string fieldKey);
-
-        /// <summary>
-        /// </summary>
-        /// <param name="fieldKey"></param>
         /// <returns>Player selection value from current configuration.</returns>
         IPlayerSelectionEntry GetPlayerSelection(string fieldKey);
 

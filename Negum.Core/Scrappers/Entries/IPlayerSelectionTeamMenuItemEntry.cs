@@ -12,6 +12,6 @@ namespace Negum.Core.Scrappers.Entries
         ITextEntry Item => Scrapper.GetText(this.KeyPrefix);
         IFontEntry Active => Scrapper.GetFont(this.KeyPrefix + ".active");
         IFontEntry Active2 => Scrapper.GetFont(this.KeyPrefix + ".active2");
-        IAnimationEntry Cursor => Scrapper.GetAnimation(this.KeyPrefix + ".cursor");
+        IImageEntry Cursor => Scrapper.GetImage(this.KeyPrefix + ".cursor");
     }
 }
