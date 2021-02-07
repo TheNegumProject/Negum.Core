@@ -17,14 +17,14 @@ namespace Negum.Core.Scrappers.Entries
 
         /// <summary>
         /// If you want to load a different def file, you can enter it as a directory plus the def file.
-        /// Example: kfm/alt-kfm.def, ...
+        /// Example: kfm/alt-kfm.def
         ///
         /// Zipped characters are also supported.
         /// Place the ZIP file in the "chars/" directory.
-        /// Example: zipname.zip:defname.def, ...
+        /// Example: zipname.zip:defname.def
         ///
         /// If your def file has the same name as the zip file (eg. suave.def in suave.zip), you can just put the name of the zip file alone.
-        /// Example: suave.zip, ...
+        /// Example: suave.zip
         /// </summary>
         IFileEntry NameFile { get; }
 

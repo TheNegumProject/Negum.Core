@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Negum.Core.Cleaners;
 using Negum.Core.Configurations;
@@ -19,7 +20,17 @@ namespace Negum.Core.Tests
     {
         protected void InitializeContainer()
         {
-            NegumContainer.RegisterKnownTypes();
+            try
+            {
+                NegumContainer.RegisterKnownTypes();
+            }
+            catch (Exception e)
+            {
+                /***
+                 * Multiple tests may try to register it multiple times.
+                 * This should not happen is real-life scenario.
+                 */
+            }
         }
 
         protected async Task<IConfigurationDefinition> Parse(string path)
