@@ -84,14 +84,21 @@ namespace Negum.Core.Managers
 
     public interface IFightConfigurationSimulLifebar : IConfigurationManagerSection<IFightConfigurationSimulLifebar>
     {
+        IFightConfigurationPlayerEntry Player1 => Scrapper.GetFightConfigurationPlayer("p1");
+        IFightConfigurationPlayerEntry Player2 => Scrapper.GetFightConfigurationPlayer("p2");
     }
 
     public interface IFightConfigurationTurnsLifebar : IConfigurationManagerSection<IFightConfigurationTurnsLifebar>
     {
+        IFightConfigurationPlayerEntry Player1 => Scrapper.GetFightConfigurationPlayer("p1");
+        IFightConfigurationPlayerEntry Player2 => Scrapper.GetFightConfigurationPlayer("p2");
     }
 
     public interface IFightConfigurationPowerbar : IConfigurationManagerSection<IFightConfigurationPowerbar>
     {
+        IFightConfigurationPlayerEntry Player1 => Scrapper.GetFightConfigurationPlayer("p1");
+        IFightConfigurationPlayerEntry Player2 => Scrapper.GetFightConfigurationPlayer("p2");
+        IEntryCollection<ISoundEntry> LevelSounds => Scrapper.GetCollection<ISoundEntry>("level");
     }
 
     public interface IFightConfigurationFace : IConfigurationManagerSection<IFightConfigurationFace>

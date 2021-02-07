@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using Negum.Core.Cleaners;
 using Negum.Core.Configurations;
 using Negum.Core.Managers;
@@ -41,11 +43,28 @@ namespace Negum.Core.Containers
         /// <summary>
         /// Registers new type.
         /// </summary>
+        /// <param name="interfaceType"></param>
+        /// <param name="implementationType"></param>
+        /// <param name="lifetime"></param>
+        public static void Register(Type interfaceType, Type implementationType,
+            NegumObjectLifetime lifetime = NegumObjectLifetime.Transient)
+        {
+            if (!interfaceType.IsInterface || !implementationType.IsClass)
+            {
+                return;
+            }
+
+            Registerer(lifetime, interfaceType, implementationType);
+        }
+
+        /// <summary>
+        /// Registers new type.
+        /// </summary>
         /// <typeparam name="TInterface">Interface type.</typeparam>
         /// <typeparam name="TClass">Implementation type.</typeparam>
         public static void Register<TInterface, TClass>(NegumObjectLifetime lifetime = NegumObjectLifetime.Transient)
             where TClass : class, TInterface =>
-            Registerer(lifetime, typeof(TInterface), typeof(TClass));
+            Register(typeof(TInterface), typeof(TClass), lifetime);
 
         /// <summary>
         /// </summary>
@@ -78,7 +97,6 @@ namespace Negum.Core.Containers
 
             // Scrapper Entries
             Register<IFileEntry, FileEntry>();
-            Register<IEntryCollection<IFileEntry>, EntryCollection<IFileEntry>>();
             Register<IAudioEntry, AudioEntry>();
             Register<IKeysEntry, KeysEntry>();
             Register<ISpriteSoundEntry, SpriteSoundEntry>();
@@ -101,6 +119,8 @@ namespace Negum.Core.Containers
             Register<IDemoModeFightEntry, DemoModeFightEntry>();
             Register<ICharacterEntry, CharacterEntry>();
             Register<IFightConfigurationPlayerEntry, FightConfigurationPlayerEntry>();
+
+            RegisterEntryCollections();
 
             // Scrappers
             Register<IConfigurationSectionScrapper, ConfigurationSectionScrapper>();
@@ -150,7 +170,7 @@ namespace Negum.Core.Containers
             Register<ISelectionConfigurationCharacters, SelectionConfigurationManagerSection>();
             Register<ISelectionConfigurationExtraStages, SelectionConfigurationManagerSection>();
             Register<ISelectionConfigurationOptions, SelectionConfigurationManagerSection>();
-            
+
             // Fight Configuration Types
             Register<IFightConfigurationFiles, FightConfigurationManagerSection>();
             Register<IFightConfigurationFightFx, FightConfigurationManagerSection>();
@@ -168,6 +188,25 @@ namespace Negum.Core.Containers
             Register<IFightConfigurationCombo, FightConfigurationManagerSection>();
             Register<IFightConfigurationRound, FightConfigurationManagerSection>();
             Register<IFightConfigurationWinIcon, FightConfigurationManagerSection>();
+        }
+
+        /// <summary>
+        /// Registers IEntryCollection pairs in the container.
+        /// </summary>
+        private static void RegisterEntryCollections()
+        {
+            Assembly.GetExecutingAssembly()
+                .GetTypes()
+                .Where(type => 
+                    type.IsInterface &&
+                    type.GetInterfaces().Any(t => t.GenericTypeArguments.Length > 0 && t.GetGenericTypeDefinition() == typeof(IScrapperEntry<>)))
+                .ToList()
+                .ForEach(type =>
+                {
+                    var key = typeof(IEntryCollection<>).MakeGenericType(type);
+                    var value = typeof(EntryCollection<>).MakeGenericType(type);
+                    Register(key, value);
+                });
         }
     }
 
