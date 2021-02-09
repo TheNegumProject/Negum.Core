@@ -140,10 +140,64 @@ namespace Negum.Core.Managers
 
     public interface IStageConfigurationPlayerInfo : IConfigurationManagerSection<IStageConfigurationPlayerInfo>
     {
+        /// <summary>
+        /// Player's 1 starting coordinate X.
+        /// This is typically -70.
+        /// </summary>
+        int Player1StartX => Scrapper.GetInt("p1startx");
+
+        /// <summary>
+        /// Player's 1 starting coordinate Y.
+        /// Should be 0.
+        /// </summary>
+        int Player1StartY => Scrapper.GetInt("p1starty");
+
+        /// <summary>
+        /// Direction player faces: 1 = right, -1 = left.
+        /// </summary>
+        int Player1Facing => Scrapper.GetInt("p1facing");
+
+        /// <summary>
+        /// Player's 2 starting coordinate X.
+        /// This is typically 70.
+        /// </summary>
+        int Player2StartX => Scrapper.GetInt("p2startx");
+
+        /// <summary>
+        /// Player's 2 starting coordinate Y.
+        /// Should be 0.
+        /// </summary>
+        int Player2StartY => Scrapper.GetInt("p2starty");
+
+        /// <summary>
+        /// Direction player faces: 1 = right, -1 = left.
+        /// </summary>
+        int Player2Facing => Scrapper.GetInt("p2facing");
+
+        /// <summary>
+        /// Left bound (x-movement).
+        /// </summary>
+        int LeftBound => Scrapper.GetInt("leftbound");
+
+        /// <summary>
+        /// Right bound.
+        /// </summary>
+        int RightBound => Scrapper.GetInt("rightbound");
     }
 
     public interface IStageConfigurationBound : IConfigurationManagerSection<IStageConfigurationBound>
     {
+        /// <summary>
+        /// Distance from left edge of screen that player can move to.
+        /// Typically 15.
+        /// </summary>
+        int ScreenLeft => Scrapper.GetInt("screenleft");
+
+        /// <summary>
+        /// Distance from right edge of screen that player can move to.
+        /// Typically 15.
+        /// </summary>
+        int ScreenRight => Scrapper.GetInt("screenright");
     }
 
     public interface IStageConfigurationStageInfo : IConfigurationManagerSection<IStageConfigurationStageInfo>
