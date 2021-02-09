@@ -126,12 +126,6 @@ namespace Negum.Core.Scrappers
         /// <summary>
         /// </summary>
         /// <param name="fieldKey"></param>
-        /// <returns>Box value from current configuration.</returns>
-        IBoxEntry GetBox(string fieldKey);
-
-        /// <summary>
-        /// </summary>
-        /// <param name="fieldKey"></param>
         /// <returns>Text value from current configuration.</returns>
         ITextEntry GetText(string fieldKey);
 

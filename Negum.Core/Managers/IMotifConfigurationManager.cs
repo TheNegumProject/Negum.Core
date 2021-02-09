@@ -220,7 +220,7 @@ namespace Negum.Core.Managers
         /// </summary>
         bool IsMenuBoxCursorVisible => Scrapper.GetBoolean("menu.boxcursor.visible");
 
-        IBoxEntry MenuBoxCursorCoords => Scrapper.GetBox("menu.boxcursor.coords");
+        IVectorEntry MenuBoxCursorCoords => Scrapper.GetVector("menu.boxcursor.coords");
         IMovementEntry Cursor => Scrapper.GetMovement("cursor");
         ISpriteSoundEntry Cancel => Scrapper.GetSpriteSound("cancel");
     }
@@ -233,7 +233,7 @@ namespace Negum.Core.Managers
         IVectorEntry Start => Scrapper.GetVector("start");
         IVectorEntry Tile => Scrapper.GetVector("tile");
         IVectorEntry Velocity => Scrapper.GetVector("velocity");
-        IBoxEntry Window => Scrapper.GetBox("window");
+        IVectorEntry Window => Scrapper.GetVector("window");
         string Trans => Scrapper.GetString("trans");
         int Mask => Scrapper.GetInt("mask");
         IVectorEntry Delta => Scrapper.GetVector("delta");

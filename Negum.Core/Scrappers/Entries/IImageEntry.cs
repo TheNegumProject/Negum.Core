@@ -29,7 +29,7 @@ namespace Negum.Core.Scrappers.Entries
         /// </summary>
         int Facing => this.Scrapper.GetInt(this.KeyPrefix + ".facing");
 
-        IBoxEntry Window => this.Scrapper.GetBox(this.KeyPrefix + ".window");
+        IVectorEntry Window => this.Scrapper.GetVector(this.KeyPrefix + ".window");
         int Animation => this.Scrapper.GetInt(this.KeyPrefix + ".anim");
 
         /// <summary>

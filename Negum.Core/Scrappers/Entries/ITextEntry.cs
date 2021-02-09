@@ -22,7 +22,7 @@ namespace Negum.Core.Scrappers.Entries
 
         IVectorEntry Spacing => this.Scrapper.GetVector(this.KeyPrefix + ".spacing");
         string Text => this.Scrapper.GetString(this.KeyPrefix + ".text");
-        IBoxEntry Window => Scrapper.GetBox(this.KeyPrefix + ".window");
+        IVectorEntry Window => Scrapper.GetVector(this.KeyPrefix + ".window");
         string TextWrap => Scrapper.GetString(this.KeyPrefix + ".textwrap");
         ITimeEntry DisplayTime => Scrapper.GetTime(this.KeyPrefix + ".displaytime");
         int Layer => Scrapper.GetInt(this.KeyPrefix + ".layerno");
