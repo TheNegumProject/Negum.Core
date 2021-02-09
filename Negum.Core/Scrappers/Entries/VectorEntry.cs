@@ -8,18 +8,18 @@ namespace Negum.Core.Scrappers.Entries
     /// </author>
     public class VectorEntry : ScrappedEntry<IVectorEntry>, IVectorEntry
     {
-        private string Value { get; set; }
+        private string RawValue { get; set; }
 
         public IVectorEntry From(string value)
         {
-            this.Value = Clean(value);
+            this.RawValue = Clean(value);
             return this;
         }
 
         public override IVectorEntry Setup(IConfigurationSectionScrapper scrapper, string keyPrefix)
         {
             base.Setup(scrapper, keyPrefix);
-            this.Value = Clean(this.Scrapper.GetString(this.KeyPrefix));
+            this.RawValue = Clean(this.Scrapper.GetString(this.KeyPrefix));
             return this;
         }
 
