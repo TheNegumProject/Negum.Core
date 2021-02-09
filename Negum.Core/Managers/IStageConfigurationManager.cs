@@ -238,6 +238,39 @@ namespace Negum.Core.Managers
 
     public interface IStageConfigurationShadow : IConfigurationManagerSection<IStageConfigurationShadow>
     {
+        /// <summary>
+        /// This is the shadow darkening intensity.
+        /// Valid values range from 0 (lightest) to 256 (darkest).
+        /// Defaults to 128 if omitted.
+        /// </summary>
+        int Intensity => Scrapper.GetInt("intensity");
+
+        /// <summary>
+        /// This is the shadow color given in r,g,b.
+        /// Valid values for each range from 0 (lightest) to 255 (darkest).
+        /// Defaults to 0,0,0 if omitted.
+        /// Intensity and color's effects add up to give the final shadow result.
+        /// </summary>
+        string Color => Scrapper.GetString("color");
+
+        /// <summary>
+        /// This is the scale factor of the shadow.
+        /// Use a big scale factor to make the shadow longer.
+        /// You can use a NEGATIVE scale factor to make the shadow fall INTO the screen.
+        /// Defaults to 0.4 if omitted.
+        /// </summary>
+        float ScaleY => Scrapper.GetFloat("yscale");
+
+        /// <summary>
+        /// This parameter lets you set the range over which the shadow is visible.
+        /// The first value is the high level, and the second is the middle level.
+        /// Both represent y-coordinates of the player.
+        /// A shadow is invisible if the player is above the high level, and fully visible if below the middle level.
+        /// The shadow is faded in between the two levels.
+        /// This gives an effect of the shadow fading away as the player gets farther away from the ground.
+        /// If omitted, defaults to no level effects (shadow is always fully visible).
+        /// </summary>
+        IPositionEntry FadeRange => Scrapper.GetPosition("fade.range");
     }
 
     public interface IStageConfigurationReflection : IConfigurationManagerSection<IStageConfigurationReflection>
