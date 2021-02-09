@@ -10,8 +10,8 @@ namespace Negum.Core.Scrappers.Entries
     public interface IPlayerSelectionTeamMenuItemEntry : IScrapperEntry<IPlayerSelectionTeamMenuItemEntry>
     {
         ITextEntry Item => Scrapper.GetText(this.KeyPrefix);
-        IFontEntry Active => Scrapper.GetFont(this.KeyPrefix + ".active");
-        IFontEntry Active2 => Scrapper.GetFont(this.KeyPrefix + ".active2");
+        IVectorEntry Active => Scrapper.GetVector(this.KeyPrefix + ".active");
+        IVectorEntry Active2 => Scrapper.GetVector(this.KeyPrefix + ".active2");
         IImageEntry Cursor => Scrapper.GetImage(this.KeyPrefix + ".cursor");
     }
 }

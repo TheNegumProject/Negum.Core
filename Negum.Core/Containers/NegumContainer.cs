@@ -106,7 +106,6 @@ namespace Negum.Core.Containers
             Register<IImageEntry, ImageEntry>();
             Register<IVectorEntry, VectorEntry>();
             Register<ITextEntry, TextEntry>();
-            Register<IFontEntry, FontEntry>();
             Register<ICellSelectionEntry, CellSelectionEntry>();
             Register<IStageSelectionEntry, StageSelectionEntry>();
             Register<ISpriteEntry, SpriteEntry>();

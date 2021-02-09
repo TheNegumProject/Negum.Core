@@ -18,7 +18,7 @@ namespace Negum.Core.Scrappers.Entries
         /// Font the text.
         /// Set for -1 for none / no display.
         /// </summary>
-        IFontEntry Font => this.Scrapper.GetFont(this.KeyPrefix + ".font");
+        IVectorEntry Font => this.Scrapper.GetVector(this.KeyPrefix + ".font");
 
         IVectorEntry Spacing => this.Scrapper.GetVector(this.KeyPrefix + ".spacing");
         string Text => this.Scrapper.GetString(this.KeyPrefix + ".text");

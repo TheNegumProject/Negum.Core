@@ -77,9 +77,6 @@ namespace Negum.Core.Scrappers
         public ITextEntry GetText(string fieldKey) =>
             NegumContainer.Resolve<ITextEntry>().Setup(this, fieldKey);
 
-        public IFontEntry GetFont(string fieldKey) =>
-            NegumContainer.Resolve<IFontEntry>().Setup(this, fieldKey);
-
         public ICellSelectionEntry GetCell(string fieldKey) =>
             NegumContainer.Resolve<ICellSelectionEntry>().Setup(this, fieldKey);
 

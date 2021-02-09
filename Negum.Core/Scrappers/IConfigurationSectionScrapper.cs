@@ -126,12 +126,6 @@ namespace Negum.Core.Scrappers
         /// <summary>
         /// </summary>
         /// <param name="fieldKey"></param>
-        /// <returns>Font value from current configuration.</returns>
-        IFontEntry GetFont(string fieldKey);
-
-        /// <summary>
-        /// </summary>
-        /// <param name="fieldKey"></param>
         /// <returns>Cell value from current configuration.</returns>
         ICellSelectionEntry GetCell(string fieldKey);
 

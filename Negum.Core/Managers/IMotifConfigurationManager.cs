@@ -172,7 +172,7 @@ namespace Negum.Core.Managers
         /// <summary>
         /// Music to play at title screen.
         /// </summary>
-        IAudioEntry Title => Scrapper.GetAudio("title.bgm");
+        IFileEntry Title => Scrapper.GetFile("title.bgm");
 
         /// <summary>
         /// Music to play at char select screen.
