@@ -12,6 +12,6 @@ namespace Negum.Core.Scrappers.Entries
         ISoundEntry Sound => this.Scrapper.GetSound(this.KeyPrefix + ".snd");
         IImageEntry Icon => this.Scrapper.GetImage(this.KeyPrefix + ".icon");
         IImageEntry EmptyIcon => this.Scrapper.GetImage(this.KeyPrefix + ".empty.icon");
-        IPositionEntry Spacing => this.Scrapper.GetPosition(this.KeyPrefix + ".spacing");
+        IVectorEntry Spacing => this.Scrapper.GetVector(this.KeyPrefix + ".spacing");
     }
 }

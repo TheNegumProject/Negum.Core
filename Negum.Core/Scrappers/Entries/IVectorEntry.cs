@@ -1,22 +1,19 @@
 namespace Negum.Core.Scrappers.Entries
 {
     /// <summary>
-    /// Represents a scrapped entry which should represent Position.
+    /// Represents a scrapped entry which should represent Vector of values.
     /// </summary>
     /// 
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface IPositionEntry : IScrapperEntry<IPositionEntry>
+    public interface IVectorEntry : IScrapperEntry<IVectorEntry>
     {
-        float X { get; }
-        float y { get; }
-
         /// <summary>
         /// Initializes position from specified value.
         /// </summary>
         /// <param name="value"></param>
         /// <returns>Current entry with initialized values.</returns>
-        IPositionEntry From(string value);
+        IVectorEntry From(string value);
     }
 }

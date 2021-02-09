@@ -103,7 +103,7 @@ namespace Negum.Core.Managers
     public interface IMotifConfigurationScreenBgDef : IConfigurationManagerSection<IMotifConfigurationScreenBgDef>
     {
         IFileEntry Sprite => Scrapper.GetFile("spr");
-        string BgClearColor => Scrapper.GetString("bgclearcolor");
+        IVectorEntry BgClearColor => Scrapper.GetVector("bgclearcolor");
     }
 
     public interface IMotifConfigurationInfo : IConfigurationManagerSection<IMotifConfigurationInfo>
@@ -194,7 +194,7 @@ namespace Negum.Core.Managers
     {
         ITimeEntry FadeInTime => Scrapper.GetTime("fadein.time");
         ITimeEntry FadeOutTime => Scrapper.GetTime("fadeout.time");
-        IPositionEntry MenuPos => Scrapper.GetPosition("menu.pos");
+        IVectorEntry MenuPosition => Scrapper.GetVector("menu.pos");
         ITextEntry MenuItem => Scrapper.GetText("menu.item");
         ITextEntry MenuItemActive => Scrapper.GetText("menu.item.active");
         string MenuItemNameArcade => Scrapper.GetString("menu.itemname.arcade");
@@ -211,7 +211,7 @@ namespace Negum.Core.Managers
         string MenuItemNameWatch => Scrapper.GetString("menu.itemname.watch");
         string MenuItemNameOptions => Scrapper.GetString("menu.itemname.options");
         string MenuItemNameExit => Scrapper.GetString("menu.itemname.exit");
-        IPositionEntry MenuWindowMarginsY => Scrapper.GetPosition("menu.window.margins.y");
+        IVectorEntry MenuWindowMarginsY => Scrapper.GetVector("menu.window.margins.y");
         int MenuWindowVisibleItems => Scrapper.GetInt("menu.window.visibleitems");
 
         /// <summary>
@@ -228,15 +228,15 @@ namespace Negum.Core.Managers
     public interface IMotifConfigurationScreenBg : IConfigurationManagerSection<IMotifConfigurationScreenBg>
     {
         string Type => Scrapper.GetString("type");
-        IPositionEntry SpriteNumber => Scrapper.GetPosition("spriteno");
+        IVectorEntry SpriteNumber => Scrapper.GetVector("spriteno");
         int LayerNumber => Scrapper.GetInt("layerno");
-        IPositionEntry Start => Scrapper.GetPosition("start");
-        IPositionEntry Tile => Scrapper.GetPosition("tile");
-        IPositionEntry Velocity => Scrapper.GetPosition("velocity");
+        IVectorEntry Start => Scrapper.GetVector("start");
+        IVectorEntry Tile => Scrapper.GetVector("tile");
+        IVectorEntry Velocity => Scrapper.GetVector("velocity");
         IBoxEntry Window => Scrapper.GetBox("window");
         string Trans => Scrapper.GetString("trans");
         int Mask => Scrapper.GetInt("mask");
-        IPositionEntry Delta => Scrapper.GetPosition("delta");
+        IVectorEntry Delta => Scrapper.GetVector("delta");
     }
 
     public interface IMotifConfigurationInfobox : IConfigurationManagerSection<IMotifConfigurationInfobox>
@@ -261,7 +261,7 @@ namespace Negum.Core.Managers
         /// <summary>
         /// Position to draw to.
         /// </summary>
-        IPositionEntry Pos => Scrapper.GetPosition("pos");
+        IVectorEntry Position => Scrapper.GetVector("pos");
 
         bool ShowEmptyBoxes => Scrapper.GetBoolean("showemptyboxes");
         bool CanMoveOverEmptyBoxes => Scrapper.GetBoolean("moveoveremptyboxes");
@@ -308,7 +308,7 @@ namespace Negum.Core.Managers
     public interface IMotifConfigurationContinueScreen : IConfigurationManagerSection<IMotifConfigurationContinueScreen>
     {
         bool IsEnabled => Scrapper.GetBoolean("enabled");
-        IPositionEntry Position => Scrapper.GetPosition("pos");
+        IVectorEntry Position => Scrapper.GetVector("pos");
         ITextEntry ContinueText => Scrapper.GetText("continue");
         ITextEntry YesText => Scrapper.GetText("yes");
         ITextEntry YesActiveText => Scrapper.GetText("yes.active");

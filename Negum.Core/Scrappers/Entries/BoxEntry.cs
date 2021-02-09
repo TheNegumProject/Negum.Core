@@ -10,8 +10,8 @@ namespace Negum.Core.Scrappers.Entries
     /// </author>
     public class BoxEntry : ScrappedEntry<IBoxEntry>, IBoxEntry
     {
-        public IPositionEntry Start => NegumContainer.Resolve<IPositionEntry>().From(this.GetValue(0, 1));
-        public IPositionEntry End => NegumContainer.Resolve<IPositionEntry>().From(this.GetValue(2, 3));
+        public IVectorEntry Start => NegumContainer.Resolve<IVectorEntry>().From(this.GetValue(0, 1));
+        public IVectorEntry End => NegumContainer.Resolve<IVectorEntry>().From(this.GetValue(2, 3));
 
         private string GetValue(int startIndex, int endIndex)
         {

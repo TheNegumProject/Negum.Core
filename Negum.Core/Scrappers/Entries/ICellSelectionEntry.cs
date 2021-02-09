@@ -12,7 +12,7 @@ namespace Negum.Core.Scrappers.Entries
         /// <summary>
         /// (x,y) size of each cell in pixels.
         /// </summary>
-        IPositionEntry CellSize => Scrapper.GetPosition(this.KeyPrefix + ".size");
+        IVectorEntry CellSize => Scrapper.GetVector(this.KeyPrefix + ".size");
         
         /// <summary>
         /// Space between each cell.

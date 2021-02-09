@@ -17,12 +17,12 @@ namespace Negum.Core.Scrappers.Entries
         /// <summary>
         /// Offset by which current image should be moved.
         /// </summary>
-        IPositionEntry Offset => this.Scrapper.GetPosition(this.KeyPrefix + ".offset");
+        IVectorEntry Offset => this.Scrapper.GetVector(this.KeyPrefix + ".offset");
 
         /// <summary>
         /// Scales the image.
         /// </summary>
-        IPositionEntry Scale => this.Scrapper.GetPosition(this.KeyPrefix + ".scale");
+        IVectorEntry Scale => this.Scrapper.GetVector(this.KeyPrefix + ".scale");
 
         /// <summary>
         /// Direction of image facing.

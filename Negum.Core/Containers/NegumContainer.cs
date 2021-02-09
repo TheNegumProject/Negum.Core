@@ -104,7 +104,7 @@ namespace Negum.Core.Containers
             Register<IPlayerSelectionEntry, PlayerSelectionEntry>();
             Register<IMovementEntry, MovementEntry>();
             Register<IImageEntry, ImageEntry>();
-            Register<IPositionEntry, PositionEntry>();
+            Register<IVectorEntry, VectorEntry>();
             Register<IBoxEntry, BoxEntry>();
             Register<ITextEntry, TextEntry>();
             Register<IFontEntry, FontEntry>();

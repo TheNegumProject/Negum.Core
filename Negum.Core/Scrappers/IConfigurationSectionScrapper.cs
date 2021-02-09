@@ -120,8 +120,8 @@ namespace Negum.Core.Scrappers
         /// <summary>
         /// </summary>
         /// <param name="fieldKey"></param>
-        /// <returns>Position value from current configuration.</returns>
-        IPositionEntry GetPosition(string fieldKey);
+        /// <returns>Vector value from current configuration.</returns>
+        IVectorEntry GetVector(string fieldKey);
 
         /// <summary>
         /// </summary>

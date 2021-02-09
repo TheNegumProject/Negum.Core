@@ -12,7 +12,7 @@ namespace Negum.Core.Scrappers.Entries
         /// <summary>
         /// Position of the text.
         /// </summary>
-        IPositionEntry Offset => this.Scrapper.GetPosition(this.KeyPrefix + ".offset");
+        IVectorEntry Offset => this.Scrapper.GetVector(this.KeyPrefix + ".offset");
 
         /// <summary>
         /// Font the text.
@@ -20,13 +20,13 @@ namespace Negum.Core.Scrappers.Entries
         /// </summary>
         IFontEntry Font => this.Scrapper.GetFont(this.KeyPrefix + ".font");
 
-        IPositionEntry Spacing => this.Scrapper.GetPosition(this.KeyPrefix + ".spacing");
+        IVectorEntry Spacing => this.Scrapper.GetVector(this.KeyPrefix + ".spacing");
         string Text => this.Scrapper.GetString(this.KeyPrefix + ".text");
         IBoxEntry Window => Scrapper.GetBox(this.KeyPrefix + ".window");
         string TextWrap => Scrapper.GetString(this.KeyPrefix + ".textwrap");
         ITimeEntry DisplayTime => Scrapper.GetTime(this.KeyPrefix + ".displaytime");
         int Layer => Scrapper.GetInt(this.KeyPrefix + ".layerno");
-        IPositionEntry Scale => Scrapper.GetPosition(this.KeyPrefix + ".scale");
+        IVectorEntry Scale => Scrapper.GetVector(this.KeyPrefix + ".scale");
         
         /// <summary>
         /// Set to true to shake the text.

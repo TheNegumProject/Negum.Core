@@ -44,12 +44,12 @@ namespace Negum.Core.Managers
         /// For example, for 4,3,1 you will fight up to 4 randomly-picked characters who have order=1,
         /// followed by 3 with order=2 and 1 with order=3.
         /// </summary>
-        string ArcadeMaxMatches => Scrapper.GetString("arcade.maxmatches");
+        IVectorEntry ArcadeMaxMatches => Scrapper.GetVector("arcade.maxmatches");
 
         /// <summary>
         /// Maximum number of matches to fight before game ends in Team Mode.
         /// Like ArcadeMaxMatches, but applies to Team Battle.
         /// </summary>
-        string TeamMaxMatches => Scrapper.GetString("team.maxmatches");
+        IVectorEntry TeamMaxMatches => Scrapper.GetVector("team.maxmatches");
     }
 }

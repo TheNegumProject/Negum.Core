@@ -48,17 +48,17 @@ namespace Negum.Core.Managers
         /// <summary>
         /// Size of font: width, height.  Width is used for spaces.
         /// </summary>
-        IPositionEntry Size => Scrapper.GetPosition("Size");
+        IVectorEntry Size => Scrapper.GetVector("Size");
 
         /// <summary>
         /// Spacing between font glyphs: width, height.
         /// </summary>
-        IPositionEntry Spacing => Scrapper.GetPosition("Spacing");
+        IVectorEntry Spacing => Scrapper.GetVector("Spacing");
 
         /// <summary>
         /// Drawing offset: x, y.
         /// </summary>
-        IPositionEntry Offset => Scrapper.GetPosition("Offset");
+        IVectorEntry Offset => Scrapper.GetVector("Offset");
 
         /// <summary>
         /// Filename of the sff containing the glyphs.

@@ -74,8 +74,8 @@ namespace Negum.Core.Scrappers
         public IImageEntry GetImage(string fieldKey) =>
             NegumContainer.Resolve<IImageEntry>().Setup(this, fieldKey);
 
-        public IPositionEntry GetPosition(string fieldKey) =>
-            NegumContainer.Resolve<IPositionEntry>().Setup(this, fieldKey);
+        public IVectorEntry GetVector(string fieldKey) =>
+            NegumContainer.Resolve<IVectorEntry>().Setup(this, fieldKey);
 
         public IBoxEntry GetBox(string fieldKey) =>
             NegumContainer.Resolve<IBoxEntry>().Setup(this, fieldKey);

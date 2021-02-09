@@ -374,24 +374,24 @@ namespace Negum.Core.Managers
         /// For 6 matches at level 4, the difficulty will be (by match):
         ///     4,4,4,5,6,6
         /// </summary>
-        IPositionEntry ArcadeAiRampStart => Scrapper.GetPosition("arcade.AIramp.start");
+        IVectorEntry ArcadeAiRampStart => Scrapper.GetVector("arcade.AIramp.start");
 
-        IPositionEntry ArcadeAiRampEnd => Scrapper.GetPosition("arcade.AIramp.end");
+        IVectorEntry ArcadeAiRampEnd => Scrapper.GetVector("arcade.AIramp.end");
 
 
         /// <summary>
         /// Team Mode AI ramping.
         /// </summary>
-        IPositionEntry TeamAiRampStart => Scrapper.GetPosition("team.AIramp.start");
+        IVectorEntry TeamAiRampStart => Scrapper.GetVector("team.AIramp.start");
 
-        IPositionEntry TeamAiRampEnd => Scrapper.GetPosition("team.AIramp.end");
+        IVectorEntry TeamAiRampEnd => Scrapper.GetVector("team.AIramp.end");
 
         /// <summary>
         /// Survival Mode AI ramping.
         /// </summary>
-        IPositionEntry SurvivalAiRampStart => Scrapper.GetPosition("survival.AIramp.start");
+        IVectorEntry SurvivalAiRampStart => Scrapper.GetVector("survival.AIramp.start");
 
-        IPositionEntry SurvivalAiRampEnd => Scrapper.GetPosition("survival.AIramp.end");
+        IVectorEntry SurvivalAiRampEnd => Scrapper.GetVector("survival.AIramp.end");
     }
 
     public interface INegumConfigurationInput : IConfigurationManagerSection<INegumConfigurationInput>

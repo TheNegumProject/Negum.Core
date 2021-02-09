@@ -9,7 +9,7 @@ namespace Negum.Core.Scrappers.Entries
     /// </author>
     public interface IBoxEntry : IScrapperEntry<IBoxEntry>
     {
-        IPositionEntry Start { get; }
-        IPositionEntry End { get; }
+        IVectorEntry Start { get; }
+        IVectorEntry End { get; }
     }
 }

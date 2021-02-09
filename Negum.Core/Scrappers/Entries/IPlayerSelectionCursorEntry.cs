@@ -9,7 +9,7 @@ namespace Negum.Core.Scrappers.Entries
     /// </author>
     public interface IPlayerSelectionCursorEntry : IScrapperEntry<IPlayerSelectionCursorEntry>
     {
-        string StartCell => this.Scrapper.GetString(this.KeyPrefix + ".startcell");
+        IVectorEntry StartCell => this.Scrapper.GetVector(this.KeyPrefix + ".startcell");
         IImageEntry Animation => this.Scrapper.GetImage(this.KeyPrefix + ".active");
         IMovementEntry Movement => this.Scrapper.GetMovement(this.KeyPrefix);
     }

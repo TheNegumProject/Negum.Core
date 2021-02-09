@@ -144,7 +144,7 @@ namespace Negum.Core.Managers
 
     public interface IFightConfigurationTime : IConfigurationManagerSection<IFightConfigurationTime>
     {
-        IPositionEntry Position => Scrapper.GetPosition("pos");
+        IVectorEntry Position => Scrapper.GetVector("pos");
         ITextEntry Counter => Scrapper.GetText("counter");
         IImageEntry Background => Scrapper.GetImage(".bg");
 
@@ -180,7 +180,7 @@ namespace Negum.Core.Managers
         /// <summary>
         /// Default position for all components.
         /// </summary>
-        IPositionEntry Position => Scrapper.GetPosition("pos");
+        IVectorEntry Position => Scrapper.GetVector("pos");
 
         /// <summary>
         /// Time to show round display.

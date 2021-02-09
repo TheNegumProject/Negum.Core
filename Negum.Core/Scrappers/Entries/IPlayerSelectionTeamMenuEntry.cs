@@ -9,7 +9,7 @@ namespace Negum.Core.Scrappers.Entries
     /// </author>
     public interface IPlayerSelectionTeamMenuEntry : IScrapperEntry<IPlayerSelectionTeamMenuEntry>
     {
-        IPositionEntry Position => Scrapper.GetPosition(this.KeyPrefix + ".pos");
+        IVectorEntry Position => Scrapper.GetVector(this.KeyPrefix + ".pos");
         IImageEntry Background => Scrapper.GetImage(this.KeyPrefix + ".bg");
         ITextEntry SelfTitle => Scrapper.GetText(this.KeyPrefix + ".selftitle");
         ITextEntry EnemyTitle => Scrapper.GetText(this.KeyPrefix + ".enemytitle");

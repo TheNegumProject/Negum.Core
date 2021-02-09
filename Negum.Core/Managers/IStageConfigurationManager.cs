@@ -223,7 +223,7 @@ namespace Negum.Core.Managers
         /// <summary>
         /// Width and height of the local coordinate space of the stage.
         /// </summary>
-        IPositionEntry LocalCoord => Scrapper.GetPosition("localcoord");
+        IVectorEntry LocalCoord => Scrapper.GetVector("localcoord");
 
         /// <summary>
         /// Horizontal scaling factor for drawing.
@@ -251,7 +251,7 @@ namespace Negum.Core.Managers
         /// Defaults to 0,0,0 if omitted.
         /// Intensity and color's effects add up to give the final shadow result.
         /// </summary>
-        string Color => Scrapper.GetString("color");
+        IVectorEntry Color => Scrapper.GetVector("color");
 
         /// <summary>
         /// This is the scale factor of the shadow.
@@ -270,7 +270,7 @@ namespace Negum.Core.Managers
         /// This gives an effect of the shadow fading away as the player gets farther away from the ground.
         /// If omitted, defaults to no level effects (shadow is always fully visible).
         /// </summary>
-        IPositionEntry FadeRange => Scrapper.GetPosition("fade.range");
+        IVectorEntry FadeRange => Scrapper.GetVector("fade.range");
     }
 
     public interface IStageConfigurationReflection : IConfigurationManagerSection<IStageConfigurationReflection>
