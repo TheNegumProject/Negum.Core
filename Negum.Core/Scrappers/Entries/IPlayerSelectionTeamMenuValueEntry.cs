@@ -9,7 +9,7 @@ namespace Negum.Core.Scrappers.Entries
     /// </author>
     public interface IPlayerSelectionTeamMenuValueEntry : IScrapperEntry<IPlayerSelectionTeamMenuValueEntry>
     {
-        ISoundEntry Sound => this.Scrapper.GetSound(this.KeyPrefix + ".snd");
+        IVectorEntry Sound => this.Scrapper.GetVector(this.KeyPrefix + ".snd");
         IImageEntry Icon => this.Scrapper.GetImage(this.KeyPrefix + ".icon");
         IImageEntry EmptyIcon => this.Scrapper.GetImage(this.KeyPrefix + ".empty.icon");
         IVectorEntry Spacing => this.Scrapper.GetVector(this.KeyPrefix + ".spacing");

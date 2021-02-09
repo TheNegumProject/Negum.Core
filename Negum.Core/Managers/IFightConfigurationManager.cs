@@ -99,7 +99,7 @@ namespace Negum.Core.Managers
     {
         IFightConfigurationPlayerEntry Player1 => Scrapper.GetFightConfigurationPlayer("p1");
         IFightConfigurationPlayerEntry Player2 => Scrapper.GetFightConfigurationPlayer("p2");
-        IEntryCollection<ISoundEntry> LevelSounds => Scrapper.GetCollection<ISoundEntry>("level");
+        IEntryCollection<IVectorEntry> LevelSounds => Scrapper.GetCollection<IVectorEntry>("level");
     }
 
     public interface IFightConfigurationFace : IConfigurationManagerSection<IFightConfigurationFace>
@@ -196,7 +196,7 @@ namespace Negum.Core.Managers
         /// <summary>
         /// Sounds to play for each round (optional).
         /// </summary>
-        IEntryCollection<ISoundEntry> RoundSounds => Scrapper.GetCollection<ISoundEntry>(
+        IEntryCollection<IVectorEntry> RoundSounds => Scrapper.GetCollection<IVectorEntry>(
             Scrapper
                 .GetAll()
                 .Where(entry => entry.Key.StartsWith("round") && !entry.Key.StartsWith("round."))

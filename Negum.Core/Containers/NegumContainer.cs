@@ -108,7 +108,6 @@ namespace Negum.Core.Containers
             Register<ITextEntry, TextEntry>();
             Register<ICellSelectionEntry, CellSelectionEntry>();
             Register<IStageSelectionEntry, StageSelectionEntry>();
-            Register<ISoundEntry, SoundEntry>();
             Register<IPlayerSelectionTeamMenuEntry, PlayerSelectionTeamMenuEntry>();
             Register<IPlayerSelectionTeamMenuItemEntry, PlayerSelectionTeamMenuItemEntry>();
             Register<IPlayerSelectionTeamMenuValueEntry, PlayerSelectionTeamMenuValueEntry>();

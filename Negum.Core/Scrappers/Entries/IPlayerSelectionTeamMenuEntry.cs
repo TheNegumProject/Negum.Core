@@ -13,7 +13,7 @@ namespace Negum.Core.Scrappers.Entries
         IImageEntry Background => Scrapper.GetImage(this.KeyPrefix + ".bg");
         ITextEntry SelfTitle => Scrapper.GetText(this.KeyPrefix + ".selftitle");
         ITextEntry EnemyTitle => Scrapper.GetText(this.KeyPrefix + ".enemytitle");
-        ISoundEntry Move => Scrapper.GetSound(this.KeyPrefix + ".move");
+        IVectorEntry Move => Scrapper.GetVector(this.KeyPrefix + ".move");
         IPlayerSelectionTeamMenuItemEntry Item => Scrapper.GetPlayerSelectionTeamMenuItem(this.KeyPrefix + ".item");
         IPlayerSelectionTeamMenuValueEntry Value => Scrapper.GetPlayerSelectionTeamMenuValue(this.KeyPrefix + ".value");
     }

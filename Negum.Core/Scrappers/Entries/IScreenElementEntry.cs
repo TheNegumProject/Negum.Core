@@ -22,7 +22,7 @@ namespace Negum.Core.Scrappers.Entries
         /// <summary>
         /// Sound to play.
         /// </summary>
-        ISoundEntry Sound => Scrapper.GetSound(this.KeyPrefix + ".snd");
+        IVectorEntry Sound => Scrapper.GetVector(this.KeyPrefix + ".snd");
 
         /// <summary>
         /// Time to play sound.
