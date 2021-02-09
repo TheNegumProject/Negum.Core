@@ -285,13 +285,130 @@ namespace Negum.Core.Managers
 
     public interface IStageConfigurationMusic : IConfigurationManagerSection<IStageConfigurationMusic>
     {
+        /// <summary>
+        /// Put a filename for a MOD, MP3 or MIDI here, or just leave it blank if you don't want music.
+        /// If an invalid filename is given, then no music will play.
+        /// </summary>
+        IFileEntry BackgroundMusicFile => Scrapper.GetFile("bgmusic");
+
+        int BackgroundMusicLoopStart => Scrapper.GetInt("bgmloopstart");
+        int BackgroundMusicLoopEnd => Scrapper.GetInt("bgmloopend");
+
+        /// <summary>
+        /// Adjust the volume. 100 is for 100%.
+        /// </summary>
+        int BackgroundMusicVolume => Scrapper.GetInt("bgmvolume");
     }
 
     public interface IStageConfigurationBackgroundDef : IConfigurationManagerSection<IStageConfigurationBackgroundDef>
     {
+        /// <summary>
+        /// Filename of sprite data.
+        /// </summary>
+        IFileEntry SpriteFile => Scrapper.GetFile("spr");
+
+        /// <summary>
+        /// Set to true if you want to clear the screen to magenta before drawing layer 0 (the default background).
+        /// Good for spotting "holes" in your background.
+        /// Remember to turn this off when you are done debugging the background, because it slows down performance.
+        /// </summary>
+        bool DebugBackground => Scrapper.GetBoolean("debugbg");
     }
 
     public interface IStageConfigurationBackground : IConfigurationManagerSection<IStageConfigurationBackground>
     {
+        /// <summary>
+        /// The background type goes here: for now, only NORMAL and PARALLAX.
+        /// If this line is omitted, the type will be assumed to be normal.
+        /// </summary>
+        string Type => Scrapper.GetString("type");
+
+        /// <summary>
+        /// The sprite number to use for the background (from the SFF specified above).
+        /// It's the group-number, followed by a comma, then the sprite-number.
+        /// </summary>
+        IVectorEntry SpriteNumber => Scrapper.GetVector("spriteno");
+
+        /// <summary>
+        /// This is the layer number, which determines where the sprite is drawn to.
+        /// Valid values are 0 and 1.
+        /// 0 for background (behind characters),
+        /// 1 for foreground (in front).
+        /// If this line is omitted, the default value of 0 will be assumed.
+        /// </summary>
+        int LayerNumber => Scrapper.GetInt("layerno");
+
+        /// <summary>
+        /// This is the starting location of the background in the format (x, y).
+        /// If this line is omitted, the default value of 0,0 will be assumed.
+        /// </summary>
+        IVectorEntry StartPosition => Scrapper.GetVector("start");
+
+        /// <summary>
+        /// These are the number of pixels the background moves for every single unit of camera movement, in the format (x, y).
+        /// For the main background (eg. the floor the players stand on) you'll want to use a delta of 1,1.
+        /// Things farther away should have a smaller delta, like 0.5 for example.
+        /// Things near the camera should have a larger delta.
+        /// If this line is omitted, the default value of 1,1 will be assumed.
+        /// </summary>
+        IVectorEntry Delta => Scrapper.GetVector("delta");
+
+        /// <summary>
+        /// Here is the transparency setting of the background.
+        /// Valid values are:
+        ///     - "none" for normal drawing
+        ///     - "add" for colour addition (like a spotlight effect)
+        ///     - "add1" for colour addition with background dimmed to 50% brightness
+        ///     - "addalpha" for colour addition with control over alpha values (you need an "alpha" parameter if you use this)
+        ///     - "sub" for colour subtraction (like a shadow effect)
+        /// If this line is omitted, it's assumed that there will be no transparency.
+        /// </summary>
+        string Transparency => Scrapper.GetString("trans");
+
+        /// <summary>
+        /// Use this parameter only if "trans = addalpha".
+        /// First value is the alpha of the source (sprite), and the second is the alpha of the destination (background).
+        /// The values range from 0 to 256.
+        /// </summary>
+        IVectorEntry Alpha => Scrapper.GetVector("alpha");
+
+        /// <summary>
+        /// Mask means whether or not to draw colour zero of a sprite.
+        /// If you turn masking off, the background will take less CPU power to draw, so remember to turn it off on sprites that don't use it.
+        /// If this line is omitted, it's assumed that there will be no masking.
+        /// </summary>
+        int Mask => Scrapper.GetInt("mask");
+
+        /// <summary>
+        /// The format for tiling is (x, y).
+        /// For each of them, the value is:
+        ///     - 0 to use no tiling,
+        ///     - 1 to tile,
+        ///     - n where (n>1) to tile n times.
+        /// If this line is omitted, it's assumed that there will be no tiling.
+        /// </summary>
+        IVectorEntry Tile => Scrapper.GetVector("tile");
+
+        /// <summary>
+        /// This is the x and y space between each tile, for tiled backgrounds.
+        /// If omitted, default value is 0,0.
+        /// </summary>
+        IVectorEntry TileSpacing => Scrapper.GetVector("tilespacing");
+
+        /// <summary>
+        /// This defines the drawing space, or "window" of the background.
+        /// It's given in the form (x1,y1, x2,y2) where (x1,y1)-(x2,y2) define a rectangular box.
+        /// Make the window smaller if you only want to draw part of the background.
+        /// You normally do not have to use this setting.
+        /// Value values range from 0-319 for x, and 0-239 for y.
+        /// The values are 0,0, 319,239 by default (full screen).
+        /// </summary>
+        IVectorEntry Window => Scrapper.GetVector("window");
+
+        /// <summary>
+        /// Similar to the delta parameter, this one affects the movement of the window.
+        /// Defaults to 0,0.
+        /// </summary>
+        IVectorEntry WindowDelta => Scrapper.GetVector("windowdelta");
     }
 }
