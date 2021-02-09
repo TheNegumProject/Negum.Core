@@ -275,6 +275,12 @@ namespace Negum.Core.Managers
 
     public interface IStageConfigurationReflection : IConfigurationManagerSection<IStageConfigurationReflection>
     {
+        /// <summary>
+        /// Intensity of reflection (from 0 to 256).
+        /// Set to 0 to have no reflection.
+        /// Defaults to 0.
+        /// </summary>
+        int Intensity => Scrapper.GetInt("intensity");
     }
 
     public interface IStageConfigurationMusic : IConfigurationManagerSection<IStageConfigurationMusic>
