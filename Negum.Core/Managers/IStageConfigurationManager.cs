@@ -50,7 +50,7 @@ namespace Negum.Core.Managers
     {
         string Name => Scrapper.GetString("name");
         string DisplayName => Scrapper.GetString("displayname");
-        DateTime VersionDate => Scrapper.GetDate("versiondate");
+        ITimeEntry VersionDate => Scrapper.GetTime("versiondate");
         string Version => Scrapper.GetString("mugenversion");
         string Author => Scrapper.GetString("author");
     }

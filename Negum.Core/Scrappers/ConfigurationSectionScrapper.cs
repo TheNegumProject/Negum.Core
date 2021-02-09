@@ -39,9 +39,6 @@ namespace Negum.Core.Scrappers
         public string GetString(string fieldKey) =>
             this.ConfigSection[fieldKey];
 
-        public DateTime GetDate(string fieldKey) =>
-            DateTime.Parse(this.GetString(fieldKey));
-
         public IFileEntry GetFile(string fieldKey) =>
             NegumContainer.Resolve<IFileEntry>().Setup(this, fieldKey);
 

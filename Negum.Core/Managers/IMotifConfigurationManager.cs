@@ -121,7 +121,7 @@ namespace Negum.Core.Managers
         /// <summary>
         /// Version date of motif.
         /// </summary>
-        DateTime VersionDate => Scrapper.GetDate("versiondate");
+        ITimeEntry VersionDate => Scrapper.GetTime("versiondate");
 
         /// <summary>
         /// Version of motif.

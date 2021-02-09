@@ -53,12 +53,6 @@ namespace Negum.Core.Scrappers
         /// <summary>
         /// </summary>
         /// <param name="fieldKey"></param>
-        /// <returns>DateTime value from current configuration.</returns>
-        DateTime GetDate(string fieldKey);
-
-        /// <summary>
-        /// </summary>
-        /// <param name="fieldKey"></param>
         /// <returns>File value from current configuration.</returns>
         IFileEntry GetFile(string fieldKey);
 
