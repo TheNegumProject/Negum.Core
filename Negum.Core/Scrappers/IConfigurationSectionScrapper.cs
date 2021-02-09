@@ -138,12 +138,6 @@ namespace Negum.Core.Scrappers
         /// <summary>
         /// </summary>
         /// <param name="fieldKey"></param>
-        /// <returns>Sprite value from current configuration.</returns>
-        ISpriteEntry GetSprite(string fieldKey);
-
-        /// <summary>
-        /// </summary>
-        /// <param name="fieldKey"></param>
         /// <returns>Sound value from current configuration.</returns>
         ISoundEntry GetSound(string fieldKey);
 

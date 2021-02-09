@@ -12,7 +12,7 @@ namespace Negum.Core.Scrappers.Entries
         /// <summary>
         /// Image to be displayed.
         /// </summary>
-        ISpriteEntry Sprite => this.Scrapper.GetSprite(this.KeyPrefix + ".spr");
+        IVectorEntry Sprite => this.Scrapper.GetVector(this.KeyPrefix + ".spr");
 
         /// <summary>
         /// Offset by which current image should be moved.

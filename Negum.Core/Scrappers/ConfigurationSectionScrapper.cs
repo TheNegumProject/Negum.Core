@@ -83,9 +83,6 @@ namespace Negum.Core.Scrappers
         public IStageSelectionEntry GetStage(string fieldKey) =>
             NegumContainer.Resolve<IStageSelectionEntry>().Setup(this, fieldKey);
 
-        public ISpriteEntry GetSprite(string fieldKey) =>
-            NegumContainer.Resolve<ISpriteEntry>().Setup(this, fieldKey);
-
         public ISoundEntry GetSound(string fieldKey) =>
             NegumContainer.Resolve<ISoundEntry>().Setup(this, fieldKey);
 
