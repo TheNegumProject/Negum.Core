@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Negum.Core.Containers;
+using Negum.Core.Scrappers.Entries;
 
 namespace Negum.Core.Managers
 {
@@ -202,6 +203,37 @@ namespace Negum.Core.Managers
 
     public interface IStageConfigurationStageInfo : IConfigurationManagerSection<IStageConfigurationStageInfo>
     {
+        /// <summary>
+        /// "Ground" level where players stand at, measured in pixels from the top of the screen.
+        /// Adjust this value to move the ground level up/down in the screen.
+        /// </summary>
+        int OffsetZ => Scrapper.GetInt("zoffset");
+
+        /// <summary>
+        /// Leave this at 1.
+        /// It makes the players face each other
+        /// </summary>
+        int AutoTurn => Scrapper.GetInt("autoturn");
+
+        /// <summary>
+        /// Set the following to 1 to have the background reset itself between rounds.
+        /// </summary>
+        int ResetBg => Scrapper.GetInt("resetBG");
+
+        /// <summary>
+        /// Width and height of the local coordinate space of the stage.
+        /// </summary>
+        IPositionEntry LocalCoord => Scrapper.GetPosition("localcoord");
+
+        /// <summary>
+        /// Horizontal scaling factor for drawing.
+        /// </summary>
+        int ScaleX => Scrapper.GetInt("xscale");
+
+        /// <summary>
+        /// Vertical scaling factor for drawing.
+        /// </summary>
+        int ScaleY => Scrapper.GetInt("yscale");
     }
 
     public interface IStageConfigurationShadow : IConfigurationManagerSection<IStageConfigurationShadow>
