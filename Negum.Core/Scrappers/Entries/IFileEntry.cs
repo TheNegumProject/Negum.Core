@@ -9,6 +9,9 @@ namespace Negum.Core.Scrappers.Entries
     /// </author>
     public interface IFileEntry : IScrapperEntry<IFileEntry>
     {
-        // TODO: Set values
+        /// <summary>
+        /// Path to the file. 
+        /// </summary>
+        string Path => Scrapper.GetString(this.KeyPrefix);
     }
 }
