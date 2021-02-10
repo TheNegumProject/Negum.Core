@@ -29,8 +29,8 @@ namespace Negum.Core.Managers
         IEnumerable<ICharacterEntry> Characters => Scrapper.GetCharacters();
     }
 
-    public interface
-        ISelectionConfigurationExtraStages : IConfigurationManagerSection<ISelectionConfigurationExtraStages>
+    public interface ISelectionConfigurationExtraStages :
+        IConfigurationManagerSection<ISelectionConfigurationExtraStages>
     {
         IEnumerable<IFileEntry> StageFiles =>
             Scrapper.GetCollection<IFileEntry>(Scrapper.GetAll().Select(x => x.Key).ToList());

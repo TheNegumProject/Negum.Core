@@ -13,88 +13,88 @@ namespace Negum.Core.Managers
     /// </author>
     public interface IMotifConfigurationManager : IConfigurationManager<IMotifConfigurationManager>
     {
-        public IMotifConfigurationInfo Info =>
+        IMotifConfigurationInfo Info =>
             NegumContainer.Resolve<IMotifConfigurationInfo>().Setup(this.Scrapper.GetSection("Info"));
 
-        public IMotifConfigurationFiles Files =>
+        IMotifConfigurationFiles Files =>
             NegumContainer.Resolve<IMotifConfigurationFiles>().Setup(this.Scrapper.GetSection("Files"));
 
-        public IMotifConfigurationMusic Music =>
+        IMotifConfigurationMusic Music =>
             NegumContainer.Resolve<IMotifConfigurationMusic>().Setup(this.Scrapper.GetSection("Music"));
 
-        public IMotifConfigurationTitleInfo TitleInfo =>
+        IMotifConfigurationTitleInfo TitleInfo =>
             NegumContainer.Resolve<IMotifConfigurationTitleInfo>().Setup(this.Scrapper.GetSection("Title Info"));
 
-        public IMotifConfigurationScreenBgDef TitleBgDef =>
+        IMotifConfigurationScreenBgDef TitleBgDef =>
             NegumContainer.Resolve<IMotifConfigurationScreenBgDef>().Setup(this.Scrapper.GetSection("TitleBGdef"));
 
-        public IEnumerable<IMotifConfigurationScreenBg> TitleBgs =>
+        IEnumerable<IMotifConfigurationScreenBg> TitleBgs =>
             NegumContainer.Resolve<ISectionCollectionProvider>()
                 .SetupMultiple<IMotifConfigurationScreenBg>(this.Scrapper.GetSections("TitleBG "));
 
-        public IMotifConfigurationInfobox Infobox =>
+        IMotifConfigurationInfobox Infobox =>
             NegumContainer.Resolve<IMotifConfigurationInfobox>().Setup(this.Scrapper.GetSection("Infobox"));
 
-        public IMotifConfigurationSelectInfo SelectInfo =>
+        IMotifConfigurationSelectInfo SelectInfo =>
             NegumContainer.Resolve<IMotifConfigurationSelectInfo>().Setup(this.Scrapper.GetSection("Select Info"));
 
-        public IMotifConfigurationScreenBgDef SelectBgDef =>
+        IMotifConfigurationScreenBgDef SelectBgDef =>
             NegumContainer.Resolve<IMotifConfigurationScreenBgDef>().Setup(this.Scrapper.GetSection("SelectBGdef"));
 
-        public IEnumerable<IMotifConfigurationScreenBg> SelectBgs =>
+        IEnumerable<IMotifConfigurationScreenBg> SelectBgs =>
             NegumContainer.Resolve<ISectionCollectionProvider>()
                 .SetupMultiple<IMotifConfigurationScreenBg>(this.Scrapper.GetSections("SelectBG "));
 
-        public IMotifConfigurationVsScreen VsScreen =>
+        IMotifConfigurationVsScreen VsScreen =>
             NegumContainer.Resolve<IMotifConfigurationVsScreen>().Setup(this.Scrapper.GetSection("VS Screen"));
 
-        public IMotifConfigurationScreenBgDef VersusBgDef =>
+        IMotifConfigurationScreenBgDef VersusBgDef =>
             NegumContainer.Resolve<IMotifConfigurationScreenBgDef>().Setup(this.Scrapper.GetSection("VersusBGdef"));
 
-        public IEnumerable<IMotifConfigurationScreenBg> VersusBgs =>
+        IEnumerable<IMotifConfigurationScreenBg> VersusBgs =>
             NegumContainer.Resolve<ISectionCollectionProvider>()
                 .SetupMultiple<IMotifConfigurationScreenBg>(this.Scrapper.GetSections("VersusBG "));
 
-        public IMotifConfigurationDemoMode DemoMode =>
+        IMotifConfigurationDemoMode DemoMode =>
             NegumContainer.Resolve<IMotifConfigurationDemoMode>().Setup(this.Scrapper.GetSection("Demo Mode"));
 
-        public IMotifConfigurationContinueScreen ContinueScreen =>
+        IMotifConfigurationContinueScreen ContinueScreen =>
             NegumContainer.Resolve<IMotifConfigurationContinueScreen>()
                 .Setup(this.Scrapper.GetSection("Continue Screen"));
 
-        public IMotifConfigurationGameOverScreen GameOverScreen =>
+        IMotifConfigurationGameOverScreen GameOverScreen =>
             NegumContainer.Resolve<IMotifConfigurationGameOverScreen>()
                 .Setup(this.Scrapper.GetSection("Game Over Screen"));
 
-        public IMotifConfigurationVictoryScreen VictoryScreen =>
+        IMotifConfigurationVictoryScreen VictoryScreen =>
             NegumContainer.Resolve<IMotifConfigurationVictoryScreen>()
                 .Setup(this.Scrapper.GetSection("Victory Screen"));
 
-        public IMotifConfigurationScreenBgDef VictoryBgDef =>
+        IMotifConfigurationScreenBgDef VictoryBgDef =>
             NegumContainer.Resolve<IMotifConfigurationScreenBgDef>().Setup(this.Scrapper.GetSection("VictoryBGdef"));
 
-        public IEnumerable<IMotifConfigurationScreenBg> VictoryBgs =>
+        IEnumerable<IMotifConfigurationScreenBg> VictoryBgs =>
             NegumContainer.Resolve<ISectionCollectionProvider>()
                 .SetupMultiple<IMotifConfigurationScreenBg>(this.Scrapper.GetSections("VictoryBG "));
 
-        public IMotifConfigurationWinScreen WinScreen =>
+        IMotifConfigurationWinScreen WinScreen =>
             NegumContainer.Resolve<IMotifConfigurationWinScreen>().Setup(this.Scrapper.GetSection("Win Screen"));
 
-        public IMotifConfigurationDefaultEnding DefaultEnding =>
+        IMotifConfigurationDefaultEnding DefaultEnding =>
             NegumContainer.Resolve<IMotifConfigurationDefaultEnding>()
                 .Setup(this.Scrapper.GetSection("Default Ending"));
 
-        public IMotifConfigurationEndCredits EndCredits =>
+        IMotifConfigurationEndCredits EndCredits =>
             NegumContainer.Resolve<IMotifConfigurationEndCredits>().Setup(this.Scrapper.GetSection("End Credits"));
 
-        public IMotifConfigurationSurvivalResultsScreen SurvivalResultsScreen =>
+        IMotifConfigurationSurvivalResultsScreen SurvivalResultsScreen =>
             NegumContainer.Resolve<IMotifConfigurationSurvivalResultsScreen>()
                 .Setup(this.Scrapper.GetSection("Survival Results Screen"));
 
-        public IMotifConfigurationScreenBgDef OptionInfo =>
+        IMotifConfigurationScreenBgDef OptionInfo =>
             NegumContainer.Resolve<IMotifConfigurationScreenBgDef>().Setup(this.Scrapper.GetSection("Option Info"));
 
-        public IEnumerable<IMotifConfigurationScreenBg> OptionBgs =>
+        IEnumerable<IMotifConfigurationScreenBg> OptionBgs =>
             NegumContainer.Resolve<ISectionCollectionProvider>()
                 .SetupMultiple<IMotifConfigurationScreenBg>(this.Scrapper.GetSections("OptionBG "));
     }
