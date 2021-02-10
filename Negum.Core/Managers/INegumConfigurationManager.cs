@@ -70,7 +70,7 @@ namespace Negum.Core.Managers
         /// you may need to set the motif line to use data/system.def instead.
         /// motif = data/system.def  - Use this line if using a motif that overwrites system files.
         /// </summary>
-        IFileEntry Motif => Scrapper.GetFile("motif");
+        IFileEntry MotifFile => Scrapper.GetFile("motif");
     }
 
     public interface INegumConfigurationRules : IConfigurationManagerSection<INegumConfigurationRules>
@@ -216,7 +216,7 @@ namespace Negum.Core.Managers
         /// <summary>
         /// Default starting stage for quick versus.
         /// </summary>
-        IFileEntry StartStage => Scrapper.GetFile("StartStage");
+        IFileEntry StartStageFile => Scrapper.GetFile("StartStage");
 
         /// <summary>
         /// Set to true to hide the development build banner that shows on startup.

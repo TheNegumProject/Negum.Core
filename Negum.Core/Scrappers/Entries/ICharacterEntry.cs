@@ -34,14 +34,14 @@ namespace Negum.Core.Scrappers.Entries
         ///
         /// If you put "random" as the Stage in configuration, then a random stage will be selected for that player.
         /// </summary>
-        IFileEntry Stage { get; }
+        IFileEntry StageFile { get; }
         
         /// <summary>
         /// Set the value to the name of the music file to use as the BGM for that character.
         /// This overrides the bgmusic parameter in the stage's .def file,
         /// so you can re-use the same stage for multiple characters, but have a different BGM playing for each person.
         /// </summary>
-        IFileEntry Music { get; }
+        IFileEntry MusicFile { get; }
 
         /// <summary>
         /// Set the paramValue to 0 to avoid including this stage in the stage select list (in VS, training modes, etc).

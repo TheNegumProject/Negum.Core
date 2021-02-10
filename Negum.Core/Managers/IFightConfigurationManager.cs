@@ -64,12 +64,12 @@ namespace Negum.Core.Managers
 
     public interface IFightConfigurationFiles : IConfigurationManagerSection<IFightConfigurationFiles>
     {
-        IFileEntry Sprite => Scrapper.GetFile("sff");
-        IFileEntry Sound => Scrapper.GetFile("snd");
-        IEntryCollection<IFileEntry> Fonts => Scrapper.GetCollection<IFileEntry>("font");
-        IFileEntry FightFxSff => Scrapper.GetFile("fightfx.sff");
-        IFileEntry FightFxAir => Scrapper.GetFile("fightfx.air");
-        IFileEntry CommonSound => Scrapper.GetFile("common.snd");
+        IFileEntry SpriteFile => Scrapper.GetFile("sff");
+        IFileEntry SoundFile => Scrapper.GetFile("snd");
+        IEntryCollection<IFileEntry> FontFiles => Scrapper.GetCollection<IFileEntry>("font");
+        IFileEntry FightFxSffFile => Scrapper.GetFile("fightfx.sff");
+        IFileEntry FightFxAirFile => Scrapper.GetFile("fightfx.air");
+        IFileEntry CommonSoundFile => Scrapper.GetFile("common.snd");
     }
 
     public interface IFightConfigurationFightFx : IConfigurationManagerSection<IFightConfigurationFightFx>

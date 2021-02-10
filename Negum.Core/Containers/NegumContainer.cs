@@ -194,7 +194,7 @@ namespace Negum.Core.Containers
             // Font Configuration Types
             Register<IFontConfigurationFontV2, FontConfigurationManagerSection>();
             Register<IFontConfigurationDef, FontConfigurationManagerSection>();
-            
+
             // Stage Configuration Types
             Register<IStageConfigurationInfo, StageConfigurationManagerSection>();
             Register<IStageConfigurationCamera, StageConfigurationManagerSection>();
@@ -206,11 +206,12 @@ namespace Negum.Core.Containers
             Register<IStageConfigurationMusic, StageConfigurationManagerSection>();
             Register<IStageConfigurationBackgroundDef, StageConfigurationManagerSection>();
             Register<IStageConfigurationBackground, StageConfigurationManagerSection>();
-            
+
             // Character Configuration Types
             Register<ICharacterConfigurationInfo, CharacterConfigurationManagerSection>();
             Register<ICharacterConfigurationFiles, CharacterConfigurationManagerSection>();
             Register<ICharacterConfigurationPaletteKeymap, CharacterConfigurationManagerSection>();
+            Register<ICharacterConfigurationArcade, CharacterConfigurationManagerSection>();
         }
 
         /// <summary>

@@ -17,7 +17,8 @@ namespace Negum.Core.Managers
         ConfigurationManagerSection<CharacterConfigurationManagerSection>,
         ICharacterConfigurationInfo,
         ICharacterConfigurationFiles,
-        ICharacterConfigurationPaletteKeymap
+        ICharacterConfigurationPaletteKeymap,
+        ICharacterConfigurationArcade
     {
         ICharacterConfigurationInfo IConfigurationManagerSection<ICharacterConfigurationInfo>.Setup(
             IConfigurationSectionScrapper scrapper) => this.Setup(scrapper);
@@ -26,6 +27,9 @@ namespace Negum.Core.Managers
             IConfigurationSectionScrapper scrapper) => this.Setup(scrapper);
 
         ICharacterConfigurationPaletteKeymap IConfigurationManagerSection<ICharacterConfigurationPaletteKeymap>.Setup(
+            IConfigurationSectionScrapper scrapper) => this.Setup(scrapper);
+
+        ICharacterConfigurationArcade IConfigurationManagerSection<ICharacterConfigurationArcade>.Setup(
             IConfigurationSectionScrapper scrapper) => this.Setup(scrapper);
     }
 }

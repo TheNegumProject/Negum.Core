@@ -101,7 +101,7 @@ namespace Negum.Core.Managers
 
     public interface IMotifConfigurationScreenBgDef : IConfigurationManagerSection<IMotifConfigurationScreenBgDef>
     {
-        IFileEntry Sprite => Scrapper.GetFile("spr");
+        IFileEntry SpriteFile => Scrapper.GetFile("spr");
         IVectorEntry BgClearColor => Scrapper.GetVector("bgclearcolor");
     }
 
@@ -133,12 +133,12 @@ namespace Negum.Core.Managers
         /// <summary>
         /// Filename of sprite data.
         /// </summary>
-        IFileEntry Sprite => Scrapper.GetFile("spr");
+        IFileEntry SpriteFile => Scrapper.GetFile("spr");
 
         /// <summary>
         /// Filename of sound data.
         /// </summary>
-        IFileEntry Sound => Scrapper.GetFile("snd");
+        IFileEntry SoundFile => Scrapper.GetFile("snd");
 
         /// <summary>
         /// Logo storyboard definition (optional).
@@ -153,17 +153,17 @@ namespace Negum.Core.Managers
         /// <summary>
         /// Character and stage selection list.
         /// </summary>
-        IFileEntry Selection => Scrapper.GetFile("select");
+        IFileEntry SelectionFile => Scrapper.GetFile("select");
 
         /// <summary>
         /// Fight definition filename.
         /// </summary>
-        IFileEntry Fight => Scrapper.GetFile("fight");
+        IFileEntry FightFile => Scrapper.GetFile("fight");
 
         /// <summary>
         /// System fonts.
         /// </summary>
-        IEntryCollection<IFileEntry> Fonts => Scrapper.GetCollection<IFileEntry>("font");
+        IEntryCollection<IFileEntry> FontFiles => Scrapper.GetCollection<IFileEntry>("font");
     }
 
     public interface IMotifConfigurationMusic : IConfigurationManagerSection<IMotifConfigurationMusic>
@@ -171,7 +171,7 @@ namespace Negum.Core.Managers
         /// <summary>
         /// Music to play at title screen.
         /// </summary>
-        IFileEntry Title => Scrapper.GetFile("title.bgm");
+        IFileEntry TitleMusicFile => Scrapper.GetFile("title.bgm");
 
         /// <summary>
         /// Music to play at char select screen.
@@ -318,7 +318,7 @@ namespace Negum.Core.Managers
     public interface IMotifConfigurationGameOverScreen : IConfigurationManagerSection<IMotifConfigurationGameOverScreen>
     {
         bool IsEnabled => Scrapper.GetBoolean("enabled");
-        IFileEntry Storyboard => Scrapper.GetFile("storyboard");
+        IFileEntry StoryboardFile => Scrapper.GetFile("storyboard");
     }
 
     public interface IMotifConfigurationVictoryScreen : IConfigurationManagerSection<IMotifConfigurationVictoryScreen>
@@ -343,13 +343,13 @@ namespace Negum.Core.Managers
     public interface IMotifConfigurationDefaultEnding : IConfigurationManagerSection<IMotifConfigurationDefaultEnding>
     {
         bool IsEnabled => Scrapper.GetBoolean("enabled");
-        IFileEntry Storyboard => Scrapper.GetFile("storyboard");
+        IFileEntry StoryboardFile => Scrapper.GetFile("storyboard");
     }
 
     public interface IMotifConfigurationEndCredits : IConfigurationManagerSection<IMotifConfigurationEndCredits>
     {
         bool IsEnabled => Scrapper.GetBoolean("enabled");
-        IFileEntry Storyboard => Scrapper.GetFile("storyboard");
+        IFileEntry StoryboardFile => Scrapper.GetFile("storyboard");
     }
 
     public interface IMotifConfigurationSurvivalResultsScreen :

@@ -10,8 +10,8 @@ namespace Negum.Core.Scrappers.Entries
     {
         public string Name { get; protected set; }
         public IFileEntry NameFile { get; protected set; }
-        public IFileEntry Stage { get; protected set; }
-        public IFileEntry Music { get; protected set; }
+        public IFileEntry StageFile { get; protected set; }
+        public IFileEntry MusicFile { get; protected set; }
         public int IncludeStage { get; protected set; }
         public int Order { get; protected set; }
         public bool IsRandomSelect { get; protected set; }
