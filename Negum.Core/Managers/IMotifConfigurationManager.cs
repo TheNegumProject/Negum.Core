@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Negum.Core.Containers;
 using Negum.Core.Scrappers.Entries;
@@ -70,7 +69,7 @@ namespace Negum.Core.Managers
         public IMotifConfigurationVictoryScreen VictoryScreen =>
             NegumContainer.Resolve<IMotifConfigurationVictoryScreen>()
                 .Setup(this.Scrapper.GetSection("Victory Screen"));
-        
+
         public IMotifConfigurationScreenBgDef VictoryBgDef =>
             NegumContainer.Resolve<IMotifConfigurationScreenBgDef>().Setup(this.Scrapper.GetSection("VictoryBGdef"));
 
@@ -353,9 +352,8 @@ namespace Negum.Core.Managers
         IFileEntry Storyboard => Scrapper.GetFile("storyboard");
     }
 
-    public interface
-        IMotifConfigurationSurvivalResultsScreen : IConfigurationManagerSection<IMotifConfigurationSurvivalResultsScreen
-        >
+    public interface IMotifConfigurationSurvivalResultsScreen :
+        IConfigurationManagerSection<IMotifConfigurationSurvivalResultsScreen>
     {
         bool IsEnabled => Scrapper.GetBoolean("enabled");
         ITextEntry WinText => Scrapper.GetText("wintext");

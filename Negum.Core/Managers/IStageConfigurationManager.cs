@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Negum.Core.Containers;
 using Negum.Core.Scrappers.Entries;

@@ -132,6 +132,7 @@ namespace Negum.Core.Containers
             Register<IFightConfigurationManager, FightConfigurationManager>();
             Register<IFontConfigurationManager, FontConfigurationManager>();
             Register<IStageConfigurationManager, StageConfigurationManager>();
+            Register<ICharacterConfigurationManager, CharacterConfigurationManager>();
 
             // Managers others
             Register<ISectionCollectionProvider, SectionCollectionProvider>();
@@ -205,6 +206,11 @@ namespace Negum.Core.Containers
             Register<IStageConfigurationMusic, StageConfigurationManagerSection>();
             Register<IStageConfigurationBackgroundDef, StageConfigurationManagerSection>();
             Register<IStageConfigurationBackground, StageConfigurationManagerSection>();
+            
+            // Character Configuration Types
+            Register<ICharacterConfigurationInfo, CharacterConfigurationManagerSection>();
+            Register<ICharacterConfigurationFiles, CharacterConfigurationManagerSection>();
+            Register<ICharacterConfigurationPaletteKeymap, CharacterConfigurationManagerSection>();
         }
 
         /// <summary>
