@@ -16,6 +16,7 @@ namespace Negum.Core.Scrappers.Entries
 
         /// <summary>
         /// Offset by which current image should be moved.
+        /// Position offset.
         /// </summary>
         IVectorEntry Offset => this.Scrapper.GetVector(this.KeyPrefix + ".offset");
 
@@ -30,11 +31,20 @@ namespace Negum.Core.Scrappers.Entries
         int Facing => this.Scrapper.GetInt(this.KeyPrefix + ".facing");
 
         IVectorEntry Window => this.Scrapper.GetVector(this.KeyPrefix + ".window");
+
+        /// <summary>
+        /// Animation action number.
+        /// </summary>
         int Animation => this.Scrapper.GetInt(this.KeyPrefix + ".anim");
 
         /// <summary>
         /// Describes how long to display current image.
         /// </summary>
         ITimeEntry Time => Scrapper.GetTime(this.KeyPrefix + ".time");
+
+        /// <summary>
+        /// Time to start display.
+        /// </summary>
+        ITimeEntry StartTime => Scrapper.GetTime(this.KeyPrefix + ".starttime");
     }
 }

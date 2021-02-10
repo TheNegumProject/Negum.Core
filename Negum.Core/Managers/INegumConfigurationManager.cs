@@ -306,7 +306,7 @@ namespace Negum.Core.Managers
         /// <summary>
         /// This is the master volume for music, (0-100).
         /// </summary>
-        int BgmVolume => Scrapper.GetInt("BGMVolume");
+        int BackgroundMusicVolume => Scrapper.GetInt("BGMVolume");
     }
 
     public interface INegumConfigurationMisc : IConfigurationManagerSection<INegumConfigurationMisc>
@@ -333,7 +333,7 @@ namespace Negum.Core.Managers
         /// Set to "Pause" to pause the music, "Mute" to mute the music but leave it running at normal speed, or "Play" to continue playing as usual.
         /// If you are running in fullscreen mode, then this setting is always set to "Pause".
         /// </summary>
-        string BgmBackgroundMode => Scrapper.GetString("BGMBackgroundMode");
+        string BackgroundMusicBackgroundMode => Scrapper.GetString("BGMBackgroundMode");
     }
 
     public interface INegumConfigurationArcade : IConfigurationManagerSection<INegumConfigurationArcade>

@@ -17,12 +17,12 @@ namespace Negum.Core.Scrappers.Entries
         /// <summary>
         /// Set to true to enable in-fight BGM, false to disable.
         /// </summary>
-        bool PlayBgm => Scrapper.GetBoolean(this.KeyPrefix + ".playbgm");
+        bool PlayBackgroundMusic => Scrapper.GetBoolean(this.KeyPrefix + ".playbgm");
 
         /// <summary>
         /// Set to true to stop title BGM (only if playbgm = true).
         /// </summary>
-        bool StopBgm => Scrapper.GetBoolean(this.KeyPrefix + ".stopbgm");
+        bool StopBackgroundMusic => Scrapper.GetBoolean(this.KeyPrefix + ".stopbgm");
 
         /// <summary>
         /// Set to true to display lifebar, false to disable.
