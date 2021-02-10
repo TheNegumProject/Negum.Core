@@ -26,9 +26,9 @@ namespace Negum.Core.Tests.Managers
             var manager = NegumContainer.Resolve<ISelectionConfigurationManager>().Setup(scrapper);
 
             Assert.True(manager.Characters.Characters.Count() == 2);
-            Assert.True(manager.Stages.Stages.Count() == 1);
-            Assert.True(manager.Options.ArcadeMaxMatches.Equals("6,1,1,0,0,0,0,0,0,0"));
-            Assert.True(manager.Options.TeamMaxMatches.Equals("4,1,1,0,0,0,0,0,0,0"));
+            Assert.True(manager.Stages.StageFiles.Count() == 1);
+            Assert.True(manager.Options.ArcadeMaxMatches.RawValue.Equals("6,1,1,0,0,0,0,0,0,0"));
+            Assert.True(manager.Options.TeamMaxMatches.RawValue.Equals("4,1,1,0,0,0,0,0,0,0"));
         }
     }
 }

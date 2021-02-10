@@ -8,7 +8,7 @@ namespace Negum.Core.Scrappers.Entries
     /// </author>
     public class VectorEntry : ScrappedEntry<IVectorEntry>, IVectorEntry
     {
-        private string RawValue { get; set; }
+        public string RawValue { get; protected set; }
 
         public IVectorEntry From(string value)
         {
