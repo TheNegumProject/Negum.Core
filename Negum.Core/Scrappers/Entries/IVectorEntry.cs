@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Negum.Core.Scrappers.Entries
 {
     /// <summary>
@@ -7,8 +9,14 @@ namespace Negum.Core.Scrappers.Entries
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface IVectorEntry : IScrapperEntry<IVectorEntry>
+    public interface IVectorEntry : IScrapperEntry<IVectorEntry>, IEnumerable<string>
     {
+        /// <summary>
+        /// Provides simple way to retrieve value from appropriate slot.
+        /// </summary>
+        /// <param name="index"></param>
+        string this[int index] { get; }
+        
         /// <summary>
         /// Raw value passed to current entry.
         /// Exposed for any custom outside operations.
