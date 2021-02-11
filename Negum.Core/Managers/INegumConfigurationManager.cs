@@ -1,4 +1,3 @@
-using Negum.Core.Containers;
 using Negum.Core.Scrappers.Entries;
 
 namespace Negum.Core.Managers
@@ -12,44 +11,19 @@ namespace Negum.Core.Managers
     /// </author>
     public interface INegumConfigurationManager : IConfigurationManager<INegumConfigurationManager>
     {
-        INegumConfigurationOptions Options =>
-            NegumContainer.Resolve<INegumConfigurationOptions>().Setup(this.Scrapper.GetSection("Options"));
-
-        INegumConfigurationRules Rules =>
-            NegumContainer.Resolve<INegumConfigurationRules>().Setup(this.Scrapper.GetSection("Rules"));
-
-        INegumConfigurationConfig Config =>
-            NegumContainer.Resolve<INegumConfigurationConfig>().Setup(this.Scrapper.GetSection("Config"));
-
-        INegumConfigurationDebug Debug =>
-            NegumContainer.Resolve<INegumConfigurationDebug>().Setup(this.Scrapper.GetSection("Debug"));
-
-        INegumConfigurationVideo Video =>
-            NegumContainer.Resolve<INegumConfigurationVideo>().Setup(this.Scrapper.GetSection("Video"));
-
-        INegumConfigurationSound Sound =>
-            NegumContainer.Resolve<INegumConfigurationSound>().Setup(this.Scrapper.GetSection("Sound"));
-
-        INegumConfigurationMisc Misc =>
-            NegumContainer.Resolve<INegumConfigurationMisc>().Setup(this.Scrapper.GetSection("Misc"));
-
-        INegumConfigurationArcade Arcade =>
-            NegumContainer.Resolve<INegumConfigurationArcade>().Setup(this.Scrapper.GetSection("Arcade"));
-
-        INegumConfigurationInput Input =>
-            NegumContainer.Resolve<INegumConfigurationInput>().Setup(this.Scrapper.GetSection("Input"));
-
-        INegumConfigurationKeys P1Keys =>
-            NegumContainer.Resolve<INegumConfigurationKeys>().Setup(this.Scrapper.GetSection("P1 Keys"));
-
-        INegumConfigurationKeys P2Keys =>
-            NegumContainer.Resolve<INegumConfigurationKeys>().Setup(this.Scrapper.GetSection("P2 Keys"));
-
-        INegumConfigurationKeys P1Joystick =>
-            NegumContainer.Resolve<INegumConfigurationKeys>().Setup(this.Scrapper.GetSection("P1 Joystick"));
-
-        INegumConfigurationKeys P2Joystick =>
-            NegumContainer.Resolve<INegumConfigurationKeys>().Setup(this.Scrapper.GetSection("P2 Joystick"));
+        INegumConfigurationOptions Options => this.GetSection<INegumConfigurationOptions>("Options");
+        INegumConfigurationRules Rules => this.GetSection<INegumConfigurationRules>("Rules");
+        INegumConfigurationConfig Config => this.GetSection<INegumConfigurationConfig>("Config");
+        INegumConfigurationDebug Debug => this.GetSection<INegumConfigurationDebug>("Debug");
+        INegumConfigurationVideo Video => this.GetSection<INegumConfigurationVideo>("Video");
+        INegumConfigurationSound Sound => this.GetSection<INegumConfigurationSound>("Sound");
+        INegumConfigurationMisc Misc => this.GetSection<INegumConfigurationMisc>("Misc");
+        INegumConfigurationArcade Arcade => this.GetSection<INegumConfigurationArcade>("Arcade");
+        INegumConfigurationInput Input => this.GetSection<INegumConfigurationInput>("Input");
+        INegumConfigurationKeys P1Keys => this.GetSection<INegumConfigurationKeys>("P1 Keys");
+        INegumConfigurationKeys P2Keys => this.GetSection<INegumConfigurationKeys>("P2 Keys");
+        INegumConfigurationKeys P1Joystick => this.GetSection<INegumConfigurationKeys>("P1 Joystick");
+        INegumConfigurationKeys P2Joystick => this.GetSection<INegumConfigurationKeys>("P2 Joystick");
     }
 
     public interface INegumConfigurationOptions : IConfigurationManagerSection<INegumConfigurationOptions>

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Negum.Core.Scrappers;
 
 namespace Negum.Core.Managers
@@ -23,5 +24,21 @@ namespace Negum.Core.Managers
         /// <param name="scrapper"></param>
         /// <returns>Current Manager.</returns>
         TConfigurationManager Setup(IConfigurationScrapper scrapper);
+
+        /// <summary>
+        /// </summary>
+        /// <param name="sectionName">Name of the section to find.</param>
+        /// <typeparam name="TManagerSection">Type of the searched section.</typeparam>
+        /// <returns>Parsed found section.</returns>
+        TManagerSection GetSection<TManagerSection>(string sectionName) 
+            where TManagerSection : IConfigurationManagerSection<TManagerSection>;
+
+        /// <summary>
+        /// </summary>
+        /// <param name="sectionNamePrefix"></param>
+        /// <typeparam name="TManagerSection"></typeparam>
+        /// <returns>Collection of sections which name starts from the given prefix.</returns>
+        IEnumerable<TManagerSection> GetSections<TManagerSection>(string sectionNamePrefix) 
+            where TManagerSection : IConfigurationManagerSection<TManagerSection>;
     }
 }

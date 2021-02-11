@@ -18,9 +18,9 @@ namespace Negum.Core.Managers
         IFontConfigurationDef
     {
         IFontConfigurationFontV2 IConfigurationManagerSection<IFontConfigurationFontV2>.Setup(
-            IConfigurationSectionScrapper scrapper) => this.Setup(scrapper);
+            IConfigurationSectionScrapper scrapper, string sectionName) => this.Setup(scrapper, sectionName);
 
         IFontConfigurationDef IConfigurationManagerSection<IFontConfigurationDef>.Setup(
-            IConfigurationSectionScrapper scrapper) => this.Setup(scrapper);
+            IConfigurationSectionScrapper scrapper, string sectionName) => this.Setup(scrapper, sectionName);
     }
 }

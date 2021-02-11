@@ -33,51 +33,51 @@ namespace Negum.Core.Managers
         IFightConfigurationWinIcon
     {
         IFightConfigurationFiles IConfigurationManagerSection<IFightConfigurationFiles>.Setup(
-            IConfigurationSectionScrapper scrapper) => this.Setup(scrapper);
+            IConfigurationSectionScrapper scrapper, string sectionName) => this.Setup(scrapper, sectionName);
 
         IFightConfigurationFightFx IConfigurationManagerSection<IFightConfigurationFightFx>.Setup(
-            IConfigurationSectionScrapper scrapper) => this.Setup(scrapper);
+            IConfigurationSectionScrapper scrapper, string sectionName) => this.Setup(scrapper, sectionName);
 
         IFightConfigurationLifebar IConfigurationManagerSection<IFightConfigurationLifebar>.Setup(
-            IConfigurationSectionScrapper scrapper) => this.Setup(scrapper);
+            IConfigurationSectionScrapper scrapper, string sectionName) => this.Setup(scrapper, sectionName);
 
         IFightConfigurationSimulLifebar IConfigurationManagerSection<IFightConfigurationSimulLifebar>.Setup(
-            IConfigurationSectionScrapper scrapper) => this.Setup(scrapper);
+            IConfigurationSectionScrapper scrapper, string sectionName) => this.Setup(scrapper, sectionName);
 
         IFightConfigurationTurnsLifebar IConfigurationManagerSection<IFightConfigurationTurnsLifebar>.Setup(
-            IConfigurationSectionScrapper scrapper) => this.Setup(scrapper);
+            IConfigurationSectionScrapper scrapper, string sectionName) => this.Setup(scrapper, sectionName);
 
         IFightConfigurationPowerbar IConfigurationManagerSection<IFightConfigurationPowerbar>.Setup(
-            IConfigurationSectionScrapper scrapper) => this.Setup(scrapper);
+            IConfigurationSectionScrapper scrapper, string sectionName) => this.Setup(scrapper, sectionName);
 
         IFightConfigurationFace IConfigurationManagerSection<IFightConfigurationFace>.Setup(
-            IConfigurationSectionScrapper scrapper) => this.Setup(scrapper);
+            IConfigurationSectionScrapper scrapper, string sectionName) => this.Setup(scrapper, sectionName);
 
         IFightConfigurationSimulFace IConfigurationManagerSection<IFightConfigurationSimulFace>.Setup(
-            IConfigurationSectionScrapper scrapper) => this.Setup(scrapper);
+            IConfigurationSectionScrapper scrapper, string sectionName) => this.Setup(scrapper, sectionName);
 
         IFightConfigurationTurnsFace IConfigurationManagerSection<IFightConfigurationTurnsFace>.Setup(
-            IConfigurationSectionScrapper scrapper) => this.Setup(scrapper);
+            IConfigurationSectionScrapper scrapper, string sectionName) => this.Setup(scrapper, sectionName);
 
         IFightConfigurationName IConfigurationManagerSection<IFightConfigurationName>.Setup(
-            IConfigurationSectionScrapper scrapper) => this.Setup(scrapper);
+            IConfigurationSectionScrapper scrapper, string sectionName) => this.Setup(scrapper, sectionName);
 
         IFightConfigurationSimulName IConfigurationManagerSection<IFightConfigurationSimulName>.Setup(
-            IConfigurationSectionScrapper scrapper) => this.Setup(scrapper);
+            IConfigurationSectionScrapper scrapper, string sectionName) => this.Setup(scrapper, sectionName);
 
         IFightConfigurationTurnsName IConfigurationManagerSection<IFightConfigurationTurnsName>.Setup(
-            IConfigurationSectionScrapper scrapper) => this.Setup(scrapper);
+            IConfigurationSectionScrapper scrapper, string sectionName) => this.Setup(scrapper, sectionName);
 
         IFightConfigurationTime IConfigurationManagerSection<IFightConfigurationTime>.Setup(
-            IConfigurationSectionScrapper scrapper) => this.Setup(scrapper);
+            IConfigurationSectionScrapper scrapper, string sectionName) => this.Setup(scrapper, sectionName);
 
         IFightConfigurationCombo IConfigurationManagerSection<IFightConfigurationCombo>.Setup(
-            IConfigurationSectionScrapper scrapper) => this.Setup(scrapper);
+            IConfigurationSectionScrapper scrapper, string sectionName) => this.Setup(scrapper, sectionName);
 
         IFightConfigurationRound IConfigurationManagerSection<IFightConfigurationRound>.Setup(
-            IConfigurationSectionScrapper scrapper) => this.Setup(scrapper);
+            IConfigurationSectionScrapper scrapper, string sectionName) => this.Setup(scrapper, sectionName);
 
         IFightConfigurationWinIcon IConfigurationManagerSection<IFightConfigurationWinIcon>.Setup(
-            IConfigurationSectionScrapper scrapper) => this.Setup(scrapper);
+            IConfigurationSectionScrapper scrapper, string sectionName) => this.Setup(scrapper, sectionName);
     }
 }

@@ -135,9 +135,6 @@ namespace Negum.Core.Containers
             Register<ICharacterConfigurationManager, CharacterConfigurationManager>();
             Register<ICharacterStoryboardSceneConfigurationManager, CharacterStoryboardSceneConfigurationManager>();
 
-            // Managers others
-            Register<ISectionCollectionProvider, SectionCollectionProvider>();
-
             // Negum Configuration Types
             Register<INegumConfigurationOptions, NegumConfigurationManagerSection>();
             Register<INegumConfigurationRules, NegumConfigurationManagerSection>();

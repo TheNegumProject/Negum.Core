@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Negum.Core.Containers;
 using Negum.Core.Scrappers.Entries;
 
 namespace Negum.Core.Managers
@@ -13,36 +12,18 @@ namespace Negum.Core.Managers
     /// </author>
     public interface IStageConfigurationManager : IConfigurationManager<IStageConfigurationManager>
     {
-        IStageConfigurationInfo Info =>
-            NegumContainer.Resolve<IStageConfigurationInfo>().Setup(this.Scrapper.GetSection("Info"));
-
-        IStageConfigurationCamera Camera =>
-            NegumContainer.Resolve<IStageConfigurationCamera>().Setup(this.Scrapper.GetSection("Camera"));
-
-        IStageConfigurationPlayerInfo PlayerInfo =>
-            NegumContainer.Resolve<IStageConfigurationPlayerInfo>().Setup(this.Scrapper.GetSection("PlayerInfo"));
-
-        IStageConfigurationBound Bound =>
-            NegumContainer.Resolve<IStageConfigurationBound>().Setup(this.Scrapper.GetSection("Bound"));
-
-        IStageConfigurationStageInfo StageInfo =>
-            NegumContainer.Resolve<IStageConfigurationStageInfo>().Setup(this.Scrapper.GetSection("StageInfo"));
-
-        IStageConfigurationShadow Shadow =>
-            NegumContainer.Resolve<IStageConfigurationShadow>().Setup(this.Scrapper.GetSection("Shadow"));
-
-        IStageConfigurationReflection Reflection =>
-            NegumContainer.Resolve<IStageConfigurationReflection>().Setup(this.Scrapper.GetSection("Reflection"));
-
-        IStageConfigurationMusic Music =>
-            NegumContainer.Resolve<IStageConfigurationMusic>().Setup(this.Scrapper.GetSection("Music"));
-
-        IStageConfigurationBackgroundDef BackgroundDef =>
-            NegumContainer.Resolve<IStageConfigurationBackgroundDef>().Setup(this.Scrapper.GetSection("BGdef"));
+        IStageConfigurationInfo Info => this.GetSection<IStageConfigurationInfo>("Info");
+        IStageConfigurationCamera Camera => this.GetSection<IStageConfigurationCamera>("Camera");
+        IStageConfigurationPlayerInfo PlayerInfo => this.GetSection<IStageConfigurationPlayerInfo>("PlayerInfo");
+        IStageConfigurationBound Bound => this.GetSection<IStageConfigurationBound>("Bound");
+        IStageConfigurationStageInfo StageInfo => this.GetSection<IStageConfigurationStageInfo>("StageInfo");
+        IStageConfigurationShadow Shadow => this.GetSection<IStageConfigurationShadow>("Shadow");
+        IStageConfigurationReflection Reflection => this.GetSection<IStageConfigurationReflection>("Reflection");
+        IStageConfigurationMusic Music => this.GetSection<IStageConfigurationMusic>("Music");
+        IStageConfigurationBackgroundDef BackgroundDef => this.GetSection<IStageConfigurationBackgroundDef>("BGdef");
 
         IEnumerable<IStageConfigurationBackground> Backgrounds =>
-            NegumContainer.Resolve<ISectionCollectionProvider>()
-                .SetupMultiple<IStageConfigurationBackground>(this.Scrapper.GetSections("BG "));
+            this.GetSections<IStageConfigurationBackground>("BG ");
     }
 
     public interface IStageConfigurationInfo : IConfigurationManagerSection<IStageConfigurationInfo>

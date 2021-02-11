@@ -1,4 +1,3 @@
-using Negum.Core.Containers;
 using Negum.Core.Scrappers.Entries;
 
 namespace Negum.Core.Managers
@@ -12,18 +11,13 @@ namespace Negum.Core.Managers
     /// </author>
     public interface ICharacterConfigurationManager : IConfigurationManager<ICharacterConfigurationManager>
     {
-        ICharacterConfigurationInfo Info =>
-            NegumContainer.Resolve<ICharacterConfigurationInfo>().Setup(this.Scrapper.GetSection("Info"));
-
-        ICharacterConfigurationFiles Files =>
-            NegumContainer.Resolve<ICharacterConfigurationFiles>().Setup(this.Scrapper.GetSection("Files"));
+        ICharacterConfigurationInfo Info => this.GetSection<ICharacterConfigurationInfo>("Info");
+        ICharacterConfigurationFiles Files => this.GetSection<ICharacterConfigurationFiles>("Files");
 
         ICharacterConfigurationPaletteKeymap Keymap =>
-            NegumContainer.Resolve<ICharacterConfigurationPaletteKeymap>()
-                .Setup(this.Scrapper.GetSection("Palette Keymap"));
+            this.GetSection<ICharacterConfigurationPaletteKeymap>("Palette Keymap");
 
-        ICharacterConfigurationArcade Arcade =>
-            NegumContainer.Resolve<ICharacterConfigurationArcade>().Setup(this.Scrapper.GetSection("Arcade"));
+        ICharacterConfigurationArcade Arcade => this.GetSection<ICharacterConfigurationArcade>("Arcade");
     }
 
     public interface ICharacterConfigurationInfo : IConfigurationManagerSection<ICharacterConfigurationInfo>

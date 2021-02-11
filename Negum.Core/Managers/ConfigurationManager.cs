@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using System.Linq;
+using Negum.Core.Containers;
 using Negum.Core.Scrappers;
 
 namespace Negum.Core.Managers
@@ -19,5 +22,21 @@ namespace Negum.Core.Managers
             this.Scrapper = scrapper;
             return (TConfigurationManager) (IConfigurationManager<TConfigurationManager>) this;
         }
+
+        public TManagerSection GetSection<TManagerSection>(string sectionName)
+            where TManagerSection : IConfigurationManagerSection<TManagerSection>
+        {
+            var managerSection = NegumContainer.Resolve<TManagerSection>();
+            var scrapperSection = this.Scrapper.GetSection(sectionName);
+            return managerSection.Setup(scrapperSection, sectionName);
+        }
+
+        public IEnumerable<TManagerSection> GetSections<TManagerSection>(string sectionNamePrefix)
+            where TManagerSection : IConfigurationManagerSection<TManagerSection> =>
+            this.Scrapper
+                .GetSections(sectionNamePrefix)
+                .Select(sectionScrapper => NegumContainer.Resolve<TManagerSection>()
+                    .Setup(sectionScrapper, sectionScrapper.SectionName))
+                .ToList();
     }
 }

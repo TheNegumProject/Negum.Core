@@ -21,15 +21,15 @@ namespace Negum.Core.Managers
         ICharacterConfigurationArcade
     {
         ICharacterConfigurationInfo IConfigurationManagerSection<ICharacterConfigurationInfo>.Setup(
-            IConfigurationSectionScrapper scrapper) => this.Setup(scrapper);
+            IConfigurationSectionScrapper scrapper, string sectionName) => this.Setup(scrapper, sectionName);
 
         ICharacterConfigurationFiles IConfigurationManagerSection<ICharacterConfigurationFiles>.Setup(
-            IConfigurationSectionScrapper scrapper) => this.Setup(scrapper);
+            IConfigurationSectionScrapper scrapper, string sectionName) => this.Setup(scrapper, sectionName);
 
         ICharacterConfigurationPaletteKeymap IConfigurationManagerSection<ICharacterConfigurationPaletteKeymap>.Setup(
-            IConfigurationSectionScrapper scrapper) => this.Setup(scrapper);
+            IConfigurationSectionScrapper scrapper, string sectionName) => this.Setup(scrapper, sectionName);
 
         ICharacterConfigurationArcade IConfigurationManagerSection<ICharacterConfigurationArcade>.Setup(
-            IConfigurationSectionScrapper scrapper) => this.Setup(scrapper);
+            IConfigurationSectionScrapper scrapper, string sectionName) => this.Setup(scrapper, sectionName);
     }
 }

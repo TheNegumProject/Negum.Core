@@ -1,4 +1,3 @@
-using Negum.Core.Containers;
 using Negum.Core.Scrappers.Entries;
 
 namespace Negum.Core.Managers
@@ -12,11 +11,8 @@ namespace Negum.Core.Managers
     /// </author>
     public interface IFontConfigurationManager : IConfigurationManager<IFontConfigurationManager>
     {
-        IFontConfigurationFontV2 FontV2 =>
-            NegumContainer.Resolve<IFontConfigurationFontV2>().Setup(this.Scrapper.GetSection("FNT V2"));
-
-        IFontConfigurationDef Def =>
-            NegumContainer.Resolve<IFontConfigurationDef>().Setup(this.Scrapper.GetSection("Def"));
+        IFontConfigurationFontV2 FontV2 => this.GetSection<IFontConfigurationFontV2>("FNT V2");
+        IFontConfigurationDef Def => this.GetSection<IFontConfigurationDef>("Def");
     }
 
     public interface IFontConfigurationFontV2 : IConfigurationManagerSection<IFontConfigurationFontV2>

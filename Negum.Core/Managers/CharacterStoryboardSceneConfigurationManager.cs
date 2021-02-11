@@ -21,10 +21,10 @@ namespace Negum.Core.Managers
     {
         ICharacterStoryboardSceneConfigurationSceneDef
             IConfigurationManagerSection<ICharacterStoryboardSceneConfigurationSceneDef>.Setup(
-                IConfigurationSectionScrapper scrapper) => this.Setup(scrapper);
+                IConfigurationSectionScrapper scrapper, string sectionName) => this.Setup(scrapper, sectionName);
 
         ICharacterStoryboardSceneConfigurationScene
             IConfigurationManagerSection<ICharacterStoryboardSceneConfigurationScene>.Setup(
-                IConfigurationSectionScrapper scrapper) => this.Setup(scrapper);
+                IConfigurationSectionScrapper scrapper, string sectionName) => this.Setup(scrapper, sectionName);
     }
 }

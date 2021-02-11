@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using Negum.Core.Containers;
 using Negum.Core.Scrappers.Entries;
 
 namespace Negum.Core.Managers
@@ -15,13 +14,10 @@ namespace Negum.Core.Managers
     public interface ISelectionConfigurationManager : IConfigurationManager<ISelectionConfigurationManager>
     {
         ISelectionConfigurationCharacters Characters =>
-            NegumContainer.Resolve<ISelectionConfigurationCharacters>().Setup(this.Scrapper.GetSection("Characters"));
+            this.GetSection<ISelectionConfigurationCharacters>("Characters");
 
-        ISelectionConfigurationExtraStages Stages =>
-            NegumContainer.Resolve<ISelectionConfigurationExtraStages>().Setup(this.Scrapper.GetSection("ExtraStages"));
-
-        ISelectionConfigurationOptions Options =>
-            NegumContainer.Resolve<ISelectionConfigurationOptions>().Setup(this.Scrapper.GetSection("Options"));
+        ISelectionConfigurationExtraStages Stages => this.GetSection<ISelectionConfigurationExtraStages>("ExtraStages");
+        ISelectionConfigurationOptions Options => this.GetSection<ISelectionConfigurationOptions>("Options");
     }
 
     public interface ISelectionConfigurationCharacters : IConfigurationManagerSection<ISelectionConfigurationCharacters>

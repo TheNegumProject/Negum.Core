@@ -1,5 +1,4 @@
 using System.Linq;
-using Negum.Core.Containers;
 using Negum.Core.Scrappers.Entries;
 
 namespace Negum.Core.Managers
@@ -13,53 +12,27 @@ namespace Negum.Core.Managers
     /// </author>
     public interface IFightConfigurationManager : IConfigurationManager<IFightConfigurationManager>
     {
-        IFightConfigurationFiles Files =>
-            NegumContainer.Resolve<IFightConfigurationFiles>().Setup(this.Scrapper.GetSection("Files"));
-
-        IFightConfigurationFightFx FightFx =>
-            NegumContainer.Resolve<IFightConfigurationFightFx>().Setup(this.Scrapper.GetSection("FightFx"));
-
-        IFightConfigurationLifebar Lifebar =>
-            NegumContainer.Resolve<IFightConfigurationLifebar>().Setup(this.Scrapper.GetSection("Lifebar"));
+        IFightConfigurationFiles Files => this.GetSection<IFightConfigurationFiles>("Files");
+        IFightConfigurationFightFx FightFx => this.GetSection<IFightConfigurationFightFx>("FightFx");
+        IFightConfigurationLifebar Lifebar => this.GetSection<IFightConfigurationLifebar>("Lifebar");
 
         IFightConfigurationSimulLifebar SimulLifebar =>
-            NegumContainer.Resolve<IFightConfigurationSimulLifebar>().Setup(this.Scrapper.GetSection("Simul Lifebar"));
+            this.GetSection<IFightConfigurationSimulLifebar>("Simul Lifebar");
 
         IFightConfigurationTurnsLifebar TurnsLifebar =>
-            NegumContainer.Resolve<IFightConfigurationTurnsLifebar>().Setup(this.Scrapper.GetSection("Turns Lifebar"));
+            this.GetSection<IFightConfigurationTurnsLifebar>("Turns Lifebar");
 
-        IFightConfigurationPowerbar Powerbar =>
-            NegumContainer.Resolve<IFightConfigurationPowerbar>().Setup(this.Scrapper.GetSection("Powerbar"));
-
-        IFightConfigurationFace Face =>
-            NegumContainer.Resolve<IFightConfigurationFace>().Setup(this.Scrapper.GetSection("Face"));
-
-        IFightConfigurationSimulFace SimulFace =>
-            NegumContainer.Resolve<IFightConfigurationSimulFace>().Setup(this.Scrapper.GetSection("Simul Face"));
-
-        IFightConfigurationTurnsFace TurnsFace =>
-            NegumContainer.Resolve<IFightConfigurationTurnsFace>().Setup(this.Scrapper.GetSection("Turns Face"));
-
-        IFightConfigurationName Name =>
-            NegumContainer.Resolve<IFightConfigurationName>().Setup(this.Scrapper.GetSection("Name"));
-
-        IFightConfigurationSimulName SimulName =>
-            NegumContainer.Resolve<IFightConfigurationSimulName>().Setup(this.Scrapper.GetSection("Simul Name"));
-
-        IFightConfigurationTurnsName TurnsName =>
-            NegumContainer.Resolve<IFightConfigurationTurnsName>().Setup(this.Scrapper.GetSection("Turns Name"));
-
-        IFightConfigurationTime Time =>
-            NegumContainer.Resolve<IFightConfigurationTime>().Setup(this.Scrapper.GetSection("Time"));
-
-        IFightConfigurationCombo Combo =>
-            NegumContainer.Resolve<IFightConfigurationCombo>().Setup(this.Scrapper.GetSection("Combo"));
-
-        IFightConfigurationRound Round =>
-            NegumContainer.Resolve<IFightConfigurationRound>().Setup(this.Scrapper.GetSection("Round"));
-
-        IFightConfigurationWinIcon WinIcon =>
-            NegumContainer.Resolve<IFightConfigurationWinIcon>().Setup(this.Scrapper.GetSection("WinIcon"));
+        IFightConfigurationPowerbar Powerbar => this.GetSection<IFightConfigurationPowerbar>("Powerbar");
+        IFightConfigurationFace Face => this.GetSection<IFightConfigurationFace>("Face");
+        IFightConfigurationSimulFace SimulFace => this.GetSection<IFightConfigurationSimulFace>("Simul Face");
+        IFightConfigurationTurnsFace TurnsFace => this.GetSection<IFightConfigurationTurnsFace>("Turns Face");
+        IFightConfigurationName Name => this.GetSection<IFightConfigurationName>("Name");
+        IFightConfigurationSimulName SimulName => this.GetSection<IFightConfigurationSimulName>("Simul Name");
+        IFightConfigurationTurnsName TurnsName => this.GetSection<IFightConfigurationTurnsName>("Turns Name");
+        IFightConfigurationTime Time => this.GetSection<IFightConfigurationTime>("Time");
+        IFightConfigurationCombo Combo => this.GetSection<IFightConfigurationCombo>("Combo");
+        IFightConfigurationRound Round => this.GetSection<IFightConfigurationRound>("Round");
+        IFightConfigurationWinIcon WinIcon => this.GetSection<IFightConfigurationWinIcon>("WinIcon");
     }
 
     public interface IFightConfigurationFiles : IConfigurationManagerSection<IFightConfigurationFiles>

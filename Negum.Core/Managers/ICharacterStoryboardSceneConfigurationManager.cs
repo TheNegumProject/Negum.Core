@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Negum.Core.Containers;
 using Negum.Core.Scrappers.Entries;
 
 namespace Negum.Core.Managers
@@ -15,12 +14,10 @@ namespace Negum.Core.Managers
         IConfigurationManager<ICharacterStoryboardSceneConfigurationManager>
     {
         ICharacterStoryboardSceneConfigurationSceneDef SceneDef =>
-            NegumContainer.Resolve<ICharacterStoryboardSceneConfigurationSceneDef>()
-                .Setup(this.Scrapper.GetSection("SceneDef"));
+            this.GetSection<ICharacterStoryboardSceneConfigurationSceneDef>("SceneDef");
 
         IEnumerable<ICharacterStoryboardSceneConfigurationScene> Scenes =>
-            NegumContainer.Resolve<ISectionCollectionProvider>()
-                .SetupMultiple<ICharacterStoryboardSceneConfigurationScene>(this.Scrapper.GetSections("Scene "));
+            this.GetSections<ICharacterStoryboardSceneConfigurationScene>("Scene ");
     }
 
     public interface ICharacterStoryboardSceneConfigurationSceneDef :

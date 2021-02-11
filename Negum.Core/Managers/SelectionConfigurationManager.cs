@@ -20,12 +20,12 @@ namespace Negum.Core.Managers
         ISelectionConfigurationOptions
     {
         ISelectionConfigurationCharacters IConfigurationManagerSection<ISelectionConfigurationCharacters>.Setup(
-            IConfigurationSectionScrapper scrapper) => this.Setup(scrapper);
+            IConfigurationSectionScrapper scrapper, string sectionName) => this.Setup(scrapper, sectionName);
 
         ISelectionConfigurationExtraStages IConfigurationManagerSection<ISelectionConfigurationExtraStages>.Setup(
-            IConfigurationSectionScrapper scrapper) => this.Setup(scrapper);
+            IConfigurationSectionScrapper scrapper, string sectionName) => this.Setup(scrapper, sectionName);
 
         ISelectionConfigurationOptions IConfigurationManagerSection<ISelectionConfigurationOptions>.Setup(
-            IConfigurationSectionScrapper scrapper) => this.Setup(scrapper);
+            IConfigurationSectionScrapper scrapper, string sectionName) => this.Setup(scrapper, sectionName);
     }
 }

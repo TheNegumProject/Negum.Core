@@ -22,7 +22,7 @@ namespace Negum.Core.Scrappers
         }
 
         public IConfigurationSectionScrapper GetSection(string sectionName) =>
-            NegumContainer.Resolve<IConfigurationSectionScrapper>().Setup(this.ConfigDef[sectionName]);
+            NegumContainer.Resolve<IConfigurationSectionScrapper>().Setup(this.ConfigDef[sectionName], sectionName);
 
         public IEnumerable<IConfigurationSectionScrapper> GetSections(string sectionNamePrefix) =>
             this.ConfigDef.Sections
