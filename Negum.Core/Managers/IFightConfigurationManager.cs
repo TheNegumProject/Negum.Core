@@ -198,7 +198,6 @@ namespace Negum.Core.Managers
         /// </summary>
         IEntryCollection<IVectorEntry> RoundSounds => Scrapper.GetCollection<IVectorEntry>(
             Scrapper
-                .GetAll()
                 .Where(entry => entry.Key.StartsWith("round") && !entry.Key.StartsWith("round."))
                 .Select(entry => entry.Key)
                 .ToList());
@@ -208,7 +207,6 @@ namespace Negum.Core.Managers
         /// </summary>
         IEntryCollection<IImageEntry> RoundAnimations => Scrapper.GetCollection<IImageEntry>(
             Scrapper
-                .GetAll()
                 .Where(entry => entry.Key.StartsWith("round") && !entry.Key.StartsWith("round."))
                 .Select(entry => entry.Key)
                 .ToList());

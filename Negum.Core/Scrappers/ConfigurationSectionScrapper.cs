@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -16,15 +17,15 @@ namespace Negum.Core.Scrappers
     public class ConfigurationSectionScrapper : IConfigurationSectionScrapper
     {
         private IConfigurationSection ConfigSection { get; set; }
+        
+        public IConfigurationScrapper Scrapper { get; protected set; }
 
-        public IConfigurationSectionScrapper Setup(IConfigurationSection configSection)
+        public IConfigurationSectionScrapper Setup(IConfigurationScrapper scrapper, IConfigurationSection configSection)
         {
+            this.Scrapper = scrapper;
             this.ConfigSection = configSection;
             return this;
         }
-
-        public IEnumerable<IConfigurationSectionEntry> GetAll() =>
-            this.ConfigSection.Entries.ToImmutableList();
 
         public int GetInt(string fieldKey) =>
             int.Parse(this.GetString(fieldKey));
@@ -98,8 +99,7 @@ namespace Negum.Core.Scrappers
             NegumContainer.Resolve<IDemoModeFightEntry>().Setup(this, fieldKey);
 
         public IEnumerable<ICharacterEntry> GetCharacters() =>
-            this.GetAll()
-                .Select(entry => NegumContainer.Resolve<ICharacterEntry>().Setup(this, entry.Value))
+            this.Select(entry => NegumContainer.Resolve<ICharacterEntry>().Setup(this, entry.Value))
                 .ToImmutableList();
 
         public IFightConfigurationPlayerEntry GetFightConfigurationPlayer(string fieldKey) =>
@@ -113,5 +113,9 @@ namespace Negum.Core.Scrappers
 
         public IScreenElementEntry GetScreenElement(string fieldKey) =>
             NegumContainer.Resolve<IScreenElementEntry>().Setup(this, fieldKey);
+
+        public IEnumerator<IConfigurationSectionEntry> GetEnumerator() => this.ConfigSection.Entries.GetEnumerator();
+
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
 }

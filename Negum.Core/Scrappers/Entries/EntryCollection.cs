@@ -25,7 +25,6 @@ namespace Negum.Core.Scrappers.Entries
             base.Setup(scrapper, keyPrefix);
 
             this.Entries = this.Scrapper
-                .GetAll()
                 .Where(entry => entry.Key.StartsWith(keyPrefix))
                 .Select(entry => NegumContainer.Resolve<TEntry>().Setup(this.Scrapper, entry.Key))
                 .ToList();
