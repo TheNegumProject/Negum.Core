@@ -9,13 +9,13 @@ namespace Negum.Core.Managers
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface IFontConfigurationManager : IConfigurationManager<IFontConfigurationManager>
+    public interface IFontConfigurationManager : IConfigurationManager
     {
         IFontConfigurationFontV2 FontV2 => this.GetSection<IFontConfigurationFontV2>("FNT V2");
         IFontConfigurationDef Def => this.GetSection<IFontConfigurationDef>("Def");
     }
 
-    public interface IFontConfigurationFontV2 : IConfigurationManagerSection<IFontConfigurationFontV2>
+    public interface IFontConfigurationFontV2 : IConfigurationManagerSection
     {
         /// <summary>
         /// Version of this Font.
@@ -28,7 +28,7 @@ namespace Negum.Core.Managers
         string Name => Scrapper.GetString("name");
     }
 
-    public interface IFontConfigurationDef : IConfigurationManagerSection<IFontConfigurationDef>
+    public interface IFontConfigurationDef : IConfigurationManagerSection
     {
         /// <summary>
         /// Type of this Font.

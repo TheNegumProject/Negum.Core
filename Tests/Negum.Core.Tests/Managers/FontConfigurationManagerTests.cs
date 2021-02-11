@@ -22,7 +22,7 @@ namespace Negum.Core.Tests.Managers
             
             var config = await this.Parse(path);
             var scrapper = NegumContainer.Resolve<IConfigurationScrapper>().Setup(config);
-            var manager = NegumContainer.Resolve<IFontConfigurationManager>().Setup(scrapper);
+            var manager = (IFontConfigurationManager) NegumContainer.Resolve<IFontConfigurationManager>().Setup(scrapper);
 
             Assert.True(manager.Def.Type.Equals("bitmap"));
         }

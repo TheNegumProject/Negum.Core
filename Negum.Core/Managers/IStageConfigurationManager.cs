@@ -10,7 +10,7 @@ namespace Negum.Core.Managers
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface IStageConfigurationManager : IConfigurationManager<IStageConfigurationManager>
+    public interface IStageConfigurationManager : IConfigurationManager
     {
         IStageConfigurationInfo Info => this.GetSection<IStageConfigurationInfo>("Info");
         IStageConfigurationCamera Camera => this.GetSection<IStageConfigurationCamera>("Camera");
@@ -26,7 +26,7 @@ namespace Negum.Core.Managers
             this.GetSections<IStageConfigurationBackground>("BG ");
     }
 
-    public interface IStageConfigurationInfo : IConfigurationManagerSection<IStageConfigurationInfo>
+    public interface IStageConfigurationInfo : IConfigurationManagerSection
     {
         string Name => Scrapper.GetString("name");
         string DisplayName => Scrapper.GetString("displayname");
@@ -35,7 +35,7 @@ namespace Negum.Core.Managers
         string Author => Scrapper.GetString("author");
     }
 
-    public interface IStageConfigurationCamera : IConfigurationManagerSection<IStageConfigurationCamera>
+    public interface IStageConfigurationCamera : IConfigurationManagerSection
     {
         /// <summary>
         /// Camera starting X position.
@@ -119,7 +119,7 @@ namespace Negum.Core.Managers
         int CutLow => Scrapper.GetInt("cutlow");
     }
 
-    public interface IStageConfigurationPlayerInfo : IConfigurationManagerSection<IStageConfigurationPlayerInfo>
+    public interface IStageConfigurationPlayerInfo : IConfigurationManagerSection
     {
         /// <summary>
         /// Player's 1 starting coordinate X.
@@ -166,7 +166,7 @@ namespace Negum.Core.Managers
         int RightBound => Scrapper.GetInt("rightbound");
     }
 
-    public interface IStageConfigurationBound : IConfigurationManagerSection<IStageConfigurationBound>
+    public interface IStageConfigurationBound : IConfigurationManagerSection
     {
         /// <summary>
         /// Distance from left edge of screen that player can move to.
@@ -181,7 +181,7 @@ namespace Negum.Core.Managers
         int ScreenRight => Scrapper.GetInt("screenright");
     }
 
-    public interface IStageConfigurationStageInfo : IConfigurationManagerSection<IStageConfigurationStageInfo>
+    public interface IStageConfigurationStageInfo : IConfigurationManagerSection
     {
         /// <summary>
         /// "Ground" level where players stand at, measured in pixels from the top of the screen.
@@ -216,7 +216,7 @@ namespace Negum.Core.Managers
         int ScaleY => Scrapper.GetInt("yscale");
     }
 
-    public interface IStageConfigurationShadow : IConfigurationManagerSection<IStageConfigurationShadow>
+    public interface IStageConfigurationShadow : IConfigurationManagerSection
     {
         /// <summary>
         /// This is the shadow darkening intensity.
@@ -253,7 +253,7 @@ namespace Negum.Core.Managers
         IVectorEntry FadeRange => Scrapper.GetVector("fade.range");
     }
 
-    public interface IStageConfigurationReflection : IConfigurationManagerSection<IStageConfigurationReflection>
+    public interface IStageConfigurationReflection : IConfigurationManagerSection
     {
         /// <summary>
         /// Intensity of reflection (from 0 to 256).
@@ -263,7 +263,7 @@ namespace Negum.Core.Managers
         int Intensity => Scrapper.GetInt("intensity");
     }
 
-    public interface IStageConfigurationMusic : IConfigurationManagerSection<IStageConfigurationMusic>
+    public interface IStageConfigurationMusic : IConfigurationManagerSection
     {
         /// <summary>
         /// Put a filename for a MOD, MP3 or MIDI here, or just leave it blank if you don't want music.
@@ -280,7 +280,7 @@ namespace Negum.Core.Managers
         int BackgroundMusicVolume => Scrapper.GetInt("bgmvolume");
     }
 
-    public interface IStageConfigurationBackgroundDef : IConfigurationManagerSection<IStageConfigurationBackgroundDef>
+    public interface IStageConfigurationBackgroundDef : IConfigurationManagerSection
     {
         /// <summary>
         /// Filename of sprite data.
@@ -295,7 +295,7 @@ namespace Negum.Core.Managers
         bool DebugBackground => Scrapper.GetBoolean("debugbg");
     }
 
-    public interface IStageConfigurationBackground : IConfigurationManagerSection<IStageConfigurationBackground>
+    public interface IStageConfigurationBackground : IConfigurationManagerSection
     {
         /// <summary>
         /// The background type goes here: for now, only NORMAL and PARALLAX.

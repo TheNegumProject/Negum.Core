@@ -9,7 +9,7 @@ namespace Negum.Core.Managers
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface INegumConfigurationManager : IConfigurationManager<INegumConfigurationManager>
+    public interface INegumConfigurationManager : IConfigurationManager
     {
         INegumConfigurationOptions Options => this.GetSection<INegumConfigurationOptions>("Options");
         INegumConfigurationRules Rules => this.GetSection<INegumConfigurationRules>("Rules");
@@ -26,7 +26,7 @@ namespace Negum.Core.Managers
         INegumConfigurationKeys P2Joystick => this.GetSection<INegumConfigurationKeys>("P2 Joystick");
     }
 
-    public interface INegumConfigurationOptions : IConfigurationManagerSection<INegumConfigurationOptions>
+    public interface INegumConfigurationOptions : IConfigurationManagerSection
     {
         int Difficulty => Scrapper.GetInt("Difficulty");
         int Life => Scrapper.GetInt("Life");
@@ -47,7 +47,7 @@ namespace Negum.Core.Managers
         IFileEntry MotifFile => Scrapper.GetFile("motif");
     }
 
-    public interface INegumConfigurationRules : IConfigurationManagerSection<INegumConfigurationRules>
+    public interface INegumConfigurationRules : IConfigurationManagerSection
     {
         /// <summary>
         /// This is the amount of power the attacker gets when an attack successfully hits the opponent.
@@ -78,7 +78,7 @@ namespace Negum.Core.Managers
         float SuperTargetDefenceMul => Scrapper.GetFloat("Super.TargetDefenceMul");
     }
 
-    public interface INegumConfigurationConfig : IConfigurationManagerSection<INegumConfigurationConfig>
+    public interface INegumConfigurationConfig : IConfigurationManagerSection
     {
         /// <summary>
         /// Set the game speed here. The default is 60 frames per second.
@@ -163,7 +163,7 @@ namespace Negum.Core.Managers
         bool FirstRun => Scrapper.GetBoolean("FirstRun");
     }
 
-    public interface INegumConfigurationDebug : IConfigurationManagerSection<INegumConfigurationDebug>
+    public interface INegumConfigurationDebug : IConfigurationManagerSection
     {
         /// <summary>
         /// Set to false to disable starting in debug mode by default.
@@ -199,7 +199,7 @@ namespace Negum.Core.Managers
             Scrapper.GetBoolean("HideDevelopmentBuildBanner");
     }
 
-    public interface INegumConfigurationVideo : IConfigurationManagerSection<INegumConfigurationVideo>
+    public interface INegumConfigurationVideo : IConfigurationManagerSection
     {
         /// <summary>
         /// This is the color depth at which to run engine.
@@ -238,7 +238,7 @@ namespace Negum.Core.Managers
         int SystemFit => Scrapper.GetInt("SystemFit");
     }
 
-    public interface INegumConfigurationSound : IConfigurationManagerSection<INegumConfigurationSound>
+    public interface INegumConfigurationSound : IConfigurationManagerSection
     {
         /// <summary>
         /// Set the following to true to enable sound effects and music.
@@ -283,7 +283,7 @@ namespace Negum.Core.Managers
         int BackgroundMusicVolume => Scrapper.GetInt("BGMVolume");
     }
 
-    public interface INegumConfigurationMisc : IConfigurationManagerSection<INegumConfigurationMisc>
+    public interface INegumConfigurationMisc : IConfigurationManagerSection
     {
         /// <summary>
         /// Number of extra players to cache in memory.
@@ -310,7 +310,7 @@ namespace Negum.Core.Managers
         string BackgroundMusicBackgroundMode => Scrapper.GetString("BGMBackgroundMode");
     }
 
-    public interface INegumConfigurationArcade : IConfigurationManagerSection<INegumConfigurationArcade>
+    public interface INegumConfigurationArcade : IConfigurationManagerSection
     {
         /// <summary>
         /// Set to false for computer to choose color 1 if possible.
@@ -368,7 +368,7 @@ namespace Negum.Core.Managers
         IVectorEntry SurvivalAiRampEnd => Scrapper.GetVector("survival.AIramp.end");
     }
 
-    public interface INegumConfigurationInput : IConfigurationManagerSection<INegumConfigurationInput>
+    public interface INegumConfigurationInput : IConfigurationManagerSection
     {
         bool P1UseKeyboard => Scrapper.GetBoolean("P1.UseKeyboard");
         bool P2UseKeyboard => Scrapper.GetBoolean("P2.UseKeyboard");
@@ -382,7 +382,7 @@ namespace Negum.Core.Managers
         bool AnyKeyUnpauses => Scrapper.GetBoolean("AnyKeyUnpauses");
     }
 
-    public interface INegumConfigurationKeys : IConfigurationManagerSection<INegumConfigurationKeys>
+    public interface INegumConfigurationKeys : IConfigurationManagerSection
     {
         IKeysEntry Keys => Scrapper.GetKeys(string.Empty);
     }

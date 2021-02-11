@@ -9,7 +9,7 @@ namespace Negum.Core.Managers
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface ICharacterConfigurationManager : IConfigurationManager<ICharacterConfigurationManager>
+    public interface ICharacterConfigurationManager : IConfigurationManager
     {
         ICharacterConfigurationInfo Info => this.GetSection<ICharacterConfigurationInfo>("Info");
         ICharacterConfigurationFiles Files => this.GetSection<ICharacterConfigurationFiles>("Files");
@@ -20,7 +20,7 @@ namespace Negum.Core.Managers
         ICharacterConfigurationArcade Arcade => this.GetSection<ICharacterConfigurationArcade>("Arcade");
     }
 
-    public interface ICharacterConfigurationInfo : IConfigurationManagerSection<ICharacterConfigurationInfo>
+    public interface ICharacterConfigurationInfo : IConfigurationManagerSection
     {
         string Name => Scrapper.GetString("name");
         string DisplayName => Scrapper.GetString("displayname");
@@ -34,7 +34,7 @@ namespace Negum.Core.Managers
         IVectorEntry PaletteDefaults => Scrapper.GetVector("pal.defaults");
     }
 
-    public interface ICharacterConfigurationFiles : IConfigurationManagerSection<ICharacterConfigurationFiles>
+    public interface ICharacterConfigurationFiles : IConfigurationManagerSection
     {
         IFileEntry CommandFile => Scrapper.GetFile("cmd");
         IFileEntry ConstantsFile => Scrapper.GetFile("cns");
@@ -46,8 +46,7 @@ namespace Negum.Core.Managers
         IFileEntry AiHintsDataFile => Scrapper.GetFile("ai");
     }
 
-    public interface ICharacterConfigurationPaletteKeymap :
-        IConfigurationManagerSection<ICharacterConfigurationPaletteKeymap>
+    public interface ICharacterConfigurationPaletteKeymap : IConfigurationManagerSection
     {
         int A => Scrapper.GetInt("a");
         int B => Scrapper.GetInt("b");
@@ -57,7 +56,7 @@ namespace Negum.Core.Managers
         int Z => Scrapper.GetInt("z");
     }
 
-    public interface ICharacterConfigurationArcade : IConfigurationManagerSection<ICharacterConfigurationArcade>
+    public interface ICharacterConfigurationArcade : IConfigurationManagerSection
     {
         IFileEntry IntroStoryboardFile => Scrapper.GetFile("intro.storyboard");
         IFileEntry EndingStoryboardFile => Scrapper.GetFile("ending.storyboard");

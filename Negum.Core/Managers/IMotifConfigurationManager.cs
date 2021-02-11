@@ -10,7 +10,7 @@ namespace Negum.Core.Managers
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface IMotifConfigurationManager : IConfigurationManager<IMotifConfigurationManager>
+    public interface IMotifConfigurationManager : IConfigurationManager
     {
         IMotifConfigurationInfo Info => this.GetSection<IMotifConfigurationInfo>("Info");
         IMotifConfigurationFiles Files => this.GetSection<IMotifConfigurationFiles>("Files");
@@ -63,13 +63,13 @@ namespace Negum.Core.Managers
             this.GetSections<IMotifConfigurationScreenBg>("OptionBG ");
     }
 
-    public interface IMotifConfigurationScreenBgDef : IConfigurationManagerSection<IMotifConfigurationScreenBgDef>
+    public interface IMotifConfigurationScreenBgDef : IConfigurationManagerSection
     {
         IFileEntry SpriteFile => Scrapper.GetFile("spr");
         IVectorEntry BgClearColor => Scrapper.GetVector("bgclearcolor");
     }
 
-    public interface IMotifConfigurationInfo : IConfigurationManagerSection<IMotifConfigurationInfo>
+    public interface IMotifConfigurationInfo : IConfigurationManagerSection
     {
         /// <summary>
         /// Name of motif.
@@ -92,7 +92,7 @@ namespace Negum.Core.Managers
         float Version => Scrapper.GetFloat("mugenversion");
     }
 
-    public interface IMotifConfigurationFiles : IConfigurationManagerSection<IMotifConfigurationFiles>
+    public interface IMotifConfigurationFiles : IConfigurationManagerSection
     {
         /// <summary>
         /// Filename of sprite data.
@@ -130,7 +130,7 @@ namespace Negum.Core.Managers
         IEntryCollection<IFileEntry> FontFiles => Scrapper.GetCollection<IFileEntry>("font");
     }
 
-    public interface IMotifConfigurationMusic : IConfigurationManagerSection<IMotifConfigurationMusic>
+    public interface IMotifConfigurationMusic : IConfigurationManagerSection
     {
         /// <summary>
         /// Music to play at title screen.
@@ -153,7 +153,7 @@ namespace Negum.Core.Managers
         IAudioEntry Victory => Scrapper.GetAudio("victory.bgm");
     }
 
-    public interface IMotifConfigurationTitleInfo : IConfigurationManagerSection<IMotifConfigurationTitleInfo>
+    public interface IMotifConfigurationTitleInfo : IConfigurationManagerSection
     {
         ITimeEntry FadeInTime => Scrapper.GetTime("fadein.time");
         ITimeEntry FadeOutTime => Scrapper.GetTime("fadeout.time");
@@ -188,7 +188,7 @@ namespace Negum.Core.Managers
         ISpriteSoundEntry Cancel => Scrapper.GetSpriteSound("cancel");
     }
 
-    public interface IMotifConfigurationScreenBg : IConfigurationManagerSection<IMotifConfigurationScreenBg>
+    public interface IMotifConfigurationScreenBg : IConfigurationManagerSection
     {
         string Type => Scrapper.GetString("type");
         IVectorEntry SpriteNumber => Scrapper.GetVector("spriteno");
@@ -202,12 +202,12 @@ namespace Negum.Core.Managers
         IVectorEntry Delta => Scrapper.GetVector("delta");
     }
 
-    public interface IMotifConfigurationInfobox : IConfigurationManagerSection<IMotifConfigurationInfobox>
+    public interface IMotifConfigurationInfobox : IConfigurationManagerSection
     {
         // TODO: What is this ??? Get an example
     }
 
-    public interface IMotifConfigurationSelectInfo : IConfigurationManagerSection<IMotifConfigurationSelectInfo>
+    public interface IMotifConfigurationSelectInfo : IConfigurationManagerSection
     {
         ITimeEntry FadeInTime => Scrapper.GetTime("fadein.time");
         ITimeEntry FadeOutTime => Scrapper.GetTime("fadeout.time");
@@ -249,7 +249,7 @@ namespace Negum.Core.Managers
         bool TeamMenuMoveWrapping => Scrapper.GetBoolean("teammenu.move.wrapping");
     }
 
-    public interface IMotifConfigurationVsScreen : IConfigurationManagerSection<IMotifConfigurationVsScreen>
+    public interface IMotifConfigurationVsScreen : IConfigurationManagerSection
     {
         ITimeEntry Time => Scrapper.GetTime("time");
         ITimeEntry FadeInTime => Scrapper.GetTime("fadein.time");
@@ -259,7 +259,7 @@ namespace Negum.Core.Managers
         IPlayerSelectionEntry Player2 => Scrapper.GetPlayerSelection("p2");
     }
 
-    public interface IMotifConfigurationDemoMode : IConfigurationManagerSection<IMotifConfigurationDemoMode>
+    public interface IMotifConfigurationDemoMode : IConfigurationManagerSection
     {
         bool IsEnabled => Scrapper.GetBoolean("enabled");
         ITimeEntry WaitTime => Scrapper.GetTime("title.waittime");
@@ -268,7 +268,7 @@ namespace Negum.Core.Managers
         bool ShowDebugInfo => Scrapper.GetBoolean("debuginfo");
     }
 
-    public interface IMotifConfigurationContinueScreen : IConfigurationManagerSection<IMotifConfigurationContinueScreen>
+    public interface IMotifConfigurationContinueScreen : IConfigurationManagerSection
     {
         bool IsEnabled => Scrapper.GetBoolean("enabled");
         IVectorEntry Position => Scrapper.GetVector("pos");
@@ -279,13 +279,13 @@ namespace Negum.Core.Managers
         ITextEntry NoActiveText => Scrapper.GetText("no.active");
     }
 
-    public interface IMotifConfigurationGameOverScreen : IConfigurationManagerSection<IMotifConfigurationGameOverScreen>
+    public interface IMotifConfigurationGameOverScreen : IConfigurationManagerSection
     {
         bool IsEnabled => Scrapper.GetBoolean("enabled");
         IFileEntry StoryboardFile => Scrapper.GetFile("storyboard");
     }
 
-    public interface IMotifConfigurationVictoryScreen : IConfigurationManagerSection<IMotifConfigurationVictoryScreen>
+    public interface IMotifConfigurationVictoryScreen : IConfigurationManagerSection
     {
         bool IsEnabled => Scrapper.GetBoolean("enabled");
         ITimeEntry Time => Scrapper.GetTime("time");
@@ -295,7 +295,7 @@ namespace Negum.Core.Managers
         ITextEntry WinQuote => Scrapper.GetText("winquote");
     }
 
-    public interface IMotifConfigurationWinScreen : IConfigurationManagerSection<IMotifConfigurationWinScreen>
+    public interface IMotifConfigurationWinScreen : IConfigurationManagerSection
     {
         bool IsEnabled => Scrapper.GetBoolean("enabled");
         ITextEntry WinText => Scrapper.GetText("wintext");
@@ -304,20 +304,19 @@ namespace Negum.Core.Managers
         ITimeEntry PoseTime => Scrapper.GetTime("pos.time");
     }
 
-    public interface IMotifConfigurationDefaultEnding : IConfigurationManagerSection<IMotifConfigurationDefaultEnding>
+    public interface IMotifConfigurationDefaultEnding : IConfigurationManagerSection
     {
         bool IsEnabled => Scrapper.GetBoolean("enabled");
         IFileEntry StoryboardFile => Scrapper.GetFile("storyboard");
     }
 
-    public interface IMotifConfigurationEndCredits : IConfigurationManagerSection<IMotifConfigurationEndCredits>
+    public interface IMotifConfigurationEndCredits : IConfigurationManagerSection
     {
         bool IsEnabled => Scrapper.GetBoolean("enabled");
         IFileEntry StoryboardFile => Scrapper.GetFile("storyboard");
     }
 
-    public interface IMotifConfigurationSurvivalResultsScreen :
-        IConfigurationManagerSection<IMotifConfigurationSurvivalResultsScreen>
+    public interface IMotifConfigurationSurvivalResultsScreen : IConfigurationManagerSection
     {
         bool IsEnabled => Scrapper.GetBoolean("enabled");
         ITextEntry WinText => Scrapper.GetText("wintext");

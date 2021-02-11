@@ -10,8 +10,7 @@ namespace Negum.Core.Managers
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface ICharacterStoryboardSceneConfigurationManager :
-        IConfigurationManager<ICharacterStoryboardSceneConfigurationManager>
+    public interface ICharacterStoryboardSceneConfigurationManager : IConfigurationManager
     {
         ICharacterStoryboardSceneConfigurationSceneDef SceneDef =>
             this.GetSection<ICharacterStoryboardSceneConfigurationSceneDef>("SceneDef");
@@ -20,8 +19,7 @@ namespace Negum.Core.Managers
             this.GetSections<ICharacterStoryboardSceneConfigurationScene>("Scene ");
     }
 
-    public interface ICharacterStoryboardSceneConfigurationSceneDef :
-        IConfigurationManagerSection<ICharacterStoryboardSceneConfigurationSceneDef>
+    public interface ICharacterStoryboardSceneConfigurationSceneDef : IConfigurationManagerSection
     {
         IFileEntry SpriteFile => Scrapper.GetFile("spr");
 
@@ -31,8 +29,7 @@ namespace Negum.Core.Managers
         int StartScene => Scrapper.GetInt("startscene");
     }
 
-    public interface ICharacterStoryboardSceneConfigurationScene :
-        IConfigurationManagerSection<ICharacterStoryboardSceneConfigurationScene>
+    public interface ICharacterStoryboardSceneConfigurationScene : IConfigurationManagerSection
     {
         ITimeEntry FadeInTime => Scrapper.GetTime("fadein.time");
         IVectorEntry FadeInColor => Scrapper.GetVector("fadein.col");

@@ -10,7 +10,7 @@ namespace Negum.Core.Managers
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface IFightConfigurationManager : IConfigurationManager<IFightConfigurationManager>
+    public interface IFightConfigurationManager : IConfigurationManager
     {
         IFightConfigurationFiles Files => this.GetSection<IFightConfigurationFiles>("Files");
         IFightConfigurationFightFx FightFx => this.GetSection<IFightConfigurationFightFx>("FightFx");
@@ -35,7 +35,7 @@ namespace Negum.Core.Managers
         IFightConfigurationWinIcon WinIcon => this.GetSection<IFightConfigurationWinIcon>("WinIcon");
     }
 
-    public interface IFightConfigurationFiles : IConfigurationManagerSection<IFightConfigurationFiles>
+    public interface IFightConfigurationFiles : IConfigurationManagerSection
     {
         IFileEntry SpriteFile => Scrapper.GetFile("sff");
         IFileEntry SoundFile => Scrapper.GetFile("snd");
@@ -45,63 +45,43 @@ namespace Negum.Core.Managers
         IFileEntry CommonSoundFile => Scrapper.GetFile("common.snd");
     }
 
-    public interface IFightConfigurationFightFx : IConfigurationManagerSection<IFightConfigurationFightFx>
+    public interface IFightConfigurationFightFx : IConfigurationManagerSection
     {
         int Scale => Scrapper.GetInt("scale");
     }
 
-    public interface IFightConfigurationLifebar : IConfigurationManagerSection<IFightConfigurationLifebar>
+    public interface IFightConfigurationLifebar : IConfigurationManagerSection
     {
         IFightConfigurationPlayerEntry Player1 => Scrapper.GetFightConfigurationPlayer("p1");
         IFightConfigurationPlayerEntry Player2 => Scrapper.GetFightConfigurationPlayer("p2");
     }
 
-    public interface IFightConfigurationSimulLifebar : IConfigurationManagerSection<IFightConfigurationSimulLifebar>
+    public interface IFightConfigurationSimulLifebar : IConfigurationManagerSection
     {
         IFightConfigurationPlayerEntry Player1 => Scrapper.GetFightConfigurationPlayer("p1");
         IFightConfigurationPlayerEntry Player2 => Scrapper.GetFightConfigurationPlayer("p2");
     }
 
-    public interface IFightConfigurationTurnsLifebar : IConfigurationManagerSection<IFightConfigurationTurnsLifebar>
+    public interface IFightConfigurationTurnsLifebar : IConfigurationManagerSection
     {
         IFightConfigurationPlayerEntry Player1 => Scrapper.GetFightConfigurationPlayer("p1");
         IFightConfigurationPlayerEntry Player2 => Scrapper.GetFightConfigurationPlayer("p2");
     }
 
-    public interface IFightConfigurationPowerbar : IConfigurationManagerSection<IFightConfigurationPowerbar>
+    public interface IFightConfigurationPowerbar : IConfigurationManagerSection
     {
         IFightConfigurationPlayerEntry Player1 => Scrapper.GetFightConfigurationPlayer("p1");
         IFightConfigurationPlayerEntry Player2 => Scrapper.GetFightConfigurationPlayer("p2");
         IEntryCollection<IVectorEntry> LevelSounds => Scrapper.GetCollection<IVectorEntry>("level");
     }
 
-    public interface IFightConfigurationFace : IConfigurationManagerSection<IFightConfigurationFace>
+    public interface IFightConfigurationFace : IConfigurationManagerSection
     {
         IFightConfigurationPlayerEntry Player1 => Scrapper.GetFightConfigurationPlayer("p1");
         IFightConfigurationPlayerEntry Player2 => Scrapper.GetFightConfigurationPlayer("p2");
     }
 
-    public interface IFightConfigurationSimulFace : IConfigurationManagerSection<IFightConfigurationSimulFace>
-    {
-        IFightConfigurationPlayerEntry Player1 => Scrapper.GetFightConfigurationPlayer("p1");
-        IFightConfigurationPlayerEntry Player2 => Scrapper.GetFightConfigurationPlayer("p2");
-        IFightConfigurationPlayerEntry Player3 => Scrapper.GetFightConfigurationPlayer("p3");
-        IFightConfigurationPlayerEntry Player4 => Scrapper.GetFightConfigurationPlayer("p4");
-    }
-
-    public interface IFightConfigurationTurnsFace : IConfigurationManagerSection<IFightConfigurationTurnsFace>
-    {
-        IFightConfigurationPlayerEntry Player1 => Scrapper.GetFightConfigurationPlayer("p1");
-        IFightConfigurationPlayerEntry Player2 => Scrapper.GetFightConfigurationPlayer("p2");
-    }
-
-    public interface IFightConfigurationName : IConfigurationManagerSection<IFightConfigurationName>
-    {
-        IFightConfigurationPlayerEntry Player1 => Scrapper.GetFightConfigurationPlayer("p1");
-        IFightConfigurationPlayerEntry Player2 => Scrapper.GetFightConfigurationPlayer("p2");
-    }
-
-    public interface IFightConfigurationSimulName : IConfigurationManagerSection<IFightConfigurationSimulName>
+    public interface IFightConfigurationSimulFace : IConfigurationManagerSection
     {
         IFightConfigurationPlayerEntry Player1 => Scrapper.GetFightConfigurationPlayer("p1");
         IFightConfigurationPlayerEntry Player2 => Scrapper.GetFightConfigurationPlayer("p2");
@@ -109,13 +89,33 @@ namespace Negum.Core.Managers
         IFightConfigurationPlayerEntry Player4 => Scrapper.GetFightConfigurationPlayer("p4");
     }
 
-    public interface IFightConfigurationTurnsName : IConfigurationManagerSection<IFightConfigurationTurnsName>
+    public interface IFightConfigurationTurnsFace : IConfigurationManagerSection
     {
         IFightConfigurationPlayerEntry Player1 => Scrapper.GetFightConfigurationPlayer("p1");
         IFightConfigurationPlayerEntry Player2 => Scrapper.GetFightConfigurationPlayer("p2");
     }
 
-    public interface IFightConfigurationTime : IConfigurationManagerSection<IFightConfigurationTime>
+    public interface IFightConfigurationName : IConfigurationManagerSection
+    {
+        IFightConfigurationPlayerEntry Player1 => Scrapper.GetFightConfigurationPlayer("p1");
+        IFightConfigurationPlayerEntry Player2 => Scrapper.GetFightConfigurationPlayer("p2");
+    }
+
+    public interface IFightConfigurationSimulName : IConfigurationManagerSection
+    {
+        IFightConfigurationPlayerEntry Player1 => Scrapper.GetFightConfigurationPlayer("p1");
+        IFightConfigurationPlayerEntry Player2 => Scrapper.GetFightConfigurationPlayer("p2");
+        IFightConfigurationPlayerEntry Player3 => Scrapper.GetFightConfigurationPlayer("p3");
+        IFightConfigurationPlayerEntry Player4 => Scrapper.GetFightConfigurationPlayer("p4");
+    }
+
+    public interface IFightConfigurationTurnsName : IConfigurationManagerSection
+    {
+        IFightConfigurationPlayerEntry Player1 => Scrapper.GetFightConfigurationPlayer("p1");
+        IFightConfigurationPlayerEntry Player2 => Scrapper.GetFightConfigurationPlayer("p2");
+    }
+
+    public interface IFightConfigurationTime : IConfigurationManagerSection
     {
         IVectorEntry Position => Scrapper.GetVector("pos");
         ITextEntry Counter => Scrapper.GetText("counter");
@@ -127,13 +127,13 @@ namespace Negum.Core.Managers
         int FramesPerCount => Scrapper.GetInt("framespercount");
     }
 
-    public interface IFightConfigurationCombo : IConfigurationManagerSection<IFightConfigurationCombo>
+    public interface IFightConfigurationCombo : IConfigurationManagerSection
     {
         IFightConfigurationTeamEntry Team1 => Scrapper.GetFightConfigurationTeam("team1");
         IFightConfigurationTeamEntry Team2 => Scrapper.GetFightConfigurationTeam("team2");
     }
 
-    public interface IFightConfigurationRound : IConfigurationManagerSection<IFightConfigurationRound>
+    public interface IFightConfigurationRound : IConfigurationManagerSection
     {
         /// <summary>
         /// Rounds needed to win a match.
@@ -240,7 +240,7 @@ namespace Negum.Core.Managers
         ITextEntry DrawText => Scrapper.GetText("draw");
     }
 
-    public interface IFightConfigurationWinIcon : IConfigurationManagerSection<IFightConfigurationWinIcon>
+    public interface IFightConfigurationWinIcon : IConfigurationManagerSection
     {
         IFightConfigurationPlayerEntry Player1 => Scrapper.GetFightConfigurationPlayer("p1");
         IFightConfigurationPlayerEntry Player2 => Scrapper.GetFightConfigurationPlayer("p2");

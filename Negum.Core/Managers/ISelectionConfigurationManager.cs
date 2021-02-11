@@ -11,7 +11,7 @@ namespace Negum.Core.Managers
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface ISelectionConfigurationManager : IConfigurationManager<ISelectionConfigurationManager>
+    public interface ISelectionConfigurationManager : IConfigurationManager
     {
         ISelectionConfigurationCharacters Characters =>
             this.GetSection<ISelectionConfigurationCharacters>("Characters");
@@ -20,19 +20,18 @@ namespace Negum.Core.Managers
         ISelectionConfigurationOptions Options => this.GetSection<ISelectionConfigurationOptions>("Options");
     }
 
-    public interface ISelectionConfigurationCharacters : IConfigurationManagerSection<ISelectionConfigurationCharacters>
+    public interface ISelectionConfigurationCharacters : IConfigurationManagerSection
     {
         IEnumerable<ICharacterEntry> Characters => Scrapper.GetCharacters();
     }
 
-    public interface ISelectionConfigurationExtraStages :
-        IConfigurationManagerSection<ISelectionConfigurationExtraStages>
+    public interface ISelectionConfigurationExtraStages : IConfigurationManagerSection
     {
         IEnumerable<IFileEntry> StageFiles =>
             Scrapper.GetCollection<IFileEntry>(Scrapper.Select(x => x.Key).ToList());
     }
 
-    public interface ISelectionConfigurationOptions : IConfigurationManagerSection<ISelectionConfigurationOptions>
+    public interface ISelectionConfigurationOptions : IConfigurationManagerSection
     {
         /// <summary>
         /// Here you set the maximum number of matches to fight before game ends in Arcade Mode.

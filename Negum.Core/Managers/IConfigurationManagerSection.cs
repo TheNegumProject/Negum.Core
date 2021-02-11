@@ -9,8 +9,7 @@ namespace Negum.Core.Managers
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface IConfigurationManagerSection<out TConfigurationManagerSection>
-        where TConfigurationManagerSection : IConfigurationManagerSection<TConfigurationManagerSection>
+    public interface IConfigurationManagerSection
     {
         /// <summary>
         /// Scrapper used by this section.
@@ -28,6 +27,6 @@ namespace Negum.Core.Managers
         /// <param name="scrapper"></param>
         /// <param name="sectionName"></param>
         /// <returns>Current section.</returns>
-        TConfigurationManagerSection Setup(IConfigurationSectionScrapper scrapper, string sectionName);
+        IConfigurationManagerSection Setup(IConfigurationSectionScrapper scrapper, string sectionName);
     }
 }

@@ -23,7 +23,7 @@ namespace Negum.Core.Tests.Managers
             
             var config = await this.Parse(path);
             var scrapper = NegumContainer.Resolve<IConfigurationScrapper>().Setup(config);
-            var manager = NegumContainer.Resolve<ISelectionConfigurationManager>().Setup(scrapper);
+            var manager = (ISelectionConfigurationManager) NegumContainer.Resolve<ISelectionConfigurationManager>().Setup(scrapper);
 
             Assert.True(manager.Characters.Characters.Count() == 2);
             Assert.True(manager.Stages.StageFiles.Count() == 1);
