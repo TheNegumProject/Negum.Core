@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Negum.Core.Scrappers;
 
 namespace Negum.Core.Managers
@@ -15,7 +16,7 @@ namespace Negum.Core.Managers
         /// Scrapper used by this section.
         /// </summary>
         IConfigurationSectionScrapper Scrapper { get; }
-        
+
         /// <summary>
         /// Name of the current section.
         /// </summary>
@@ -24,9 +25,16 @@ namespace Negum.Core.Managers
         /// <summary>
         /// Setups current section.
         /// </summary>
+        /// <param name="manager"></param>
         /// <param name="scrapper"></param>
         /// <param name="sectionName"></param>
         /// <returns>Current section.</returns>
-        IConfigurationManagerSection Setup(IConfigurationSectionScrapper scrapper, string sectionName);
+        IConfigurationManagerSection Setup(IConfigurationManager manager, IConfigurationSectionScrapper scrapper,
+            string sectionName);
+
+        /// <summary>
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<IConfigurationManagerSection> GetActions();
     }
 }

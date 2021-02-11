@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Negum.Core.Scrappers;
 
 namespace Negum.Core.Managers
@@ -10,14 +11,21 @@ namespace Negum.Core.Managers
     /// </author>
     public class ConfigurationManagerSection : IConfigurationManagerSection
     {
+        private IConfigurationManager Manager { get; set; }
+
         public IConfigurationSectionScrapper Scrapper { get; protected set; }
         public string SectionName { get; protected set; }
 
-        public IConfigurationManagerSection Setup(IConfigurationSectionScrapper scrapper, string sectionName)
+        public IConfigurationManagerSection Setup(IConfigurationManager manager, IConfigurationSectionScrapper scrapper,
+            string sectionName)
         {
+            this.Manager = manager;
             this.Scrapper = scrapper;
             this.SectionName = sectionName;
             return this;
         }
+
+        public IEnumerable<IConfigurationManagerSection> GetActions() => 
+            this.Manager.GetInnerSections(this, "Begin Action ");
     }
 }

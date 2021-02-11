@@ -13,11 +13,6 @@ namespace Negum.Core.Managers
     public interface IConfigurationManager
     {
         /// <summary>
-        /// Scrapper used by the current Manager.
-        /// </summary>
-        IConfigurationScrapper Scrapper { get; }
-
-        /// <summary>
         /// ASetups Manager.
         /// </summary>
         /// <param name="scrapper"></param>
@@ -39,5 +34,14 @@ namespace Negum.Core.Managers
         /// <returns>Collection of sections which name starts from the given prefix.</returns>
         IEnumerable<TManagerSection> GetSections<TManagerSection>(string sectionNamePrefix)
             where TManagerSection : IConfigurationManagerSection;
+
+        /// <summary>
+        /// </summary>
+        /// <param name="parent"></param>
+        /// <param name="innerSectionsPrefix"></param>
+        /// <typeparam name="TManagerSection"></typeparam>
+        /// <returns>Sections which names starts from the specified name which are directly after the specified section</returns>
+        IEnumerable<IConfigurationManagerSection> GetInnerSections(IConfigurationManagerSection parent,
+            string innerSectionsPrefix);
     }
 }

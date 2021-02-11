@@ -12,7 +12,7 @@ namespace Negum.Core.Managers
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public abstract class ConfigurationManager : IConfigurationManager
+    public class ConfigurationManager : IConfigurationManager
     {
         public IConfigurationScrapper Scrapper { get; protected set; }
 
@@ -27,16 +27,20 @@ namespace Negum.Core.Managers
         {
             var managerSection = NegumContainer.Resolve<TManagerSection>();
             var scrapperSection = this.Scrapper.GetSection(sectionName);
-            return (TManagerSection) managerSection.Setup(scrapperSection, sectionName);
+            return (TManagerSection) managerSection.Setup(this, scrapperSection, sectionName);
         }
 
         public IEnumerable<TManagerSection> GetSections<TManagerSection>(string sectionNamePrefix)
             where TManagerSection : IConfigurationManagerSection =>
             this.Scrapper
                 .GetSections(sectionNamePrefix)
-                .Select(sectionScrapper => NegumContainer.Resolve<TManagerSection>()
-                    .Setup(sectionScrapper, sectionScrapper.SectionName))
-                .Cast<TManagerSection>()
+                .Select(sectionScrapper => this.GetSection<TManagerSection>(sectionScrapper.SectionName))
+                .ToList();
+
+        public IEnumerable<IConfigurationManagerSection> GetInnerSections(IConfigurationManagerSection parent,
+            string innerSectionsPrefix) =>
+            this.Scrapper.GetInnerSections(parent.Scrapper, innerSectionsPrefix)
+                .Select(section => this.GetSection<IConfigurationManagerSection>(section.SectionName))
                 .ToList();
     }
 }

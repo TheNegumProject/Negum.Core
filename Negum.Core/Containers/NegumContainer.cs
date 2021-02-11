@@ -126,6 +126,8 @@ namespace Negum.Core.Containers
             Register<IConfigurationScrapper, ConfigurationScrapper>();
 
             // Managers
+            Register<IConfigurationManager, ConfigurationManager>();
+            Register<IConfigurationManagerSection, ConfigurationManagerSection>();
             Register<INegumConfigurationManager, NegumConfigurationManager>();
             Register<IMotifConfigurationManager, MotifConfigurationManager>();
             Register<ISelectionConfigurationManager, SelectionConfigurationManager>();

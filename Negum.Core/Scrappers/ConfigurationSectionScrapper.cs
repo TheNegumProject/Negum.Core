@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using Negum.Core.Configurations;
 using Negum.Core.Containers;
@@ -100,7 +99,7 @@ namespace Negum.Core.Scrappers
 
         public IEnumerable<ICharacterEntry> GetCharacters() =>
             this.Select(entry => NegumContainer.Resolve<ICharacterEntry>().Setup(this, entry.Value))
-                .ToImmutableList();
+                .ToList();
 
         public IFightConfigurationPlayerEntry GetFightConfigurationPlayer(string fieldKey) =>
             NegumContainer.Resolve<IFightConfigurationPlayerEntry>().Setup(this, fieldKey);

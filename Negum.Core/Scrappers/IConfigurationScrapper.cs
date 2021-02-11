@@ -31,5 +31,13 @@ namespace Negum.Core.Scrappers
         /// <param name="sectionNamePrefix"></param>
         /// <returns>Collection of Scrappers.</returns>
         IEnumerable<IConfigurationSectionScrapper> GetSections(string sectionNamePrefix);
+
+        /// <summary>
+        /// </summary>
+        /// <param name="parent"></param>
+        /// <param name="innerSectionsPrefix"></param>
+        /// <returns>Sections which names starts from the specified name which are directly after the specified section.</returns>
+        IEnumerable<IConfigurationSectionScrapper> GetInnerSections(IConfigurationSectionScrapper parent,
+            string innerSectionsPrefix);
     }
 }

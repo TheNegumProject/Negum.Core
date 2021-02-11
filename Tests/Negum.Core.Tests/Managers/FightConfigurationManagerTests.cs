@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Threading.Tasks;
 using Negum.Core.Containers;
 using Negum.Core.Managers;
@@ -24,8 +25,12 @@ namespace Negum.Core.Tests.Managers
             var scrapper = NegumContainer.Resolve<IConfigurationScrapper>().Setup(config);
             var manager = (IFightConfigurationManager) NegumContainer.Resolve<IFightConfigurationManager>().Setup(scrapper);
             var text = manager.Round.WinText.Text;
-            
+
             Assert.True(text.Equals("%s Wins"));
+
+            var actions = manager.Round.GetActions();
+            
+            Assert.True(actions.Count() == 2);
         }
     }
 }

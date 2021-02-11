@@ -29,5 +29,14 @@ namespace Negum.Core.Scrappers
                 .Where(section => section.Key.StartsWith(sectionNamePrefix))
                 .Select(entry => this.GetSection(entry.Key))
                 .ToList();
+
+        public IEnumerable<IConfigurationSectionScrapper> GetInnerSections(IConfigurationSectionScrapper parent,
+            string innerSectionsPrefix) =>
+            this.ConfigDef.Sections
+                .SkipWhile(section => !section.Key.Equals(parent.SectionName))
+                .SkipWhile(section => section.Key.Equals(parent.SectionName))
+                .TakeWhile(section => section.Key.StartsWith(innerSectionsPrefix))
+                .Select(section => this.GetSection(section.Key))
+                .ToList();
     }
 }
