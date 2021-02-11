@@ -14,17 +14,11 @@ namespace Negum.Core.Scrappers
     public interface IConfigurationSectionScrapper : IEnumerable<IConfigurationSectionEntry>
     {
         /// <summary>
-        /// Scrapper from which the current section was taken.
-        /// </summary>
-        IConfigurationScrapper Scrapper { get; }
-
-        /// <summary>
         /// Setups current Section Scrapper.
         /// </summary>
-        /// <param name="scrapper"></param>
         /// <param name="configSection"></param>
         /// <returns>Current Section Scrapper.</returns>
-        IConfigurationSectionScrapper Setup(IConfigurationScrapper scrapper, IConfigurationSection configSection);
+        IConfigurationSectionScrapper Setup(IConfigurationSection configSection);
 
         /// <summary>
         /// </summary>

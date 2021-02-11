@@ -26,7 +26,5 @@ namespace Negum.Core.Configurations
         /// Contains all read entries.
         /// </summary>
         ICollection<IConfigurationSectionEntry> Entries { get; }
-        
-        // TODO: Add support for assigning "Begin Action" elements to appropriate section
     }
 }

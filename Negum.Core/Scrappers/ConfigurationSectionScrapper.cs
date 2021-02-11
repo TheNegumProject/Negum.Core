@@ -17,12 +17,9 @@ namespace Negum.Core.Scrappers
     public class ConfigurationSectionScrapper : IConfigurationSectionScrapper
     {
         private IConfigurationSection ConfigSection { get; set; }
-        
-        public IConfigurationScrapper Scrapper { get; protected set; }
 
-        public IConfigurationSectionScrapper Setup(IConfigurationScrapper scrapper, IConfigurationSection configSection)
+        public IConfigurationSectionScrapper Setup(IConfigurationSection configSection)
         {
-            this.Scrapper = scrapper;
             this.ConfigSection = configSection;
             return this;
         }
