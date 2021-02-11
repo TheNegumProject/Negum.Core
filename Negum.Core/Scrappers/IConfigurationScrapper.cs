@@ -15,7 +15,6 @@ namespace Negum.Core.Scrappers
         /// <summary>
         /// Sets configuration which should be scrapped.
         /// </summary>
-        /// <typeparam name="TConfiguration"></typeparam>
         /// <returns>This scrapper.</returns>
         IConfigurationScrapper Setup(IConfigurationDefinition def);
 
