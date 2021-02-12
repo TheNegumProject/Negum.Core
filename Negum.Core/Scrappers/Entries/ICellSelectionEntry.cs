@@ -7,7 +7,7 @@ namespace Negum.Core.Scrappers.Entries
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface ICellSelectionEntry : IScrapperEntry<ICellSelectionEntry>
+    public interface ICellSelectionEntry : IScrapperEntry
     {
         /// <summary>
         /// (x,y) size of each cell in pixels.

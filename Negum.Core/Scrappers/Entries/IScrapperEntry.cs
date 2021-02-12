@@ -7,8 +7,7 @@ namespace Negum.Core.Scrappers.Entries
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface IScrapperEntry<out TEntry>
-        where TEntry : IScrapperEntry<TEntry>
+    public interface IScrapperEntry
     {
         /// <summary>
         /// Scrapper used by the current entry.
@@ -26,6 +25,6 @@ namespace Negum.Core.Scrappers.Entries
         /// <param name="scrapper">Scrapper used to get the entry.</param>
         /// <param name="keyPrefix">Prefix for the entry details.</param>
         /// <returns>Current entry with assigned value.</returns>
-        TEntry Setup(IConfigurationSectionScrapper scrapper, string keyPrefix);
+        IScrapperEntry Setup(IConfigurationSectionScrapper scrapper, string keyPrefix);
     }
 }

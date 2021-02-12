@@ -7,7 +7,7 @@ namespace Negum.Core.Scrappers.Entries
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface IImageEntry : IScrapperEntry<IImageEntry>
+    public interface IImageEntry : IScrapperEntry
     {
         /// <summary>
         /// Image to be displayed.

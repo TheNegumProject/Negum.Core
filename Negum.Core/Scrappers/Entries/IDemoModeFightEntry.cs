@@ -7,7 +7,7 @@ namespace Negum.Core.Scrappers.Entries
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface IDemoModeFightEntry : IScrapperEntry<IDemoModeFightEntry>
+    public interface IDemoModeFightEntry : IScrapperEntry
     {
         /// <summary>
         /// Time to display the fight before returning to title.

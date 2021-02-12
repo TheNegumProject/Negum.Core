@@ -7,7 +7,7 @@ namespace Negum.Core.Scrappers.Entries
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface IScreenElementEntry : IScrapperEntry<IScreenElementEntry>
+    public interface IScreenElementEntry : IScrapperEntry
     {
         /// <summary>
         /// Time to show current element.

@@ -7,7 +7,7 @@ namespace Negum.Core.Scrappers.Entries
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface IPlayerSelectionEntry : IScrapperEntry<IPlayerSelectionEntry>
+    public interface IPlayerSelectionEntry : IScrapperEntry
     {
         IImageEntry BigPortrait => this.Scrapper.GetImage(this.KeyPrefix);
         IPlayerSelectionCursorEntry Cursor => this.Scrapper.GetPlayerSelectionCursor(this.KeyPrefix + ".cursor");

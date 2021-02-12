@@ -17,7 +17,7 @@ namespace Negum.Core.Scrappers
         /// Name of the current section.
         /// </summary>
         string SectionName { get; }
-        
+
         /// <summary>
         /// Setups current Section Scrapper.
         /// </summary>
@@ -60,14 +60,14 @@ namespace Negum.Core.Scrappers
         /// </summary>
         /// <param name="keys">Keys which should be used to take values from current Section.</param>
         /// <returns>Collection of entries from specified keys.</returns>
-        IEntryCollection<TEntry> GetCollection<TEntry>(IEnumerable<string> keys) where TEntry : IScrapperEntry<TEntry>;
+        IEntryCollection<TEntry> GetCollection<TEntry>(IEnumerable<string> keys) where TEntry : IScrapperEntry;
 
         /// <summary>
         /// </summary>
         /// <param name="fieldKey"></param>
         /// <typeparam name="TEntry"></typeparam>
         /// <returns>Collection of values which starts from selected key from configuration.</returns>
-        IEntryCollection<TEntry> GetCollection<TEntry>(string fieldKey) where TEntry : IScrapperEntry<TEntry>;
+        IEntryCollection<TEntry> GetCollection<TEntry>(string fieldKey) where TEntry : IScrapperEntry;
 
         /// <summary>
         /// </summary>
@@ -175,19 +175,19 @@ namespace Negum.Core.Scrappers
         /// <param name="fieldKey"></param>
         /// <returns>Fighting Player Entry value from current configuration.</returns>
         IFightConfigurationPlayerEntry GetFightConfigurationPlayer(string fieldKey);
-        
+
         /// <summary>
         /// </summary>
         /// <param name="fieldKey"></param>
         /// <returns>Fighting Team value from current configuration.</returns>
         IFightConfigurationTeamEntry GetFightConfigurationTeam(string fieldKey);
-        
+
         /// <summary>
         /// </summary>
         /// <param name="fieldKey"></param>
         /// <returns>Fighting Player Win value from current configuration.</returns>
         IFightConfigurationWinEntry GetFightConfigurationWin(string fieldKey);
-        
+
         /// <summary>
         /// </summary>
         /// <param name="fieldKey"></param>

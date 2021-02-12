@@ -7,7 +7,7 @@ namespace Negum.Core.Scrappers.Entries
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface IFightConfigurationTeamEntry : IScrapperEntry<IFightConfigurationTeamEntry>
+    public interface IFightConfigurationTeamEntry : IScrapperEntry
     {
         IVectorEntry Position => Scrapper.GetVector(this.KeyPrefix + ".pos");
         int StartX => Scrapper.GetInt(this.KeyPrefix + ".start.x");

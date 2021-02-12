@@ -118,6 +118,8 @@ namespace Negum.Core.Containers
             Register<IFightConfigurationTeamEntry, FightConfigurationTeamEntry>();
             Register<IFightConfigurationWinEntry, FightConfigurationWinEntry>();
             Register<IScreenElementEntry, ScreenElementEntry>();
+            Register<ITriggerEntry, TriggerEntry>();
+            Register<IComboConditionEntry, ComboConditionEntry>();
 
             RegisterEntryCollections();
 
@@ -136,6 +138,7 @@ namespace Negum.Core.Containers
             Register<IStageConfigurationManager, StageConfigurationManager>();
             Register<ICharacterConfigurationManager, CharacterConfigurationManager>();
             Register<ICharacterStoryboardSceneConfigurationManager, CharacterStoryboardSceneConfigurationManager>();
+            Register<ICharacterCommandsManager, CharacterCommandsManager>();
 
             // Negum Configuration Types
             Register<INegumConfigurationOptions, NegumConfigurationManagerSection>();
@@ -216,6 +219,13 @@ namespace Negum.Core.Containers
             // Character Storyboard Scene Configuration Types
             Register<ICharacterStoryboardSceneConfigurationSceneDef, CharacterStoryboardSceneConfigurationManagerSection>();
             Register<ICharacterStoryboardSceneConfigurationScene, CharacterStoryboardSceneConfigurationManagerSection>();
+            
+            // Character Commands Types
+            Register<ICharacterCommandsRemap ,CharacterCommandsManagerSection>();
+            Register<ICharacterCommandsDefaults, CharacterCommandsManagerSection>();
+            Register<ICharacterCommandsCommand, CharacterCommandsManagerSection>();
+            Register<ICharacterCommandsCommandStatedef, CharacterCommandsManagerSection>();
+            Register<ICharacterCommandsState, CharacterCommandsManagerSection>();
         }
 
         /// <summary>
@@ -228,7 +238,7 @@ namespace Negum.Core.Containers
                 .Where(type =>
                     type.IsInterface &&
                     type.GetInterfaces().Any(t =>
-                        t.GenericTypeArguments.Length > 0 && t.GetGenericTypeDefinition() == typeof(IScrapperEntry<>)))
+                        t.GenericTypeArguments.Length > 0 && t.GetGenericTypeDefinition() == typeof(IScrapperEntry)))
                 .ToList()
                 .ForEach(type =>
                 {

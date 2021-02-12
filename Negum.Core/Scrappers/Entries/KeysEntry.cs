@@ -6,7 +6,7 @@ namespace Negum.Core.Scrappers.Entries
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public class KeysEntry : ScrappedEntry<IKeysEntry>, IKeysEntry
+    public class KeysEntry : ScrappedEntry, IKeysEntry
     {
     }
 }

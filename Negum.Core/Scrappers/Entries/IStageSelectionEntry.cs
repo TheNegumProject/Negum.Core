@@ -7,7 +7,7 @@ namespace Negum.Core.Scrappers.Entries
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface IStageSelectionEntry : IScrapperEntry<IStageSelectionEntry>
+    public interface IStageSelectionEntry : IScrapperEntry
     {
         IVectorEntry Position => Scrapper.GetVector(this.KeyPrefix + ".pos");
         ITextEntry Active => Scrapper.GetText(this.KeyPrefix + ".active");

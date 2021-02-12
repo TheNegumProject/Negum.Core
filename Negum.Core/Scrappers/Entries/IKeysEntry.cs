@@ -7,7 +7,7 @@ namespace Negum.Core.Scrappers.Entries
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface IKeysEntry : IScrapperEntry<IKeysEntry>
+    public interface IKeysEntry : IScrapperEntry
     {
         int Jump => Scrapper.GetInt("Jump");
         int Crouch => Scrapper.GetInt("Crouch");

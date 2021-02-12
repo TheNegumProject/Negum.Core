@@ -7,7 +7,7 @@ namespace Negum.Core.Scrappers.Entries
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface IFightConfigurationWinEntry : IScrapperEntry<IFightConfigurationWinEntry>
+    public interface IFightConfigurationWinEntry : IScrapperEntry
     {
         /// <summary>
         /// Win by normal.

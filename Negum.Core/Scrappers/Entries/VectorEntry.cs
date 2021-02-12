@@ -10,7 +10,7 @@ namespace Negum.Core.Scrappers.Entries
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public class VectorEntry : ScrappedEntry<IVectorEntry>, IVectorEntry
+    public class VectorEntry : ScrappedEntry, IVectorEntry
     {
         public string this[int index] => this.Values[index];
 

@@ -6,7 +6,7 @@ namespace Negum.Core.Scrappers.Entries
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public class TimeEntry : ScrappedEntry<ITimeEntry>, ITimeEntry
+    public class TimeEntry : ScrappedEntry, ITimeEntry
     {
     }
 }

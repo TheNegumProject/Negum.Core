@@ -6,7 +6,7 @@ namespace Negum.Core.Scrappers.Entries
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>   
-    public class CharacterEntry : ScrappedEntry<ICharacterEntry>, ICharacterEntry
+    public class CharacterEntry : ScrappedEntry, ICharacterEntry
     {
         public string Name { get; protected set; }
         public IFileEntry NameFile { get; protected set; }

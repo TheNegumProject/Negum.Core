@@ -7,7 +7,7 @@ namespace Negum.Core.Scrappers.Entries
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface IPlayerSelectionTeamMenuValueEntry : IScrapperEntry<IPlayerSelectionTeamMenuValueEntry>
+    public interface IPlayerSelectionTeamMenuValueEntry : IScrapperEntry
     {
         IVectorEntry Sound => this.Scrapper.GetVector(this.KeyPrefix + ".snd");
         IImageEntry Icon => this.Scrapper.GetImage(this.KeyPrefix + ".icon");

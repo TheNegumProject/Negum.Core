@@ -16,7 +16,7 @@ namespace Negum.Core.Scrappers
     public class ConfigurationSectionScrapper : IConfigurationSectionScrapper
     {
         private IConfigurationSection ConfigSection { get; set; }
-        
+
         public string SectionName { get; protected set; }
 
         public IConfigurationSectionScrapper Setup(IConfigurationSection configSection, string sectionName)
@@ -26,95 +26,70 @@ namespace Negum.Core.Scrappers
             return this;
         }
 
-        public int GetInt(string fieldKey) =>
-            int.Parse(this.GetString(fieldKey));
-
-        public float GetFloat(string fieldKey) =>
-            float.Parse(this.GetString(fieldKey));
-
-        public bool GetBoolean(string fieldKey) =>
-            bool.Parse(this.GetString(fieldKey));
-
-        public string GetString(string fieldKey) =>
-            this.ConfigSection[fieldKey];
-
-        public IFileEntry GetFile(string fieldKey) =>
-            NegumContainer.Resolve<IFileEntry>().Setup(this, fieldKey);
+        public int GetInt(string fieldKey) => int.Parse(this.GetString(fieldKey));
+        public float GetFloat(string fieldKey) => float.Parse(this.GetString(fieldKey));
+        public bool GetBoolean(string fieldKey) => bool.Parse(this.GetString(fieldKey));
+        public string GetString(string fieldKey) => this.ConfigSection[fieldKey];
+        public IFileEntry GetFile(string fieldKey) => this.GetEntry<IFileEntry>(fieldKey);
 
         public IEntryCollection<TEntry> GetCollection<TEntry>(IEnumerable<string> keys)
-            where TEntry : IScrapperEntry<TEntry> =>
+            where TEntry : IScrapperEntry =>
             NegumContainer.Resolve<IEntryCollection<TEntry>>().Setup(this, keys);
 
         public IEntryCollection<TEntry> GetCollection<TEntry>(string fieldKey)
-            where TEntry : IScrapperEntry<TEntry> =>
-            NegumContainer.Resolve<IEntryCollection<TEntry>>().Setup(this, fieldKey);
+            where TEntry : IScrapperEntry =>
+            this.GetEntry<IEntryCollection<TEntry>>(fieldKey);
 
-        public IAudioEntry GetAudio(string fieldKey) =>
-            NegumContainer.Resolve<IAudioEntry>().Setup(this, fieldKey);
-
-        public IKeysEntry GetKeys(string fieldKey) =>
-            NegumContainer.Resolve<IKeysEntry>().Setup(this, fieldKey);
-
-        public ISpriteSoundEntry GetSpriteSound(string fieldKey) =>
-            NegumContainer.Resolve<ISpriteSoundEntry>().Setup(this, fieldKey);
+        public IAudioEntry GetAudio(string fieldKey) => this.GetEntry<IAudioEntry>(fieldKey);
+        public IKeysEntry GetKeys(string fieldKey) => this.GetEntry<IKeysEntry>(fieldKey);
+        public ISpriteSoundEntry GetSpriteSound(string fieldKey) => this.GetEntry<ISpriteSoundEntry>(fieldKey);
 
         public IPlayerSelectionEntry GetPlayerSelection(string fieldKey) =>
-            NegumContainer.Resolve<IPlayerSelectionEntry>().Setup(this, fieldKey);
+            this.GetEntry<IPlayerSelectionEntry>(fieldKey);
 
         public IPlayerSelectionCursorEntry GetPlayerSelectionCursor(string fieldKey) =>
-            NegumContainer.Resolve<IPlayerSelectionCursorEntry>().Setup(this, fieldKey);
+            this.GetEntry<IPlayerSelectionCursorEntry>(fieldKey);
 
-        public IMovementEntry GetMovement(string fieldKey) =>
-            NegumContainer.Resolve<IMovementEntry>().Setup(this, fieldKey);
-
-        public IImageEntry GetImage(string fieldKey) =>
-            NegumContainer.Resolve<IImageEntry>().Setup(this, fieldKey);
-
-        public IVectorEntry GetVector(string fieldKey) =>
-            NegumContainer.Resolve<IVectorEntry>().Setup(this, fieldKey);
-
-        public ITextEntry GetText(string fieldKey) =>
-            NegumContainer.Resolve<ITextEntry>().Setup(this, fieldKey);
-
-        public ICellSelectionEntry GetCell(string fieldKey) =>
-            NegumContainer.Resolve<ICellSelectionEntry>().Setup(this, fieldKey);
-
-        public IStageSelectionEntry GetStage(string fieldKey) =>
-            NegumContainer.Resolve<IStageSelectionEntry>().Setup(this, fieldKey);
+        public IMovementEntry GetMovement(string fieldKey) => this.GetEntry<IMovementEntry>(fieldKey);
+        public IImageEntry GetImage(string fieldKey) => this.GetEntry<IImageEntry>(fieldKey);
+        public IVectorEntry GetVector(string fieldKey) => this.GetEntry<IVectorEntry>(fieldKey);
+        public ITextEntry GetText(string fieldKey) => this.GetEntry<ITextEntry>(fieldKey);
+        public ICellSelectionEntry GetCell(string fieldKey) => this.GetEntry<ICellSelectionEntry>(fieldKey);
+        public IStageSelectionEntry GetStage(string fieldKey) => this.GetEntry<IStageSelectionEntry>(fieldKey);
 
         public IPlayerSelectionTeamMenuItemEntry GetPlayerSelectionTeamMenuItem(string fieldKey) =>
-            NegumContainer.Resolve<IPlayerSelectionTeamMenuItemEntry>().Setup(this, fieldKey);
+            this.GetEntry<IPlayerSelectionTeamMenuItemEntry>(fieldKey);
 
         public IPlayerSelectionTeamMenuEntry GetPlayerSelectionTeamMenu(string fieldKey) =>
-            NegumContainer.Resolve<IPlayerSelectionTeamMenuEntry>().Setup(this, fieldKey);
+            this.GetEntry<IPlayerSelectionTeamMenuEntry>(fieldKey);
 
         public IPlayerSelectionTeamMenuValueEntry GetPlayerSelectionTeamMenuValue(string fieldKey) =>
-            NegumContainer.Resolve<IPlayerSelectionTeamMenuValueEntry>().Setup(this, fieldKey);
+            this.GetEntry<IPlayerSelectionTeamMenuValueEntry>(fieldKey);
 
-        public ITimeEntry GetTime(string fieldKey) =>
-            NegumContainer.Resolve<ITimeEntry>().Setup(this, fieldKey);
-
-        public IDemoModeFightEntry GetDemoModeFight(string fieldKey) =>
-            NegumContainer.Resolve<IDemoModeFightEntry>().Setup(this, fieldKey);
+        public ITimeEntry GetTime(string fieldKey) => this.GetEntry<ITimeEntry>(fieldKey);
+        public IDemoModeFightEntry GetDemoModeFight(string fieldKey) => this.GetEntry<IDemoModeFightEntry>(fieldKey);
 
         public IEnumerable<ICharacterEntry> GetCharacters() =>
-            this.Select(entry => NegumContainer.Resolve<ICharacterEntry>().Setup(this, entry.Value))
+            this.Select(entry => this.GetEntry<ICharacterEntry>(entry.Value))
                 .ToList();
 
         public IFightConfigurationPlayerEntry GetFightConfigurationPlayer(string fieldKey) =>
-            NegumContainer.Resolve<IFightConfigurationPlayerEntry>().Setup(this, fieldKey);
+            this.GetEntry<IFightConfigurationPlayerEntry>(fieldKey);
 
         public IFightConfigurationTeamEntry GetFightConfigurationTeam(string fieldKey) =>
-            NegumContainer.Resolve<IFightConfigurationTeamEntry>().Setup(this, fieldKey);
+            this.GetEntry<IFightConfigurationTeamEntry>(fieldKey);
 
         public IFightConfigurationWinEntry GetFightConfigurationWin(string fieldKey) =>
-            NegumContainer.Resolve<IFightConfigurationWinEntry>().Setup(this, fieldKey);
+            this.GetEntry<IFightConfigurationWinEntry>(fieldKey);
 
-        public IScreenElementEntry GetScreenElement(string fieldKey) =>
-            NegumContainer.Resolve<IScreenElementEntry>().Setup(this, fieldKey);
+        public IScreenElementEntry GetScreenElement(string fieldKey) => this.GetEntry<IScreenElementEntry>(fieldKey);
 
         public IEnumerator<IConfigurationSectionEntry> GetEnumerator() => this.ConfigSection.Entries.GetEnumerator();
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+        private TEntry GetEntry<TEntry>(string fieldKey)
+            where TEntry : IScrapperEntry =>
+            (TEntry) NegumContainer.Resolve<TEntry>().Setup(this, fieldKey);
     }
 }

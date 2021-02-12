@@ -7,7 +7,7 @@ namespace Negum.Core.Scrappers.Entries
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface IPlayerSelectionTeamMenuEntry : IScrapperEntry<IPlayerSelectionTeamMenuEntry>
+    public interface IPlayerSelectionTeamMenuEntry : IScrapperEntry
     {
         IVectorEntry Position => Scrapper.GetVector(this.KeyPrefix + ".pos");
         IImageEntry Background => Scrapper.GetImage(this.KeyPrefix + ".bg");

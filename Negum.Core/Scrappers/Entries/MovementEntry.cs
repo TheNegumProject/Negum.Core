@@ -6,7 +6,7 @@ namespace Negum.Core.Scrappers.Entries
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public class MovementEntry : ScrappedEntry<IMovementEntry>, IMovementEntry
+    public class MovementEntry : ScrappedEntry, IMovementEntry
     {
     }
 }

@@ -6,7 +6,7 @@ namespace Negum.Core.Scrappers.Entries
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public class FightConfigurationTeamEntry : ScrappedEntry<IFightConfigurationTeamEntry>, IFightConfigurationTeamEntry
+    public class FightConfigurationTeamEntry : ScrappedEntry, IFightConfigurationTeamEntry
     {
     }
 }

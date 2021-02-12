@@ -9,8 +9,7 @@ namespace Negum.Core.Scrappers.Entries
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface IEntryCollection<out TEntry> : IScrapperEntry<IEntryCollection<TEntry>>, IEnumerable<TEntry>
-        where TEntry : IScrapperEntry<TEntry>
+    public interface IEntryCollection<out TEntry> : IScrapperEntry, IEnumerable<TEntry>
     {
         /// <summary>
         /// Setups current collection with values correspondent to the given keys.

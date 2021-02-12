@@ -11,8 +11,8 @@ namespace Negum.Core.Scrappers.Entries
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public class EntryCollection<TEntry> : ScrappedEntry<IEntryCollection<TEntry>>, IEntryCollection<TEntry>
-        where TEntry : IScrapperEntry<TEntry>
+    public class EntryCollection<TEntry> : ScrappedEntry, IEntryCollection<TEntry>
+        where TEntry : IScrapperEntry
     {
         private IEnumerable<TEntry> Entries { get; set; }
 
@@ -26,7 +26,7 @@ namespace Negum.Core.Scrappers.Entries
 
             this.Entries = this.Scrapper
                 .Where(entry => entry.Key.StartsWith(keyPrefix))
-                .Select(entry => NegumContainer.Resolve<TEntry>().Setup(this.Scrapper, entry.Key))
+                .Select(entry => (TEntry) NegumContainer.Resolve<TEntry>().Setup(this.Scrapper, entry.Key))
                 .ToList();
 
             return this;
@@ -39,7 +39,7 @@ namespace Negum.Core.Scrappers.Entries
             base.Setup(scrapper, keysList.ElementAt(0));
             
             this.Entries = keysList
-                .Select(key => NegumContainer.Resolve<TEntry>().Setup(this.Scrapper, key))
+                .Select(key => (TEntry) NegumContainer.Resolve<TEntry>().Setup(this.Scrapper, key))
                 .ToList();
 
             return this;

@@ -7,7 +7,7 @@ namespace Negum.Core.Scrappers.Entries
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface ITimeEntry : IScrapperEntry<ITimeEntry>
+    public interface ITimeEntry : IScrapperEntry
     {
         // TODO: Set values
     }

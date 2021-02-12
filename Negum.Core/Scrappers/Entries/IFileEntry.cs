@@ -7,7 +7,7 @@ namespace Negum.Core.Scrappers.Entries
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface IFileEntry : IScrapperEntry<IFileEntry>
+    public interface IFileEntry : IScrapperEntry
     {
         /// <summary>
         /// Path to the file. 

@@ -7,7 +7,7 @@ namespace Negum.Core.Scrappers.Entries
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface IAudioEntry : IScrapperEntry<IAudioEntry>
+    public interface IAudioEntry : IScrapperEntry
     {
         /// <summary>
         /// Audio file.

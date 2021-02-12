@@ -9,7 +9,7 @@ namespace Negum.Core.Scrappers.Entries
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface IVectorEntry : IScrapperEntry<IVectorEntry>, IEnumerable<string>
+    public interface IVectorEntry : IScrapperEntry, IEnumerable<string>
     {
         /// <summary>
         /// Provides simple way to retrieve value from appropriate slot.

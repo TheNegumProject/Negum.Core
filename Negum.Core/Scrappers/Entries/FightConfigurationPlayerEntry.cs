@@ -7,8 +7,7 @@ namespace Negum.Core.Scrappers.Entries
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public class FightConfigurationPlayerEntry : ScrappedEntry<IFightConfigurationPlayerEntry>,
-        IFightConfigurationPlayerEntry
+    public class FightConfigurationPlayerEntry : ScrappedEntry, IFightConfigurationPlayerEntry
     {
     }
 }
