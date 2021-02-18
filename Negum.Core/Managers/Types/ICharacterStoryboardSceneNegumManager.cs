@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Negum.Core.Managers.Entries;
 
-namespace Negum.Core.Managers
+namespace Negum.Core.Managers.Types
 {
     /// <summary>
     /// Manager which handles Character's Storyboard Scene configuration.
@@ -21,25 +21,25 @@ namespace Negum.Core.Managers
 
     public interface ICharacterStoryboardSceneNegumSceneDef : INegumManagerSection
     {
-        IFileEntry SpriteFile => Scrapper.GetFile("spr");
+        IFileEntry SpriteFile => this.GetValue<IFileEntry>("spr");
 
         /// <summary>
         /// Stating scene number (for debugging).
         /// </summary>
-        int StartScene => Scrapper.GetInt("startscene");
+        int StartScene => this.GetValue<int>("startscene");
     }
 
     public interface ICharacterStoryboardSceneNegumScene : INegumManagerSection
     {
-        ITimeEntry FadeInTime => Scrapper.GetTime("fadein.time");
-        IVectorEntry FadeInColor => Scrapper.GetVector("fadein.col");
-        ITimeEntry FadeOutTime => Scrapper.GetTime("fadeout.time");
-        IVectorEntry FadeOutColor => Scrapper.GetVector("fadeout.col");
-        IVectorEntry ClearColor => Scrapper.GetVector("clearcolor");
-        IVectorEntry LayerAllPosition => Scrapper.GetVector("layerall.pos");
-        IImageEntry Layer0 => Scrapper.GetImage("layer0");
-        IImageEntry Layer1 => Scrapper.GetImage("layer1");
-        IAudioEntry BackgroundMusic => Scrapper.GetAudio("bgm");
-        ITimeEntry TotalTime => Scrapper.GetTime("end.time");
+        ITimeEntry FadeInTime => this.GetValue<ITimeEntry>("fadein.time");
+        IVectorEntry FadeInColor => this.GetValue<IVectorEntry>("fadein.col");
+        ITimeEntry FadeOutTime => this.GetValue<ITimeEntry>("fadeout.time");
+        IVectorEntry FadeOutColor => this.GetValue<IVectorEntry>("fadeout.col");
+        IVectorEntry ClearColor => this.GetValue<IVectorEntry>("clearcolor");
+        IVectorEntry LayerAllPosition => this.GetValue<IVectorEntry>("layerall.pos");
+        IImageEntry Layer0 => this.GetValue<IImageEntry>("layer0");
+        IImageEntry Layer1 => this.GetValue<IImageEntry>("layer1");
+        IAudioEntry BackgroundMusic => this.GetValue<IAudioEntry>("bgm");
+        ITimeEntry TotalTime => this.GetValue<ITimeEntry>("end.time");
     }
 }

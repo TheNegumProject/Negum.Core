@@ -1,6 +1,6 @@
 using Negum.Core.Managers.Entries;
 
-namespace Negum.Core.Managers
+namespace Negum.Core.Managers.Types
 {
     /// <summary>
     /// Manager which handles Font configuration.
@@ -20,12 +20,12 @@ namespace Negum.Core.Managers
         /// <summary>
         /// Version of this Font.
         /// </summary>
-        string Version => Scrapper.GetString("fntversion");
+        string Version => this.GetValue<string>("fntversion");
 
         /// <summary>
         /// Name of this Font.
         /// </summary>
-        string Name => Scrapper.GetString("name");
+        string Name => this.GetValue<string>("name");
     }
 
     public interface IFontNegumDef : INegumManagerSection
@@ -34,31 +34,31 @@ namespace Negum.Core.Managers
         /// Type of this Font.
         /// Example: bitmap
         /// </summary>
-        string Type => Scrapper.GetString("Type");
+        string Type => this.GetValue<string>("Type");
 
         /// <summary>
         /// Bank numbers are mapped to palette numbers (0, bank).
         /// </summary>
-        string BankType => Scrapper.GetString("BankType");
+        string BankType => this.GetValue<string>("BankType");
 
         /// <summary>
         /// Size of font: width, height.  Width is used for spaces.
         /// </summary>
-        IVectorEntry Size => Scrapper.GetVector("Size");
+        IVectorEntry Size => this.GetValue<IVectorEntry>("Size");
 
         /// <summary>
         /// Spacing between font glyphs: width, height.
         /// </summary>
-        IVectorEntry Spacing => Scrapper.GetVector("Spacing");
+        IVectorEntry Spacing => this.GetValue<IVectorEntry>("Spacing");
 
         /// <summary>
         /// Drawing offset: x, y.
         /// </summary>
-        IVectorEntry Offset => Scrapper.GetVector("Offset");
+        IVectorEntry Offset => this.GetValue<IVectorEntry>("Offset");
 
         /// <summary>
         /// Filename of the sff containing the glyphs.
         /// </summary>
-        IFileEntry File => Scrapper.GetFile("File");
+        IFileEntry File => this.GetValue<IFileEntry>("File");
     }
 }

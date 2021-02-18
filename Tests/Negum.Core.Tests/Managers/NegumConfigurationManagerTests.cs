@@ -1,7 +1,6 @@
 using System.Threading.Tasks;
 using Negum.Core.Containers;
-using Negum.Core.Managers;
-using Negum.Core.Scrappers;
+using Negum.Core.Managers.Types;
 using Xunit;
 
 namespace Negum.Core.Tests.Managers
@@ -22,7 +21,7 @@ namespace Negum.Core.Tests.Managers
             
             var config = await this.Parse(path);
             var scrapper = NegumContainer.Resolve<IConfigurationScrapper>().Setup(config);
-            var manager = (INegumNegumManager) NegumContainer.Resolve<INegumNegumManager>().Setup(scrapper);
+            var manager = (IConfigNegumManager) NegumContainer.Resolve<IConfigNegumManager>().Setup(scrapper);
             var key = manager.P1Keys.Keys.X;
             
             Assert.True(key == 108);

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Negum.Core.Managers.Entries;
 
-namespace Negum.Core.Managers
+namespace Negum.Core.Managers.Types
 {
     /// <summary>
     /// Manager which handles Motif configuration.
@@ -65,8 +65,8 @@ namespace Negum.Core.Managers
 
     public interface IMotifNegumScreenBgDef : INegumManagerSection
     {
-        IFileEntry SpriteFile => Scrapper.GetFile("spr");
-        IVectorEntry BgClearColor => Scrapper.GetVector("bgclearcolor");
+        IFileEntry SpriteFile => this.GetValue<IFileEntry>("spr");
+        IVectorEntry BgClearColor => this.GetValue<IVectorEntry>("bgclearcolor");
     }
 
     public interface IMotifNegumInfo : INegumManagerSection
@@ -74,22 +74,22 @@ namespace Negum.Core.Managers
         /// <summary>
         /// Name of motif.
         /// </summary>
-        string Name => Scrapper.GetString("name");
+        string Name => this.GetValue<string>("name");
 
         /// <summary>
         /// Motif author name.
         /// </summary>
-        string Author => Scrapper.GetString("author");
+        string Author => this.GetValue<string>("author");
 
         /// <summary>
         /// Version date of motif.
         /// </summary>
-        ITimeEntry VersionDate => Scrapper.GetTime("versiondate");
+        ITimeEntry VersionDate => this.GetValue<ITimeEntry>("versiondate");
 
         /// <summary>
         /// Version of motif.
         /// </summary>
-        float Version => Scrapper.GetFloat("mugenversion");
+        float Version => this.GetValue<float>("mugenversion");
     }
 
     public interface IMotifNegumFiles : INegumManagerSection
@@ -97,32 +97,32 @@ namespace Negum.Core.Managers
         /// <summary>
         /// Filename of sprite data.
         /// </summary>
-        IFileEntry SpriteFile => Scrapper.GetFile("spr");
+        IFileEntry SpriteFile => this.GetValue<IFileEntry>("spr");
 
         /// <summary>
         /// Filename of sound data.
         /// </summary>
-        IFileEntry SoundFile => Scrapper.GetFile("snd");
+        IFileEntry SoundFile => this.GetValue<IFileEntry>("snd");
 
         /// <summary>
         /// Logo storyboard definition (optional).
         /// </summary>
-        string LogoStoryboardDefinition => Scrapper.GetString("logo.storyboard");
+        string LogoStoryboardDefinition => this.GetValue<string>("logo.storyboard");
 
         /// <summary>
         /// Intro storyboard definition (optional).
         /// </summary>
-        string IntroStoryboardDefinition => Scrapper.GetString("intro.storyboard");
+        string IntroStoryboardDefinition => this.GetValue<string>("intro.storyboard");
 
         /// <summary>
         /// Character and stage selection list.
         /// </summary>
-        IFileEntry SelectionFile => Scrapper.GetFile("select");
+        IFileEntry SelectionFile => this.GetValue<IFileEntry>("select");
 
         /// <summary>
         /// Fight definition filename.
         /// </summary>
-        IFileEntry FightFile => Scrapper.GetFile("fight");
+        IFileEntry FightFile => this.GetValue<IFileEntry>("fight");
 
         /// <summary>
         /// System fonts.
@@ -135,71 +135,68 @@ namespace Negum.Core.Managers
         /// <summary>
         /// Music to play at title screen.
         /// </summary>
-        IFileEntry TitleMusicFile => Scrapper.GetFile("title.bgm");
+        IFileEntry TitleMusicFile => this.GetValue<IFileEntry>("title.bgm");
 
         /// <summary>
         /// Music to play at char select screen.
         /// </summary>
-        IAudioEntry Select => Scrapper.GetAudio("select.bgm");
+        IAudioEntry Select => this.GetValue<IAudioEntry>("select.bgm");
 
         /// <summary>
         /// Music to play at versus screen.
         /// </summary>
-        IAudioEntry Vs => Scrapper.GetAudio("vs.bgm");
+        IAudioEntry Vs => this.GetValue<IAudioEntry>("vs.bgm");
 
         /// <summary>
         /// Music to play at victory screen.
         /// </summary>
-        IAudioEntry Victory => Scrapper.GetAudio("victory.bgm");
+        IAudioEntry Victory => this.GetValue<IAudioEntry>("victory.bgm");
     }
 
     public interface IMotifNegumTitleInfo : INegumManagerSection
     {
-        ITimeEntry FadeInTime => Scrapper.GetTime("fadein.time");
-        ITimeEntry FadeOutTime => Scrapper.GetTime("fadeout.time");
-        IVectorEntry MenuPosition => Scrapper.GetVector("menu.pos");
-        ITextEntry MenuItem => Scrapper.GetText("menu.item");
-        ITextEntry MenuItemActive => Scrapper.GetText("menu.item.active");
-        string MenuItemNameArcade => Scrapper.GetString("menu.itemname.arcade");
-        string MenuItemNameVersus => Scrapper.GetString("menu.itemname.versus");
-        string MenuItemNameTeamArcade => Scrapper.GetString("menu.itemname.teamarcade");
-        string MenuItemNameTeamVersus => Scrapper.GetString("menu.itemname.teamversus");
-        string MenuItemNameTeamCoop => Scrapper.GetString("menu.itemname.teamcoop");
-        string MenuItemNameSurvival => Scrapper.GetString("menu.itemname.survival");
-
-        string MenuItemNameSurvivalCoop =>
-            Scrapper.GetString("menu.itemname.survivalcoop");
-
-        string MenuItemNameTraining => Scrapper.GetString("menu.itemname.training");
-        string MenuItemNameWatch => Scrapper.GetString("menu.itemname.watch");
-        string MenuItemNameOptions => Scrapper.GetString("menu.itemname.options");
-        string MenuItemNameExit => Scrapper.GetString("menu.itemname.exit");
-        IVectorEntry MenuWindowMarginsY => Scrapper.GetVector("menu.window.margins.y");
-        int MenuWindowVisibleItems => Scrapper.GetInt("menu.window.visibleitems");
+        ITimeEntry FadeInTime => this.GetValue<ITimeEntry>("fadein.time");
+        ITimeEntry FadeOutTime => this.GetValue<ITimeEntry>("fadeout.time");
+        IVectorEntry MenuPosition => this.GetValue<IVectorEntry>("menu.pos");
+        ITextEntry MenuItem => this.GetValue<ITextEntry>("menu.item");
+        ITextEntry MenuItemActive => this.GetValue<ITextEntry>("menu.item.active");
+        string MenuItemNameArcade => this.GetValue<string>("menu.itemname.arcade");
+        string MenuItemNameVersus => this.GetValue<string>("menu.itemname.versus");
+        string MenuItemNameTeamArcade => this.GetValue<string>("menu.itemname.teamarcade");
+        string MenuItemNameTeamVersus => this.GetValue<string>("menu.itemname.teamversus");
+        string MenuItemNameTeamCoop => this.GetValue<string>("menu.itemname.teamcoop");
+        string MenuItemNameSurvival => this.GetValue<string>("menu.itemname.survival");
+        string MenuItemNameSurvivalCoop => this.GetValue<string>("menu.itemname.survivalcoop");
+        string MenuItemNameTraining => this.GetValue<string>("menu.itemname.training");
+        string MenuItemNameWatch => this.GetValue<string>("menu.itemname.watch");
+        string MenuItemNameOptions => this.GetValue<string>("menu.itemname.options");
+        string MenuItemNameExit => this.GetValue<string>("menu.itemname.exit");
+        IVectorEntry MenuWindowMarginsY => this.GetValue<IVectorEntry>("menu.window.margins.y");
+        int MenuWindowVisibleItems => this.GetValue<int>("menu.window.visibleitems");
 
         /// <summary>
         /// Set it to true to enable default cursor display.
         /// Set it to false to disable default cursor display.
         /// </summary>
-        bool IsMenuBoxCursorVisible => Scrapper.GetBoolean("menu.boxcursor.visible");
+        bool IsMenuBoxCursorVisible => this.GetValue<bool>("menu.boxcursor.visible");
 
-        IVectorEntry MenuBoxCursorCoords => Scrapper.GetVector("menu.boxcursor.coords");
-        IMovementEntry Cursor => Scrapper.GetMovement("cursor");
-        ISpriteSoundEntry Cancel => Scrapper.GetSpriteSound("cancel");
+        IVectorEntry MenuBoxCursorCoords => this.GetValue<IVectorEntry>("menu.boxcursor.coords");
+        IMovementEntry Cursor => this.GetValue<IMovementEntry>("cursor");
+        ISpriteSoundEntry Cancel => this.GetValue<ISpriteSoundEntry>("cancel");
     }
 
     public interface IMotifNegumScreenBg : INegumManagerSection
     {
-        string Type => Scrapper.GetString("type");
-        IVectorEntry SpriteNumber => Scrapper.GetVector("spriteno");
-        int LayerNumber => Scrapper.GetInt("layerno");
-        IVectorEntry Start => Scrapper.GetVector("start");
-        IVectorEntry Tile => Scrapper.GetVector("tile");
-        IVectorEntry Velocity => Scrapper.GetVector("velocity");
-        IVectorEntry Window => Scrapper.GetVector("window");
-        string Trans => Scrapper.GetString("trans");
-        int Mask => Scrapper.GetInt("mask");
-        IVectorEntry Delta => Scrapper.GetVector("delta");
+        string Type => this.GetValue<string>("type");
+        IVectorEntry SpriteNumber => this.GetValue<IVectorEntry>("spriteno");
+        int LayerNumber => this.GetValue<int>("layerno");
+        IVectorEntry Start => this.GetValue<IVectorEntry>("start");
+        IVectorEntry Tile => this.GetValue<IVectorEntry>("tile");
+        IVectorEntry Velocity => this.GetValue<IVectorEntry>("velocity");
+        IVectorEntry Window => this.GetValue<IVectorEntry>("window");
+        string Trans => this.GetValue<string>("trans");
+        int Mask => this.GetValue<int>("mask");
+        IVectorEntry Delta => this.GetValue<IVectorEntry>("delta");
     }
 
     public interface IMotifNegumInfobox : INegumManagerSection
@@ -209,124 +206,123 @@ namespace Negum.Core.Managers
 
     public interface IMotifNegumSelectInfo : INegumManagerSection
     {
-        ITimeEntry FadeInTime => Scrapper.GetTime("fadein.time");
-        ITimeEntry FadeOutTime => Scrapper.GetTime("fadeout.time");
-        int Rows => Scrapper.GetInt("rows");
-        int Columns => Scrapper.GetInt("columns");
+        ITimeEntry FadeInTime => this.GetValue<ITimeEntry>("fadein.time");
+        ITimeEntry FadeOutTime => this.GetValue<ITimeEntry>("fadeout.time");
+        int Rows => this.GetValue<int>("rows");
+        int Columns => this.GetValue<int>("columns");
 
         /// <summary>
         /// Values:
         /// 0 - default
         /// 1 - cursor wraps around
         /// </summary>
-        int Wrapping => Scrapper.GetInt("wrapping");
+        int Wrapping => this.GetValue<int>("wrapping");
 
         /// <summary>
         /// Position to draw to.
         /// </summary>
-        IVectorEntry Position => Scrapper.GetVector("pos");
+        IVectorEntry Position => this.GetValue<IVectorEntry>("pos");
 
-        bool ShowEmptyBoxes => Scrapper.GetBoolean("showemptyboxes");
-        bool CanMoveOverEmptyBoxes => Scrapper.GetBoolean("moveoveremptyboxes");
-
-        ICellSelectionEntry Cell => Scrapper.GetCell("cell");
+        bool ShowEmptyBoxes => this.GetValue<bool>("showemptyboxes");
+        bool CanMoveOverEmptyBoxes => this.GetValue<bool>("moveoveremptyboxes");
+        ICellSelectionEntry Cell => this.GetValue<ICellSelectionEntry>("cell");
 
         /// <summary>
         /// Player 1 selection.
         /// </summary>
-        IPlayerSelectionEntry Player1 => Scrapper.GetPlayerSelection("p1");
+        IPlayerSelectionEntry Player1 => this.GetValue<IPlayerSelectionEntry>("p1");
 
         /// <summary>
         /// Player 2 selection.
         /// </summary>
-        IPlayerSelectionEntry Player2 => Scrapper.GetPlayerSelection("p2");
+        IPlayerSelectionEntry Player2 => this.GetValue<IPlayerSelectionEntry>("p2");
 
-        IMovementEntry Random => Scrapper.GetMovement("random");
-        ISpriteSoundEntry Cancel => Scrapper.GetSpriteSound("cancel");
-        IImageEntry Portrait => Scrapper.GetImage("portrait");
-        ITextEntry Title => Scrapper.GetText("title");
-        IStageSelectionEntry Stage => Scrapper.GetStage("stage");
-        bool TeamMenuMoveWrapping => Scrapper.GetBoolean("teammenu.move.wrapping");
+        IMovementEntry Random => this.GetValue<IMovementEntry>("random");
+        ISpriteSoundEntry Cancel => this.GetValue<ISpriteSoundEntry>("cancel");
+        IImageEntry Portrait => this.GetValue<IImageEntry>("portrait");
+        ITextEntry Title => this.GetValue<ITextEntry>("title");
+        IStageSelectionEntry Stage => this.GetValue<IStageSelectionEntry>("stage");
+        bool TeamMenuMoveWrapping => this.GetValue<bool>("teammenu.move.wrapping");
     }
 
     public interface IMotifNegumVsScreen : INegumManagerSection
     {
-        ITimeEntry Time => Scrapper.GetTime("time");
-        ITimeEntry FadeInTime => Scrapper.GetTime("fadein.time");
-        ITimeEntry FadeOutTime => Scrapper.GetTime("fadeout.time");
-        ITextEntry Match => Scrapper.GetText("match");
-        IPlayerSelectionEntry Player1 => Scrapper.GetPlayerSelection("p1");
-        IPlayerSelectionEntry Player2 => Scrapper.GetPlayerSelection("p2");
+        ITimeEntry Time => this.GetValue<ITimeEntry>("time");
+        ITimeEntry FadeInTime => this.GetValue<ITimeEntry>("fadein.time");
+        ITimeEntry FadeOutTime => this.GetValue<ITimeEntry>("fadeout.time");
+        ITextEntry Match => this.GetValue<ITextEntry>("match");
+        IPlayerSelectionEntry Player1 => this.GetValue<IPlayerSelectionEntry>("p1");
+        IPlayerSelectionEntry Player2 => this.GetValue<IPlayerSelectionEntry>("p2");
     }
 
     public interface IMotifNegumDemoMode : INegumManagerSection
     {
-        bool IsEnabled => Scrapper.GetBoolean("enabled");
-        ITimeEntry WaitTime => Scrapper.GetTime("title.waittime");
-        IDemoModeFightEntry Fight => Scrapper.GetDemoModeFight("fight");
-        int IntroWaitCycles => Scrapper.GetInt("intro.waitcycles");
-        bool ShowDebugInfo => Scrapper.GetBoolean("debuginfo");
+        bool IsEnabled => this.GetValue<bool>("enabled");
+        ITimeEntry WaitTime => this.GetValue<ITimeEntry>("title.waittime");
+        IDemoModeFightEntry Fight => this.GetValue<IDemoModeFightEntry>("fight");
+        int IntroWaitCycles => this.GetValue<int>("intro.waitcycles");
+        bool ShowDebugInfo => this.GetValue<bool>("debuginfo");
     }
 
     public interface IMotifNegumContinueScreen : INegumManagerSection
     {
-        bool IsEnabled => Scrapper.GetBoolean("enabled");
-        IVectorEntry Position => Scrapper.GetVector("pos");
-        ITextEntry ContinueText => Scrapper.GetText("continue");
-        ITextEntry YesText => Scrapper.GetText("yes");
-        ITextEntry YesActiveText => Scrapper.GetText("yes.active");
-        ITextEntry NoText => Scrapper.GetText("no");
-        ITextEntry NoActiveText => Scrapper.GetText("no.active");
+        bool IsEnabled => this.GetValue<bool>("enabled");
+        IVectorEntry Position => this.GetValue<IVectorEntry>("pos");
+        ITextEntry ContinueText => this.GetValue<ITextEntry>("continue");
+        ITextEntry YesText => this.GetValue<ITextEntry>("yes");
+        ITextEntry YesActiveText => this.GetValue<ITextEntry>("yes.active");
+        ITextEntry NoText => this.GetValue<ITextEntry>("no");
+        ITextEntry NoActiveText => this.GetValue<ITextEntry>("no.active");
     }
 
     public interface IMotifNegumGameOverScreen : INegumManagerSection
     {
-        bool IsEnabled => Scrapper.GetBoolean("enabled");
-        IFileEntry StoryboardFile => Scrapper.GetFile("storyboard");
+        bool IsEnabled => this.GetValue<bool>("enabled");
+        IFileEntry StoryboardFile => this.GetValue<IFileEntry>("storyboard");
     }
 
     public interface IMotifNegumVictoryScreen : INegumManagerSection
     {
-        bool IsEnabled => Scrapper.GetBoolean("enabled");
-        ITimeEntry Time => Scrapper.GetTime("time");
-        ITimeEntry FadeInTime => Scrapper.GetTime("fadein.time");
-        ITimeEntry FadeOutTime => Scrapper.GetTime("fadeout.time");
-        IPlayerSelectionEntry Player1 => Scrapper.GetPlayerSelection("p1");
-        ITextEntry WinQuote => Scrapper.GetText("winquote");
+        bool IsEnabled => this.GetValue<bool>("enabled");
+        ITimeEntry Time => this.GetValue<ITimeEntry>("time");
+        ITimeEntry FadeInTime => this.GetValue<ITimeEntry>("fadein.time");
+        ITimeEntry FadeOutTime => this.GetValue<ITimeEntry>("fadeout.time");
+        IPlayerSelectionEntry Player1 => this.GetValue<IPlayerSelectionEntry>("p1");
+        ITextEntry WinQuote => this.GetValue<ITextEntry>("winquote");
     }
 
     public interface IMotifNegumWinScreen : INegumManagerSection
     {
-        bool IsEnabled => Scrapper.GetBoolean("enabled");
-        ITextEntry WinText => Scrapper.GetText("wintext");
-        ITimeEntry FadeInTime => Scrapper.GetTime("fadein.time");
-        ITimeEntry FadeOutTime => Scrapper.GetTime("fadeout.time");
-        ITimeEntry PoseTime => Scrapper.GetTime("pos.time");
+        bool IsEnabled => this.GetValue<bool>("enabled");
+        ITextEntry WinText => this.GetValue<ITextEntry>("wintext");
+        ITimeEntry FadeInTime => this.GetValue<ITimeEntry>("fadein.time");
+        ITimeEntry FadeOutTime => this.GetValue<ITimeEntry>("fadeout.time");
+        ITimeEntry PoseTime => this.GetValue<ITimeEntry>("pos.time");
     }
 
     public interface IMotifNegumDefaultEnding : INegumManagerSection
     {
-        bool IsEnabled => Scrapper.GetBoolean("enabled");
-        IFileEntry StoryboardFile => Scrapper.GetFile("storyboard");
+        bool IsEnabled => this.GetValue<bool>("enabled");
+        IFileEntry StoryboardFile => this.GetValue<IFileEntry>("storyboard");
     }
 
     public interface IMotifNegumEndCredits : INegumManagerSection
     {
-        bool IsEnabled => Scrapper.GetBoolean("enabled");
-        IFileEntry StoryboardFile => Scrapper.GetFile("storyboard");
+        bool IsEnabled => this.GetValue<bool>("enabled");
+        IFileEntry StoryboardFile => this.GetValue<IFileEntry>("storyboard");
     }
 
     public interface IMotifNegumSurvivalResultsScreen : INegumManagerSection
     {
-        bool IsEnabled => Scrapper.GetBoolean("enabled");
-        ITextEntry WinText => Scrapper.GetText("wintext");
-        ITimeEntry FadeInTime => Scrapper.GetTime("fadein.time");
-        ITimeEntry FadeOutTime => Scrapper.GetTime("fadeout.time");
-        ITimeEntry ShowTime => Scrapper.GetTime("show.time");
+        bool IsEnabled => this.GetValue<bool>("enabled");
+        ITextEntry WinText => this.GetValue<ITextEntry>("wintext");
+        ITimeEntry FadeInTime => this.GetValue<ITimeEntry>("fadein.time");
+        ITimeEntry FadeOutTime => this.GetValue<ITimeEntry>("fadeout.time");
+        ITimeEntry ShowTime => this.GetValue<ITimeEntry>("show.time");
 
         /// <summary>
         /// Number of rounds to get win pose (lose pose otherwise).
         /// </summary>
-        int RoundsToWin => Scrapper.GetInt("roundstowin");
+        int RoundsToWin => this.GetValue<int>("roundstowin");
     }
 }

@@ -1,8 +1,7 @@
 using System.Collections.Generic;
-using System.Linq;
 using Negum.Core.Managers.Entries;
 
-namespace Negum.Core.Managers
+namespace Negum.Core.Managers.Types
 {
     /// <summary>
     /// Manager which handles Selection configuration.
@@ -39,12 +38,12 @@ namespace Negum.Core.Managers
         /// For example, for 4,3,1 you will fight up to 4 randomly-picked characters who have order=1,
         /// followed by 3 with order=2 and 1 with order=3.
         /// </summary>
-        IVectorEntry ArcadeMaxMatches => Scrapper.GetVector("arcade.maxmatches");
+        IVectorEntry ArcadeMaxMatches => this.GetValue<IVectorEntry>("arcade.maxmatches");
 
         /// <summary>
         /// Maximum number of matches to fight before game ends in Team Mode.
         /// Like ArcadeMaxMatches, but applies to Team Battle.
         /// </summary>
-        IVectorEntry TeamMaxMatches => Scrapper.GetVector("team.maxmatches");
+        IVectorEntry TeamMaxMatches => this.GetValue<IVectorEntry>("team.maxmatches");
     }
 }

@@ -1,6 +1,4 @@
-using System.Runtime.CompilerServices;
-
-namespace Negum.Core.Managers
+namespace Negum.Core.Managers.Types
 {
     /// <summary>
     /// </summary>

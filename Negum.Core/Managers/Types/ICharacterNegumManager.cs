@@ -1,6 +1,6 @@
 using Negum.Core.Managers.Entries;
 
-namespace Negum.Core.Managers
+namespace Negum.Core.Managers.Types
 {
     /// <summary>
     /// Manager which handles Character configuration.
@@ -22,43 +22,43 @@ namespace Negum.Core.Managers
 
     public interface ICharacterNegumInfo : INegumManagerSection
     {
-        string Name => Scrapper.GetString("name");
-        string DisplayName => Scrapper.GetString("displayname");
-        ITimeEntry VersionDate => Scrapper.GetTime("versiondate");
-        string Version => Scrapper.GetString("mugenversion");
-        string Author => Scrapper.GetString("author");
+        string Name => this.GetValue<string>("name");
+        string DisplayName => this.GetValue<string>("displayname");
+        ITimeEntry VersionDate => this.GetValue<ITimeEntry>("versiondate");
+        string Version => this.GetValue<string>("mugenversion");
+        string Author => this.GetValue<string>("author");
 
         /// <summary>
         /// Default palettes in order of preference (up to 4).
         /// </summary>
-        IVectorEntry PaletteDefaults => Scrapper.GetVector("pal.defaults");
+        IVectorEntry PaletteDefaults => this.GetValue<IVectorEntry>("pal.defaults");
     }
 
     public interface ICharacterNegumFiles : INegumManagerSection
     {
-        IFileEntry CommandFile => Scrapper.GetFile("cmd");
-        IFileEntry ConstantsFile => Scrapper.GetFile("cns");
-        IFileEntry StatesFile => Scrapper.GetFile("st");
-        IFileEntry CommonStatesFile => Scrapper.GetFile("stcommon");
-        IFileEntry SpriteFiles => Scrapper.GetFile("sprite");
-        IFileEntry AnimationFile => Scrapper.GetFile("anim");
-        IFileEntry SoundFile => Scrapper.GetFile("sound");
-        IFileEntry AiHintsDataFile => Scrapper.GetFile("ai");
+        IFileEntry CommandFile => this.GetValue<IFileEntry>("cmd");
+        IFileEntry ConstantsFile => this.GetValue<IFileEntry>("cns");
+        IFileEntry StatesFile => this.GetValue<IFileEntry>("st");
+        IFileEntry CommonStatesFile => this.GetValue<IFileEntry>("stcommon");
+        IFileEntry SpriteFiles => this.GetValue<IFileEntry>("sprite");
+        IFileEntry AnimationFile => this.GetValue<IFileEntry>("anim");
+        IFileEntry SoundFile => this.GetValue<IFileEntry>("sound");
+        IFileEntry AiHintsDataFile => this.GetValue<IFileEntry>("ai");
     }
 
     public interface ICharacterNegumPaletteKeymap : INegumManagerSection
     {
-        int A => Scrapper.GetInt("a");
-        int B => Scrapper.GetInt("b");
-        int C => Scrapper.GetInt("c");
-        int X => Scrapper.GetInt("x");
-        int Y => Scrapper.GetInt("y");
-        int Z => Scrapper.GetInt("z");
+        int A => this.GetValue<int>("a");
+        int B => this.GetValue<int>("b");
+        int C => this.GetValue<int>("c");
+        int X => this.GetValue<int>("x");
+        int Y => this.GetValue<int>("y");
+        int Z => this.GetValue<int>("z");
     }
 
     public interface ICharacterNegumArcade : INegumManagerSection
     {
-        IFileEntry IntroStoryboardFile => Scrapper.GetFile("intro.storyboard");
-        IFileEntry EndingStoryboardFile => Scrapper.GetFile("ending.storyboard");
+        IFileEntry IntroStoryboardFile => this.GetValue<IFileEntry>("intro.storyboard");
+        IFileEntry EndingStoryboardFile => this.GetValue<IFileEntry>("ending.storyboard");
     }
 }

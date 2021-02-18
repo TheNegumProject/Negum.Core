@@ -1,4 +1,4 @@
-namespace Negum.Core.Managers
+namespace Negum.Core.Managers.Types
 {
     /// <summary>
     /// </summary>

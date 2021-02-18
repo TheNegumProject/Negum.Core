@@ -1,8 +1,7 @@
 using System.Collections.Generic;
-using System.Linq;
 using Negum.Core.Managers.Entries;
 
-namespace Negum.Core.Managers
+namespace Negum.Core.Managers.Types
 {
     /// <summary>
     /// Manager which handles Character commands.
@@ -22,13 +21,13 @@ namespace Negum.Core.Managers
 
     public interface ICharacterCommandsRemap : INegumManagerSection
     {
-        int A => Scrapper.GetInt("a");
-        int B => Scrapper.GetInt("b");
-        int C => Scrapper.GetInt("c");
-        int X => Scrapper.GetInt("x");
-        int Y => Scrapper.GetInt("y");
-        int Z => Scrapper.GetInt("z");
-        int S => Scrapper.GetInt("s");
+        int A => this.GetValue<int>("a");
+        int B => this.GetValue<int>("b");
+        int C => this.GetValue<int>("c");
+        int X => this.GetValue<int>("x");
+        int Y => this.GetValue<int>("y");
+        int Z => this.GetValue<int>("z");
+        int S => this.GetValue<int>("s");
     }
 
     public interface ICharacterCommandsDefaults : INegumManagerSection
@@ -36,12 +35,12 @@ namespace Negum.Core.Managers
         /// <summary>
         /// Default value for the "time" parameter of a Command. Minimum 1.
         /// </summary>
-        ITimeEntry CommandTime => this.Scrapper.GetTime("command.time");
+        ITimeEntry CommandTime => this.GetValue<ITimeEntry>("command.time");
 
         /// <summary>
         /// Default value for the "buffer.time" parameter of a Command. Minimum 1, maximum 30.
         /// </summary>
-        ITimeEntry CommandBufferTime => this.Scrapper.GetTime("command.buffer.time");
+        ITimeEntry CommandBufferTime => this.GetValue<ITimeEntry>("command.buffer.time");
     }
 
     public interface ICharacterCommandsCommand : INegumManagerSection
@@ -51,7 +50,7 @@ namespace Negum.Core.Managers
         /// You'll use this name to refer to that command in the state entry, as well as the CNS.
         /// It is case-sensitive (QCB_a is NOT the same as Qcb_a or QCB_A).
         /// </summary>
-        string Name => this.Scrapper.GetString("name");
+        string Name => this.GetValue<string>("name");
 
         /// <summary>
         /// List of buttons or directions, separated by commas.
@@ -83,14 +82,14 @@ namespace Negum.Core.Managers
         /// It is recommended that for most "motion" commands, eg. quarter-circle-fwd, you start off with a "release direction".
         /// This makes the command easier to do.
         /// </summary>
-        string Command => this.Scrapper.GetString("command");
+        string Command => this.GetValue<string>("command");
 
         /// <summary>
         /// Time allowed to do the command, given in game-ticks.
         /// The default value for this is set in the [Defaults] section below.
         /// A typical value is 15.
         /// </summary>
-        ITimeEntry Time => this.Scrapper.GetTime("time");
+        ITimeEntry Time => this.GetValue<ITimeEntry>("time");
 
         /// <summary>
         /// Time that the command will be buffered for.
@@ -107,7 +106,7 @@ namespace Negum.Core.Managers
         /// This parameter does not affect hold-only commands (eg. /F).
         /// It will be assumed to be 1 for those commands.
         /// </summary>
-        ITimeEntry BufferTime => this.Scrapper.GetTime("buffer.time");
+        ITimeEntry BufferTime => this.GetValue<ITimeEntry>("buffer.time");
     }
 
     public interface ICharacterCommandsCommandStatedef : INegumManagerSection
@@ -116,12 +115,12 @@ namespace Negum.Core.Managers
 
     public interface ICharacterCommandsState : INegumManagerSection
     {
-        string Type => this.Scrapper.GetString("type");
+        string Type => this.GetValue<string>("type");
 
         /// <summary>
         /// The number of the state to change to.
         /// </summary>
-        int Value => this.Scrapper.GetInt("value");
+        int Value => this.GetValue<int>("value");
 
         /// <summary>
         /// Parameters which will bbe used for all triggers.

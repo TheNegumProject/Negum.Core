@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Negum.Core.Managers.Entries;
 
-namespace Negum.Core.Managers
+namespace Negum.Core.Managers.Types
 {
     /// <summary>
     /// Manager which handles Stage configuration.
@@ -28,11 +28,11 @@ namespace Negum.Core.Managers
 
     public interface IStageNegumInfo : INegumManagerSection
     {
-        string Name => Scrapper.GetString("name");
-        string DisplayName => Scrapper.GetString("displayname");
-        ITimeEntry VersionDate => Scrapper.GetTime("versiondate");
-        string Version => Scrapper.GetString("mugenversion");
-        string Author => Scrapper.GetString("author");
+        string Name => this.GetValue<string>("name");
+        string DisplayName => this.GetValue<string>("displayname");
+        ITimeEntry VersionDate => this.GetValue<ITimeEntry>("versiondate");
+        string Version => this.GetValue<string>("mugenversion");
+        string Author => this.GetValue<string>("author");
     }
 
     public interface IStageNegumCamera : INegumManagerSection
@@ -40,35 +40,35 @@ namespace Negum.Core.Managers
         /// <summary>
         /// Camera starting X position.
         /// </summary>
-        int StartX => Scrapper.GetInt("startx");
+        int StartX => this.GetValue<int>("startx");
 
         /// <summary>
         /// Camera starting Y position.
         /// </summary>
-        int StartY => Scrapper.GetInt("starty");
+        int StartY => this.GetValue<int>("starty");
 
         /// <summary>
         /// Left bound of Camera.
         /// </summary>
-        int BoundLeft => Scrapper.GetInt("boundleft");
+        int BoundLeft => this.GetValue<int>("boundleft");
 
         /// <summary>
         /// Right bound of Camera.
         /// </summary>
-        int BoundRight => Scrapper.GetInt("boundright");
+        int BoundRight => this.GetValue<int>("boundright");
 
         /// <summary>
         /// High bound of Camera.
         /// High is a negative number.
         /// Make it more negative if you want a Camera to be able to move higher.
         /// </summary>
-        int BoundHigh => Scrapper.GetInt("boundhigh");
+        int BoundHigh => this.GetValue<int>("boundhigh");
 
         /// <summary>
         /// Low bound of Camera.
         /// Low should usually be 0.
         /// </summary>
-        int BoundLow => Scrapper.GetInt("boundlow");
+        int BoundLow => this.GetValue<int>("boundlow");
 
         /// <summary>
         /// This is how much the camera will move vertically towards the highest player.
@@ -78,45 +78,45 @@ namespace Negum.Core.Managers
         /// Typically .2 for normal-sized backgrounds.
         /// You may need to pull this value up for taller backgrounds.
         /// </summary>
-        float VerticalFollow => Scrapper.GetFloat("verticalfollow");
+        float VerticalFollow => this.GetValue<float>("verticalfollow");
 
         /// <summary>
         /// Minimum vertical distance the highest player has to be from the floor, before the camera starts to move up to follow him.
         /// For extremely tall stages, a floor tension of about 20-30 coupled with a vertical-follow of .8 allows the camera to follow the action.
         /// </summary>
-        float FloorTension => Scrapper.GetFloat("floortension");
+        float FloorTension => this.GetValue<float>("floortension");
 
         /// <summary>
         /// Horizontal distance player is from edge before camera starts to move left or right.
         /// Typically 50 or 60.
         /// </summary>
-        int Tension => Scrapper.GetInt("tension");
+        int Tension => this.GetValue<int>("tension");
 
         /// <summary>
         /// Number of pixels beyond the top and bottom of the screen that may be drawn.
         /// Overdraw specifies the how much can be seen during an EnvShake.
         /// Overdraw pixels will also be used when the screen aspect is taller than the stage aspect.
         /// </summary>
-        int OverdrawHigh => Scrapper.GetInt("overdrawhigh");
+        int OverdrawHigh => this.GetValue<int>("overdrawhigh");
 
         /// <summary>
         /// Number of pixels beyond the top and bottom of the screen that may be drawn.
         /// Overdraw specifies the how much can be seen during an EnvShake.
         /// Overdraw pixels will also be used when the screen aspect is taller than the stage aspect.
         /// </summary>
-        int OverdrawLow => Scrapper.GetInt("overdrawlow");
+        int OverdrawLow => this.GetValue<int>("overdrawlow");
 
         /// <summary>
         /// Number of pixels into the top of the screen that may be cut from drawing when the screen aspect is shorter than the stage aspect.
         /// This parameter suggest a guideline, and the actual number of pixels cut depends on the difference in aspect.
         /// </summary>
-        int CutHigh => Scrapper.GetInt("cuthigh");
+        int CutHigh => this.GetValue<int>("cuthigh");
 
         /// <summary>
         /// Number of pixels into the bottom of the screen that may be cut from drawing when the screen aspect is shorter than the stage aspect.
         /// This parameter suggest a guideline, and the actual number of pixels cut depends on the difference in aspect.
         /// </summary>
-        int CutLow => Scrapper.GetInt("cutlow");
+        int CutLow => this.GetValue<int>("cutlow");
     }
 
     public interface IStageNegumPlayerInfo : INegumManagerSection
@@ -125,45 +125,45 @@ namespace Negum.Core.Managers
         /// Player's 1 starting coordinate X.
         /// This is typically -70.
         /// </summary>
-        int Player1StartX => Scrapper.GetInt("p1startx");
+        int Player1StartX => this.GetValue<int>("p1startx");
 
         /// <summary>
         /// Player's 1 starting coordinate Y.
         /// Should be 0.
         /// </summary>
-        int Player1StartY => Scrapper.GetInt("p1starty");
+        int Player1StartY => this.GetValue<int>("p1starty");
 
         /// <summary>
         /// Direction player faces: 1 = right, -1 = left.
         /// </summary>
-        int Player1Facing => Scrapper.GetInt("p1facing");
+        int Player1Facing => this.GetValue<int>("p1facing");
 
         /// <summary>
         /// Player's 2 starting coordinate X.
         /// This is typically 70.
         /// </summary>
-        int Player2StartX => Scrapper.GetInt("p2startx");
+        int Player2StartX => this.GetValue<int>("p2startx");
 
         /// <summary>
         /// Player's 2 starting coordinate Y.
         /// Should be 0.
         /// </summary>
-        int Player2StartY => Scrapper.GetInt("p2starty");
+        int Player2StartY => this.GetValue<int>("p2starty");
 
         /// <summary>
         /// Direction player faces: 1 = right, -1 = left.
         /// </summary>
-        int Player2Facing => Scrapper.GetInt("p2facing");
+        int Player2Facing => this.GetValue<int>("p2facing");
 
         /// <summary>
         /// Left bound (x-movement).
         /// </summary>
-        int LeftBound => Scrapper.GetInt("leftbound");
+        int LeftBound => this.GetValue<int>("leftbound");
 
         /// <summary>
         /// Right bound.
         /// </summary>
-        int RightBound => Scrapper.GetInt("rightbound");
+        int RightBound => this.GetValue<int>("rightbound");
     }
 
     public interface IStageNegumBound : INegumManagerSection
@@ -172,13 +172,13 @@ namespace Negum.Core.Managers
         /// Distance from left edge of screen that player can move to.
         /// Typically 15.
         /// </summary>
-        int ScreenLeft => Scrapper.GetInt("screenleft");
+        int ScreenLeft => this.GetValue<int>("screenleft");
 
         /// <summary>
         /// Distance from right edge of screen that player can move to.
         /// Typically 15.
         /// </summary>
-        int ScreenRight => Scrapper.GetInt("screenright");
+        int ScreenRight => this.GetValue<int>("screenright");
     }
 
     public interface IStageNegumStageInfo : INegumManagerSection
@@ -187,33 +187,33 @@ namespace Negum.Core.Managers
         /// "Ground" level where players stand at, measured in pixels from the top of the screen.
         /// Adjust this value to move the ground level up/down in the screen.
         /// </summary>
-        int OffsetZ => Scrapper.GetInt("zoffset");
+        int OffsetZ => this.GetValue<int>("zoffset");
 
         /// <summary>
         /// Leave this at 1.
         /// It makes the players face each other
         /// </summary>
-        int AutoTurn => Scrapper.GetInt("autoturn");
+        int AutoTurn => this.GetValue<int>("autoturn");
 
         /// <summary>
         /// Set the following to 1 to have the background reset itself between rounds.
         /// </summary>
-        int ResetBg => Scrapper.GetInt("resetBG");
+        int ResetBg => this.GetValue<int>("resetBG");
 
         /// <summary>
         /// Width and height of the local coordinate space of the stage.
         /// </summary>
-        IVectorEntry LocalCoord => Scrapper.GetVector("localcoord");
+        IVectorEntry LocalCoord => this.GetValue<IVectorEntry>("localcoord");
 
         /// <summary>
         /// Horizontal scaling factor for drawing.
         /// </summary>
-        int ScaleX => Scrapper.GetInt("xscale");
+        int ScaleX => this.GetValue<int>("xscale");
 
         /// <summary>
         /// Vertical scaling factor for drawing.
         /// </summary>
-        int ScaleY => Scrapper.GetInt("yscale");
+        int ScaleY => this.GetValue<int>("yscale");
     }
 
     public interface IStageNegumShadow : INegumManagerSection
@@ -223,7 +223,7 @@ namespace Negum.Core.Managers
         /// Valid values range from 0 (lightest) to 256 (darkest).
         /// Defaults to 128 if omitted.
         /// </summary>
-        int Intensity => Scrapper.GetInt("intensity");
+        int Intensity => this.GetValue<int>("intensity");
 
         /// <summary>
         /// This is the shadow color given in r,g,b.
@@ -231,7 +231,7 @@ namespace Negum.Core.Managers
         /// Defaults to 0,0,0 if omitted.
         /// Intensity and color's effects add up to give the final shadow result.
         /// </summary>
-        IVectorEntry Color => Scrapper.GetVector("color");
+        IVectorEntry Color => this.GetValue<IVectorEntry>("color");
 
         /// <summary>
         /// This is the scale factor of the shadow.
@@ -239,7 +239,7 @@ namespace Negum.Core.Managers
         /// You can use a NEGATIVE scale factor to make the shadow fall INTO the screen.
         /// Defaults to 0.4 if omitted.
         /// </summary>
-        float ScaleY => Scrapper.GetFloat("yscale");
+        float ScaleY => this.GetValue<float>("yscale");
 
         /// <summary>
         /// This parameter lets you set the range over which the shadow is visible.
@@ -250,7 +250,7 @@ namespace Negum.Core.Managers
         /// This gives an effect of the shadow fading away as the player gets farther away from the ground.
         /// If omitted, defaults to no level effects (shadow is always fully visible).
         /// </summary>
-        IVectorEntry FadeRange => Scrapper.GetVector("fade.range");
+        IVectorEntry FadeRange => this.GetValue<IVectorEntry>("fade.range");
     }
 
     public interface IStageNegumReflection : INegumManagerSection
@@ -260,7 +260,7 @@ namespace Negum.Core.Managers
         /// Set to 0 to have no reflection.
         /// Defaults to 0.
         /// </summary>
-        int Intensity => Scrapper.GetInt("intensity");
+        int Intensity => this.GetValue<int>("intensity");
     }
 
     public interface IStageNegumMusic : INegumManagerSection
@@ -269,15 +269,15 @@ namespace Negum.Core.Managers
         /// Put a filename for a MOD, MP3 or MIDI here, or just leave it blank if you don't want music.
         /// If an invalid filename is given, then no music will play.
         /// </summary>
-        IFileEntry BackgroundMusicFile => Scrapper.GetFile("bgmusic");
+        IFileEntry BackgroundMusicFile => this.GetValue<IFileEntry>("bgmusic");
 
-        int BackgroundMusicLoopStart => Scrapper.GetInt("bgmloopstart");
-        int BackgroundMusicLoopEnd => Scrapper.GetInt("bgmloopend");
+        int BackgroundMusicLoopStart => this.GetValue<int>("bgmloopstart");
+        int BackgroundMusicLoopEnd => this.GetValue<int>("bgmloopend");
 
         /// <summary>
         /// Adjust the volume. 100 is for 100%.
         /// </summary>
-        int BackgroundMusicVolume => Scrapper.GetInt("bgmvolume");
+        int BackgroundMusicVolume => this.GetValue<int>("bgmvolume");
     }
 
     public interface IStageNegumBackgroundDef : INegumManagerSection
@@ -285,14 +285,14 @@ namespace Negum.Core.Managers
         /// <summary>
         /// Filename of sprite data.
         /// </summary>
-        IFileEntry SpriteFile => Scrapper.GetFile("spr");
+        IFileEntry SpriteFile => this.GetValue<IFileEntry>("spr");
 
         /// <summary>
         /// Set to true if you want to clear the screen to magenta before drawing layer 0 (the default background).
         /// Good for spotting "holes" in your background.
         /// Remember to turn this off when you are done debugging the background, because it slows down performance.
         /// </summary>
-        bool DebugBackground => Scrapper.GetBoolean("debugbg");
+        bool DebugBackground => this.GetValue<bool>("debugbg");
     }
 
     public interface IStageNegumBackground : INegumManagerSection
@@ -301,13 +301,13 @@ namespace Negum.Core.Managers
         /// The background type goes here: for now, only NORMAL and PARALLAX.
         /// If this line is omitted, the type will be assumed to be normal.
         /// </summary>
-        string Type => Scrapper.GetString("type");
+        string Type => this.GetValue<string>("type");
 
         /// <summary>
         /// The sprite number to use for the background (from the SFF specified above).
         /// It's the group-number, followed by a comma, then the sprite-number.
         /// </summary>
-        IVectorEntry SpriteNumber => Scrapper.GetVector("spriteno");
+        IVectorEntry SpriteNumber => this.GetValue<IVectorEntry>("spriteno");
 
         /// <summary>
         /// This is the layer number, which determines where the sprite is drawn to.
@@ -316,13 +316,13 @@ namespace Negum.Core.Managers
         /// 1 for foreground (in front).
         /// If this line is omitted, the default value of 0 will be assumed.
         /// </summary>
-        int LayerNumber => Scrapper.GetInt("layerno");
+        int LayerNumber => this.GetValue<int>("layerno");
 
         /// <summary>
         /// This is the starting location of the background in the format (x, y).
         /// If this line is omitted, the default value of 0,0 will be assumed.
         /// </summary>
-        IVectorEntry StartPosition => Scrapper.GetVector("start");
+        IVectorEntry StartPosition => this.GetValue<IVectorEntry>("start");
 
         /// <summary>
         /// These are the number of pixels the background moves for every single unit of camera movement, in the format (x, y).
@@ -331,7 +331,7 @@ namespace Negum.Core.Managers
         /// Things near the camera should have a larger delta.
         /// If this line is omitted, the default value of 1,1 will be assumed.
         /// </summary>
-        IVectorEntry Delta => Scrapper.GetVector("delta");
+        IVectorEntry Delta => this.GetValue<IVectorEntry>("delta");
 
         /// <summary>
         /// Here is the transparency setting of the background.
@@ -343,21 +343,21 @@ namespace Negum.Core.Managers
         ///     - "sub" for colour subtraction (like a shadow effect)
         /// If this line is omitted, it's assumed that there will be no transparency.
         /// </summary>
-        string Transparency => Scrapper.GetString("trans");
+        string Transparency => this.GetValue<string>("trans");
 
         /// <summary>
         /// Use this parameter only if "trans = addalpha".
         /// First value is the alpha of the source (sprite), and the second is the alpha of the destination (background).
         /// The values range from 0 to 256.
         /// </summary>
-        IVectorEntry Alpha => Scrapper.GetVector("alpha");
+        IVectorEntry Alpha => this.GetValue<IVectorEntry>("alpha");
 
         /// <summary>
         /// Mask means whether or not to draw colour zero of a sprite.
         /// If you turn masking off, the background will take less CPU power to draw, so remember to turn it off on sprites that don't use it.
         /// If this line is omitted, it's assumed that there will be no masking.
         /// </summary>
-        int Mask => Scrapper.GetInt("mask");
+        int Mask => this.GetValue<int>("mask");
 
         /// <summary>
         /// The format for tiling is (x, y).
@@ -367,13 +367,13 @@ namespace Negum.Core.Managers
         ///     - n where (n>1) to tile n times.
         /// If this line is omitted, it's assumed that there will be no tiling.
         /// </summary>
-        IVectorEntry Tile => Scrapper.GetVector("tile");
+        IVectorEntry Tile => this.GetValue<IVectorEntry>("tile");
 
         /// <summary>
         /// This is the x and y space between each tile, for tiled backgrounds.
         /// If omitted, default value is 0,0.
         /// </summary>
-        IVectorEntry TileSpacing => Scrapper.GetVector("tilespacing");
+        IVectorEntry TileSpacing => this.GetValue<IVectorEntry>("tilespacing");
 
         /// <summary>
         /// This defines the drawing space, or "window" of the background.
@@ -383,12 +383,12 @@ namespace Negum.Core.Managers
         /// Value values range from 0-319 for x, and 0-239 for y.
         /// The values are 0,0, 319,239 by default (full screen).
         /// </summary>
-        IVectorEntry Window => Scrapper.GetVector("window");
+        IVectorEntry Window => this.GetValue<IVectorEntry>("window");
 
         /// <summary>
         /// Similar to the delta parameter, this one affects the movement of the window.
         /// Defaults to 0,0.
         /// </summary>
-        IVectorEntry WindowDelta => Scrapper.GetVector("windowdelta");
+        IVectorEntry WindowDelta => this.GetValue<IVectorEntry>("windowdelta");
     }
 }

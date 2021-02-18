@@ -1,4 +1,4 @@
-namespace Negum.Core.Managers
+namespace Negum.Core.Managers.Types
 {
     /// <summary>
     /// Manager which provides helper methods for IMotifConfiguration.

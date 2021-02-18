@@ -1,7 +1,6 @@
 using System.Threading.Tasks;
 using Negum.Core.Containers;
-using Negum.Core.Managers;
-using Negum.Core.Scrappers;
+using Negum.Core.Managers.Types;
 using Xunit;
 
 namespace Negum.Core.Tests.Managers

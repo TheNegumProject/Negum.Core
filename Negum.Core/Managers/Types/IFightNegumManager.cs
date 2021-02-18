@@ -1,7 +1,6 @@
-using System.Linq;
 using Negum.Core.Managers.Entries;
 
-namespace Negum.Core.Managers
+namespace Negum.Core.Managers.Types
 {
     /// <summary>
     /// Manager which handles Fight configuration.
@@ -37,100 +36,100 @@ namespace Negum.Core.Managers
 
     public interface IFightNegumFiles : INegumManagerSection
     {
-        IFileEntry SpriteFile => Scrapper.GetFile("sff");
-        IFileEntry SoundFile => Scrapper.GetFile("snd");
+        IFileEntry SpriteFile => this.GetValue<IFileEntry>("sff");
+        IFileEntry SoundFile => this.GetValue<IFileEntry>("snd");
         IEntryCollection<IFileEntry> FontFiles => Scrapper.GetCollection<IFileEntry>("font");
-        IFileEntry FightFxSffFile => Scrapper.GetFile("fightfx.sff");
-        IFileEntry FightFxAirFile => Scrapper.GetFile("fightfx.air");
-        IFileEntry CommonSoundFile => Scrapper.GetFile("common.snd");
+        IFileEntry FightFxSffFile => this.GetValue<IFileEntry>("fightfx.sff");
+        IFileEntry FightFxAirFile => this.GetValue<IFileEntry>("fightfx.air");
+        IFileEntry CommonSoundFile => this.GetValue<IFileEntry>("common.snd");
     }
 
     public interface IFightNegumFightFx : INegumManagerSection
     {
-        int Scale => Scrapper.GetInt("scale");
+        int Scale => this.GetValue<int>("scale");
     }
 
     public interface IFightNegumLifebar : INegumManagerSection
     {
-        IFightConfigurationPlayerEntry Player1 => Scrapper.GetFightConfigurationPlayer("p1");
-        IFightConfigurationPlayerEntry Player2 => Scrapper.GetFightConfigurationPlayer("p2");
+        IFightConfigurationPlayerEntry Player1 => this.GetValue<IFightConfigurationPlayerEntry>("p1");
+        IFightConfigurationPlayerEntry Player2 => this.GetValue<IFightConfigurationPlayerEntry>("p2");
     }
 
     public interface IFightNegumSimulLifebar : INegumManagerSection
     {
-        IFightConfigurationPlayerEntry Player1 => Scrapper.GetFightConfigurationPlayer("p1");
-        IFightConfigurationPlayerEntry Player2 => Scrapper.GetFightConfigurationPlayer("p2");
+        IFightConfigurationPlayerEntry Player1 => this.GetValue<IFightConfigurationPlayerEntry>("p1");
+        IFightConfigurationPlayerEntry Player2 => this.GetValue<IFightConfigurationPlayerEntry>("p2");
     }
 
     public interface IFightNegumTurnsLifebar : INegumManagerSection
     {
-        IFightConfigurationPlayerEntry Player1 => Scrapper.GetFightConfigurationPlayer("p1");
-        IFightConfigurationPlayerEntry Player2 => Scrapper.GetFightConfigurationPlayer("p2");
+        IFightConfigurationPlayerEntry Player1 => this.GetValue<IFightConfigurationPlayerEntry>("p1");
+        IFightConfigurationPlayerEntry Player2 => this.GetValue<IFightConfigurationPlayerEntry>("p2");
     }
 
     public interface IFightNegumPowerbar : INegumManagerSection
     {
-        IFightConfigurationPlayerEntry Player1 => Scrapper.GetFightConfigurationPlayer("p1");
-        IFightConfigurationPlayerEntry Player2 => Scrapper.GetFightConfigurationPlayer("p2");
+        IFightConfigurationPlayerEntry Player1 => this.GetValue<IFightConfigurationPlayerEntry>("p1");
+        IFightConfigurationPlayerEntry Player2 => this.GetValue<IFightConfigurationPlayerEntry>("p2");
         IEntryCollection<IVectorEntry> LevelSounds => Scrapper.GetCollection<IVectorEntry>("level");
     }
 
     public interface IFightNegumFace : INegumManagerSection
     {
-        IFightConfigurationPlayerEntry Player1 => Scrapper.GetFightConfigurationPlayer("p1");
-        IFightConfigurationPlayerEntry Player2 => Scrapper.GetFightConfigurationPlayer("p2");
+        IFightConfigurationPlayerEntry Player1 => this.GetValue<IFightConfigurationPlayerEntry>("p1");
+        IFightConfigurationPlayerEntry Player2 => this.GetValue<IFightConfigurationPlayerEntry>("p2");
     }
 
     public interface IFightNegumSimulFace : INegumManagerSection
     {
-        IFightConfigurationPlayerEntry Player1 => Scrapper.GetFightConfigurationPlayer("p1");
-        IFightConfigurationPlayerEntry Player2 => Scrapper.GetFightConfigurationPlayer("p2");
-        IFightConfigurationPlayerEntry Player3 => Scrapper.GetFightConfigurationPlayer("p3");
-        IFightConfigurationPlayerEntry Player4 => Scrapper.GetFightConfigurationPlayer("p4");
+        IFightConfigurationPlayerEntry Player1 => this.GetValue<IFightConfigurationPlayerEntry>("p1");
+        IFightConfigurationPlayerEntry Player2 => this.GetValue<IFightConfigurationPlayerEntry>("p2");
+        IFightConfigurationPlayerEntry Player3 => this.GetValue<IFightConfigurationPlayerEntry>("p3");
+        IFightConfigurationPlayerEntry Player4 => this.GetValue<IFightConfigurationPlayerEntry>("p4");
     }
 
     public interface IFightNegumTurnsFace : INegumManagerSection
     {
-        IFightConfigurationPlayerEntry Player1 => Scrapper.GetFightConfigurationPlayer("p1");
-        IFightConfigurationPlayerEntry Player2 => Scrapper.GetFightConfigurationPlayer("p2");
+        IFightConfigurationPlayerEntry Player1 => this.GetValue<IFightConfigurationPlayerEntry>("p1");
+        IFightConfigurationPlayerEntry Player2 => this.GetValue<IFightConfigurationPlayerEntry>("p2");
     }
 
     public interface IFightNegumName : INegumManagerSection
     {
-        IFightConfigurationPlayerEntry Player1 => Scrapper.GetFightConfigurationPlayer("p1");
-        IFightConfigurationPlayerEntry Player2 => Scrapper.GetFightConfigurationPlayer("p2");
+        IFightConfigurationPlayerEntry Player1 => this.GetValue<IFightConfigurationPlayerEntry>("p1");
+        IFightConfigurationPlayerEntry Player2 => this.GetValue<IFightConfigurationPlayerEntry>("p2");
     }
 
     public interface IFightNegumSimulName : INegumManagerSection
     {
-        IFightConfigurationPlayerEntry Player1 => Scrapper.GetFightConfigurationPlayer("p1");
-        IFightConfigurationPlayerEntry Player2 => Scrapper.GetFightConfigurationPlayer("p2");
-        IFightConfigurationPlayerEntry Player3 => Scrapper.GetFightConfigurationPlayer("p3");
-        IFightConfigurationPlayerEntry Player4 => Scrapper.GetFightConfigurationPlayer("p4");
+        IFightConfigurationPlayerEntry Player1 => this.GetValue<IFightConfigurationPlayerEntry>("p1");
+        IFightConfigurationPlayerEntry Player2 => this.GetValue<IFightConfigurationPlayerEntry>("p2");
+        IFightConfigurationPlayerEntry Player3 => this.GetValue<IFightConfigurationPlayerEntry>("p3");
+        IFightConfigurationPlayerEntry Player4 => this.GetValue<IFightConfigurationPlayerEntry>("p4");
     }
 
     public interface IFightNegumTurnsName : INegumManagerSection
     {
-        IFightConfigurationPlayerEntry Player1 => Scrapper.GetFightConfigurationPlayer("p1");
-        IFightConfigurationPlayerEntry Player2 => Scrapper.GetFightConfigurationPlayer("p2");
+        IFightConfigurationPlayerEntry Player1 => this.GetValue<IFightConfigurationPlayerEntry>("p1");
+        IFightConfigurationPlayerEntry Player2 => this.GetValue<IFightConfigurationPlayerEntry>("p2");
     }
 
     public interface IFightNegumTime : INegumManagerSection
     {
-        IVectorEntry Position => Scrapper.GetVector("pos");
-        ITextEntry Counter => Scrapper.GetText("counter");
-        IImageEntry Background => Scrapper.GetImage(".bg");
+        IVectorEntry Position => this.GetValue<IVectorEntry>("pos");
+        ITextEntry Counter => this.GetValue<ITextEntry>("counter");
+        IImageEntry Background => this.GetValue<IImageEntry>(".bg");
 
         /// <summary>
         /// Ticks for each count.
         /// </summary>
-        int FramesPerCount => Scrapper.GetInt("framespercount");
+        int FramesPerCount => this.GetValue<int>("framespercount");
     }
 
     public interface IFightNegumCombo : INegumManagerSection
     {
-        IFightConfigurationTeamEntry Team1 => Scrapper.GetFightConfigurationTeam("team1");
-        IFightConfigurationTeamEntry Team2 => Scrapper.GetFightConfigurationTeam("team2");
+        IFightConfigurationTeamEntry Team1 => this.GetValue<IFightConfigurationTeamEntry>("team1");
+        IFightConfigurationTeamEntry Team2 => this.GetValue<IFightConfigurationTeamEntry>("team2");
     }
 
     public interface IFightNegumRound : INegumManagerSection
@@ -138,33 +137,33 @@ namespace Negum.Core.Managers
         /// <summary>
         /// Rounds needed to win a match.
         /// </summary>
-        int MatchWins => Scrapper.GetInt("match.wins");
+        int MatchWins => this.GetValue<int>("match.wins");
 
         /// <summary>
         /// Max number of drawgames allowed (-1 for infinite).
         /// </summary>
-        int MatchMaxDrawGames => Scrapper.GetInt("match.maxdrawgames");
+        int MatchMaxDrawGames => this.GetValue<int>("match.maxdrawgames");
 
         /// <summary>
         /// Time to wait before starting intro.
         /// </summary>
-        ITimeEntry StartWaitTime => Scrapper.GetTime("start.waittime");
+        ITimeEntry StartWaitTime => this.GetValue<ITimeEntry>("start.waittime");
 
         /// <summary>
         /// Default position for all components.
         /// </summary>
-        IVectorEntry Position => Scrapper.GetVector("pos");
+        IVectorEntry Position => this.GetValue<IVectorEntry>("pos");
 
         /// <summary>
         /// Time to show round display.
         /// </summary>
-        ITimeEntry RoundTime => Scrapper.GetTime("round.time");
+        ITimeEntry RoundTime => this.GetValue<ITimeEntry>("round.time");
 
         /// <summary>
         /// Default component to show for each round.
         /// Text can include a %i to the round number.
         /// </summary>
-        ITextEntry RoundText => Scrapper.GetText("round.default");
+        ITextEntry RoundText => this.GetValue<ITextEntry>("round.default");
 
         /// <summary>
         /// Sounds to play for each round (optional).
@@ -187,67 +186,67 @@ namespace Negum.Core.Managers
         /// <summary>
         /// Time players get control after "Fight".
         /// </summary>
-        ITimeEntry ControlTime => Scrapper.GetTime("ctrl.time");
+        ITimeEntry ControlTime => this.GetValue<ITimeEntry>("ctrl.time");
 
-        IScreenElementEntry FightElement => Scrapper.GetScreenElement("fight");
-        IScreenElementEntry KoElement => Scrapper.GetScreenElement("KO");
-        IScreenElementEntry DoubleKoElement => Scrapper.GetScreenElement("DKO");
-        IScreenElementEntry TimeOverElement => Scrapper.GetScreenElement("TO");
+        IScreenElementEntry FightElement => this.GetValue<IScreenElementEntry>("fight");
+        IScreenElementEntry KoElement => this.GetValue<IScreenElementEntry>("KO");
+        IScreenElementEntry DoubleKoElement => this.GetValue<IScreenElementEntry>("DKO");
+        IScreenElementEntry TimeOverElement => this.GetValue<IScreenElementEntry>("TO");
 
         /// <summary>
         /// Time for KO slowdown (in ticks).
         /// </summary>
-        ITimeEntry SlowTime => Scrapper.GetTime("slow.time");
+        ITimeEntry SlowTime => this.GetValue<ITimeEntry>("slow.time");
 
         /// <summary>
         /// Time to wait after KO before player control is stopped.
         /// </summary>
-        ITimeEntry GameOverWaitTime => Scrapper.GetTime("over.waittime");
+        ITimeEntry GameOverWaitTime => this.GetValue<ITimeEntry>("over.waittime");
 
         /// <summary>
         /// Time after KO that players can still damage each other (for double KO).
         /// </summary>
-        ITimeEntry GameOverHitTime => Scrapper.GetTime("over.hittime");
+        ITimeEntry GameOverHitTime => this.GetValue<ITimeEntry>("over.hittime");
 
         /// <summary>
         /// Time to wait before players change to win states.
         /// </summary>
-        ITimeEntry GameOverWinTime => Scrapper.GetTime("over.wintime");
+        ITimeEntry GameOverWinTime => this.GetValue<ITimeEntry>("over.wintime");
 
         /// <summary>
         /// Time to wait before round ends.
         /// </summary>
-        ITimeEntry GameOverTime => Scrapper.GetTime("over.time");
+        ITimeEntry GameOverTime => this.GetValue<ITimeEntry>("over.time");
 
         /// <summary>
         /// Time to wait before showing win/draw message.
         /// </summary>
-        ITimeEntry WinTime => Scrapper.GetTime("win.time");
+        ITimeEntry WinTime => this.GetValue<ITimeEntry>("win.time");
 
         /// <summary>
         /// Win text.
         /// </summary>
-        ITextEntry WinText => Scrapper.GetText("win");
+        ITextEntry WinText => this.GetValue<ITextEntry>("win");
 
         /// <summary>
         /// 2-player win text.
         /// </summary>
-        ITextEntry Win2Text => Scrapper.GetText("win2");
+        ITextEntry Win2Text => this.GetValue<ITextEntry>("win2");
 
         /// <summary>
         /// Draw text.
         /// </summary>
-        ITextEntry DrawText => Scrapper.GetText("draw");
+        ITextEntry DrawText => this.GetValue<ITextEntry>("draw");
     }
 
     public interface IFightNegumWinIcon : INegumManagerSection
     {
-        IFightConfigurationPlayerEntry Player1 => Scrapper.GetFightConfigurationPlayer("p1");
-        IFightConfigurationPlayerEntry Player2 => Scrapper.GetFightConfigurationPlayer("p2");
+        IFightConfigurationPlayerEntry Player1 => this.GetValue<IFightConfigurationPlayerEntry>("p1");
+        IFightConfigurationPlayerEntry Player2 => this.GetValue<IFightConfigurationPlayerEntry>("p2");
 
         /// <summary>
         /// Use icons up until this number of wins.
         /// </summary>
-        int UseIconUpTo => Scrapper.GetInt("useiconupto");
+        int UseIconUpTo => this.GetValue<int>("useiconupto");
     }
 }
