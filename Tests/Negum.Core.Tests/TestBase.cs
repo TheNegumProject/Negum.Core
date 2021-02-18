@@ -33,7 +33,7 @@ namespace Negum.Core.Tests
             }
         }
 
-        protected async Task<IConfigurationDefinition> Parse(string path)
+        protected async Task<INegumConfiguration> Parse(string path)
         {
             var reader = NegumContainer.Resolve<IConfigurationReader>();
             var data = await reader.ReadAsync(path);

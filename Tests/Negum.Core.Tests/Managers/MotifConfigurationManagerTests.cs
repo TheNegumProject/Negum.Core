@@ -23,7 +23,7 @@ namespace Negum.Core.Tests.Managers
 
             var config = await this.Parse(path);
             var scrapper = NegumContainer.Resolve<IConfigurationScrapper>().Setup(config);
-            var manager = (IMotifConfigurationManager) NegumContainer.Resolve<IMotifConfigurationManager>().Setup(scrapper);
+            var manager = (IMotifNegumManager) NegumContainer.Resolve<IMotifNegumManager>().Setup(scrapper);
             var animation = manager.SelectInfo.Player1.Cursor.Animation.Animation;
             
             Assert.True(animation == 160);
