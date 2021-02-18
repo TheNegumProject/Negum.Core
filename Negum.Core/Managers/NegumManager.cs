@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Negum.Core.Configurations;
 
 namespace Negum.Core.Managers
@@ -13,6 +14,12 @@ namespace Negum.Core.Managers
         where TSection : INegumConfigurationSection<TEntry>
         where TEntry : INegumConfigurationSectionEntry
     {
+        /// <summary>
+        /// Contains sections already used.
+        /// Mainly used to increase performance.
+        /// </summary>
+        private IDictionary<string, object> Sections { get; } = new Dictionary<string, object>();
+        
         protected TConfig Config { get; }
         
         public NegumManager(TConfig config)
@@ -24,11 +31,21 @@ namespace Negum.Core.Managers
             where TManagerSection : INegumManagerSection
         {
             var section = this.Config[sectionName];
-            var managerSection = this.GetNewManagerSection<TManagerSection>(sectionName, section);
-            return managerSection;
+
+            if (!this.Sections.ContainsKey(sectionName))
+            {
+                var managerSection = this.GetNewManagerSection(sectionName, section);
+                this.Sections.Add(sectionName, managerSection);
+            }
+            
+            return (TManagerSection) this.Sections[sectionName];
         }
 
-        protected abstract TManagerSection GetNewManagerSection<TManagerSection>(string sectionName, TSection configSection)
-            where TManagerSection : INegumManagerSection;
+        /// <summary>
+        /// </summary>
+        /// <param name="sectionName"></param>
+        /// <param name="configSection"></param>
+        /// <returns>Returns related Manager's Section.</returns>
+        protected abstract INegumManagerSection GetNewManagerSection(string sectionName, TSection configSection);
     }
 }
