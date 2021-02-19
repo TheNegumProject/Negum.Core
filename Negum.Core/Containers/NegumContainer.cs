@@ -75,17 +75,22 @@ namespace Negum.Core.Containers
         /// </summary>
         public static void RegisterKnownTypes()
         {
+            // Configurations
+            // TODO: Register configurations
+            
             // Readers
-            // Register<ICfgConfigurationReader, CfgConfigurationReader>(); // TODO: Register all Readers
             RegisterMultiple("Negum.Core.Readers", typeof(IReader<,>), 
-                (type, baseType) => null); // TODO: Finish this
+                (type, baseType) => type.GetInterfaces().FirstOrDefault(i => i.GetGenericArguments().Length == 0));
 
             // Negum Manager Section Entries
             RegisterMultiple("Negum.Core.Managers.Entries", typeof(INegumManagerSectionEntry<>), 
                 (type, baseType) => type.GetInterfaces().FirstOrDefault(i => i.GetGenericTypeDefinition() == baseType));
 
+            // Managers Entries
+            // TODO Register all Manager Entries
+            
             // // Managers
-            // Register<INegumManager, NegumManager>(); // TODO: Register all Managers
+            // Register<INegumManager, NegumManager>(); // TODO: Register all Manager Types
             // Register<INegumManagerSection, NegumManagerSection>();
             // Register<INegumNegumManager, NegumNegumManager>();
             // Register<IMotifNegumManager, MotifNegumManager>();
