@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Negum.Core.Configurations;
 
 namespace Negum.Core.Managers
@@ -19,13 +20,21 @@ namespace Negum.Core.Managers
         /// <param name="config"></param>
         /// <returns>Current manager.</returns>
         IManager UseConfiguration(IConfiguration config);
-        
+
         /// <summary>
         /// </summary>
         /// <param name="sectionName">Name of the section to find.</param>
         /// <typeparam name="TManagerSection">Type of the searched section.</typeparam>
         /// <returns>Parsed found section.</returns>
         TManagerSection GetSection<TManagerSection>(string sectionName)
+            where TManagerSection : IManagerSection;
+
+        /// <summary>
+        /// </summary>
+        /// <param name="sectionName"></param>
+        /// <typeparam name="TManagerSection"></typeparam>
+        /// <returns>Collection of subsections from the current section.</returns>
+        IEnumerable<TManagerSection> GetSubsections<TManagerSection>(string sectionName)
             where TManagerSection : IManagerSection;
     }
 
@@ -65,6 +74,12 @@ namespace Negum.Core.Managers
 
             return (TManagerSection) this.Sections[sectionName];
         }
+
+        public IEnumerable<TManagerSection> GetSubsections<TManagerSection>(string sectionName)
+            where TManagerSection : IManagerSection =>
+            this.Config[sectionName].Subsections
+                .Select(subsection => (TManagerSection) this.GetNewManagerSection(subsection.Name, subsection))
+                .ToList();
 
         /// <summary>
         /// </summary>
