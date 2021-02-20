@@ -17,9 +17,6 @@ namespace Negum.Core.Configurations
 
         public IDictionary<string, TSection> Sections { get; } = new Dictionary<string, TSection>();
 
-        public IEnumerable<string> GetSectionNames() =>
-            this.Sections.Keys;
-
         public IEnumerator<TSection> GetEnumerator() =>
             this.Sections.Values.GetEnumerator();
 

@@ -18,10 +18,5 @@ namespace Negum.Core.Configurations
         /// </summary>
         /// <param name="sectionName"></param>
         TSection this[string sectionName] { get; }
-
-        /// <summary>
-        /// </summary>
-        /// <returns>Collection of names for registered sections.</returns>
-        IEnumerable<string> GetSectionNames();
     }
 }
