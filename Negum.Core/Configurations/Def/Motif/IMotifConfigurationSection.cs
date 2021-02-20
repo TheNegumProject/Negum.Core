@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Negum.Core.Configurations.Def.Motif
@@ -11,6 +12,10 @@ namespace Negum.Core.Configurations.Def.Motif
     /// </author>
     public interface IMotifConfigurationSection : INegumConfigurationSection<IMotifConfigurationSectionEntry>
     {
+        /// <summary>
+        /// Number of sections with the same name prefix but used for different things based on the postfix.
+        /// </summary>
+        IEnumerable<IMotifConfigurationSection> Subsections { get; }
     }
 
     /// <summary>
@@ -22,7 +27,14 @@ namespace Negum.Core.Configurations.Def.Motif
     public class MotifConfigurationSection : NegumConfigurationSection<IMotifConfigurationSectionEntry>,
         IMotifConfigurationSection
     {
+        public IEnumerable<IMotifConfigurationSection> Subsections { get; } = new List<IMotifConfigurationSection>();
+
         protected override IMotifConfigurationSectionEntry GetEntry(string key) =>
             this.FirstOrDefault(entry => entry.Key.Equals(key));
+
+        public void AddSubsection(IMotifConfigurationSection section)
+        {
+            ((List<IMotifConfigurationSection>) this.Subsections).Add(section);
+        }
     }
 }
