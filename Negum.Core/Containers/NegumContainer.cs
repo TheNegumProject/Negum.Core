@@ -82,7 +82,7 @@ namespace Negum.Core.Containers
             
             // Readers
             RegisterMultiple("Negum.Core.Readers", typeof(IReader<,>), 
-                (type, baseType) => type.GetInterfaces().FirstOrDefault(i => i.GetGenericArguments().Length == 0));
+                (type, baseType) => type.GetInterfaces().FirstOrDefault(i => i.GetGenericArguments().Length == 0 && i.Name.Equals("I" + type.Name)));
 
             // Negum Manager Section Entries
             RegisterMultiple("Negum.Core.Managers.Entries", typeof(IManagerSectionEntry<>), 
