@@ -35,6 +35,12 @@ namespace Negum.Core.Configurations
         /// Only few files are using it.
         /// </summary>
         IEnumerable<IConfigurationSection> Subsections { get; }
+
+        /// <summary>
+        /// Adds new subsection to the current section.
+        /// </summary>
+        /// <param name="section"></param>
+        void AddSubsection(IConfigurationSection section);
     }
 
     /// <summary>
@@ -57,6 +63,9 @@ namespace Negum.Core.Configurations
 
         public ICollection<IConfigurationSectionEntry> Entries { get; internal set; } =
             new List<IConfigurationSectionEntry>();
+        
+        public void AddSubsection(IConfigurationSection section) =>
+            ((List<IConfigurationSection>) this.Subsections).Add(section);
 
         public IEnumerator<IConfigurationSectionEntry> GetEnumerator() =>
             this.Entries.GetEnumerator();
