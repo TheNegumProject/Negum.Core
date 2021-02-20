@@ -9,32 +9,32 @@ namespace Negum.Core.Managers.Types
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface IFightNegumManager : INegumManager
+    public interface IFightManager : IManager
     {
-        IFightNegumFiles Files => this.GetSection<IFightNegumFiles>("Files");
-        IFightNegumFightFx FightFx => this.GetSection<IFightNegumFightFx>("FightFx");
-        IFightNegumLifebar Lifebar => this.GetSection<IFightNegumLifebar>("Lifebar");
+        IFightFiles Files => this.GetSection<IFightFiles>("Files");
+        IFightFightFx FightFx => this.GetSection<IFightFightFx>("FightFx");
+        IFightLifebar Lifebar => this.GetSection<IFightLifebar>("Lifebar");
 
-        IFightNegumSimulLifebar SimulLifebar =>
-            this.GetSection<IFightNegumSimulLifebar>("Simul Lifebar");
+        IFightSimulLifebar SimulLifebar =>
+            this.GetSection<IFightSimulLifebar>("Simul Lifebar");
 
-        IFightNegumTurnsLifebar TurnsLifebar =>
-            this.GetSection<IFightNegumTurnsLifebar>("Turns Lifebar");
+        IFightTurnsLifebar TurnsLifebar =>
+            this.GetSection<IFightTurnsLifebar>("Turns Lifebar");
 
-        IFightNegumPowerbar Powerbar => this.GetSection<IFightNegumPowerbar>("Powerbar");
-        IFightNegumFace Face => this.GetSection<IFightNegumFace>("Face");
-        IFightNegumSimulFace SimulFace => this.GetSection<IFightNegumSimulFace>("Simul Face");
-        IFightNegumTurnsFace TurnsFace => this.GetSection<IFightNegumTurnsFace>("Turns Face");
-        IFightNegumName Name => this.GetSection<IFightNegumName>("Name");
-        IFightNegumSimulName SimulName => this.GetSection<IFightNegumSimulName>("Simul Name");
-        IFightNegumTurnsName TurnsName => this.GetSection<IFightNegumTurnsName>("Turns Name");
-        IFightNegumTime Time => this.GetSection<IFightNegumTime>("Time");
-        IFightNegumCombo Combo => this.GetSection<IFightNegumCombo>("Combo");
-        IFightNegumRound Round => this.GetSection<IFightNegumRound>("Round");
-        IFightNegumWinIcon WinIcon => this.GetSection<IFightNegumWinIcon>("WinIcon");
+        IFightPowerbar Powerbar => this.GetSection<IFightPowerbar>("Powerbar");
+        IFightFace Face => this.GetSection<IFightFace>("Face");
+        IFightSimulFace SimulFace => this.GetSection<IFightSimulFace>("Simul Face");
+        IFightTurnsFace TurnsFace => this.GetSection<IFightTurnsFace>("Turns Face");
+        IFightName Name => this.GetSection<IFightName>("Name");
+        IFightSimulName SimulName => this.GetSection<IFightSimulName>("Simul Name");
+        IFightTurnsName TurnsName => this.GetSection<IFightTurnsName>("Turns Name");
+        IFightTime Time => this.GetSection<IFightTime>("Time");
+        IFightCombo Combo => this.GetSection<IFightCombo>("Combo");
+        IFightRound Round => this.GetSection<IFightRound>("Round");
+        IFightWinIcon WinIcon => this.GetSection<IFightWinIcon>("WinIcon");
     }
 
-    public interface IFightNegumFiles : INegumManagerSection
+    public interface IFightFiles : IManagerSection
     {
         IFileEntry SpriteFile => this.GetValue<IFileEntry>("sff");
         IFileEntry SoundFile => this.GetValue<IFileEntry>("snd");
@@ -44,63 +44,43 @@ namespace Negum.Core.Managers.Types
         IFileEntry CommonSoundFile => this.GetValue<IFileEntry>("common.snd");
     }
 
-    public interface IFightNegumFightFx : INegumManagerSection
+    public interface IFightFightFx : IManagerSection
     {
         int Scale => this.GetValue<int>("scale");
     }
 
-    public interface IFightNegumLifebar : INegumManagerSection
+    public interface IFightLifebar : IManagerSection
     {
         IFightConfigurationPlayerEntry Player1 => this.GetValue<IFightConfigurationPlayerEntry>("p1");
         IFightConfigurationPlayerEntry Player2 => this.GetValue<IFightConfigurationPlayerEntry>("p2");
     }
 
-    public interface IFightNegumSimulLifebar : INegumManagerSection
+    public interface IFightSimulLifebar : IManagerSection
     {
         IFightConfigurationPlayerEntry Player1 => this.GetValue<IFightConfigurationPlayerEntry>("p1");
         IFightConfigurationPlayerEntry Player2 => this.GetValue<IFightConfigurationPlayerEntry>("p2");
     }
 
-    public interface IFightNegumTurnsLifebar : INegumManagerSection
+    public interface IFightTurnsLifebar : IManagerSection
     {
         IFightConfigurationPlayerEntry Player1 => this.GetValue<IFightConfigurationPlayerEntry>("p1");
         IFightConfigurationPlayerEntry Player2 => this.GetValue<IFightConfigurationPlayerEntry>("p2");
     }
 
-    public interface IFightNegumPowerbar : INegumManagerSection
+    public interface IFightPowerbar : IManagerSection
     {
         IFightConfigurationPlayerEntry Player1 => this.GetValue<IFightConfigurationPlayerEntry>("p1");
         IFightConfigurationPlayerEntry Player2 => this.GetValue<IFightConfigurationPlayerEntry>("p2");
         IEntryCollection<IVectorEntry> LevelSounds => Scrapper.GetCollection<IVectorEntry>("level");
     }
 
-    public interface IFightNegumFace : INegumManagerSection
+    public interface IFightFace : IManagerSection
     {
         IFightConfigurationPlayerEntry Player1 => this.GetValue<IFightConfigurationPlayerEntry>("p1");
         IFightConfigurationPlayerEntry Player2 => this.GetValue<IFightConfigurationPlayerEntry>("p2");
     }
 
-    public interface IFightNegumSimulFace : INegumManagerSection
-    {
-        IFightConfigurationPlayerEntry Player1 => this.GetValue<IFightConfigurationPlayerEntry>("p1");
-        IFightConfigurationPlayerEntry Player2 => this.GetValue<IFightConfigurationPlayerEntry>("p2");
-        IFightConfigurationPlayerEntry Player3 => this.GetValue<IFightConfigurationPlayerEntry>("p3");
-        IFightConfigurationPlayerEntry Player4 => this.GetValue<IFightConfigurationPlayerEntry>("p4");
-    }
-
-    public interface IFightNegumTurnsFace : INegumManagerSection
-    {
-        IFightConfigurationPlayerEntry Player1 => this.GetValue<IFightConfigurationPlayerEntry>("p1");
-        IFightConfigurationPlayerEntry Player2 => this.GetValue<IFightConfigurationPlayerEntry>("p2");
-    }
-
-    public interface IFightNegumName : INegumManagerSection
-    {
-        IFightConfigurationPlayerEntry Player1 => this.GetValue<IFightConfigurationPlayerEntry>("p1");
-        IFightConfigurationPlayerEntry Player2 => this.GetValue<IFightConfigurationPlayerEntry>("p2");
-    }
-
-    public interface IFightNegumSimulName : INegumManagerSection
+    public interface IFightSimulFace : IManagerSection
     {
         IFightConfigurationPlayerEntry Player1 => this.GetValue<IFightConfigurationPlayerEntry>("p1");
         IFightConfigurationPlayerEntry Player2 => this.GetValue<IFightConfigurationPlayerEntry>("p2");
@@ -108,13 +88,33 @@ namespace Negum.Core.Managers.Types
         IFightConfigurationPlayerEntry Player4 => this.GetValue<IFightConfigurationPlayerEntry>("p4");
     }
 
-    public interface IFightNegumTurnsName : INegumManagerSection
+    public interface IFightTurnsFace : IManagerSection
     {
         IFightConfigurationPlayerEntry Player1 => this.GetValue<IFightConfigurationPlayerEntry>("p1");
         IFightConfigurationPlayerEntry Player2 => this.GetValue<IFightConfigurationPlayerEntry>("p2");
     }
 
-    public interface IFightNegumTime : INegumManagerSection
+    public interface IFightName : IManagerSection
+    {
+        IFightConfigurationPlayerEntry Player1 => this.GetValue<IFightConfigurationPlayerEntry>("p1");
+        IFightConfigurationPlayerEntry Player2 => this.GetValue<IFightConfigurationPlayerEntry>("p2");
+    }
+
+    public interface IFightSimulName : IManagerSection
+    {
+        IFightConfigurationPlayerEntry Player1 => this.GetValue<IFightConfigurationPlayerEntry>("p1");
+        IFightConfigurationPlayerEntry Player2 => this.GetValue<IFightConfigurationPlayerEntry>("p2");
+        IFightConfigurationPlayerEntry Player3 => this.GetValue<IFightConfigurationPlayerEntry>("p3");
+        IFightConfigurationPlayerEntry Player4 => this.GetValue<IFightConfigurationPlayerEntry>("p4");
+    }
+
+    public interface IFightTurnsName : IManagerSection
+    {
+        IFightConfigurationPlayerEntry Player1 => this.GetValue<IFightConfigurationPlayerEntry>("p1");
+        IFightConfigurationPlayerEntry Player2 => this.GetValue<IFightConfigurationPlayerEntry>("p2");
+    }
+
+    public interface IFightTime : IManagerSection
     {
         IVectorEntry Position => this.GetValue<IVectorEntry>("pos");
         ITextEntry Counter => this.GetValue<ITextEntry>("counter");
@@ -126,13 +126,13 @@ namespace Negum.Core.Managers.Types
         int FramesPerCount => this.GetValue<int>("framespercount");
     }
 
-    public interface IFightNegumCombo : INegumManagerSection
+    public interface IFightCombo : IManagerSection
     {
         IFightConfigurationTeamEntry Team1 => this.GetValue<IFightConfigurationTeamEntry>("team1");
         IFightConfigurationTeamEntry Team2 => this.GetValue<IFightConfigurationTeamEntry>("team2");
     }
 
-    public interface IFightNegumRound : INegumManagerSection
+    public interface IFightRound : IManagerSection
     {
         /// <summary>
         /// Rounds needed to win a match.
@@ -239,7 +239,7 @@ namespace Negum.Core.Managers.Types
         ITextEntry DrawText => this.GetValue<ITextEntry>("draw");
     }
 
-    public interface IFightNegumWinIcon : INegumManagerSection
+    public interface IFightWinIcon : IManagerSection
     {
         IFightConfigurationPlayerEntry Player1 => this.GetValue<IFightConfigurationPlayerEntry>("p1");
         IFightConfigurationPlayerEntry Player2 => this.GetValue<IFightConfigurationPlayerEntry>("p2");

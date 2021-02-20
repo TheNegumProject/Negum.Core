@@ -9,12 +9,12 @@ namespace Negum.Core.Managers
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface INegumManagerSectionEntry<out TEntryType>
+    public interface IManagerSectionEntry<out TEntryType>
     {
         /// <summary>
         /// Section from which the current entry was created.
         /// </summary>
-        INegumManagerSection Section { get; }
+        IManagerSection Section { get; }
 
         /// <summary>
         /// Prefix from which the current field was created.
@@ -29,7 +29,7 @@ namespace Negum.Core.Managers
         /// <param name="section"></param>
         /// <param name="fieldKey"></param>
         /// <param name="sectionEntryContent"></param>
-        void Initialize(INegumManagerSection section, string fieldKey, IConfigurationSectionEntry entry);
+        void Initialize(IManagerSection section, string fieldKey, IConfigurationSectionEntry entry);
 
         /// <summary>
         /// </summary>
@@ -43,14 +43,14 @@ namespace Negum.Core.Managers
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public abstract class NegumManagerSectionEntry<TEntry> : INegumManagerSectionEntry<TEntry>
+    public abstract class ManagerSectionEntry<TEntry> : IManagerSectionEntry<TEntry>
     {
         protected IConfigurationSectionEntry Entry { get; set; }
 
-        public INegumManagerSection Section { get; protected set; }
+        public IManagerSection Section { get; protected set; }
         public string FieldKey { get; protected set; }
 
-        public void Initialize(INegumManagerSection section, string fieldKey, IConfigurationSectionEntry entry)
+        public void Initialize(IManagerSection section, string fieldKey, IConfigurationSectionEntry entry)
         {
             this.Section = section;
             this.FieldKey = fieldKey;

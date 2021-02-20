@@ -7,7 +7,7 @@ namespace Negum.Core.Managers.Entries
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface IPlayerSelectionTeamMenuItemEntry : INegumManagerSectionEntry<IPlayerSelectionTeamMenuItemEntry>
+    public interface IPlayerSelectionTeamMenuItemEntry : IManagerSectionEntry<IPlayerSelectionTeamMenuItemEntry>
     {
         ITextEntry Item { get; }
         IVectorEntry Active { get; }
@@ -21,7 +21,7 @@ namespace Negum.Core.Managers.Entries
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public class PlayerSelectionTeamMenuItemEntry : NegumManagerSectionEntry<IPlayerSelectionTeamMenuItemEntry>,
+    public class PlayerSelectionTeamMenuItemEntry : ManagerSectionEntry<IPlayerSelectionTeamMenuItemEntry>,
         IPlayerSelectionTeamMenuItemEntry
     {
         public ITextEntry Item { get; private set; }

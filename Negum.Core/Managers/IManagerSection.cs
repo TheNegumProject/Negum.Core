@@ -13,7 +13,7 @@ namespace Negum.Core.Managers
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface INegumManagerSection
+    public interface IManagerSection
     {
         /// <summary>
         /// Name of the current section.
@@ -34,7 +34,7 @@ namespace Negum.Core.Managers
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public abstract class NegumManagerSection : INegumManagerSection
+    public abstract class ManagerSection : IManagerSection
     {
         /// <summary>
         /// Already used fields in current section.
@@ -45,7 +45,7 @@ namespace Negum.Core.Managers
         
         public string Name { get; }
 
-        public NegumManagerSection(string name, IConfigurationSection section)
+        public ManagerSection(string name, IConfigurationSection section)
         {
             this.Name = name;
             this.Section = section;
@@ -58,7 +58,7 @@ namespace Negum.Core.Managers
                 return (TValue) this.Fields[fieldKey];
             }
             
-            var entry = NegumContainer.Resolve<INegumManagerSectionEntry<TValue>>();
+            var entry = NegumContainer.Resolve<IManagerSectionEntry<TValue>>();
             var sectionEntry = this.Section[fieldKey];
             entry.Initialize(this, fieldKey, sectionEntry);
             this.Fields.Add(fieldKey, entry);

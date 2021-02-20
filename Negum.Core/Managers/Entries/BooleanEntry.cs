@@ -7,7 +7,7 @@ namespace Negum.Core.Managers.Entries
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public class BooleanEntry : NegumManagerSectionEntry<bool>
+    public class BooleanEntry : ManagerSectionEntry<bool>
     {
         public override bool Get() =>
             this.Entry.Value switch

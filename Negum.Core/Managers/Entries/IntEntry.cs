@@ -7,7 +7,7 @@ namespace Negum.Core.Managers.Entries
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public class IntEntry : NegumManagerSectionEntry<int>
+    public class IntEntry : ManagerSectionEntry<int>
     {
         public override int Get() => int.Parse(this.Entry.Value);
     }

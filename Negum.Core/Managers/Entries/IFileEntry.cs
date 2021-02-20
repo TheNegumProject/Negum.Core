@@ -7,7 +7,7 @@ namespace Negum.Core.Managers.Entries
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface IFileEntry : INegumManagerSectionEntry<IFileEntry>
+    public interface IFileEntry : IManagerSectionEntry<IFileEntry>
     {
         /// <summary>
         /// Path to the file. 
@@ -21,7 +21,7 @@ namespace Negum.Core.Managers.Entries
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public class FileEntry : NegumManagerSectionEntry<IFileEntry>, IFileEntry
+    public class FileEntry : ManagerSectionEntry<IFileEntry>, IFileEntry
     {
         public string Path { get; private set; }
 

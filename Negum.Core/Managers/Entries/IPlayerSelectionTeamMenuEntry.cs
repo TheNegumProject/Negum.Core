@@ -7,7 +7,7 @@ namespace Negum.Core.Managers.Entries
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface IPlayerSelectionTeamMenuEntry : INegumManagerSectionEntry<IPlayerSelectionTeamMenuEntry>
+    public interface IPlayerSelectionTeamMenuEntry : IManagerSectionEntry<IPlayerSelectionTeamMenuEntry>
     {
         IVectorEntry Position { get; }
         IImageEntry Background { get; }
@@ -24,7 +24,7 @@ namespace Negum.Core.Managers.Entries
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public class PlayerSelectionTeamMenuEntry : NegumManagerSectionEntry<IPlayerSelectionTeamMenuEntry>,
+    public class PlayerSelectionTeamMenuEntry : ManagerSectionEntry<IPlayerSelectionTeamMenuEntry>,
         IPlayerSelectionTeamMenuEntry
     {
         public IVectorEntry Position { get; private set; }

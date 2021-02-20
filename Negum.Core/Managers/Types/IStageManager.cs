@@ -10,23 +10,23 @@ namespace Negum.Core.Managers.Types
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface IStageNegumManager : INegumManager
+    public interface IStageManager : IManager
     {
-        IStageNegumInfo Info => this.GetSection<IStageNegumInfo>("Info");
-        IStageNegumCamera Camera => this.GetSection<IStageNegumCamera>("Camera");
-        IStageNegumPlayerInfo PlayerInfo => this.GetSection<IStageNegumPlayerInfo>("PlayerInfo");
-        IStageNegumBound Bound => this.GetSection<IStageNegumBound>("Bound");
-        IStageNegumStageInfo StageInfo => this.GetSection<IStageNegumStageInfo>("StageInfo");
-        IStageNegumShadow Shadow => this.GetSection<IStageNegumShadow>("Shadow");
-        IStageNegumReflection Reflection => this.GetSection<IStageNegumReflection>("Reflection");
-        IStageNegumMusic Music => this.GetSection<IStageNegumMusic>("Music");
-        IStageNegumBackgroundDef BackgroundDef => this.GetSection<IStageNegumBackgroundDef>("BGdef");
+        IStageInfo Info => this.GetSection<IStageInfo>("Info");
+        IStageCamera Camera => this.GetSection<IStageCamera>("Camera");
+        IStagePlayerInfo PlayerInfo => this.GetSection<IStagePlayerInfo>("PlayerInfo");
+        IStageBound Bound => this.GetSection<IStageBound>("Bound");
+        IStageStageInfo StageInfo => this.GetSection<IStageStageInfo>("StageInfo");
+        IStageShadow Shadow => this.GetSection<IStageShadow>("Shadow");
+        IStageReflection Reflection => this.GetSection<IStageReflection>("Reflection");
+        IStageMusic Music => this.GetSection<IStageMusic>("Music");
+        IStageBackgroundDef BackgroundDef => this.GetSection<IStageBackgroundDef>("BGdef");
 
-        IEnumerable<IStageNegumBackground> Backgrounds =>
-            this.GetSections<IStageNegumBackground>("BG ");
+        IEnumerable<IStageBackground> Backgrounds =>
+            this.GetSections<IStageBackground>("BG ");
     }
 
-    public interface IStageNegumInfo : INegumManagerSection
+    public interface IStageInfo : IManagerSection
     {
         string Name => this.GetValue<string>("name");
         string DisplayName => this.GetValue<string>("displayname");
@@ -35,7 +35,7 @@ namespace Negum.Core.Managers.Types
         string Author => this.GetValue<string>("author");
     }
 
-    public interface IStageNegumCamera : INegumManagerSection
+    public interface IStageCamera : IManagerSection
     {
         /// <summary>
         /// Camera starting X position.
@@ -119,7 +119,7 @@ namespace Negum.Core.Managers.Types
         int CutLow => this.GetValue<int>("cutlow");
     }
 
-    public interface IStageNegumPlayerInfo : INegumManagerSection
+    public interface IStagePlayerInfo : IManagerSection
     {
         /// <summary>
         /// Player's 1 starting coordinate X.
@@ -166,7 +166,7 @@ namespace Negum.Core.Managers.Types
         int RightBound => this.GetValue<int>("rightbound");
     }
 
-    public interface IStageNegumBound : INegumManagerSection
+    public interface IStageBound : IManagerSection
     {
         /// <summary>
         /// Distance from left edge of screen that player can move to.
@@ -181,7 +181,7 @@ namespace Negum.Core.Managers.Types
         int ScreenRight => this.GetValue<int>("screenright");
     }
 
-    public interface IStageNegumStageInfo : INegumManagerSection
+    public interface IStageStageInfo : IManagerSection
     {
         /// <summary>
         /// "Ground" level where players stand at, measured in pixels from the top of the screen.
@@ -216,7 +216,7 @@ namespace Negum.Core.Managers.Types
         int ScaleY => this.GetValue<int>("yscale");
     }
 
-    public interface IStageNegumShadow : INegumManagerSection
+    public interface IStageShadow : IManagerSection
     {
         /// <summary>
         /// This is the shadow darkening intensity.
@@ -253,7 +253,7 @@ namespace Negum.Core.Managers.Types
         IVectorEntry FadeRange => this.GetValue<IVectorEntry>("fade.range");
     }
 
-    public interface IStageNegumReflection : INegumManagerSection
+    public interface IStageReflection : IManagerSection
     {
         /// <summary>
         /// Intensity of reflection (from 0 to 256).
@@ -263,7 +263,7 @@ namespace Negum.Core.Managers.Types
         int Intensity => this.GetValue<int>("intensity");
     }
 
-    public interface IStageNegumMusic : INegumManagerSection
+    public interface IStageMusic : IManagerSection
     {
         /// <summary>
         /// Put a filename for a MOD, MP3 or MIDI here, or just leave it blank if you don't want music.
@@ -280,7 +280,7 @@ namespace Negum.Core.Managers.Types
         int BackgroundMusicVolume => this.GetValue<int>("bgmvolume");
     }
 
-    public interface IStageNegumBackgroundDef : INegumManagerSection
+    public interface IStageBackgroundDef : IManagerSection
     {
         /// <summary>
         /// Filename of sprite data.
@@ -295,7 +295,7 @@ namespace Negum.Core.Managers.Types
         bool DebugBackground => this.GetValue<bool>("debugbg");
     }
 
-    public interface IStageNegumBackground : INegumManagerSection
+    public interface IStageBackground : IManagerSection
     {
         /// <summary>
         /// The background type goes here: for now, only NORMAL and PARALLAX.

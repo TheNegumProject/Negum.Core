@@ -7,7 +7,7 @@ namespace Negum.Core.Managers.Entries
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface IImageEntry : INegumManagerSectionEntry<IImageEntry>
+    public interface IImageEntry : IManagerSectionEntry<IImageEntry>
     {
         /// <summary>
         /// Image to be displayed.
@@ -54,7 +54,7 @@ namespace Negum.Core.Managers.Entries
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public class ImageEntry : NegumManagerSectionEntry<IImageEntry>, IImageEntry
+    public class ImageEntry : ManagerSectionEntry<IImageEntry>, IImageEntry
     {
         public IVectorEntry Sprite { get; private set; }
         public IVectorEntry Offset { get; private set; }

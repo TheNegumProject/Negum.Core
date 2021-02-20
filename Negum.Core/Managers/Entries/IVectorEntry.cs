@@ -11,7 +11,7 @@ namespace Negum.Core.Managers.Entries
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface IVectorEntry : INegumManagerSectionEntry<IVectorEntry>, IEnumerable<string>
+    public interface IVectorEntry : IManagerSectionEntry<IVectorEntry>, IEnumerable<string>
     {
         /// <summary>
         /// Provides simple way to retrieve value from appropriate slot.
@@ -32,7 +32,7 @@ namespace Negum.Core.Managers.Entries
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public class VectorEntry : NegumManagerSectionEntry<IVectorEntry>, IVectorEntry
+    public class VectorEntry : ManagerSectionEntry<IVectorEntry>, IVectorEntry
     {
         private IList<string> Values { get; set; }
 

@@ -7,7 +7,7 @@ namespace Negum.Core.Managers.Entries
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface ISpriteSoundEntry : INegumManagerSectionEntry<ISpriteSoundEntry>
+    public interface ISpriteSoundEntry : IManagerSectionEntry<ISpriteSoundEntry>
     {
         IVectorEntry Sprite { get; }
         IVectorEntry Sound { get; }
@@ -19,7 +19,7 @@ namespace Negum.Core.Managers.Entries
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public class SpriteSoundEntry : NegumManagerSectionEntry<ISpriteSoundEntry>, ISpriteSoundEntry
+    public class SpriteSoundEntry : ManagerSectionEntry<ISpriteSoundEntry>, ISpriteSoundEntry
     {
         public IVectorEntry Sprite { get; private set; }
         public IVectorEntry Sound { get; private set; }

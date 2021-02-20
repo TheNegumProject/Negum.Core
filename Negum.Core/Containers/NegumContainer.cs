@@ -83,7 +83,7 @@ namespace Negum.Core.Containers
                 (type, baseType) => type.GetInterfaces().FirstOrDefault(i => i.GetGenericArguments().Length == 0));
 
             // Negum Manager Section Entries
-            RegisterMultiple("Negum.Core.Managers.Entries", typeof(INegumManagerSectionEntry<>), 
+            RegisterMultiple("Negum.Core.Managers.Entries", typeof(IManagerSectionEntry<>), 
                 (type, baseType) => type.GetInterfaces().FirstOrDefault(i => i.GetGenericTypeDefinition() == baseType));
 
             // Managers Entries

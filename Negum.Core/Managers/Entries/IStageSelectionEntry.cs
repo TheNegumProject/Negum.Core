@@ -7,7 +7,7 @@ namespace Negum.Core.Managers.Entries
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface IStageSelectionEntry : INegumManagerSectionEntry<IStageSelectionEntry>
+    public interface IStageSelectionEntry : IManagerSectionEntry<IStageSelectionEntry>
     {
         IVectorEntry Position { get; }
         ITextEntry Active { get; }
@@ -21,7 +21,7 @@ namespace Negum.Core.Managers.Entries
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public class StageSelectionEntry : NegumManagerSectionEntry<IStageSelectionEntry>, IStageSelectionEntry
+    public class StageSelectionEntry : ManagerSectionEntry<IStageSelectionEntry>, IStageSelectionEntry
     {
         public IVectorEntry Position { get; private set; }
         public ITextEntry Active { get; private set; }

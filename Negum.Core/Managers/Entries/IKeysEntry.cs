@@ -7,7 +7,7 @@ namespace Negum.Core.Managers.Entries
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface IKeysEntry : INegumManagerSectionEntry<IKeysEntry>
+    public interface IKeysEntry : IManagerSectionEntry<IKeysEntry>
     {
         int Jump { get; }
         int Crouch { get; }
@@ -28,7 +28,7 @@ namespace Negum.Core.Managers.Entries
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public class KeysEntry : NegumManagerSectionEntry<IKeysEntry>, IKeysEntry
+    public class KeysEntry : ManagerSectionEntry<IKeysEntry>, IKeysEntry
     {
         public int Jump { get; private set; }
         public int Crouch { get; private set; }

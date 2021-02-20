@@ -7,7 +7,7 @@ namespace Negum.Core.Managers.Entries
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface ITextEntry : INegumManagerSectionEntry<ITextEntry>
+    public interface ITextEntry : IManagerSectionEntry<ITextEntry>
     {
         /// <summary>
         /// Position of the text.
@@ -40,7 +40,7 @@ namespace Negum.Core.Managers.Entries
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public class TextEntry : NegumManagerSectionEntry<ITextEntry>, ITextEntry
+    public class TextEntry : ManagerSectionEntry<ITextEntry>, ITextEntry
     {
         public IVectorEntry Offset { get; private set; }
         public IVectorEntry Font { get; private set; }

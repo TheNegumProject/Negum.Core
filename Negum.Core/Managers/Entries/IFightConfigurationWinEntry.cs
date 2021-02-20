@@ -7,7 +7,7 @@ namespace Negum.Core.Managers.Entries
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface IFightConfigurationWinEntry : INegumManagerSectionEntry<IFightConfigurationWinEntry>
+    public interface IFightConfigurationWinEntry : IManagerSectionEntry<IFightConfigurationWinEntry>
     {
         /// <summary>
         /// Win by normal.
@@ -61,7 +61,7 @@ namespace Negum.Core.Managers.Entries
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public class FightConfigurationWinEntry : NegumManagerSectionEntry<IFightConfigurationWinEntry>,
+    public class FightConfigurationWinEntry : ManagerSectionEntry<IFightConfigurationWinEntry>,
         IFightConfigurationWinEntry
     {
         public IImageEntry Normal { get; private set; }

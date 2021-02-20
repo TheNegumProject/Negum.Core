@@ -9,7 +9,7 @@ namespace Negum.Core.Managers.Entries
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface ITimeEntry : INegumManagerSectionEntry<ITimeEntry>
+    public interface ITimeEntry : IManagerSectionEntry<ITimeEntry>
     {
         /// <summary>
         /// </summary>
@@ -28,7 +28,7 @@ namespace Negum.Core.Managers.Entries
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public class TimeEntry : NegumManagerSectionEntry<ITimeEntry>, ITimeEntry
+    public class TimeEntry : ManagerSectionEntry<ITimeEntry>, ITimeEntry
     {
         public override ITimeEntry Get() => this;
         public DateTime GetDateTime() => DateTime.Parse(this.Entry.Value);

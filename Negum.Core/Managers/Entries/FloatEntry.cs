@@ -7,7 +7,7 @@ namespace Negum.Core.Managers.Entries
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public class FloatEntry : NegumManagerSectionEntry<float>
+    public class FloatEntry : ManagerSectionEntry<float>
     {
         public override float Get() => float.Parse(this.Entry.Value);
     }

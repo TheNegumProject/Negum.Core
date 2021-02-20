@@ -10,66 +10,66 @@ namespace Negum.Core.Managers.Types
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface IMotifNegumManager : INegumManager
+    public interface IMotifManager : IManager
     {
-        IMotifNegumInfo Info => this.GetSection<IMotifNegumInfo>("Info");
-        IMotifNegumFiles Files => this.GetSection<IMotifNegumFiles>("Files");
-        IMotifNegumMusic Music => this.GetSection<IMotifNegumMusic>("Music");
-        IMotifNegumTitleInfo TitleInfo => this.GetSection<IMotifNegumTitleInfo>("Title Info");
-        IMotifNegumScreenBgDef TitleBgDef => this.GetSection<IMotifNegumScreenBgDef>("TitleBGdef");
-        IEnumerable<IMotifNegumScreenBg> TitleBgs => this.GetSections<IMotifNegumScreenBg>("TitleBG ");
-        IMotifNegumInfobox Infobox => this.GetSection<IMotifNegumInfobox>("Infobox");
-        IMotifNegumSelectInfo SelectInfo => this.GetSection<IMotifNegumSelectInfo>("Select Info");
-        IMotifNegumScreenBgDef SelectBgDef => this.GetSection<IMotifNegumScreenBgDef>("SelectBGdef");
+        IMotifInfo Info => this.GetSection<IMotifInfo>("Info");
+        IMotifFiles Files => this.GetSection<IMotifFiles>("Files");
+        IMotifMusic Music => this.GetSection<IMotifMusic>("Music");
+        IMotifTitleInfo TitleInfo => this.GetSection<IMotifTitleInfo>("Title Info");
+        IMotifScreenBgDef TitleBgDef => this.GetSection<IMotifScreenBgDef>("TitleBGdef");
+        IEnumerable<IMotifScreenBg> TitleBgs => this.GetSections<IMotifScreenBg>("TitleBG ");
+        IMotifInfobox Infobox => this.GetSection<IMotifInfobox>("Infobox");
+        IMotifSelectInfo SelectInfo => this.GetSection<IMotifSelectInfo>("Select Info");
+        IMotifScreenBgDef SelectBgDef => this.GetSection<IMotifScreenBgDef>("SelectBGdef");
 
-        IEnumerable<IMotifNegumScreenBg> SelectBgs =>
-            this.GetSections<IMotifNegumScreenBg>("SelectBG ");
+        IEnumerable<IMotifScreenBg> SelectBgs =>
+            this.GetSections<IMotifScreenBg>("SelectBG ");
 
-        IMotifNegumVsScreen VsScreen => this.GetSection<IMotifNegumVsScreen>("VS Screen");
-        IMotifNegumScreenBgDef VersusBgDef => this.GetSection<IMotifNegumScreenBgDef>("VersusBGdef");
+        IMotifVsScreen VsScreen => this.GetSection<IMotifVsScreen>("VS Screen");
+        IMotifScreenBgDef VersusBgDef => this.GetSection<IMotifScreenBgDef>("VersusBGdef");
 
-        IEnumerable<IMotifNegumScreenBg> VersusBgs =>
-            this.GetSections<IMotifNegumScreenBg>("VersusBG ");
+        IEnumerable<IMotifScreenBg> VersusBgs =>
+            this.GetSections<IMotifScreenBg>("VersusBG ");
 
-        IMotifNegumDemoMode DemoMode => this.GetSection<IMotifNegumDemoMode>("Demo Mode");
+        IMotifDemoMode DemoMode => this.GetSection<IMotifDemoMode>("Demo Mode");
 
-        IMotifNegumContinueScreen ContinueScreen =>
-            this.GetSection<IMotifNegumContinueScreen>("Continue Screen");
+        IMotifContinueScreen ContinueScreen =>
+            this.GetSection<IMotifContinueScreen>("Continue Screen");
 
-        IMotifNegumGameOverScreen GameOverScreen =>
-            this.GetSection<IMotifNegumGameOverScreen>("Game Over Screen");
+        IMotifGameOverScreen GameOverScreen =>
+            this.GetSection<IMotifGameOverScreen>("Game Over Screen");
 
-        IMotifNegumVictoryScreen VictoryScreen =>
-            this.GetSection<IMotifNegumVictoryScreen>("Victory Screen");
+        IMotifVictoryScreen VictoryScreen =>
+            this.GetSection<IMotifVictoryScreen>("Victory Screen");
 
-        IMotifNegumScreenBgDef VictoryBgDef => this.GetSection<IMotifNegumScreenBgDef>("VictoryBGdef");
+        IMotifScreenBgDef VictoryBgDef => this.GetSection<IMotifScreenBgDef>("VictoryBGdef");
 
-        IEnumerable<IMotifNegumScreenBg> VictoryBgs =>
-            this.GetSections<IMotifNegumScreenBg>("VictoryBG ");
+        IEnumerable<IMotifScreenBg> VictoryBgs =>
+            this.GetSections<IMotifScreenBg>("VictoryBG ");
 
-        IMotifNegumWinScreen WinScreen => this.GetSection<IMotifNegumWinScreen>("Win Screen");
+        IMotifWinScreen WinScreen => this.GetSection<IMotifWinScreen>("Win Screen");
 
-        IMotifNegumDefaultEnding DefaultEnding =>
-            this.GetSection<IMotifNegumDefaultEnding>("Default Ending");
+        IMotifDefaultEnding DefaultEnding =>
+            this.GetSection<IMotifDefaultEnding>("Default Ending");
 
-        IMotifNegumEndCredits EndCredits => this.GetSection<IMotifNegumEndCredits>("End Credits");
+        IMotifEndCredits EndCredits => this.GetSection<IMotifEndCredits>("End Credits");
 
-        IMotifNegumSurvivalResultsScreen SurvivalResultsScreen =>
-            this.GetSection<IMotifNegumSurvivalResultsScreen>("Survival Results Screen");
+        IMotifSurvivalResultsScreen SurvivalResultsScreen =>
+            this.GetSection<IMotifSurvivalResultsScreen>("Survival Results Screen");
 
-        IMotifNegumScreenBgDef OptionInfo => this.GetSection<IMotifNegumScreenBgDef>("Option Info");
+        IMotifScreenBgDef OptionInfo => this.GetSection<IMotifScreenBgDef>("Option Info");
 
-        IEnumerable<IMotifNegumScreenBg> OptionBgs =>
-            this.GetSections<IMotifNegumScreenBg>("OptionBG ");
+        IEnumerable<IMotifScreenBg> OptionBgs =>
+            this.GetSections<IMotifScreenBg>("OptionBG ");
     }
 
-    public interface IMotifNegumScreenBgDef : INegumManagerSection
+    public interface IMotifScreenBgDef : IManagerSection
     {
         IFileEntry SpriteFile => this.GetValue<IFileEntry>("spr");
         IVectorEntry BgClearColor => this.GetValue<IVectorEntry>("bgclearcolor");
     }
 
-    public interface IMotifNegumInfo : INegumManagerSection
+    public interface IMotifInfo : IManagerSection
     {
         /// <summary>
         /// Name of motif.
@@ -92,7 +92,7 @@ namespace Negum.Core.Managers.Types
         float Version => this.GetValue<float>("mugenversion");
     }
 
-    public interface IMotifNegumFiles : INegumManagerSection
+    public interface IMotifFiles : IManagerSection
     {
         /// <summary>
         /// Filename of sprite data.
@@ -130,7 +130,7 @@ namespace Negum.Core.Managers.Types
         IEntryCollection<IFileEntry> FontFiles => Scrapper.GetCollection<IFileEntry>("font");
     }
 
-    public interface IMotifNegumMusic : INegumManagerSection
+    public interface IMotifMusic : IManagerSection
     {
         /// <summary>
         /// Music to play at title screen.
@@ -153,7 +153,7 @@ namespace Negum.Core.Managers.Types
         IAudioEntry Victory => this.GetValue<IAudioEntry>("victory.bgm");
     }
 
-    public interface IMotifNegumTitleInfo : INegumManagerSection
+    public interface IMotifTitleInfo : IManagerSection
     {
         ITimeEntry FadeInTime => this.GetValue<ITimeEntry>("fadein.time");
         ITimeEntry FadeOutTime => this.GetValue<ITimeEntry>("fadeout.time");
@@ -185,7 +185,7 @@ namespace Negum.Core.Managers.Types
         ISpriteSoundEntry Cancel => this.GetValue<ISpriteSoundEntry>("cancel");
     }
 
-    public interface IMotifNegumScreenBg : INegumManagerSection
+    public interface IMotifScreenBg : IManagerSection
     {
         string Type => this.GetValue<string>("type");
         IVectorEntry SpriteNumber => this.GetValue<IVectorEntry>("spriteno");
@@ -199,12 +199,12 @@ namespace Negum.Core.Managers.Types
         IVectorEntry Delta => this.GetValue<IVectorEntry>("delta");
     }
 
-    public interface IMotifNegumInfobox : INegumManagerSection
+    public interface IMotifInfobox : IManagerSection
     {
         // TODO: What is this ??? Get an example
     }
 
-    public interface IMotifNegumSelectInfo : INegumManagerSection
+    public interface IMotifSelectInfo : IManagerSection
     {
         ITimeEntry FadeInTime => this.GetValue<ITimeEntry>("fadein.time");
         ITimeEntry FadeOutTime => this.GetValue<ITimeEntry>("fadeout.time");
@@ -245,7 +245,7 @@ namespace Negum.Core.Managers.Types
         bool TeamMenuMoveWrapping => this.GetValue<bool>("teammenu.move.wrapping");
     }
 
-    public interface IMotifNegumVsScreen : INegumManagerSection
+    public interface IMotifVsScreen : IManagerSection
     {
         ITimeEntry Time => this.GetValue<ITimeEntry>("time");
         ITimeEntry FadeInTime => this.GetValue<ITimeEntry>("fadein.time");
@@ -255,7 +255,7 @@ namespace Negum.Core.Managers.Types
         IPlayerSelectionEntry Player2 => this.GetValue<IPlayerSelectionEntry>("p2");
     }
 
-    public interface IMotifNegumDemoMode : INegumManagerSection
+    public interface IMotifDemoMode : IManagerSection
     {
         bool IsEnabled => this.GetValue<bool>("enabled");
         ITimeEntry WaitTime => this.GetValue<ITimeEntry>("title.waittime");
@@ -264,7 +264,7 @@ namespace Negum.Core.Managers.Types
         bool ShowDebugInfo => this.GetValue<bool>("debuginfo");
     }
 
-    public interface IMotifNegumContinueScreen : INegumManagerSection
+    public interface IMotifContinueScreen : IManagerSection
     {
         bool IsEnabled => this.GetValue<bool>("enabled");
         IVectorEntry Position => this.GetValue<IVectorEntry>("pos");
@@ -275,13 +275,13 @@ namespace Negum.Core.Managers.Types
         ITextEntry NoActiveText => this.GetValue<ITextEntry>("no.active");
     }
 
-    public interface IMotifNegumGameOverScreen : INegumManagerSection
+    public interface IMotifGameOverScreen : IManagerSection
     {
         bool IsEnabled => this.GetValue<bool>("enabled");
         IFileEntry StoryboardFile => this.GetValue<IFileEntry>("storyboard");
     }
 
-    public interface IMotifNegumVictoryScreen : INegumManagerSection
+    public interface IMotifVictoryScreen : IManagerSection
     {
         bool IsEnabled => this.GetValue<bool>("enabled");
         ITimeEntry Time => this.GetValue<ITimeEntry>("time");
@@ -291,7 +291,7 @@ namespace Negum.Core.Managers.Types
         ITextEntry WinQuote => this.GetValue<ITextEntry>("winquote");
     }
 
-    public interface IMotifNegumWinScreen : INegumManagerSection
+    public interface IMotifWinScreen : IManagerSection
     {
         bool IsEnabled => this.GetValue<bool>("enabled");
         ITextEntry WinText => this.GetValue<ITextEntry>("wintext");
@@ -300,19 +300,19 @@ namespace Negum.Core.Managers.Types
         ITimeEntry PoseTime => this.GetValue<ITimeEntry>("pos.time");
     }
 
-    public interface IMotifNegumDefaultEnding : INegumManagerSection
+    public interface IMotifDefaultEnding : IManagerSection
     {
         bool IsEnabled => this.GetValue<bool>("enabled");
         IFileEntry StoryboardFile => this.GetValue<IFileEntry>("storyboard");
     }
 
-    public interface IMotifNegumEndCredits : INegumManagerSection
+    public interface IMotifEndCredits : IManagerSection
     {
         bool IsEnabled => this.GetValue<bool>("enabled");
         IFileEntry StoryboardFile => this.GetValue<IFileEntry>("storyboard");
     }
 
-    public interface IMotifNegumSurvivalResultsScreen : INegumManagerSection
+    public interface IMotifSurvivalResultsScreen : IManagerSection
     {
         bool IsEnabled => this.GetValue<bool>("enabled");
         ITextEntry WinText => this.GetValue<ITextEntry>("wintext");

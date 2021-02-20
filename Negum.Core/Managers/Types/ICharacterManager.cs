@@ -9,18 +9,18 @@ namespace Negum.Core.Managers.Types
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface ICharacterNegumManager : INegumManager
+    public interface ICharacterManager : IManager
     {
-        ICharacterNegumInfo Info => this.GetSection<ICharacterNegumInfo>("Info");
-        ICharacterNegumFiles Files => this.GetSection<ICharacterNegumFiles>("Files");
+        ICharacterInfo Info => this.GetSection<ICharacterInfo>("Info");
+        ICharacterFiles Files => this.GetSection<ICharacterFiles>("Files");
 
-        ICharacterNegumPaletteKeymap Keymap =>
-            this.GetSection<ICharacterNegumPaletteKeymap>("Palette Keymap");
+        ICharacterPaletteKeymap Keymap =>
+            this.GetSection<ICharacterPaletteKeymap>("Palette Keymap");
 
-        ICharacterNegumArcade Arcade => this.GetSection<ICharacterNegumArcade>("Arcade");
+        ICharacterArcade Arcade => this.GetSection<ICharacterArcade>("Arcade");
     }
 
-    public interface ICharacterNegumInfo : INegumManagerSection
+    public interface ICharacterInfo : IManagerSection
     {
         string Name => this.GetValue<string>("name");
         string DisplayName => this.GetValue<string>("displayname");
@@ -34,7 +34,7 @@ namespace Negum.Core.Managers.Types
         IVectorEntry PaletteDefaults => this.GetValue<IVectorEntry>("pal.defaults");
     }
 
-    public interface ICharacterNegumFiles : INegumManagerSection
+    public interface ICharacterFiles : IManagerSection
     {
         IFileEntry CommandFile => this.GetValue<IFileEntry>("cmd");
         IFileEntry ConstantsFile => this.GetValue<IFileEntry>("cns");
@@ -46,7 +46,7 @@ namespace Negum.Core.Managers.Types
         IFileEntry AiHintsDataFile => this.GetValue<IFileEntry>("ai");
     }
 
-    public interface ICharacterNegumPaletteKeymap : INegumManagerSection
+    public interface ICharacterPaletteKeymap : IManagerSection
     {
         int A => this.GetValue<int>("a");
         int B => this.GetValue<int>("b");
@@ -56,7 +56,7 @@ namespace Negum.Core.Managers.Types
         int Z => this.GetValue<int>("z");
     }
 
-    public interface ICharacterNegumArcade : INegumManagerSection
+    public interface ICharacterArcade : IManagerSection
     {
         IFileEntry IntroStoryboardFile => this.GetValue<IFileEntry>("intro.storyboard");
         IFileEntry EndingStoryboardFile => this.GetValue<IFileEntry>("ending.storyboard");

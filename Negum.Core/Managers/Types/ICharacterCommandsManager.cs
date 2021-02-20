@@ -10,7 +10,7 @@ namespace Negum.Core.Managers.Types
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface ICharacterCommandsManager : INegumManager
+    public interface ICharacterCommandsManager : IManager
     {
         ICharacterCommandsRemap Remap => this.GetSection<ICharacterCommandsRemap>("Remap");
         ICharacterCommandsDefaults Defaults => this.GetSection<ICharacterCommandsDefaults>("Defaults");
@@ -19,7 +19,7 @@ namespace Negum.Core.Managers.Types
         IEnumerable<ICharacterCommandsState> States => this.GetSections<ICharacterCommandsState>("State ");
     }
 
-    public interface ICharacterCommandsRemap : INegumManagerSection
+    public interface ICharacterCommandsRemap : IManagerSection
     {
         int A => this.GetValue<int>("a");
         int B => this.GetValue<int>("b");
@@ -30,7 +30,7 @@ namespace Negum.Core.Managers.Types
         int S => this.GetValue<int>("s");
     }
 
-    public interface ICharacterCommandsDefaults : INegumManagerSection
+    public interface ICharacterCommandsDefaults : IManagerSection
     {
         /// <summary>
         /// Default value for the "time" parameter of a Command. Minimum 1.
@@ -43,7 +43,7 @@ namespace Negum.Core.Managers.Types
         ITimeEntry CommandBufferTime => this.GetValue<ITimeEntry>("command.buffer.time");
     }
 
-    public interface ICharacterCommandsCommand : INegumManagerSection
+    public interface ICharacterCommandsCommand : IManagerSection
     {
         /// <summary>
         /// A name to give that command.
@@ -109,11 +109,11 @@ namespace Negum.Core.Managers.Types
         ITimeEntry BufferTime => this.GetValue<ITimeEntry>("buffer.time");
     }
 
-    public interface ICharacterCommandsCommandStatedef : INegumManagerSection
+    public interface ICharacterCommandsCommandStatedef : IManagerSection
     {
     }
 
-    public interface ICharacterCommandsState : INegumManagerSection
+    public interface ICharacterCommandsState : IManagerSection
     {
         string Type => this.GetValue<string>("type");
 

@@ -10,16 +10,16 @@ namespace Negum.Core.Managers.Types
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface ICharacterStoryboardSceneNegumManager : INegumManager
+    public interface ICharacterStoryboardSceneManager : IManager
     {
-        ICharacterStoryboardSceneNegumSceneDef SceneDef =>
-            this.GetSection<ICharacterStoryboardSceneNegumSceneDef>("SceneDef");
+        ICharacterStoryboardSceneSceneDef SceneDef =>
+            this.GetSection<ICharacterStoryboardSceneSceneDef>("SceneDef");
 
-        IEnumerable<ICharacterStoryboardSceneNegumScene> Scenes =>
-            this.GetSections<ICharacterStoryboardSceneNegumScene>("Scene ");
+        IEnumerable<ICharacterStoryboardSceneScene> Scenes =>
+            this.GetSections<ICharacterStoryboardSceneScene>("Scene ");
     }
 
-    public interface ICharacterStoryboardSceneNegumSceneDef : INegumManagerSection
+    public interface ICharacterStoryboardSceneSceneDef : IManagerSection
     {
         IFileEntry SpriteFile => this.GetValue<IFileEntry>("spr");
 
@@ -29,7 +29,7 @@ namespace Negum.Core.Managers.Types
         int StartScene => this.GetValue<int>("startscene");
     }
 
-    public interface ICharacterStoryboardSceneNegumScene : INegumManagerSection
+    public interface ICharacterStoryboardSceneScene : IManagerSection
     {
         ITimeEntry FadeInTime => this.GetValue<ITimeEntry>("fadein.time");
         IVectorEntry FadeInColor => this.GetValue<IVectorEntry>("fadein.col");

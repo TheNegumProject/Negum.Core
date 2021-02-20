@@ -8,7 +8,7 @@ namespace Negum.Core.Managers.Entries
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public class StringEntry : NegumManagerSectionEntry<string>
+    public class StringEntry : ManagerSectionEntry<string>
     {
         public override string Get() => this.Entry.Value;
     }

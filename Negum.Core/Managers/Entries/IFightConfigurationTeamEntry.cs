@@ -7,7 +7,7 @@ namespace Negum.Core.Managers.Entries
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface IFightConfigurationTeamEntry : INegumManagerSectionEntry<IFightConfigurationTeamEntry>
+    public interface IFightConfigurationTeamEntry : IManagerSectionEntry<IFightConfigurationTeamEntry>
     {
         IVectorEntry Position { get; }
         int StartX { get; }
@@ -22,7 +22,7 @@ namespace Negum.Core.Managers.Entries
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public class FightConfigurationTeamEntry : NegumManagerSectionEntry<IFightConfigurationTeamEntry>,
+    public class FightConfigurationTeamEntry : ManagerSectionEntry<IFightConfigurationTeamEntry>,
         IFightConfigurationTeamEntry
     {
         public IVectorEntry Position { get; private set; }

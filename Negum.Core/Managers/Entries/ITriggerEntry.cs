@@ -7,7 +7,7 @@ namespace Negum.Core.Managers.Entries
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface ITriggerEntry : INegumManagerSectionEntry<ITriggerEntry>
+    public interface ITriggerEntry : IManagerSectionEntry<ITriggerEntry>
     {
     }
 
@@ -17,7 +17,7 @@ namespace Negum.Core.Managers.Entries
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public class TriggerEntry : NegumManagerSectionEntry<ITriggerEntry>, ITriggerEntry
+    public class TriggerEntry : ManagerSectionEntry<ITriggerEntry>, ITriggerEntry
     {
         public override ITriggerEntry Get() => this;
     }

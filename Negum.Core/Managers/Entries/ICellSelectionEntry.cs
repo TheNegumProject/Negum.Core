@@ -7,7 +7,7 @@ namespace Negum.Core.Managers.Entries
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface ICellSelectionEntry : INegumManagerSectionEntry<ICellSelectionEntry>
+    public interface ICellSelectionEntry : IManagerSectionEntry<ICellSelectionEntry>
     {
         /// <summary>
         /// (x,y) size of each cell in pixels.
@@ -38,7 +38,7 @@ namespace Negum.Core.Managers.Entries
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public class CellSelectionEntry : NegumManagerSectionEntry<ICellSelectionEntry>, ICellSelectionEntry
+    public class CellSelectionEntry : ManagerSectionEntry<ICellSelectionEntry>, ICellSelectionEntry
     {
         public IVectorEntry CellSize { get; private set; }
         public int CellSpacing { get; private set; }

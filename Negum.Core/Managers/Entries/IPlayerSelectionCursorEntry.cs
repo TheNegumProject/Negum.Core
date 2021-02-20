@@ -7,7 +7,7 @@ namespace Negum.Core.Managers.Entries
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface IPlayerSelectionCursorEntry : INegumManagerSectionEntry<IPlayerSelectionCursorEntry>
+    public interface IPlayerSelectionCursorEntry : IManagerSectionEntry<IPlayerSelectionCursorEntry>
     {
         IVectorEntry StartCell { get; }
         IImageEntry Animation { get; }
@@ -20,7 +20,7 @@ namespace Negum.Core.Managers.Entries
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public class PlayerSelectionCursorEntry : NegumManagerSectionEntry<IPlayerSelectionCursorEntry>,
+    public class PlayerSelectionCursorEntry : ManagerSectionEntry<IPlayerSelectionCursorEntry>,
         IPlayerSelectionCursorEntry
     {
         public IVectorEntry StartCell { get; private set; }

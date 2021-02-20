@@ -7,7 +7,7 @@ namespace Negum.Core.Managers.Entries
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface ICharacterEntry : INegumManagerSectionEntry<ICharacterEntry>
+    public interface ICharacterEntry : IManagerSectionEntry<ICharacterEntry>
     {
         /// <summary>
         /// Name / Nick of the Character.
@@ -72,7 +72,7 @@ namespace Negum.Core.Managers.Entries
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>   
-    public class CharacterEntry : NegumManagerSectionEntry<ICharacterEntry>, ICharacterEntry
+    public class CharacterEntry : ManagerSectionEntry<ICharacterEntry>, ICharacterEntry
     {
         public string Name { get; private set; }
         public IFileEntry NameFile { get; private set; }

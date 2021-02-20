@@ -7,7 +7,7 @@ namespace Negum.Core.Managers.Entries
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface IAudioEntry : INegumManagerSectionEntry<IAudioEntry>
+    public interface IAudioEntry : IManagerSectionEntry<IAudioEntry>
     {
         /// <summary>
         /// Audio file.
@@ -37,7 +37,7 @@ namespace Negum.Core.Managers.Entries
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public class AudioEntry : NegumManagerSectionEntry<IAudioEntry>, IAudioEntry
+    public class AudioEntry : ManagerSectionEntry<IAudioEntry>, IAudioEntry
     {
         public IFileEntry File { get; private set; }
         public int Volume { get; private set; }

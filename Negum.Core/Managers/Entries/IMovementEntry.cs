@@ -7,7 +7,7 @@ namespace Negum.Core.Managers.Entries
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface IMovementEntry : INegumManagerSectionEntry<IMovementEntry>
+    public interface IMovementEntry : IManagerSectionEntry<IMovementEntry>
     {
         ISpriteSoundEntry Move { get; }
         ISpriteSoundEntry Done { get; }
@@ -19,7 +19,7 @@ namespace Negum.Core.Managers.Entries
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public class MovementEntry : NegumManagerSectionEntry<IMovementEntry>, IMovementEntry
+    public class MovementEntry : ManagerSectionEntry<IMovementEntry>, IMovementEntry
     {
         public ISpriteSoundEntry Move { get; private set; }
         public ISpriteSoundEntry Done { get; private set; }

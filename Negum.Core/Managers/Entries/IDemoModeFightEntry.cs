@@ -7,7 +7,7 @@ namespace Negum.Core.Managers.Entries
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface IDemoModeFightEntry : INegumManagerSectionEntry<IDemoModeFightEntry>
+    public interface IDemoModeFightEntry : IManagerSectionEntry<IDemoModeFightEntry>
     {
         /// <summary>
         /// Time to display the fight before returning to title.
@@ -36,7 +36,7 @@ namespace Negum.Core.Managers.Entries
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public class DemoModeFightEntry : NegumManagerSectionEntry<IDemoModeFightEntry>, IDemoModeFightEntry
+    public class DemoModeFightEntry : ManagerSectionEntry<IDemoModeFightEntry>, IDemoModeFightEntry
     {
         public ITimeEntry EndTime { get; private set; }
         public bool PlayBackgroundMusic { get; private set; }

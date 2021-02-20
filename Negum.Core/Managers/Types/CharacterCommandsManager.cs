@@ -6,12 +6,12 @@ namespace Negum.Core.Managers.Types
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public class CharacterCommandsManager : NegumManager, ICharacterCommandsManager
+    public class CharacterCommandsManager : Manager, ICharacterCommandsManager
     {
     }
 
     public class CharacterCommandsManagerSection :
-        NegumManagerSection,
+        ManagerSection,
         ICharacterCommandsRemap,
         ICharacterCommandsDefaults,
         ICharacterCommandsCommand,

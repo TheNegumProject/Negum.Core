@@ -21,7 +21,7 @@ namespace Negum.Core.Tests.Managers
             
             var config = await this.Parse(path);
             var scrapper = NegumContainer.Resolve<IConfigurationScrapper>().Setup(config);
-            var manager = (IFightNegumManager) NegumContainer.Resolve<IFightNegumManager>().Setup(scrapper);
+            var manager = (IFightManager) NegumContainer.Resolve<IFightManager>().Setup(scrapper);
             var text = manager.Round.WinText.Text;
 
             Assert.True(text.Equals("%s Wins"));

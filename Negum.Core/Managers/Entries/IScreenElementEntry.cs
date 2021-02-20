@@ -7,7 +7,7 @@ namespace Negum.Core.Managers.Entries
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface IScreenElementEntry : INegumManagerSectionEntry<IScreenElementEntry>
+    public interface IScreenElementEntry : IManagerSectionEntry<IScreenElementEntry>
     {
         /// <summary>
         /// Time to show current element.
@@ -41,7 +41,7 @@ namespace Negum.Core.Managers.Entries
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public class ScreenElementEntry : NegumManagerSectionEntry<IScreenElementEntry>, IScreenElementEntry
+    public class ScreenElementEntry : ManagerSectionEntry<IScreenElementEntry>, IScreenElementEntry
     {
         public ITimeEntry Time { get; private set; }
         public IImageEntry Image { get; private set; }

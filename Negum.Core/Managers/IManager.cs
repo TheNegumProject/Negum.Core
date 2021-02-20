@@ -11,7 +11,7 @@ namespace Negum.Core.Managers
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface INegumManager
+    public interface IManager
     {
         /// <summary>
         /// </summary>
@@ -19,7 +19,7 @@ namespace Negum.Core.Managers
         /// <typeparam name="TManagerSection">Type of the searched section.</typeparam>
         /// <returns>Parsed found section.</returns>
         TManagerSection GetSection<TManagerSection>(string sectionName)
-            where TManagerSection : INegumManagerSection;
+            where TManagerSection : IManagerSection;
     }
 
     /// <summary>
@@ -28,24 +28,24 @@ namespace Negum.Core.Managers
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public abstract class NegumManager : INegumManager
+    public abstract class Manager : IManager
     {
         /// <summary>
         /// Contains sections already used.
         /// Mainly used to increase performance.
         /// </summary>
-        private IDictionary<string, INegumManagerSection> Sections { get; } =
-            new Dictionary<string, INegumManagerSection>();
+        private IDictionary<string, IManagerSection> Sections { get; } =
+            new Dictionary<string, IManagerSection>();
 
         protected IConfiguration Config { get; }
 
-        public NegumManager(IConfiguration config)
+        public Manager(IConfiguration config)
         {
             this.Config = config;
         }
 
         public TManagerSection GetSection<TManagerSection>(string sectionName)
-            where TManagerSection : INegumManagerSection
+            where TManagerSection : IManagerSection
         {
             var section = this.Config[sectionName];
 
@@ -63,7 +63,7 @@ namespace Negum.Core.Managers
         /// <param name="sectionName"></param>
         /// <param name="configSection"></param>
         /// <returns>Returns related Manager's Section.</returns>
-        protected abstract INegumManagerSection GetNewManagerSection(string sectionName,
+        protected abstract IManagerSection GetNewManagerSection(string sectionName,
             IConfigurationSection configSection);
     }
 }
