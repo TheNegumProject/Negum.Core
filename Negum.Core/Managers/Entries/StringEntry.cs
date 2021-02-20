@@ -10,6 +10,6 @@ namespace Negum.Core.Managers.Entries
     /// </author>
     public class StringEntry : NegumManagerSectionEntry<string>
     {
-        public override string Get() => this.SectionEntryContent;
+        public override string Get() => this.Entry.Value;
     }
 }

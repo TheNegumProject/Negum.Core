@@ -1,5 +1,3 @@
-using Negum.Core.Configurations.Cfg;
-
 namespace Negum.Core.Managers.Types
 {
     /// <summary>
@@ -23,7 +21,7 @@ namespace Negum.Core.Managers.Types
     }
 
     public class ConfigNegumManagerSection :
-        NegumManagerSection<ICfgConfigurationSection, ICfgConfigurationSectionEntry>,
+        NegumManagerSection,
         IConfigNegumOptions,
         IConfigNegumRules,
         IConfigNegumConfig,

@@ -38,7 +38,7 @@ namespace Negum.Core.Managers.Entries
 
         public string this[int index] => this.Values[index];
 
-        public string RawValue => this.SectionEntryContent;
+        public string RawValue => this.Entry.Value;
 
         public override IVectorEntry Get()
         {

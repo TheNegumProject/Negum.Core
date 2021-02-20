@@ -10,11 +10,11 @@ namespace Negum.Core.Managers.Entries
     public class BooleanEntry : NegumManagerSectionEntry<bool>
     {
         public override bool Get() =>
-            this.SectionEntryContent.Trim() switch
+            this.Entry.Value switch
             {
                 "0" => false,
                 "1" => true,
-                _ => bool.Parse(this.SectionEntryContent)
+                _ => bool.Parse(this.Entry.Value)
             };
     }
 }

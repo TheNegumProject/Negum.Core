@@ -31,7 +31,7 @@ namespace Negum.Core.Managers.Entries
     public class TimeEntry : NegumManagerSectionEntry<ITimeEntry>, ITimeEntry
     {
         public override ITimeEntry Get() => this;
-        public DateTime GetDateTime() => DateTime.Parse(this.SectionEntryContent);
-        public TimeSpan GetTimeSpan() => TimeSpan.FromTicks(long.Parse(this.SectionEntryContent));
+        public DateTime GetDateTime() => DateTime.Parse(this.Entry.Value);
+        public TimeSpan GetTimeSpan() => TimeSpan.FromTicks(long.Parse(this.Entry.Value));
     }
 }

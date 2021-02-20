@@ -1,13 +1,13 @@
-namespace Negum.Core.Configurations.Def
+namespace Negum.Core.Configurations
 {
     /// <summary>
-    /// Represents a definition of a DEF entry in a section in configuration.
+    /// Represents general definition of an entry in a section in configuration.
     /// </summary>
     /// 
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface IDefConfigurationSectionEntry : INegumConfigurationSectionEntry
+    public partial interface IConfigurationSectionEntry
     {
         /// <summary>
         /// Entry's key.
@@ -26,7 +26,7 @@ namespace Negum.Core.Configurations.Def
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public class DefConfigurationSectionEntry : NegumConfigurationSectionEntry, IDefConfigurationSectionEntry
+    public partial class ConfigurationSectionEntry : IConfigurationSectionEntry
     {
         public string Key { get; internal set; }
         public string Value { get; internal set; }
