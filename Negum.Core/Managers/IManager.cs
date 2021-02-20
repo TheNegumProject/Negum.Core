@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Negum.Core.Configurations;
@@ -12,7 +13,7 @@ namespace Negum.Core.Managers
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface IManager
+    public interface IManager : IEnumerable<IManagerSection>
     {
         /// <summary>
         /// Setups current Manager to use specified configuration.
@@ -33,6 +34,14 @@ namespace Negum.Core.Managers
         /// </summary>
         /// <param name="sectionName"></param>
         /// <typeparam name="TManagerSection"></typeparam>
+        /// <returns>Collection of sections with the same name.</returns>
+        IEnumerable<TManagerSection> GetSections<TManagerSection>(string sectionName)
+            where TManagerSection : IManagerSection;
+
+        /// <summary>
+        /// </summary>
+        /// <param name="sectionName"></param>
+        /// <typeparam name="TManagerSection"></typeparam>
         /// <returns>Collection of subsections from the current section.</returns>
         IEnumerable<TManagerSection> GetSubsections<TManagerSection>(string sectionName)
             where TManagerSection : IManagerSection;
@@ -46,13 +55,6 @@ namespace Negum.Core.Managers
     /// </author>
     public abstract class Manager : IManager
     {
-        /// <summary>
-        /// Contains sections already used.
-        /// Mainly used to increase performance.
-        /// </summary>
-        private IDictionary<string, IManagerSection> Sections { get; } =
-            new Dictionary<string, IManagerSection>();
-
         protected IConfiguration Config { get; set; }
 
         public IManager UseConfiguration(IConfiguration config)
@@ -62,24 +64,35 @@ namespace Negum.Core.Managers
         }
 
         public TManagerSection GetSection<TManagerSection>(string sectionName)
-            where TManagerSection : IManagerSection
-        {
-            var section = this.Config[sectionName];
+            where TManagerSection : IManagerSection =>
+            this.GetSections<TManagerSection>(sectionName)
+                .FirstOrDefault();
 
-            if (!this.Sections.ContainsKey(sectionName))
-            {
-                var managerSection = this.GetNewManagerSection(sectionName, section);
-                this.Sections.Add(sectionName, managerSection);
-            }
-
-            return (TManagerSection) this.Sections[sectionName];
-        }
+        public IEnumerable<TManagerSection> GetSections<TManagerSection>(string sectionName)
+            where TManagerSection : IManagerSection =>
+            this.Config
+                .Where(section => section.Name.Equals(sectionName))
+                .Select(section => this.GetNewManagerSection(section.Name, section))
+                .Cast<TManagerSection>()
+                .ToList();
 
         public IEnumerable<TManagerSection> GetSubsections<TManagerSection>(string sectionName)
             where TManagerSection : IManagerSection =>
-            this.Config[sectionName].Subsections
-                .Select(subsection => (TManagerSection) this.GetNewManagerSection(subsection.Name, subsection))
+            this.Config
+                .FirstOrDefault(section => section.Name.Equals(sectionName))
+                .Subsections
+                .Select(subsection => this.GetNewManagerSection(subsection.Name, subsection))
+                .Cast<TManagerSection>()
                 .ToList();
+
+        public IEnumerator<IManagerSection> GetEnumerator() =>
+            this.Config
+                .Select(section => this.GetSection<IManagerSection>(section.Name))
+                .ToList()
+                .GetEnumerator();
+
+        IEnumerator IEnumerable.GetEnumerator() =>
+            GetEnumerator();
 
         /// <summary>
         /// </summary>

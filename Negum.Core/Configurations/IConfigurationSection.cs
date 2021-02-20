@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Negum.Core.Configurations
 {
@@ -13,12 +12,6 @@ namespace Negum.Core.Configurations
     /// </author>
     public interface IConfigurationSection : IEnumerable<IConfigurationSectionEntry>
     {
-        /// <summary>
-        /// Allows for easy accessing entries.
-        /// </summary>
-        /// <param name="key"></param>
-        IConfigurationSectionEntry this[string key] { get; }
-
         /// <summary>
         /// Name of the current section.
         /// </summary>
@@ -51,8 +44,6 @@ namespace Negum.Core.Configurations
     /// </author>
     public class ConfigurationSection : IConfigurationSection
     {
-        public IConfigurationSectionEntry this[string key] => this.FirstOrDefault(entry => entry.Key.Equals(key));
-
         public string Name { get; internal set; }
 
         public IEnumerable<IConfigurationSectionEntry> Attributes { get; internal set; } =
@@ -63,7 +54,7 @@ namespace Negum.Core.Configurations
 
         public ICollection<IConfigurationSectionEntry> Entries { get; internal set; } =
             new List<IConfigurationSectionEntry>();
-        
+
         public void AddSubsection(IConfigurationSection section) =>
             ((List<IConfigurationSection>) this.Subsections).Add(section);
 

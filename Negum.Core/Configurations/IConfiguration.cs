@@ -13,12 +13,6 @@ namespace Negum.Core.Configurations
     public interface IConfiguration : IEnumerable<IConfigurationSection>
     {
         /// <summary>
-        /// Returns section from the specified key.
-        /// </summary>
-        /// <param name="sectionName"></param>
-        IConfigurationSection this[string sectionName] { get; }
-
-        /// <summary>
         /// Adds new section to the current configuration.
         /// </summary>
         /// <param name="section"></param>
@@ -33,16 +27,14 @@ namespace Negum.Core.Configurations
     /// </author>
     public class Configuration : IConfiguration
     {
-        public IConfigurationSection this[string sectionName] => this.Sections[sectionName];
-
-        public IDictionary<string, IConfigurationSection> Sections { get; } =
-            new Dictionary<string, IConfigurationSection>();
+        public ICollection<IConfigurationSection> Sections { get; } =
+            new List<IConfigurationSection>();
 
         public void AddSection(IConfigurationSection section) =>
-            this.Sections.Add(section.Name, section);
+            this.Sections.Add(section);
 
         public IEnumerator<IConfigurationSection> GetEnumerator() =>
-            this.Sections.Values.GetEnumerator();
+            this.Sections.GetEnumerator();
 
         IEnumerator IEnumerable.GetEnumerator() =>
             GetEnumerator();
