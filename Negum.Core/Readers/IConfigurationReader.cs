@@ -90,19 +90,28 @@ namespace Negum.Core.Readers
             }
             else
             {
-                var index = line.IndexOf("=", StringComparison.Ordinal);
-
-                var key = line
-                    .Substring(0, index)
-                    .Trim();
-
-                var value = line
-                    .Substring(index + 1, line.Length - index - 1)
-                    .Replace("\"", "")
-                    .Trim();
-
-                this.ProcessEntry(line, key, value);
+                this.ProcessEntry(line);
             }
+        }
+
+        /// <summary>
+        /// Parses and processes single entry.
+        /// </summary>
+        /// <param name="line"></param>
+        protected virtual void ProcessEntry(string line)
+        {
+            var index = line.IndexOf("=", StringComparison.Ordinal);
+
+            var key = line
+                .Substring(0, index)
+                .Trim();
+
+            var value = line
+                .Substring(index + 1, line.Length - index - 1)
+                .Replace("\"", "")
+                .Trim();
+
+            this.ProcessEntry(line, key, value);
         }
 
         /// <summary>
@@ -119,7 +128,7 @@ namespace Negum.Core.Readers
             var sectionName = this.GetSectionName(sectionHeader);
             var sectionAttributes = this.GetSectionAttributes(sectionHeader);
 
-            this.AddSection(sectionHeader, sectionName, sectionAttributes);
+            this.AddSection(sectionName, sectionAttributes);
         }
 
         /// <summary>
@@ -183,11 +192,9 @@ namespace Negum.Core.Readers
         /// <summary>
         /// Adds new section.
         /// </summary>
-        /// <param name="sectionHeader"></param>
         /// <param name="sectionName"></param>
         /// <param name="sectionAttributes"></param>
-        protected virtual void AddSection(string sectionHeader, string sectionName,
-            IEnumerable<IConfigurationSectionEntry> sectionAttributes)
+        protected virtual void AddSection(string sectionName, IEnumerable<IConfigurationSectionEntry> sectionAttributes)
         {
             var section = new ConfigurationSection
             {

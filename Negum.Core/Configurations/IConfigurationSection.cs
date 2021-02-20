@@ -29,6 +29,12 @@ namespace Negum.Core.Configurations
         /// Defined after the section name in single line.
         /// </summary>
         IEnumerable<IConfigurationSectionEntry> Attributes { get; }
+
+        /// <summary>
+        /// Collection of inner sections.
+        /// Only few files are using it.
+        /// </summary>
+        IEnumerable<IConfigurationSection> Subsections { get; }
     }
 
     /// <summary>
@@ -45,6 +51,9 @@ namespace Negum.Core.Configurations
 
         public IEnumerable<IConfigurationSectionEntry> Attributes { get; internal set; } =
             new List<IConfigurationSectionEntry>();
+
+        public IEnumerable<IConfigurationSection> Subsections { get; internal set; } =
+            new List<IConfigurationSection>();
 
         public ICollection<IConfigurationSectionEntry> Entries { get; internal set; } =
             new List<IConfigurationSectionEntry>();
