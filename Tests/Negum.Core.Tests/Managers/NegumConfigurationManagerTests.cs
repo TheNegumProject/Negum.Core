@@ -20,8 +20,7 @@ namespace Negum.Core.Tests.Managers
             this.InitializeContainer();
             
             var config = await this.Parse(path);
-            var scrapper = NegumContainer.Resolve<IConfigurationScrapper>().Setup(config);
-            var manager = (IConfigManager) NegumContainer.Resolve<IConfigManager>().Setup(scrapper);
+            var manager = (IConfigManager) NegumContainer.Resolve<IConfigManager>().UseConfiguration(config);
             var key = manager.P1Keys.Keys.X;
             
             Assert.True(key == 108);

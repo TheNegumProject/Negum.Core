@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Negum.Core.Configurations;
 using Negum.Core.Managers;
 using Negum.Core.Readers;
 
@@ -76,7 +77,8 @@ namespace Negum.Core.Containers
         public static void RegisterKnownTypes()
         {
             // Configurations
-            // TODO: Register configurations
+            RegisterMultiple("Negum.Core.Configurations", typeof(IConfiguration),
+                (type, baseType) => type);
             
             // Readers
             RegisterMultiple("Negum.Core.Readers", typeof(IReader<,>), 
@@ -86,108 +88,17 @@ namespace Negum.Core.Containers
             RegisterMultiple("Negum.Core.Managers.Entries", typeof(IManagerSectionEntry<>), 
                 (type, baseType) => type.GetInterfaces().FirstOrDefault(i => i.GetGenericTypeDefinition() == baseType));
 
-            // Managers Entries
-            // TODO Register all Manager Entries
-            
-            // // Managers
-            // Register<INegumManager, NegumManager>(); // TODO: Register all Manager Types
-            // Register<INegumManagerSection, NegumManagerSection>();
-            // Register<INegumNegumManager, NegumNegumManager>();
-            // Register<IMotifNegumManager, MotifNegumManager>();
-            // Register<ISelectionNegumManager, SelectionNegumManager>();
-            // Register<IFightNegumManager, FightNegumManager>();
-            // Register<IFontNegumManager, FontNegumManager>();
-            // Register<IStageNegumManager, StageNegumManager>();
-            // Register<ICharacterNegumManager, CharacterNegumManager>();
-            // Register<ICharacterStoryboardSceneNegumManager, CharacterStoryboardSceneNegumManager>();
-            // Register<ICharacterCommandsManager, CharacterCommandsManager>();
-            //
-            // // Negum Configuration Types
-            // Register<INegumNegumOptions, NegumNegumManagerSection>(); // TODO: Register all Sections
-            // Register<INegumNegumRules, NegumNegumManagerSection>();
-            // Register<INegumNegumConfig, NegumNegumManagerSection>();
-            // Register<INegumNegumDebug, NegumNegumManagerSection>();
-            // Register<INegumNegumVideo, NegumNegumManagerSection>();
-            // Register<INegumNegumSound, NegumNegumManagerSection>();
-            // Register<INegumNegumMisc, NegumNegumManagerSection>();
-            // Register<INegumNegumArcade, NegumNegumManagerSection>();
-            // Register<INegumNegumInput, NegumNegumManagerSection>();
-            // Register<INegumNegumKeys, NegumNegumManagerSection>();
-            //
-            // // Motif Configuration Types
-            // Register<IMotifNegumInfo, MotifNegumManagerSection>();
-            // Register<IMotifNegumFiles, MotifNegumManagerSection>();
-            // Register<IMotifNegumMusic, MotifNegumManagerSection>();
-            // Register<IMotifNegumTitleInfo, MotifNegumManagerSection>();
-            // Register<IMotifNegumScreenBgDef, MotifNegumManagerSection>();
-            // Register<IMotifNegumInfobox, MotifNegumManagerSection>();
-            // Register<IMotifNegumSelectInfo, MotifNegumManagerSection>();
-            // Register<IMotifNegumVsScreen, MotifNegumManagerSection>();
-            // Register<IMotifNegumDemoMode, MotifNegumManagerSection>();
-            // Register<IMotifNegumContinueScreen, MotifNegumManagerSection>();
-            // Register<IMotifNegumGameOverScreen, MotifNegumManagerSection>();
-            // Register<IMotifNegumVictoryScreen, MotifNegumManagerSection>();
-            // Register<IMotifNegumWinScreen, MotifNegumManagerSection>();
-            // Register<IMotifNegumDefaultEnding, MotifNegumManagerSection>();
-            // Register<IMotifNegumEndCredits, MotifNegumManagerSection>();
-            // Register<IMotifNegumSurvivalResultsScreen, MotifNegumManagerSection>();
-            // Register<IMotifNegumScreenBg, MotifNegumManagerSection>();
-            //
-            // // Selection Configuration Types
-            // Register<ISelectionNegumCharacters, SelectionNegumManagerSection>();
-            // Register<ISelectionNegumExtraStages, SelectionNegumManagerSection>();
-            // Register<ISelectionNegumOptions, SelectionNegumManagerSection>();
-            //
-            // // Fight Configuration Types
-            // Register<IFightNegumFiles, FightNegumManagerSection>();
-            // Register<IFightNegumFightFx, FightNegumManagerSection>();
-            // Register<IFightNegumLifebar, FightNegumManagerSection>();
-            // Register<IFightNegumSimulLifebar, FightNegumManagerSection>();
-            // Register<IFightNegumTurnsLifebar, FightNegumManagerSection>();
-            // Register<IFightNegumPowerbar, FightNegumManagerSection>();
-            // Register<IFightNegumFace, FightNegumManagerSection>();
-            // Register<IFightNegumSimulFace, FightNegumManagerSection>();
-            // Register<IFightNegumTurnsFace, FightNegumManagerSection>();
-            // Register<IFightNegumName, FightNegumManagerSection>();
-            // Register<IFightNegumSimulName, FightNegumManagerSection>();
-            // Register<IFightNegumTurnsName, FightNegumManagerSection>();
-            // Register<IFightNegumTime, FightNegumManagerSection>();
-            // Register<IFightNegumCombo, FightNegumManagerSection>();
-            // Register<IFightNegumRound, FightNegumManagerSection>();
-            // Register<IFightNegumWinIcon, FightNegumManagerSection>();
-            //
-            // // Font Configuration Types
-            // Register<IFontNegumFontV2, FontNegumManagerSection>();
-            // Register<IFontNegumDef, FontNegumManagerSection>();
-            //
-            // // Stage Configuration Types
-            // Register<IStageNegumInfo, StageNegumManagerSection>();
-            // Register<IStageNegumCamera, StageNegumManagerSection>();
-            // Register<IStageNegumPlayerInfo, StageNegumManagerSection>();
-            // Register<IStageNegumBound, StageNegumManagerSection>();
-            // Register<IStageNegumStageInfo, StageNegumManagerSection>();
-            // Register<IStageNegumShadow, StageNegumManagerSection>();
-            // Register<IStageNegumReflection, StageNegumManagerSection>();
-            // Register<IStageNegumMusic, StageNegumManagerSection>();
-            // Register<IStageNegumBackgroundDef, StageNegumManagerSection>();
-            // Register<IStageNegumBackground, StageNegumManagerSection>();
-            //
-            // // Character Configuration Types
-            // Register<ICharacterNegumInfo, CharacterNegumManagerSection>();
-            // Register<ICharacterNegumFiles, CharacterNegumManagerSection>();
-            // Register<ICharacterNegumPaletteKeymap, CharacterNegumManagerSection>();
-            // Register<ICharacterNegumArcade, CharacterNegumManagerSection>();
-            //
-            // // Character Storyboard Scene Configuration Types
-            // Register<ICharacterStoryboardSceneNegumSceneDef, CharacterStoryboardSceneNegumManagerSection>();
-            // Register<ICharacterStoryboardSceneNegumScene, CharacterStoryboardSceneNegumManagerSection>();
-            //
-            // // Character Commands Types
-            // Register<ICharacterCommandsRemap ,CharacterCommandsManagerSection>();
-            // Register<ICharacterCommandsDefaults, CharacterCommandsManagerSection>();
-            // Register<ICharacterCommandsCommand, CharacterCommandsManagerSection>();
-            // Register<ICharacterCommandsCommandStatedef, CharacterCommandsManagerSection>();
-            // Register<ICharacterCommandsState, CharacterCommandsManagerSection>();
+            // Managers Entries + Sections
+            RegisterMultiple("Negum.Core.Managers.Types", typeof(IManager),
+                (type, baseType) =>
+                {
+                    type.GetInterfaces()
+                        .Where(i => i.GetGenericArguments().Length == 0)
+                        .ToList()
+                        .ForEach(sectionInterfaceType => Register(sectionInterfaceType, type));
+
+                    return type;
+                });
         }
 
         /// <summary>

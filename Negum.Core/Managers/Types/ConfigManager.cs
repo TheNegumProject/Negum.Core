@@ -1,3 +1,5 @@
+using Negum.Core.Configurations;
+
 namespace Negum.Core.Managers.Types
 {
     /// <summary>
@@ -7,16 +9,10 @@ namespace Negum.Core.Managers.Types
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public class ConfigManager :
-        Manager,
-        IConfigManager
+    public class ConfigManager : Manager, IConfigManager
     {
-        public ConfigManager(ICfgConfiguration config) : base(config)
-        {
-        }
-
         protected override IManagerSection GetNewManagerSection(string sectionName,
-            ICfgConfigurationSection configSection) =>
+            IConfigurationSection configSection) =>
             new ConfigManagerSection(sectionName, configSection);
     }
 
@@ -33,7 +29,8 @@ namespace Negum.Core.Managers.Types
         IConfigInput,
         IConfigKeys
     {
-        public ConfigManagerSection(string name, ICfgConfigurationSection section) : base(name, section)
+        public ConfigManagerSection(string name, IConfigurationSection section) :
+            base(name, section)
         {
         }
     }

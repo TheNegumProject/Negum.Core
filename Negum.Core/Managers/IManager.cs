@@ -14,6 +14,13 @@ namespace Negum.Core.Managers
     public interface IManager
     {
         /// <summary>
+        /// Setups current Manager to use specified configuration.
+        /// </summary>
+        /// <param name="config"></param>
+        /// <returns>Current manager.</returns>
+        IManager UseConfiguration(IConfiguration config);
+        
+        /// <summary>
         /// </summary>
         /// <param name="sectionName">Name of the section to find.</param>
         /// <typeparam name="TManagerSection">Type of the searched section.</typeparam>
@@ -37,11 +44,12 @@ namespace Negum.Core.Managers
         private IDictionary<string, IManagerSection> Sections { get; } =
             new Dictionary<string, IManagerSection>();
 
-        protected IConfiguration Config { get; }
+        protected IConfiguration Config { get; set; }
 
-        public Manager(IConfiguration config)
+        public IManager UseConfiguration(IConfiguration config)
         {
             this.Config = config;
+            return this;
         }
 
         public TManagerSection GetSection<TManagerSection>(string sectionName)
