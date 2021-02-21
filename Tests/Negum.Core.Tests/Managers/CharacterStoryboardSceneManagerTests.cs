@@ -6,6 +6,12 @@ using Xunit;
 
 namespace Negum.Core.Tests.Managers
 {
+    /// <summary>
+    /// </summary>
+    /// 
+    /// <author>
+    /// https://github.com/TheNegumProject/Negum.Core
+    /// </author>
     public class CharacterStoryboardSceneManagerTests : TestBase
     {
         [Theory]

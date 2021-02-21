@@ -21,13 +21,13 @@ namespace Negum.Core.Managers.Types
 
     public interface ICharacterCommandsRemap : IManagerSection
     {
-        int A => this.GetValue<int>("a");
-        int B => this.GetValue<int>("b");
-        int C => this.GetValue<int>("c");
-        int X => this.GetValue<int>("x");
-        int Y => this.GetValue<int>("y");
-        int Z => this.GetValue<int>("z");
-        int S => this.GetValue<int>("s");
+        string A => this.GetValue<string>("a");
+        string B => this.GetValue<string>("b");
+        string C => this.GetValue<string>("c");
+        string X => this.GetValue<string>("x");
+        string Y => this.GetValue<string>("y");
+        string Z => this.GetValue<string>("z");
+        string S => this.GetValue<string>("s");
     }
 
     public interface ICharacterCommandsDefaults : IManagerSection
