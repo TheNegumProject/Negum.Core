@@ -12,7 +12,7 @@ namespace Negum.Core.Tests.Managers
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public class MotifConfigurationManagerTests : TestBase
+    public class MotifManagerTests : TestBase
     {
         [Theory]
         [InlineData("/Users/kdobrzynski/Downloads/mugen-1.1b1/data/mugen1/system.def")]
