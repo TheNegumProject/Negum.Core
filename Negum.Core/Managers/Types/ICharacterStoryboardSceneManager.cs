@@ -15,7 +15,7 @@ namespace Negum.Core.Managers.Types
         ICharacterStoryboardSceneSceneDef SceneDef => this.GetSection<ICharacterStoryboardSceneSceneDef>("SceneDef");
 
         IEnumerable<ICharacterStoryboardSceneScene> Scenes =>
-            this.GetSections<ICharacterStoryboardSceneScene>("Scene ");
+            this.GetSubsections<ICharacterStoryboardSceneScene>("SceneDef");
     }
 
     public interface ICharacterStoryboardSceneSceneDef : IManagerSection

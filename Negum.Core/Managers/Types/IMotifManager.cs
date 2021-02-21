@@ -17,20 +17,20 @@ namespace Negum.Core.Managers.Types
         IMotifMusic Music => this.GetSection<IMotifMusic>("Music");
         IMotifTitleInfo TitleInfo => this.GetSection<IMotifTitleInfo>("Title Info");
         IMotifScreenBgDef TitleBgDef => this.GetSection<IMotifScreenBgDef>("TitleBGdef");
-        IEnumerable<IMotifScreenBg> TitleBgs => this.GetSections<IMotifScreenBg>("TitleBG ");
+        IEnumerable<IMotifScreenBg> TitleBgs => this.GetSubsections<IMotifScreenBg>("TitleBGdef");
         IMotifInfobox Infobox => this.GetSection<IMotifInfobox>("Infobox");
         IMotifSelectInfo SelectInfo => this.GetSection<IMotifSelectInfo>("Select Info");
         IMotifScreenBgDef SelectBgDef => this.GetSection<IMotifScreenBgDef>("SelectBGdef");
-        IEnumerable<IMotifScreenBg> SelectBgs => this.GetSections<IMotifScreenBg>("SelectBG ");
+        IEnumerable<IMotifScreenBg> SelectBgs => this.GetSubsections<IMotifScreenBg>("SelectBGdef");
         IMotifVsScreen VsScreen => this.GetSection<IMotifVsScreen>("VS Screen");
         IMotifScreenBgDef VersusBgDef => this.GetSection<IMotifScreenBgDef>("VersusBGdef");
-        IEnumerable<IMotifScreenBg> VersusBgs => this.GetSections<IMotifScreenBg>("VersusBG ");
+        IEnumerable<IMotifScreenBg> VersusBgs => this.GetSubsections<IMotifScreenBg>("VersusBGdef");
         IMotifDemoMode DemoMode => this.GetSection<IMotifDemoMode>("Demo Mode");
         IMotifContinueScreen ContinueScreen => this.GetSection<IMotifContinueScreen>("Continue Screen");
         IMotifGameOverScreen GameOverScreen => this.GetSection<IMotifGameOverScreen>("Game Over Screen");
         IMotifVictoryScreen VictoryScreen => this.GetSection<IMotifVictoryScreen>("Victory Screen");
         IMotifScreenBgDef VictoryBgDef => this.GetSection<IMotifScreenBgDef>("VictoryBGdef");
-        IEnumerable<IMotifScreenBg> VictoryBgs => this.GetSections<IMotifScreenBg>("VictoryBG ");
+        IEnumerable<IMotifScreenBg> VictoryBgs => this.GetSubsections<IMotifScreenBg>("VictoryBGdef");
         IMotifWinScreen WinScreen => this.GetSection<IMotifWinScreen>("Win Screen");
         IMotifDefaultEnding DefaultEnding => this.GetSection<IMotifDefaultEnding>("Default Ending");
         IMotifEndCredits EndCredits => this.GetSection<IMotifEndCredits>("End Credits");
@@ -39,7 +39,8 @@ namespace Negum.Core.Managers.Types
             this.GetSection<IMotifSurvivalResultsScreen>("Survival Results Screen");
 
         IMotifScreenBgDef OptionInfo => this.GetSection<IMotifScreenBgDef>("Option Info");
-        IEnumerable<IMotifScreenBg> OptionBgs => this.GetSections<IMotifScreenBg>("OptionBG ");
+        IMotifScreenBgDef OptionBgDef => this.GetSection<IMotifScreenBgDef>("OptionBGdef");
+        IEnumerable<IMotifScreenBg> OptionBgs => this.GetSubsections<IMotifScreenBg>("OptionBGdef");
     }
 
     public interface IMotifScreenBgDef : IManagerSection

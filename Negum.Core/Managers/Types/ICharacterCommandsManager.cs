@@ -16,7 +16,7 @@ namespace Negum.Core.Managers.Types
         ICharacterCommandsDefaults Defaults => this.GetSection<ICharacterCommandsDefaults>("Defaults");
         IEnumerable<ICharacterCommandsCommand> Commands => this.GetSections<ICharacterCommandsCommand>("Command");
         ICharacterCommandsCommandStatedef StateDef => this.GetSection<ICharacterCommandsCommandStatedef>("Statedef");
-        IEnumerable<ICharacterCommandsState> States => this.GetSections<ICharacterCommandsState>("State ");
+        IEnumerable<ICharacterCommandsState> States => this.GetSubsections<ICharacterCommandsState>("Statedef");
     }
 
     public interface ICharacterCommandsRemap : IManagerSection

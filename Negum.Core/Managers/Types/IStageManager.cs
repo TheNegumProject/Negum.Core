@@ -23,7 +23,7 @@ namespace Negum.Core.Managers.Types
         IStageBackgroundDef BackgroundDef => this.GetSection<IStageBackgroundDef>("BGdef");
 
         IEnumerable<IStageBackground> Backgrounds =>
-            this.GetSections<IStageBackground>("BG ");
+            this.GetSubsections<IStageBackground>("BGdef");
     }
 
     public interface IStageInfo : IManagerSection
