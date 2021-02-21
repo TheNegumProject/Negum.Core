@@ -158,13 +158,18 @@ namespace Negum.Core.Readers
         protected virtual IConfiguration GetConfiguration()
         {
             var configuration = this.GetEmptyConfiguration();
-
-            this.Sections
-                .ToList()
-                .ForEach(section => configuration.AddSection(section));
-
+            this.InitializeConfiguration(configuration);
             return configuration;
         }
+
+        /// <summary>
+        /// Initializes configuration.
+        /// </summary>
+        /// <param name="configuration"></param>
+        protected virtual void InitializeConfiguration(IConfiguration configuration) =>
+            this.Sections
+                .ToList()
+                .ForEach(configuration.AddSection);
 
         /// <summary>
         /// </summary>

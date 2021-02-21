@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Linq;
 using Negum.Core.Configurations;
 
@@ -6,6 +5,8 @@ namespace Negum.Core.Readers
 {
     /// <summary>
     /// Reader which is designed to handle specific configuration file by it's path with multiple subsections.
+    /// Subsections are defined under the definition section which have a postfix of "-def".
+    /// I.e. "OptionBGdef" and "OptionBG 1", etc.
     /// </summary>
     /// 
     /// <author>
@@ -23,71 +24,33 @@ namespace Negum.Core.Readers
     /// </author>
     public class ConfigurationWithSubsectionReader : ConfigurationReader, IConfigurationWithSubsectionReader
     {
-        protected bool IsParsingSubsection { get; set; }
-        protected ICollection<IConfigurationSection> Subsections { get; set; } = new List<IConfigurationSection>();
-        protected IConfigurationSection LastSection { get; set; }
-
-        protected override void ProcessLine(string line)
+        protected virtual bool IsSubsection(IConfigurationSection lastSection, IConfigurationSection section)
         {
-            if (line.StartsWith(SectionPrefixSymbol))
+            if (lastSection == null)
             {
-                if (this.IsSubsectionHeader(line))
+                return false;
+            }
+
+            // COMMENT: -3 indicates "def" postfix
+            var lastSectionNamePrefix = lastSection.Name.Substring(0, lastSection.Name.Length - 3);
+
+            return section.Name.StartsWith(lastSectionNamePrefix);
+        }
+
+        protected override void InitializeConfiguration(IConfiguration configuration)
+        {
+            foreach (var section in this.Sections)
+            {
+                var lastSection = configuration.LastOrDefault();
+
+                if (this.IsSubsection(lastSection, section))
                 {
-                    this.IsParsingSubsection = true;
+                    lastSection.AddSubsection(section);
                 }
                 else
                 {
-                    this.IsParsingSubsection = false;
-                    this.LastSection = this.Sections.LastOrDefault();
+                    configuration.AddSection(section);
                 }
-
-                this.AddSection();
-                this.ClearInitials();
-
-                this.SectionHeaderBuilder.Append(line);
-            }
-            else
-            {
-                this.ProcessEntry(line);
-            }
-        }
-
-        protected virtual bool IsSubsectionHeader(string line)
-        {
-            var lastSectionName = this.Sections.LastOrDefault()?.Name;
-
-            return lastSectionName != null &&
-                   line.StartsWith("[" + lastSectionName.Substring(0, lastSectionName.Length - 4) + " ");
-        }
-
-        protected override void ClearInitials()
-        {
-            base.ClearInitials();
-
-            this.Subsections = new List<IConfigurationSection>();
-        }
-
-        protected override void AddSection(string sectionName,
-            IEnumerable<IConfigurationSectionEntry> sectionAttributes)
-        {
-            var section = new ConfigurationSection
-            {
-                Name = sectionName,
-                Attributes = sectionAttributes,
-                Entries = this.Entries,
-            };
-
-            if (this.IsParsingSubsection)
-            {
-                this.Subsections.Add(section);
-            }
-            else
-            {
-                this.Subsections
-                    .ToList()
-                    .ForEach(subsection => this.LastSection.AddSubsection(subsection));
-
-                this.Sections.Add(section);
             }
         }
     }
