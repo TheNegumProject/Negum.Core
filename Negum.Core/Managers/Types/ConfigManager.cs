@@ -9,27 +9,27 @@ namespace Negum.Core.Managers.Types
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public class ConfigManager : Manager, IConfigManager
+    public class ConfigurationManager : Manager, IConfigurationManager
     {
         protected override IManagerSection GetNewManagerSection(string sectionName,
             IConfigurationSection configSection) =>
-            new ConfigManagerSection(sectionName, configSection);
+            new ConfigurationManagerSection(sectionName, configSection);
     }
 
-    public class ConfigManagerSection :
+    public class ConfigurationManagerSection :
         ManagerSection,
-        IConfigOptions,
-        IConfigRules,
-        IConfigConfig,
-        IConfigDebug,
-        IConfigVideo,
-        IConfigSound,
-        IConfigMisc,
-        IConfigArcade,
-        IConfigInput,
-        IConfigKeys
+        IConfigurationOptions,
+        IConfigurationRules,
+        IConfigurationConfig,
+        IConfigurationDebug,
+        IConfigurationVideo,
+        IConfigurationSound,
+        IConfigurationMisc,
+        IConfigurationArcade,
+        IConfigurationInput,
+        IConfigurationKeys
     {
-        public ConfigManagerSection(string name, IConfigurationSection section) :
+        public ConfigurationManagerSection(string name, IConfigurationSection section) :
             base(name, section)
         {
         }

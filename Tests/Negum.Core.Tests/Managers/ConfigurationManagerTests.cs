@@ -11,7 +11,7 @@ namespace Negum.Core.Tests.Managers
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public class NegumConfigurationManagerTests : TestBase
+    public class ConfigurationManagerTests : TestBase
     {
         [Theory]
         [InlineData("/Users/kdobrzynski/Downloads/mugen-1.1b1/data/mugen.cfg")]
@@ -20,7 +20,7 @@ namespace Negum.Core.Tests.Managers
             this.InitializeContainer();
             
             var config = await this.Parse(path);
-            var manager = (IConfigManager) NegumContainer.Resolve<IConfigManager>().UseConfiguration(config);
+            var manager = (IConfigurationManager) NegumContainer.Resolve<IConfigurationManager>().UseConfiguration(config);
             var key = manager.P1Keys.Keys.X;
             
             Assert.True(key == 108);

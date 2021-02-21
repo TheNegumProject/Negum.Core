@@ -9,24 +9,24 @@ namespace Negum.Core.Managers.Types
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface IConfigManager : IManager
+    public interface IConfigurationManager : IManager
     {
-        IConfigOptions Options => this.GetSection<IConfigOptions>("Options");
-        IConfigRules Rules => this.GetSection<IConfigRules>("Rules");
-        IConfigConfig Config => this.GetSection<IConfigConfig>("Config");
-        IConfigDebug Debug => this.GetSection<IConfigDebug>("Debug");
-        IConfigVideo Video => this.GetSection<IConfigVideo>("Video");
-        IConfigSound Sound => this.GetSection<IConfigSound>("Sound");
-        IConfigMisc Misc => this.GetSection<IConfigMisc>("Misc");
-        IConfigArcade Arcade => this.GetSection<IConfigArcade>("Arcade");
-        IConfigInput Input => this.GetSection<IConfigInput>("Input");
-        IConfigKeys P1Keys => this.GetSection<IConfigKeys>("P1 Keys");
-        IConfigKeys P2Keys => this.GetSection<IConfigKeys>("P2 Keys");
-        IConfigKeys P1Joystick => this.GetSection<IConfigKeys>("P1 Joystick");
-        IConfigKeys P2Joystick => this.GetSection<IConfigKeys>("P2 Joystick");
+        IConfigurationOptions Options => this.GetSection<IConfigurationOptions>("Options");
+        IConfigurationRules Rules => this.GetSection<IConfigurationRules>("Rules");
+        IConfigurationConfig Config => this.GetSection<IConfigurationConfig>("Config");
+        IConfigurationDebug Debug => this.GetSection<IConfigurationDebug>("Debug");
+        IConfigurationVideo Video => this.GetSection<IConfigurationVideo>("Video");
+        IConfigurationSound Sound => this.GetSection<IConfigurationSound>("Sound");
+        IConfigurationMisc Misc => this.GetSection<IConfigurationMisc>("Misc");
+        IConfigurationArcade Arcade => this.GetSection<IConfigurationArcade>("Arcade");
+        IConfigurationInput Input => this.GetSection<IConfigurationInput>("Input");
+        IConfigurationKeys P1Keys => this.GetSection<IConfigurationKeys>("P1 Keys");
+        IConfigurationKeys P2Keys => this.GetSection<IConfigurationKeys>("P2 Keys");
+        IConfigurationKeys P1Joystick => this.GetSection<IConfigurationKeys>("P1 Joystick");
+        IConfigurationKeys P2Joystick => this.GetSection<IConfigurationKeys>("P2 Joystick");
     }
 
-    public interface IConfigOptions : IManagerSection
+    public interface IConfigurationOptions : IManagerSection
     {
         int Difficulty => this.GetValue<int>("Difficulty");
         int Life => this.GetValue<int>("Life");
@@ -47,7 +47,7 @@ namespace Negum.Core.Managers.Types
         IFileEntry MotifFile => this.GetValue<IFileEntry>("motif");
     }
 
-    public interface IConfigRules : IManagerSection
+    public interface IConfigurationRules : IManagerSection
     {
         /// <summary>
         /// This is the amount of power the attacker gets when an attack successfully hits the opponent.
@@ -76,7 +76,7 @@ namespace Negum.Core.Managers.Types
         float SuperTargetDefenceMul => this.GetValue<float>("Super.TargetDefenceMul");
     }
 
-    public interface IConfigConfig : IManagerSection
+    public interface IConfigurationConfig : IManagerSection
     {
         /// <summary>
         /// Set the game speed here. The default is 60 frames per second.
@@ -160,7 +160,7 @@ namespace Negum.Core.Managers.Types
         bool FirstRun => this.GetValue<bool>("FirstRun");
     }
 
-    public interface IConfigDebug : IManagerSection
+    public interface IConfigurationDebug : IManagerSection
     {
         /// <summary>
         /// Set to false to disable starting in debug mode by default.
@@ -195,7 +195,7 @@ namespace Negum.Core.Managers.Types
         bool HideDevelopmentBuildBanner => this.GetValue<bool>("HideDevelopmentBuildBanner");
     }
 
-    public interface IConfigVideo : IManagerSection
+    public interface IConfigurationVideo : IManagerSection
     {
         /// <summary>
         /// This is the color depth at which to run engine.
@@ -234,7 +234,7 @@ namespace Negum.Core.Managers.Types
         int SystemFit => this.GetValue<int>("SystemFit");
     }
 
-    public interface IConfigSound : IManagerSection
+    public interface IConfigurationSound : IManagerSection
     {
         /// <summary>
         /// Set the following to true to enable sound effects and music.
@@ -279,7 +279,7 @@ namespace Negum.Core.Managers.Types
         int BackgroundMusicVolume => this.GetValue<int>("BGMVolume");
     }
 
-    public interface IConfigMisc : IManagerSection
+    public interface IConfigurationMisc : IManagerSection
     {
         /// <summary>
         /// Number of extra players to cache in memory.
@@ -306,7 +306,7 @@ namespace Negum.Core.Managers.Types
         string BackgroundMusicBackgroundMode => this.GetValue<string>("BGMBackgroundMode");
     }
 
-    public interface IConfigArcade : IManagerSection
+    public interface IConfigurationArcade : IManagerSection
     {
         /// <summary>
         /// Set to false for computer to choose color 1 if possible.
@@ -364,7 +364,7 @@ namespace Negum.Core.Managers.Types
         IVectorEntry SurvivalAiRampEnd => this.GetValue<IVectorEntry>("survival.AIramp.end");
     }
 
-    public interface IConfigInput : IManagerSection
+    public interface IConfigurationInput : IManagerSection
     {
         bool P1UseKeyboard => this.GetValue<bool>("P1.UseKeyboard");
         bool P2UseKeyboard => this.GetValue<bool>("P2.UseKeyboard");
@@ -378,7 +378,7 @@ namespace Negum.Core.Managers.Types
         bool AnyKeyUnpauses => this.GetValue<bool>("AnyKeyUnpauses");
     }
 
-    public interface IConfigKeys : IManagerSection
+    public interface IConfigurationKeys : IManagerSection
     {
         IKeysEntry Keys => this.GetValue<IKeysEntry>(string.Empty);
     }

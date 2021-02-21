@@ -63,15 +63,24 @@ namespace Negum.Core.Managers
         public TValue GetValue<TValue>(string fieldKey) =>
             this.GetValues<TValue>(fieldKey).FirstOrDefault();
 
-        public IEnumerable<TValue> GetValues<TValue>(string fieldKey) =>
-            this.InitializeEntries<TValue>(
-                this.Section
-                    .Where(sectionEntry => sectionEntry.Key.Equals(fieldKey)));
+        public IEnumerable<TValue> GetValues<TValue>(string fieldKey)
+        {
+            if (string.IsNullOrWhiteSpace(fieldKey))
+            {
+                return this.GetAll<TValue>();
+            }
+            
+            var sections = this.Section
+                .Where(sectionEntry => sectionEntry.Key.Equals(fieldKey));
+
+            return this.InitializeEntries<TValue>(sections);
+        }
 
         public IEnumerable<TValue> GetAll<TValue>() =>
             this.InitializeEntries<TValue>(this.Section);
 
-        protected virtual IEnumerable<TValue> InitializeEntries<TValue>(IEnumerable<IConfigurationSectionEntry> entries) =>
+        protected virtual IEnumerable<TValue>
+            InitializeEntries<TValue>(IEnumerable<IConfigurationSectionEntry> entries) =>
             entries
                 .Select(sectionEntry =>
                 {
