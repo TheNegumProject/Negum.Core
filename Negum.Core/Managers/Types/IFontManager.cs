@@ -59,6 +59,6 @@ namespace Negum.Core.Managers.Types
         /// <summary>
         /// Filename of the sff containing the glyphs.
         /// </summary>
-        IFileEntry File => this.GetValue<IFileEntry>("File");
+        string File => this.GetValue<string>("File");
     }
 }

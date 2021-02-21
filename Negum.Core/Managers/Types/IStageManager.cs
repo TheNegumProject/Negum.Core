@@ -269,7 +269,7 @@ namespace Negum.Core.Managers.Types
         /// Put a filename for a MOD, MP3 or MIDI here, or just leave it blank if you don't want music.
         /// If an invalid filename is given, then no music will play.
         /// </summary>
-        IFileEntry BackgroundMusicFile => this.GetValue<IFileEntry>("bgmusic");
+        string BackgroundMusicFile => this.GetValue<string>("bgmusic");
 
         int BackgroundMusicLoopStart => this.GetValue<int>("bgmloopstart");
         int BackgroundMusicLoopEnd => this.GetValue<int>("bgmloopend");
@@ -285,7 +285,7 @@ namespace Negum.Core.Managers.Types
         /// <summary>
         /// Filename of sprite data.
         /// </summary>
-        IFileEntry SpriteFile => this.GetValue<IFileEntry>("spr");
+        string SpriteFile => this.GetValue<string>("spr");
 
         /// <summary>
         /// Set to true if you want to clear the screen to magenta before drawing layer 0 (the default background).

@@ -32,12 +32,12 @@ namespace Negum.Core.Managers.Types
 
     public interface IFightFiles : IManagerSection
     {
-        IFileEntry SpriteFile => this.GetValue<IFileEntry>("sff");
-        IFileEntry SoundFile => this.GetValue<IFileEntry>("snd");
-        IEnumerable<IFileEntry> FontFiles => this.GetValues<IFileEntry>("font");
-        IFileEntry FightFxSffFile => this.GetValue<IFileEntry>("fightfx.sff");
-        IFileEntry FightFxAirFile => this.GetValue<IFileEntry>("fightfx.air");
-        IFileEntry CommonSoundFile => this.GetValue<IFileEntry>("common.snd");
+        string SpriteFile => this.GetValue<string>("sff");
+        string SoundFile => this.GetValue<string>("snd");
+        IEnumerable<string> FontFiles => this.GetValues<string>("font");
+        string FightFxSffFile => this.GetValue<string>("fightfx.sff");
+        string FightFxAirFile => this.GetValue<string>("fightfx.air");
+        string CommonSoundFile => this.GetValue<string>("common.snd");
     }
 
     public interface IFightFightFx : IManagerSection

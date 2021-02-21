@@ -20,7 +20,7 @@ namespace Negum.Core.Managers.Types
 
     public interface ICharacterStoryboardSceneSceneDef : IManagerSection
     {
-        IFileEntry SpriteFile => this.GetValue<IFileEntry>("spr");
+        string SpriteFile => this.GetValue<string>("spr");
 
         /// <summary>
         /// Stating scene number (for debugging).

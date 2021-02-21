@@ -44,7 +44,7 @@ namespace Negum.Core.Managers.Types
         /// you may need to set the motif line to use data/system.def instead.
         /// motif = data/system.def  - Use this line if using a motif that overwrites system files.
         /// </summary>
-        IFileEntry MotifFile => this.GetValue<IFileEntry>("motif");
+        string MotifFile => this.GetValue<string>("motif");
     }
 
     public interface IConfigurationRules : IManagerSection
@@ -187,7 +187,7 @@ namespace Negum.Core.Managers.Types
         /// <summary>
         /// Default starting stage for quick versus.
         /// </summary>
-        IFileEntry StartStageFile => this.GetValue<IFileEntry>("StartStage");
+        string StartStageFile => this.GetValue<string>("StartStage");
 
         /// <summary>
         /// Set to true to hide the development build banner that shows on startup.

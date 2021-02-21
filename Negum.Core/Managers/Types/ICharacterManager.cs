@@ -33,14 +33,14 @@ namespace Negum.Core.Managers.Types
 
     public interface ICharacterFiles : IManagerSection
     {
-        IFileEntry CommandFile => this.GetValue<IFileEntry>("cmd");
-        IFileEntry ConstantsFile => this.GetValue<IFileEntry>("cns");
-        IFileEntry StatesFile => this.GetValue<IFileEntry>("st");
-        IFileEntry CommonStatesFile => this.GetValue<IFileEntry>("stcommon");
-        IFileEntry SpriteFiles => this.GetValue<IFileEntry>("sprite");
-        IFileEntry AnimationFile => this.GetValue<IFileEntry>("anim");
-        IFileEntry SoundFile => this.GetValue<IFileEntry>("sound");
-        IFileEntry AiHintsDataFile => this.GetValue<IFileEntry>("ai");
+        string CommandFile => this.GetValue<string>("cmd");
+        string ConstantsFile => this.GetValue<string>("cns");
+        string StatesFile => this.GetValue<string>("st");
+        string CommonStatesFile => this.GetValue<string>("stcommon");
+        string SpriteFiles => this.GetValue<string>("sprite");
+        string AnimationFile => this.GetValue<string>("anim");
+        string SoundFile => this.GetValue<string>("sound");
+        string AiHintsDataFile => this.GetValue<string>("ai");
     }
 
     public interface ICharacterPaletteKeymap : IManagerSection
@@ -55,7 +55,7 @@ namespace Negum.Core.Managers.Types
 
     public interface ICharacterArcade : IManagerSection
     {
-        IFileEntry IntroStoryboardFile => this.GetValue<IFileEntry>("intro.storyboard");
-        IFileEntry EndingStoryboardFile => this.GetValue<IFileEntry>("ending.storyboard");
+        string IntroStoryboardFile => this.GetValue<string>("intro.storyboard");
+        string EndingStoryboardFile => this.GetValue<string>("ending.storyboard");
     }
 }

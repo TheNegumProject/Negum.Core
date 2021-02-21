@@ -45,7 +45,7 @@ namespace Negum.Core.Managers.Types
 
     public interface IMotifScreenBgDef : IManagerSection
     {
-        IFileEntry SpriteFile => this.GetValue<IFileEntry>("spr");
+        string SpriteFile => this.GetValue<string>("spr");
         IVectorEntry BgClearColor => this.GetValue<IVectorEntry>("bgclearcolor");
     }
 
@@ -77,12 +77,12 @@ namespace Negum.Core.Managers.Types
         /// <summary>
         /// Filename of sprite data.
         /// </summary>
-        IFileEntry SpriteFile => this.GetValue<IFileEntry>("spr");
+        string SpriteFile => this.GetValue<string>("spr");
 
         /// <summary>
         /// Filename of sound data.
         /// </summary>
-        IFileEntry SoundFile => this.GetValue<IFileEntry>("snd");
+        string SoundFile => this.GetValue<string>("snd");
 
         /// <summary>
         /// Logo storyboard definition (optional).
@@ -97,17 +97,17 @@ namespace Negum.Core.Managers.Types
         /// <summary>
         /// Character and stage selection list.
         /// </summary>
-        IFileEntry SelectionFile => this.GetValue<IFileEntry>("select");
+        string SelectionFile => this.GetValue<string>("select");
 
         /// <summary>
         /// Fight definition filename.
         /// </summary>
-        IFileEntry FightFile => this.GetValue<IFileEntry>("fight");
+        string FightFile => this.GetValue<string>("fight");
 
         /// <summary>
         /// System fonts.
         /// </summary>
-        IEnumerable<IFileEntry> FontFiles => this.GetValues<IFileEntry>("font");
+        IEnumerable<string> FontFiles => this.GetValues<string>("font");
     }
 
     public interface IMotifMusic : IManagerSection
@@ -115,7 +115,7 @@ namespace Negum.Core.Managers.Types
         /// <summary>
         /// Music to play at title screen.
         /// </summary>
-        IFileEntry TitleMusicFile => this.GetValue<IFileEntry>("title.bgm");
+        string TitleMusicFile => this.GetValue<string>("title.bgm");
 
         /// <summary>
         /// Music to play at char select screen.
@@ -258,7 +258,7 @@ namespace Negum.Core.Managers.Types
     public interface IMotifGameOverScreen : IManagerSection
     {
         bool IsEnabled => this.GetValue<bool>("enabled");
-        IFileEntry StoryboardFile => this.GetValue<IFileEntry>("storyboard");
+        string StoryboardFile => this.GetValue<string>("storyboard");
     }
 
     public interface IMotifVictoryScreen : IManagerSection
@@ -283,13 +283,13 @@ namespace Negum.Core.Managers.Types
     public interface IMotifDefaultEnding : IManagerSection
     {
         bool IsEnabled => this.GetValue<bool>("enabled");
-        IFileEntry StoryboardFile => this.GetValue<IFileEntry>("storyboard");
+        string StoryboardFile => this.GetValue<string>("storyboard");
     }
 
     public interface IMotifEndCredits : IManagerSection
     {
         bool IsEnabled => this.GetValue<bool>("enabled");
-        IFileEntry StoryboardFile => this.GetValue<IFileEntry>("storyboard");
+        string StoryboardFile => this.GetValue<string>("storyboard");
     }
 
     public interface IMotifSurvivalResultsScreen : IManagerSection

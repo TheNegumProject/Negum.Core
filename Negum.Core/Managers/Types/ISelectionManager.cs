@@ -24,7 +24,7 @@ namespace Negum.Core.Managers.Types
 
     public interface ISelectionExtraStages : IManagerSection
     {
-        IEnumerable<IFileEntry> StageFiles => this.GetAll<IFileEntry>();
+        IEnumerable<string> StageFiles => this.GetAll<string>();
     }
 
     public interface ISelectionOptions : IManagerSection

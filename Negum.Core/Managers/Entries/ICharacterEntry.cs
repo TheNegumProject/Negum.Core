@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using System.Linq;
+
 namespace Negum.Core.Managers.Entries
 {
     /// <summary>
@@ -26,7 +29,7 @@ namespace Negum.Core.Managers.Entries
         /// If your def file has the same name as the zip file (eg. suave.def in suave.zip), you can just put the name of the zip file alone.
         /// Example: suave.zip
         /// </summary>
-        IFileEntry NameFile { get; }
+        string NameFile { get; }
 
         /// <summary>
         /// Path to the stage file for the character.
@@ -34,14 +37,14 @@ namespace Negum.Core.Managers.Entries
         ///
         /// If you put "random" as the Stage in configuration, then a random stage will be selected for that player.
         /// </summary>
-        IFileEntry StageFile { get; }
+        string StageFile { get; }
 
         /// <summary>
         /// Set the value to the name of the music file to use as the BGM for that character.
         /// This overrides the bgmusic parameter in the stage's .def file,
         /// so you can re-use the same stage for multiple characters, but have a different BGM playing for each person.
         /// </summary>
-        IFileEntry MusicFile { get; }
+        string MusicFile { get; }
 
         /// <summary>
         /// Set the paramValue to 0 to avoid including this stage in the stage select list (in VS, training modes, etc).
@@ -74,28 +77,36 @@ namespace Negum.Core.Managers.Entries
     /// </author>   
     public class CharacterEntry : ManagerSectionEntry<ICharacterEntry>, ICharacterEntry
     {
-        public string Name { get; private set; }
-        public IFileEntry NameFile { get; private set; }
-        public IFileEntry StageFile { get; private set; }
-        public IFileEntry MusicFile { get; private set; }
-        public int IncludeStage { get; private set; }
-        public int Order { get; private set; }
-        public bool IsRandomSelect { get; private set; }
+        public string Name { get; set; }
+        public string NameFile { get; set; }
+        public string StageFile { get; set; }
+        public string MusicFile { get; set; }
+        public int IncludeStage { get; set; }
+        public int Order { get; set; }
+        public bool IsRandomSelect { get; set; }
 
         public override ICharacterEntry Get()
         {
-            // TODO: Config file -> select.def; Section -> Character;
-            // TODO: Add appropriate parsing each line. IDEA: Add unique parser for that ???
-            
-            this.Name = this.Section.GetValue<string>(this.FieldKey);
-            this.NameFile = this.Section.GetValue<IFileEntry>(this.FieldKey);
-            this.StageFile = this.Section.GetValue<IFileEntry>(this.FieldKey);
-            this.MusicFile = this.Section.GetValue<IFileEntry>(this.FieldKey);
-            this.IncludeStage = this.Section.GetValue<int>(this.FieldKey);
-            this.Order = this.Section.GetValue<int>(this.FieldKey);
-            this.IsRandomSelect = this.Section.GetValue<bool>(this.FieldKey);
+            var value = this.Section.GetValue<string>(this.FieldKey);
+
+            var args = value
+                .Replace(" ", "")
+                .Split(",");
+
+            // Must be filled fields
+            this.Name = args[0];
+            this.NameFile = args[1];
+
+            // Optional fields
+            this.MusicFile = this.GetArg(args, "music");
+            this.IncludeStage = int.Parse(this.GetArg(args, "includestage") ?? "-1");
+            this.Order = int.Parse(this.GetArg(args, "order") ?? "1");
+            this.IsRandomSelect = bool.Parse(this.GetArg(args, "randomselect") ?? "false");
 
             return this;
         }
+
+        protected virtual string GetArg(IEnumerable<string> args, string key) =>
+            args.FirstOrDefault(arg => arg.StartsWith(key + "="))?.Split("=")[1];
     }
 }

@@ -12,7 +12,7 @@ namespace Negum.Core.Managers.Entries
         /// <summary>
         /// Audio file.
         /// </summary>
-        IFileEntry File { get; }
+        string File { get; }
 
         /// <summary>
         /// Volume scaling factor in percent.
@@ -39,7 +39,7 @@ namespace Negum.Core.Managers.Entries
     /// </author>
     public class AudioEntry : ManagerSectionEntry<IAudioEntry>, IAudioEntry
     {
-        public IFileEntry File { get; private set; }
+        public string File { get; private set; }
         public int Volume { get; private set; }
         public bool Loop { get; private set; }
         public int LoopStart { get; private set; }
@@ -47,7 +47,7 @@ namespace Negum.Core.Managers.Entries
 
         public override IAudioEntry Get()
         {
-            this.File = this.Section.GetValue<IFileEntry>(this.FieldKey);
+            this.File = this.Section.GetValue<string>(this.FieldKey);
             this.Volume = this.Section.GetValue<int>(this.FieldKey + ".volume");
             this.Loop = this.Section.GetValue<bool>(this.FieldKey + ".loop");
             this.LoopStart = this.Section.GetValue<int>(this.FieldKey + ".loopstart");
