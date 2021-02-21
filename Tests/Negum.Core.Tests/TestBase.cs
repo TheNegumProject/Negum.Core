@@ -37,5 +37,12 @@ namespace Negum.Core.Tests
             var data = await reader.ReadAsync(path);
             return data;
         }
+        
+        protected async Task<IConfiguration> ParseWithSubsections(string path)
+        {
+            var reader = NegumContainer.Resolve<IConfigurationWithSubsectionReader>();
+            var data = await reader.ReadAsync(path);
+            return data;
+        }
     }
 }

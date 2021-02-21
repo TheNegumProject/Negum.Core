@@ -29,6 +29,7 @@ namespace Negum.Core.Readers
     {
         public const string CommentSymbol = ";";
         public const string SectionPrefixSymbol = "[";
+        public const string EqualsSymbol = "=";
 
         protected StringBuilder SectionHeaderBuilder { get; } = new();
         protected ICollection<IConfigurationSection> Sections { get; } = new List<IConfigurationSection>();
@@ -51,7 +52,7 @@ namespace Negum.Core.Readers
             await Task.FromResult(lines
                     .Where(line => !string.IsNullOrWhiteSpace(line)) // Remove empty line
                     .Select(line => line.TrimStart()) // Remove whitespaces at the beginning of the line
-                    .Where(line => !line.StartsWith(CommentSymbol)) // Remove lines which start from comment
+                    .Where(line => line.StartsWith(SectionPrefixSymbol) || char.IsLetterOrDigit(line.ElementAt(0))) // Remove lines which start from comment
                     .Select(RemoveComment) // Removes comment at the end of the line
                     .Select(line => line.TrimEnd()) // Remove white spaces at the end of the line);
             );
@@ -100,17 +101,28 @@ namespace Negum.Core.Readers
         /// <param name="line"></param>
         protected virtual void ProcessEntry(string line)
         {
-            var index = line.IndexOf("=", StringComparison.Ordinal);
+            var key = string.Empty;
+            var value = string.Empty;
+            
+            if (line.Contains(EqualsSymbol))
+            {
+                var index = line.IndexOf(EqualsSymbol, StringComparison.Ordinal);
+            
+                key = line
+                    .Substring(0, index)
+                    .Trim();
 
-            var key = line
-                .Substring(0, index)
-                .Trim();
-
-            var value = line
-                .Substring(index + 1, line.Length - index - 1)
-                .Replace("\"", "")
-                .Trim();
-
+                value = line
+                    .Substring(index + 1, line.Length - index - 1)
+                    .Replace("\"", "")
+                    .Trim();
+            }
+            else
+            {
+                key = this.Entries.Count.ToString();
+                value = line;
+            }
+            
             this.ProcessEntry(line, key, value);
         }
 
