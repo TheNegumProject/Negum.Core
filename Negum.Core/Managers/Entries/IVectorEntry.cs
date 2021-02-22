@@ -34,7 +34,7 @@ namespace Negum.Core.Managers.Entries
     /// </author>
     public class VectorEntry : ManagerSectionEntry<IVectorEntry>, IVectorEntry
     {
-        private IList<string> Values { get; set; }
+        protected IList<string> Values { get; set; }
 
         public string this[int index] => this.Values[index];
 
