@@ -12,12 +12,13 @@ namespace Negum.Core.Tests.Readers
     /// </author>
     public class ConfigurationReaderTests : TestBase
     {
-        [Fact]
-        public async Task Should_Read_Configuration()
+        [Theory]
+        [InlineData("https://raw.githubusercontent.com/TheNegumProject/UnpackedMugen/main/data/mugen.cfg")]
+        [InlineData("https://raw.githubusercontent.com/TheNegumProject/UnpackedMugen/main/chars/kfm720/kfm720.air")]
+        public async Task Should_Read_Configuration(string file)
         {
-            const string filePath = "https://raw.githubusercontent.com/TheNegumProject/UnpackedMugen/main/data/mugen.cfg";
             this.InitializeContainer();
-            var config = await this.Parse(filePath);
+            var config = await this.Parse(file);
             Assert.True(config.Any());
         }
         
