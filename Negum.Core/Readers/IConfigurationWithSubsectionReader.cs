@@ -37,20 +37,18 @@ namespace Negum.Core.Readers
             return section.Name.StartsWith(lastSectionNamePrefix);
         }
 
-        protected override void InitializeConfiguration(IConfiguration configuration)
+        protected override void InitializeConfigurationSection(IConfiguration configuration,
+            IConfigurationSection section)
         {
-            foreach (var section in this.Sections)
-            {
-                var lastSection = configuration.LastOrDefault();
+            var lastSection = configuration.LastOrDefault();
 
-                if (this.IsSubsection(lastSection, section))
-                {
-                    lastSection.AddSubsection(section);
-                }
-                else
-                {
-                    configuration.AddSection(section);
-                }
+            if (this.IsSubsection(lastSection, section))
+            {
+                lastSection.AddSubsection(section);
+            }
+            else
+            {
+                configuration.AddSection(section);
             }
         }
     }

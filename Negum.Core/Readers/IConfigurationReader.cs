@@ -210,7 +210,15 @@ namespace Negum.Core.Readers
         protected virtual void InitializeConfiguration(IConfiguration configuration) =>
             this.Sections
                 .ToList()
-                .ForEach(configuration.AddSection);
+                .ForEach(section => this.InitializeConfigurationSection(configuration, section));
+
+        /// <summary>
+        /// Initializes configuration with specified section.
+        /// </summary>
+        /// <param name="configuration"></param>
+        /// <param name="section"></param>
+        protected virtual void InitializeConfigurationSection(IConfiguration configuration,
+            IConfigurationSection section) => configuration.AddSection(section);
 
         /// <summary>
         /// </summary>
@@ -238,7 +246,7 @@ namespace Negum.Core.Readers
         /// </summary>
         /// <param name="sectionHeader"></param>
         /// <returns>Section name from the given header.</returns>
-        protected virtual string GetSectionName(string sectionHeader) => sectionHeader[1..^2];
+        protected virtual string GetSectionName(string sectionHeader) => sectionHeader[1..^1];
 
         /// <summary>
         /// Adds new section.
