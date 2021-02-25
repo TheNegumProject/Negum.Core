@@ -138,9 +138,8 @@ namespace Negum.Core.Readers
 
             var sectionHeader = this.SectionHeaderBuilder.ToString();
             var sectionName = this.GetSectionName(sectionHeader);
-            var sectionAttributes = this.GetSectionAttributes(sectionHeader);
 
-            this.AddSection(sectionName, sectionAttributes);
+            this.AddSection(sectionName);
         }
 
         /// <summary>
@@ -201,22 +200,15 @@ namespace Negum.Core.Readers
             sectionHeader.Substring(1, sectionHeader.Length - 2);
 
         /// <summary>
-        /// </summary>
-        /// <param name="sectionHeader"></param>
-        /// <returns>Section attributes from the given header.</returns>
-        protected virtual IEnumerable<IConfigurationSectionEntry> GetSectionAttributes(string sectionHeader) => null;
-
-        /// <summary>
         /// Adds new section.
         /// </summary>
         /// <param name="sectionName"></param>
         /// <param name="sectionAttributes"></param>
-        protected virtual void AddSection(string sectionName, IEnumerable<IConfigurationSectionEntry> sectionAttributes)
+        protected virtual void AddSection(string sectionName)
         {
             var section = new ConfigurationSection
             {
                 Name = sectionName,
-                Attributes = sectionAttributes,
                 Entries = this.Entries,
             };
 
