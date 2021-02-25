@@ -14,7 +14,7 @@ namespace Negum.Core.Tests.Managers
     public class CharacterManagerTests : TestBase
     {
         [Theory]
-        [InlineData("/Users/kdobrzynski/Downloads/mugen-1.1b1/chars/kfm720/kfm720.def")]
+        [InlineData("https://raw.githubusercontent.com/TheNegumProject/UnpackedMugen/main/chars/kfm720/kfm720.def")]
         public async Task Should_Read_Character_Data(string path)
         {
             this.InitializeContainer();

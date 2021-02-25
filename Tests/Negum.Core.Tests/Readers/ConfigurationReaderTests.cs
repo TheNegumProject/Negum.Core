@@ -15,7 +15,7 @@ namespace Negum.Core.Tests.Readers
         [Fact]
         public async Task Should_Read_Configuration()
         {
-            const string filePath = "/Users/kdobrzynski/Downloads/mugen-1.1b1/data/mugen.cfg";
+            const string filePath = "https://raw.githubusercontent.com/TheNegumProject/UnpackedMugen/main/data/mugen.cfg";
             this.InitializeContainer();
             var config = await this.Parse(filePath);
             Assert.True(config.Any());
@@ -29,7 +29,7 @@ namespace Negum.Core.Tests.Readers
         [InlineData("OptionBGdef", 1)]
         public async Task Should_Read_Motif_With_Subsections(string sectionName, int subsectionsCount)
         {
-            const string filePath = "/Users/kdobrzynski/Downloads/mugen-1.1b1/data/mugen1/system.def";
+            const string filePath = "https://raw.githubusercontent.com/TheNegumProject/UnpackedMugen/main/data/mugen1/system.def";
             this.InitializeContainer();
             var config = await this.ParseWithSubsections(filePath);
             var section = config.FirstOrDefault(s => s.Name.Equals(sectionName));

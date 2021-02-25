@@ -15,7 +15,7 @@ namespace Negum.Core.Tests.Managers
     public class SelectionManagerTests : TestBase
     {
         [Theory]
-        [InlineData("/Users/kdobrzynski/Downloads/mugen-1.1b1/data/select.def")]
+        [InlineData("https://raw.githubusercontent.com/TheNegumProject/UnpackedMugen/main/data/select.def")]
         public async Task Should_Read_Selection_Data(string path)
         {
             this.InitializeContainer();

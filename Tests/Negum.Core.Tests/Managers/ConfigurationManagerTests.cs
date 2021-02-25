@@ -14,7 +14,7 @@ namespace Negum.Core.Tests.Managers
     public class ConfigurationManagerTests : TestBase
     {
         [Theory]
-        [InlineData("/Users/kdobrzynski/Downloads/mugen-1.1b1/data/mugen.cfg")]
+        [InlineData("https://raw.githubusercontent.com/TheNegumProject/UnpackedMugen/main/data/mugen.cfg")]
         public async Task Should_Get_Appropriate_Key(string path)
         {
             this.InitializeContainer();

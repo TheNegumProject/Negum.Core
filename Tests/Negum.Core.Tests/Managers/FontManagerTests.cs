@@ -14,7 +14,7 @@ namespace Negum.Core.Tests.Managers
     public class FontManagerTests : TestBase
     {
         [Theory]
-        [InlineData("/Users/kdobrzynski/Downloads/mugen-1.1b1/font/f-4x6.def")]
+        [InlineData("https://raw.githubusercontent.com/TheNegumProject/UnpackedMugen/main/font/f-4x6.def")]
         public async Task Should_Parse_Font(string path)
         {
             this.InitializeContainer();

@@ -15,9 +15,9 @@ namespace Negum.Core.Tests.Managers
     public class CharacterStoryboardSceneManagerTests : TestBase
     {
         [Theory]
-        [InlineData("/Users/kdobrzynski/Downloads/mugen-1.1b1/chars/kfm720/intro.def", 5)]
-        [InlineData("/Users/kdobrzynski/Downloads/mugen-1.1b1/chars/kfm720/ending.def", 3)]
-        [InlineData("/Users/kdobrzynski/Downloads/mugen-1.1b1/chars/kfm/intro.def", 5)]
+        [InlineData("https://raw.githubusercontent.com/TheNegumProject/UnpackedMugen/main/chars/kfm720/intro.def", 5)]
+        [InlineData("https://raw.githubusercontent.com/TheNegumProject/UnpackedMugen/main/chars/kfm720/ending.def", 3)]
+        [InlineData("https://raw.githubusercontent.com/TheNegumProject/UnpackedMugen/main/chars/kfm/intro.def", 5)]
         public async Task Should_Count_Number_Of_Scenes(string path, int sceneCount)
         {
             this.InitializeContainer();

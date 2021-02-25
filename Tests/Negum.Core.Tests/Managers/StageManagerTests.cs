@@ -15,7 +15,7 @@ namespace Negum.Core.Tests.Managers
     public class StageManagerTests : TestBase
     {
         [Theory]
-        [InlineData("/Users/kdobrzynski/Downloads/mugen-1.1b1/stages/stage0.def")]
+        [InlineData("https://raw.githubusercontent.com/TheNegumProject/UnpackedMugen/main/stages/stage0.def")]
         public async Task Should_Get_Number_Of_Backgrounds(string path)
         {
             this.InitializeContainer();

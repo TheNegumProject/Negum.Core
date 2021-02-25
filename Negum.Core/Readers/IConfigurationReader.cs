@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using Negum.Core.Configurations;
@@ -15,7 +16,7 @@ namespace Negum.Core.Readers
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface IConfigurationReader : IFileReader<IConfiguration>
+    public interface IConfigurationReader : IFileReader<IConfiguration>, IStreamReader<IConfiguration>
     {
     }
 
@@ -36,17 +37,59 @@ namespace Negum.Core.Readers
 
         protected ICollection<IConfigurationSectionEntry> Entries { get; set; } =
             new List<IConfigurationSectionEntry>();
+        
+        public async Task<IConfiguration> ReadAsync(Stream stream)
+        {
+            var lines = await ReadLinesAsync(stream);
+            return await this.ReadFromLinesAsync(lines);
+        }
 
         public async Task<IConfiguration> ReadAsync(string path)
         {
-            var fileLines = await this.ReadLinesAsync(path);
-            var cleanedLines = await this.CleanLinesAsync(fileLines);
+            IEnumerable<string> lines;
+            
+            if (path.StartsWith("http") || path.StartsWith("www"))
+            {
+                lines = await ReadLinesFromUrlAsync(path);
+            }
+            else
+            {
+                lines =  await File.ReadAllLinesAsync(path);
+            }
+            
+            return await this.ReadFromLinesAsync(lines);
+        }
+
+        protected virtual async Task<IEnumerable<string>> ReadLinesFromUrlAsync(string url)
+        {
+            var request = WebRequest.Create(url);
+            request.Method = "GET";
+
+            var response = await request.GetResponseAsync();
+            
+            return await this.ReadLinesAsync(response.GetResponseStream());
+        }
+        
+        protected virtual async Task<List<string>> ReadLinesAsync(Stream stream)
+        {
+            using var reader = new StreamReader(stream);
+            string line;
+            var lines = new List<string>();
+
+            while ((line = await reader.ReadLineAsync()) != null)
+            {
+                lines.Add(line);
+            }
+
+            return lines;
+        }
+
+        protected virtual async Task<IConfiguration> ReadFromLinesAsync(IEnumerable<string> lines)
+        {
+            var cleanedLines = await this.CleanLinesAsync(lines);
             var configuration = await this.ProcessLinesAsync(cleanedLines);
             return configuration;
         }
-
-        protected virtual async Task<IEnumerable<string>> ReadLinesAsync(string path) =>
-            await File.ReadAllLinesAsync(path);
 
         protected virtual async Task<IEnumerable<string>> CleanLinesAsync(IEnumerable<string> lines) =>
             await Task.FromResult(lines

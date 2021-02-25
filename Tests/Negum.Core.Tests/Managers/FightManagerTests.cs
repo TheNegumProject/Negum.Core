@@ -14,7 +14,7 @@ namespace Negum.Core.Tests.Managers
     public class FightManagerTests : TestBase
     {
         [Theory]
-        [InlineData("/Users/kdobrzynski/Downloads/mugen-1.1b1/data/mugen1/fight.def")]
+        [InlineData("https://raw.githubusercontent.com/TheNegumProject/UnpackedMugen/main/data/mugen1/fight.def")]
         public async Task Should_Parse_Win_Text(string path)
         {
             this.InitializeContainer();

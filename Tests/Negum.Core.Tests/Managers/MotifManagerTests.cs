@@ -15,7 +15,7 @@ namespace Negum.Core.Tests.Managers
     public class MotifManagerTests : TestBase
     {
         [Theory]
-        [InlineData("/Users/kdobrzynski/Downloads/mugen-1.1b1/data/mugen1/system.def")]
+        [InlineData("https://raw.githubusercontent.com/TheNegumProject/UnpackedMugen/main/data/mugen1/system.def")]
         public async Task Should_Return_Field_Value(string path)
         {
             this.InitializeContainer();
