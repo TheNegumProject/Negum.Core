@@ -32,7 +32,7 @@ namespace Negum.Core.Readers
             }
 
             // COMMENT: -3 indicates "def" postfix
-            var lastSectionNamePrefix = lastSection.Name.Substring(0, lastSection.Name.Length - 3);
+            var lastSectionNamePrefix = lastSection.Name[..^3];
 
             return section.Name.StartsWith(lastSectionNamePrefix);
         }

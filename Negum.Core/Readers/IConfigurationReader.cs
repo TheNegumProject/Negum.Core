@@ -103,7 +103,7 @@ namespace Negum.Core.Readers
         protected virtual string RemoveComment(string line)
         {
             var index = line.IndexOf(CommentSymbol, StringComparison.Ordinal);
-            return index > 0 ? line.Substring(0, index) : line;
+            return index > 0 ? line[..index] : line;
         }
 
         protected virtual async Task<IConfiguration> ProcessLinesAsync(IEnumerable<string> lines) =>
@@ -151,8 +151,7 @@ namespace Negum.Core.Readers
             {
                 var index = line.IndexOf(EqualsSymbol, StringComparison.Ordinal);
             
-                key = line
-                    .Substring(0, index)
+                key = line[..index]
                     .Trim();
 
                 value = line
@@ -239,8 +238,7 @@ namespace Negum.Core.Readers
         /// </summary>
         /// <param name="sectionHeader"></param>
         /// <returns>Section name from the given header.</returns>
-        protected virtual string GetSectionName(string sectionHeader) =>
-            sectionHeader.Substring(1, sectionHeader.Length - 2);
+        protected virtual string GetSectionName(string sectionHeader) => sectionHeader[1..^2];
 
         /// <summary>
         /// Adds new section.
