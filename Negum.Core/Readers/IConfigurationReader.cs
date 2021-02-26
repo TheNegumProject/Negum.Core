@@ -214,6 +214,8 @@ namespace Negum.Core.Readers
 
         /// <summary>
         /// Initializes configuration with specified section.
+        /// The passed section is the one read from the file or URL.
+        /// Section should be processed and add to the given configuration.
         /// </summary>
         /// <param name="configuration"></param>
         /// <param name="section"></param>
