@@ -31,16 +31,19 @@ namespace Negum.Core.Tests
             }
         }
 
-        protected async Task<IConfiguration> Parse(string path)
+        protected async Task<IConfiguration> Parse(string path) => 
+            await this.ParseInternal<IConfigurationReader>(path);
+
+        protected async Task<IConfiguration> ParseWithSubsections(string path) => 
+            await this.ParseInternal<IConfigurationWithSubsectionReader>(path);
+
+        protected async Task<IConfiguration> ParseAnimation(string path) => 
+            await this.ParseInternal<IAnimationReader>(path);
+
+        private async Task<IConfiguration> ParseInternal<TReader>(string path)
+            where TReader : IConfigurationReader
         {
-            var reader = NegumContainer.Resolve<IConfigurationReader>();
-            var data = await reader.ReadAsync(path);
-            return data;
-        }
-        
-        protected async Task<IConfiguration> ParseWithSubsections(string path)
-        {
-            var reader = NegumContainer.Resolve<IConfigurationWithSubsectionReader>();
+            var reader = NegumContainer.Resolve<TReader>();
             var data = await reader.ReadAsync(path);
             return data;
         }

@@ -14,7 +14,6 @@ namespace Negum.Core.Tests.Readers
     {
         [Theory]
         [InlineData("https://raw.githubusercontent.com/TheNegumProject/UnpackedMugen/main/data/mugen.cfg")]
-        [InlineData("https://raw.githubusercontent.com/TheNegumProject/UnpackedMugen/main/chars/kfm720/kfm720.air")]
         public async Task Should_Read_Configuration(string file)
         {
             this.InitializeContainer();
@@ -35,6 +34,15 @@ namespace Negum.Core.Tests.Readers
             var config = await this.ParseWithSubsections(filePath);
             var section = config.FirstOrDefault(s => s.Name.Equals(sectionName));
             Assert.True(section.Subsections.Count() == subsectionsCount);
+        }
+
+        [Theory]
+        [InlineData("https://raw.githubusercontent.com/TheNegumProject/UnpackedMugen/main/chars/kfm720/kfm720.air")]
+        public async Task Should_Read_Animation_File(string path)
+        {
+            this.InitializeContainer();
+            var config = await this.ParseAnimation(path);
+            Assert.True(config.Any());
         }
     }
 }
