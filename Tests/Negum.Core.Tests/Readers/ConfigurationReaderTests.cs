@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Threading.Tasks;
+using Negum.Core.Configurations.Animations;
 using Xunit;
 
 namespace Negum.Core.Tests.Readers
@@ -20,7 +21,7 @@ namespace Negum.Core.Tests.Readers
             var config = await this.Parse(file);
             Assert.True(config.Any());
         }
-        
+
         [Theory]
         [InlineData("TitleBGdef", 6)]
         [InlineData("SelectBGdef", 4)]
@@ -29,7 +30,8 @@ namespace Negum.Core.Tests.Readers
         [InlineData("OptionBGdef", 1)]
         public async Task Should_Read_Motif_With_Subsections(string sectionName, int subsectionsCount)
         {
-            const string filePath = "https://raw.githubusercontent.com/TheNegumProject/UnpackedMugen/main/data/mugen1/system.def";
+            const string filePath =
+                "https://raw.githubusercontent.com/TheNegumProject/UnpackedMugen/main/data/mugen1/system.def";
             this.InitializeContainer();
             var config = await this.ParseWithSubsections(filePath);
             var section = config.FirstOrDefault(s => s.Name.Equals(sectionName));
@@ -42,7 +44,25 @@ namespace Negum.Core.Tests.Readers
         {
             this.InitializeContainer();
             var config = await this.ParseAnimation(path);
+
             Assert.True(config.Any());
+
+            Assert.True(((IAnimationSection) config
+                    .Cast<IAnimationSection>()
+                    .FirstOrDefault())
+                .Count() == 1);
+
+            Assert.True(((IAnimationSection) config
+                    .Cast<IAnimationSection>()
+                    .FirstOrDefault())
+                .Count() == 1);
+
+            Assert.True(((IAnimationSectionEntry) config
+                    .Cast<IAnimationSection>()
+                    .FirstOrDefault(s => s.ActionNumber == 170)
+                    .ElementAt(0))
+                .AnimationElements
+                .Count() == 9);
         }
     }
 }

@@ -51,6 +51,9 @@ namespace Negum.Core.Configurations.Animations
         public IEnumerable<string> Boxes { get; } = new List<string>();
         public IEnumerable<IAnimationElement> AnimationElements { get; } = new List<IAnimationElement>();
 
+        public void AddBox(string box) =>
+            ((List<string>) this.Boxes).Add(box);
+        
         public void AddAnimationElement(IAnimationElement element) =>
             ((List<IAnimationElement>) this.AnimationElements).Add(element);
     }
