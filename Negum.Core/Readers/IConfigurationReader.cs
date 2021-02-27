@@ -254,7 +254,6 @@ namespace Negum.Core.Readers
         /// Adds new section.
         /// </summary>
         /// <param name="sectionName"></param>
-        /// <param name="sectionAttributes"></param>
         protected virtual void AddSection(string sectionName)
         {
             var section = new ConfigurationSection
