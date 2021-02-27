@@ -36,13 +36,33 @@ jobs:
         release_name: Negum.Core-${{ env.RELEASE_DATE }}
         draft: false
         prerelease: false
-    - name: Upload Release Asset
-      id: upload-release-asset 
+    - name: Upload Release Asset (dll)
+      id: upload-release-asset-dll
       uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: ./Negum.Core/bin/Debug/net5.0/Negum.Core.dll
-        asset_name: Negum.Core
+        asset_name: Negum.Core.dll
+        asset_content_type: application/octet-stream
+    - name: Upload Release Asset (json)
+      id: upload-release-asset-json
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./Negum.Core/bin/Debug/net5.0/Negum.Core.deps.json
+        asset_name: Negum.Core.deps.json
+        asset_content_type: application/xml
+    - name: Upload Release Asset (pdb)
+      id: upload-release-asset-pdb
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./Negum.Core/bin/Debug/net5.0/Negum.Core.pdb
+        asset_name: Negum.Core.pdb
         asset_content_type: application/octet-stream
