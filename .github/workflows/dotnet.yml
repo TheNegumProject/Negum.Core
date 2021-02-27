@@ -23,3 +23,16 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
+    - name: Get date
+      id: date
+      run: echo "RELEASE_DATE=$(date +%Y%m%d%H%M)" >> $GITHUB_ENV
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: Negum.Core-${{ env.RELEASE_DATE }}-${{ github.ref }}
+        release_name: Negum.Core-${{ env.RELEASE_DATE }}-${{ github.ref }}
+        draft: false
+        prerelease: false
