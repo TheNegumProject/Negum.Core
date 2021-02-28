@@ -64,5 +64,15 @@ namespace Negum.Core.Tests.Readers
                 .AnimationElements
                 .Count() == 9);
         }
+        
+        [Theory]
+        [InlineData("https://raw.githubusercontent.com/TheNegumProject/UnpackedMugen/main/data/common1.cns")]
+        [InlineData("https://raw.githubusercontent.com/TheNegumProject/UnpackedMugen/main/chars/kfm720/kfm720.cns")]
+        public async Task Should_Read_Constants(string file)
+        {
+            this.InitializeContainer();
+            var config = await this.ParseConstants(file);
+            Assert.True(config.Any());
+        }
     }
 }

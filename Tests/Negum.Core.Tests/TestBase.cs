@@ -40,6 +40,9 @@ namespace Negum.Core.Tests
         protected async Task<IConfiguration> ParseAnimation(string path) => 
             await this.ParseInternal<IAnimationReader>(path);
 
+        protected async Task<IConfiguration> ParseConstants(string path) =>
+            await this.ParseInternal<IConstantsReader>(path);
+
         private async Task<IConfiguration> ParseInternal<TReader>(string path)
             where TReader : IConfigurationReader
         {
