@@ -44,11 +44,11 @@ namespace Negum.Core.Readers
 
             if (sectionName.StartsWith("Statedef ") || sectionName.StartsWith("State "))
             {
-                section.Name = sectionName.Split(" ")[0];
-
                 var parts = sectionName.Split(",");
 
                 section.Id = int.Parse(parts[0].Split(" ")[1]);
+                
+                section.Name = sectionName.Split(" ")[0] + " " + section.Id;
 
                 if (parts.Length > 1)
                 {
