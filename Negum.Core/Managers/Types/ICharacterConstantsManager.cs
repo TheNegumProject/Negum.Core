@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Negum.Core.Managers.Entries;
 
 namespace Negum.Core.Managers.Types
@@ -298,5 +299,9 @@ namespace Negum.Core.Managers.Types
 
     public interface ICharacterConstantsQuotes : IManagerSection
     {
+        /// <summary>
+        /// The default language victory quotes should be implemented in English.
+        /// </summary>
+        IEnumerable<string> Victories => this.GetValues<string>("victory");
     }
 }
