@@ -210,6 +210,90 @@ namespace Negum.Core.Managers.Types
 
     public interface ICharacterConstantsMovement : IManagerSection
     {
+        /// <summary>
+        /// Number of air jumps allowed (opt) (default = 1).
+        /// </summary>
+        int AirJumpNumber => this.GetValue<int>("airjump.num");
+
+        /// <summary>
+        /// Minimum distance from ground before you can air jump (opt) (default = 140).
+        /// </summary>
+        int AirJumpHeight => this.GetValue<int>("airjump.height");
+
+        /// <summary>
+        /// Vertical acceleration.
+        /// </summary>
+        float AccelY => this.GetValue<float>("yaccel");
+
+        /// <summary>
+        /// Friction coefficient when standing.
+        /// </summary>
+        float StandFriction => this.GetValue<float>("stand.friction");
+
+        /// <summary>
+        /// Friction coefficient when crouching.
+        /// </summary>
+        float CrouchFriction => this.GetValue<float>("crouch.friction");
+
+        /// <summary>
+        /// If player's speed drops below this threshold while standing, stop his movement.
+        /// </summary>
+        float StandFrictionThreshold => this.GetValue<float>("stand.friction.threshold");
+        
+        /// <summary>
+        /// If player's speed drops below this threshold while crouching, stop his movement.
+        /// </summary>
+        float CrouchFrictionThreshold => this.GetValue<float>("crouch.friction.threshold");
+
+        /// <summary>
+        /// Y-position at which a falling player is considered to hit the ground.
+        /// </summary>
+        int GroundLevel => this.GetValue<int>("air.gethit.groundlevel");
+
+        /// <summary>
+        /// Y-position below which falling player can use the recovery command.
+        /// </summary>
+        float GroundRecoverThreshold => this.GetValue<float>("air.gethit.groundrecover.ground.threshold");
+
+        /// <summary>
+        /// Y-position at which player in the ground recovery state touches the ground.
+        /// </summary>
+        int GroundRecoverGroundLevel => this.GetValue<int>("air.gethit.groundrecover.groundlevel");
+
+        /// <summary>
+        /// Y-velocity above which player may use the air recovery command.
+        /// </summary>
+        float AirRecoverThreshold => this.GetValue<float>("air.gethit.airrecover.threshold");
+
+        /// <summary>
+        /// Vertical acceleration for player in the air recovery state.
+        /// </summary>
+        float AirRecoverAccelY => this.GetValue<float>("air.gethit.airrecover.yaccel");
+
+        /// <summary>
+        /// Y-position at which player in the tripped state touches the ground.
+        /// </summary>
+        int TripGroundLevel => this.GetValue<int>("air.gethit.trip.groundlevel");
+
+        /// <summary>
+        /// Offset for player bouncing off the ground (x, y).
+        /// </summary>
+        IVectorEntry DownBounceOffset => this.GetValue<IVectorEntry>("down.bounce.offset");
+
+        /// <summary>
+        /// Vertical acceleration for player bouncing off the ground.
+        /// </summary>
+        float DownBounceAccelY => this.GetValue<float>("down.bounce.yaccel");
+
+        /// <summary>
+        /// Y-position at which player bouncing off the ground touches the ground again.
+        /// </summary>
+        int DownBounceGroundLevel => this.GetValue<int>("down.bounce.groundlevel");
+
+        /// <summary>
+        /// If the player's speed drops below this threshold while lying down, stop his movement.
+        /// </summary>
+        float DownFrictionThreshold => this.GetValue<float>("down.friction.threshold");
     }
 
     public interface ICharacterConstantsQuotes : IManagerSection
