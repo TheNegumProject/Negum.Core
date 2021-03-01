@@ -115,7 +115,7 @@ namespace Negum.Core.Managers.Types
         /// <summary>
         /// Music to play at title screen.
         /// </summary>
-        string TitleMusicFile => this.GetValue<string>("title.bgm");
+        IAudioEntry Title => this.GetValue<IAudioEntry>("title.bgm");
 
         /// <summary>
         /// Music to play at char select screen.
