@@ -165,27 +165,27 @@ namespace Negum.Core.Managers.Types
         /// <summary>
         /// Walk.
         /// </summary>
-        IMovementEntry Walk => this.GetValue<IMovementEntry>("walk");
+        IVelocityEntry Walk => this.GetValue<IVelocityEntry>("walk");
 
         /// <summary>
         /// Run.
         /// </summary>
-        IMovementEntry Run => this.GetValue<IMovementEntry>("run");
+        IVelocityEntry Run => this.GetValue<IVelocityEntry>("run");
 
         /// <summary>
         /// Jump.
         /// </summary>
-        IMovementEntry Jump => this.GetValue<IMovementEntry>("jump");
+        IVelocityEntry Jump => this.GetValue<IVelocityEntry>("jump");
 
         /// <summary>
         /// Running jump.
         /// </summary>
-        IMovementEntry RunJump => this.GetValue<IMovementEntry>("runjump");
+        IVelocityEntry RunJump => this.GetValue<IVelocityEntry>("runjump");
 
         /// <summary>
         /// Air jump.
         /// </summary>
-        IMovementEntry AirJump => this.GetValue<IMovementEntry>("airjump");
+        IVelocityEntry AirJump => this.GetValue<IVelocityEntry>("airjump");
 
         /// <summary>
         /// Velocity for ground recovery state (x, y).
@@ -195,7 +195,7 @@ namespace Negum.Core.Managers.Types
         /// <summary>
         /// Extra (x, y)-velocity for holding direction during air recovery.
         /// </summary>
-        IMovementEntry AirRecover => this.GetValue<IMovementEntry>("air.gethit.airrecover");
+        IVelocityEntry AirRecover => this.GetValue<IVelocityEntry>("air.gethit.airrecover");
 
         /// <summary>
         /// Multiplier for air recovery velocity (x, y).

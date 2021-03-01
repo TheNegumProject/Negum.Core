@@ -1,13 +1,13 @@
 namespace Negum.Core.Managers.Entries
 {
     /// <summary>
-    /// Represents a Movement entry in section.
+    /// Represents a Velocity entry in section.
     /// </summary>
     /// 
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface IMovementEntry : IManagerSectionEntry<IMovementEntry>
+    public interface IVelocityEntry : IManagerSectionEntry<IVelocityEntry>
     {
         IVectorEntry Forward { get; }
         IVectorEntry Backward { get; }
@@ -22,7 +22,7 @@ namespace Negum.Core.Managers.Entries
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public class MovementEntry : ManagerSectionEntry<IMovementEntry>, IMovementEntry
+    public class VelocityEntry : ManagerSectionEntry<IVelocityEntry>, IVelocityEntry
     {
         public IVectorEntry Forward { get; private set; }
         public IVectorEntry Backward { get; private set; }
@@ -30,9 +30,9 @@ namespace Negum.Core.Managers.Entries
         public IVectorEntry Up { get; private set; }
         public IVectorEntry Down { get; private set; }
 
-        public override IMovementEntry Get()
+        public override IVelocityEntry Get()
         {
-            this.Forward = this.Section.GetValue<IVectorEntry>(this.FieldKey + ".fws");
+            this.Forward = this.Section.GetValue<IVectorEntry>(this.FieldKey + ".fwd");
             this.Backward = this.Section.GetValue<IVectorEntry>(this.FieldKey + ".back");
             this.Neutral = this.Section.GetValue<IVectorEntry>(this.FieldKey + ".neu");
             this.Up = this.Section.GetValue<IVectorEntry>(this.FieldKey + ".up");
