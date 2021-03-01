@@ -21,7 +21,7 @@ namespace Negum.Core.Managers.Types
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
     public class CharacterConstantsManagerSection :
-        ManagerSection,
+        ConstantsManagerSection,
         ICharacterConstantsData,
         ICharacterConstantsSize,
         ICharacterConstantsVelocity,
