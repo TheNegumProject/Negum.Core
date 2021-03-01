@@ -161,7 +161,7 @@ namespace Negum.Core.Managers.Types
         bool IsMenuBoxCursorVisible => this.GetValue<bool>("menu.boxcursor.visible");
 
         IVectorEntry MenuBoxCursorCoords => this.GetValue<IVectorEntry>("menu.boxcursor.coords");
-        IMovementEntry Cursor => this.GetValue<IMovementEntry>("cursor");
+        IMovementStateEntry Cursor => this.GetValue<IMovementStateEntry>("cursor");
         ISpriteSoundEntry Cancel => this.GetValue<ISpriteSoundEntry>("cancel");
     }
 
@@ -217,7 +217,7 @@ namespace Negum.Core.Managers.Types
         /// </summary>
         IPlayerSelectionEntry Player2 => this.GetValue<IPlayerSelectionEntry>("p2");
 
-        IMovementEntry Random => this.GetValue<IMovementEntry>("random");
+        IMovementStateEntry Random => this.GetValue<IMovementStateEntry>("random");
         ISpriteSoundEntry Cancel => this.GetValue<ISpriteSoundEntry>("cancel");
         IImageEntry Portrait => this.GetValue<IImageEntry>("portrait");
         ITextEntry Title => this.GetValue<ITextEntry>("title");

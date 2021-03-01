@@ -11,7 +11,7 @@ namespace Negum.Core.Managers.Entries
     {
         IImageEntry BigPortrait { get; }
         IPlayerSelectionCursorEntry Cursor { get; }
-        IMovementEntry RandomMove { get; }
+        IMovementStateEntry RandomMove { get; }
         IImageEntry Face { get; }
         ITextEntry Name { get; }
         IPlayerSelectionTeamMenuEntry MenuEntry { get; }
@@ -27,7 +27,7 @@ namespace Negum.Core.Managers.Entries
     {
         public IImageEntry BigPortrait { get; private set; }
         public IPlayerSelectionCursorEntry Cursor { get; private set; }
-        public IMovementEntry RandomMove { get; private set; }
+        public IMovementStateEntry RandomMove { get; private set; }
         public IImageEntry Face { get; private set; }
         public ITextEntry Name { get; private set; }
         public IPlayerSelectionTeamMenuEntry MenuEntry { get; private set; }
@@ -36,7 +36,7 @@ namespace Negum.Core.Managers.Entries
         {
             this.BigPortrait = this.Section.GetValue<IImageEntry>(this.FieldKey);
             this.Cursor = this.Section.GetValue<IPlayerSelectionCursorEntry>(this.FieldKey + ".cursor");
-            this.RandomMove = this.Section.GetValue<IMovementEntry>(this.FieldKey + ".random");
+            this.RandomMove = this.Section.GetValue<IMovementStateEntry>(this.FieldKey + ".random");
             this.Face = this.Section.GetValue<IImageEntry>(this.FieldKey + ".face");
             this.Name = this.Section.GetValue<ITextEntry>(this.FieldKey + ".name");
             this.MenuEntry = this.Section.GetValue<IPlayerSelectionTeamMenuEntry>(this.FieldKey + ".teammenu");

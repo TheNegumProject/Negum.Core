@@ -11,7 +11,7 @@ namespace Negum.Core.Managers.Entries
     {
         IVectorEntry StartCell { get; }
         IImageEntry Animation { get; }
-        IMovementEntry Movement { get; }
+        IMovementStateEntry MovementState { get; }
     }
 
     /// <summary>
@@ -25,13 +25,13 @@ namespace Negum.Core.Managers.Entries
     {
         public IVectorEntry StartCell { get; private set; }
         public IImageEntry Animation { get; private set; }
-        public IMovementEntry Movement { get; private set; }
+        public IMovementStateEntry MovementState { get; private set; }
 
         public override IPlayerSelectionCursorEntry Get()
         {
             this.StartCell = this.Section.GetValue<IVectorEntry>(this.FieldKey + ".startcell");
             this.Animation = this.Section.GetValue<IImageEntry>(this.FieldKey + ".active");
-            this.Movement = this.Section.GetValue<IMovementEntry>(this.FieldKey);
+            this.MovementState = this.Section.GetValue<IMovementStateEntry>(this.FieldKey);
 
             return this;
         }
