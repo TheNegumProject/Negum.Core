@@ -103,17 +103,17 @@ namespace Negum.Core.Managers.Types
         /// Player width (back, ground).
         /// </summary>
         int GroundBack => this.GetValue<int>("ground.back");
-        
+
         /// <summary>
         /// Player width (front, ground).
         /// </summary>
         int GroundFront => this.GetValue<int>("ground.front");
-        
+
         /// <summary>
         /// Player width (back, air).
         /// </summary>
         int AirBack => this.GetValue<int>("air.back");
-        
+
         /// <summary>
         /// Player width (front, air).
         /// </summary>
@@ -123,12 +123,12 @@ namespace Negum.Core.Managers.Types
         /// Height of player (for opponent to jump over).
         /// </summary>
         int Height => this.GetValue<int>("height");
-        
+
         /// <summary>
         /// Default attack distance.
         /// </summary>
         int AttackDistance => this.GetValue<int>("attack.dist");
-        
+
         /// <summary>
         /// Default attack distance for projectiles.
         /// </summary>
@@ -143,12 +143,12 @@ namespace Negum.Core.Managers.Types
         /// Approximate position of head.
         /// </summary>
         IVectorEntry HeadPosition => this.GetValue<IVectorEntry>("head.pos");
-        
+
         /// <summary>
         /// Approximate position of midsection.
         /// </summary>
         IVectorEntry MidSectionPosition => this.GetValue<IVectorEntry>("mid.pos");
-        
+
         /// <summary>
         /// Number of pixels to vertically offset the shadow.
         /// </summary>
@@ -162,6 +162,50 @@ namespace Negum.Core.Managers.Types
 
     public interface ICharacterConstantsVelocity : IManagerSection
     {
+        /// <summary>
+        /// Walk.
+        /// </summary>
+        IMovementEntry Walk => this.GetValue<IMovementEntry>("walk");
+
+        /// <summary>
+        /// Run.
+        /// </summary>
+        IMovementEntry Run => this.GetValue<IMovementEntry>("run");
+
+        /// <summary>
+        /// Jump.
+        /// </summary>
+        IMovementEntry Jump => this.GetValue<IMovementEntry>("jump");
+
+        /// <summary>
+        /// Running jump.
+        /// </summary>
+        IMovementEntry RunJump => this.GetValue<IMovementEntry>("runjump");
+
+        /// <summary>
+        /// Air jump.
+        /// </summary>
+        IMovementEntry AirJump => this.GetValue<IMovementEntry>("airjump");
+
+        /// <summary>
+        /// Velocity for ground recovery state (x, y).
+        /// </summary>
+        IVectorEntry GroundRecover => this.GetValue<IVectorEntry>("air.gethit.groundrecover");
+
+        /// <summary>
+        /// Extra (x, y)-velocity for holding direction during air recovery.
+        /// </summary>
+        IMovementEntry AirRecover => this.GetValue<IMovementEntry>("air.gethit.airrecover");
+
+        /// <summary>
+        /// Multiplier for air recovery velocity (x, y).
+        /// </summary>
+        IVectorEntry AirRecoveryMultiplier => this.GetValue<IVectorEntry>("air.gethit.airrecover.mul");
+
+        /// <summary>
+        /// Velocity offset for air recovery (x, y).
+        /// </summary>
+        IVectorEntry AirRecoveryVelocityOffset => this.GetValue<IVectorEntry>("air.gethit.airrecover.add");
     }
 
     public interface ICharacterConstantsMovement : IManagerSection

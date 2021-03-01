@@ -1,7 +1,7 @@
 namespace Negum.Core.Managers.Entries
 {
     /// <summary>
-    /// Represents a Movement entry in section.
+    /// Represents a Movement State entry in section.
     /// </summary>
     /// 
     /// <author>
