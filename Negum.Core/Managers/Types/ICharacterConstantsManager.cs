@@ -1,3 +1,5 @@
+using Negum.Core.Managers.Entries;
+
 namespace Negum.Core.Managers.Types
 {
     /// <summary>
@@ -22,52 +24,52 @@ namespace Negum.Core.Managers.Types
         /// Amount of life to start with.
         /// </summary>
         int Life => this.GetValue<int>("life");
-        
+
         /// <summary>
         /// Attack power (more is stronger).
         /// </summary>
         int Attack => this.GetValue<int>("attack");
-        
+
         /// <summary>
         /// Defensive power (more is stronger).
         /// </summary>
         int Defence => this.GetValue<int>("defence");
-        
+
         /// <summary>
         /// Percentage to increase defense everytime player is knocked down.
         /// </summary>
         int FallDefenceUp => this.GetValue<int>("fall.defence_up");
-        
+
         /// <summary>
         /// Time which player lies down for, before getting up.
         /// </summary>
         int LieDownTime => this.GetValue<int>("liedown.time");
-        
+
         /// <summary>
         /// Number of points for juggling.
         /// </summary>
         int AirJuggle => this.GetValue<int>("airjuggle");
-        
+
         /// <summary>
         /// Default hit spark number for HitDefs.
         /// </summary>
         int SparkNo => this.GetValue<int>("sparkno");
-        
+
         /// <summary>
         /// Default guard spark number.
         /// </summary>
         int GuardSparkNo => this.GetValue<int>("guard.sparkno");
-        
+
         /// <summary>
-        /// 1 to enable echo on KO.
+        /// True to enable echo on KO.
         /// </summary>
         bool KoEcho => this.GetValue<bool>("KO.echo");
-        
+
         /// <summary>
         /// Volume offset (negative for softer).
         /// </summary>
         int Volume => this.GetValue<int>("volume");
-        
+
         /// <summary>
         /// Variables with this index and above will not have their values reset to 0 between rounds or matches.
         /// There are 60 int variables, indexed from 0 to 59.
@@ -75,7 +77,7 @@ namespace Negum.Core.Managers.Types
         /// If you want your variables to persist between matches, you need to override state 5900 from common1.cns.
         /// </summary>
         int IntPersistIndex => this.GetValue<int>("IntPersistIndex");
-        
+
         /// <summary>
         /// Variables with this index and above will not have their values reset to 0 between rounds or matches.
         /// There are 40 float variables, indexed from 0 to 39.
@@ -87,6 +89,75 @@ namespace Negum.Core.Managers.Types
 
     public interface ICharacterConstantsSize : IManagerSection
     {
+        /// <summary>
+        /// Horizontal scaling factor.
+        /// </summary>
+        float ScaleX => this.GetValue<float>("xscale");
+
+        /// <summary>
+        /// Vertical scaling factor.
+        /// </summary>
+        float ScaleY => this.GetValue<float>("yscale");
+
+        /// <summary>
+        /// Player width (back, ground).
+        /// </summary>
+        int GroundBack => this.GetValue<int>("ground.back");
+        
+        /// <summary>
+        /// Player width (front, ground).
+        /// </summary>
+        int GroundFront => this.GetValue<int>("ground.front");
+        
+        /// <summary>
+        /// Player width (back, air).
+        /// </summary>
+        int AirBack => this.GetValue<int>("air.back");
+        
+        /// <summary>
+        /// Player width (front, air).
+        /// </summary>
+        int AirFront => this.GetValue<int>("air.front");
+
+        /// <summary>
+        /// Height of player (for opponent to jump over).
+        /// </summary>
+        int Height => this.GetValue<int>("height");
+        
+        /// <summary>
+        /// Default attack distance.
+        /// </summary>
+        int AttackDistance => this.GetValue<int>("attack.dist");
+        
+        /// <summary>
+        /// Default attack distance for projectiles.
+        /// </summary>
+        int ProjectileAttackDistance => this.GetValue<int>("proj.attack.dist");
+
+        /// <summary>
+        /// Set to true to scale projectiles too.
+        /// </summary>
+        bool ProjectileDoScale => this.GetValue<bool>("proj.doscale");
+
+        /// <summary>
+        /// Approximate position of head.
+        /// </summary>
+        IVectorEntry HeadPosition => this.GetValue<IVectorEntry>("head.pos");
+        
+        /// <summary>
+        /// Approximate position of midsection.
+        /// </summary>
+        IVectorEntry MidSectionPosition => this.GetValue<IVectorEntry>("mid.pos");
+        
+        /// <summary>
+        /// Number of pixels to vertically offset the shadow.
+        /// </summary>
+        int ShadowOffset => this.GetValue<int>("shadowoffset");
+
+        /// <summary>
+        /// Player drawing offset in pixels (x, y). Recommended 0,0.
+        /// </summary>
+        IVectorEntry DrawingOffset => this.GetValue<IVectorEntry>("draw.offset");
     }
 
     public interface ICharacterConstantsVelocity : IManagerSection

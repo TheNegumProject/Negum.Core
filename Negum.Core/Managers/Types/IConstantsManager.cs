@@ -109,26 +109,26 @@ namespace Negum.Core.Managers.Types
         string Juggle => this.GetValue<string>("juggle");
 
         /// <summary>
-        /// When you include the line facep2 = 1, the player will be turned, if necessary, to face the opponent at the beginning of the state.
-        /// facep2 has the default value of "0" if omitted.
+        /// When you include the line facep2 = true, the player will be turned, if necessary, to face the opponent at the beginning of the state.
+        /// facep2 has the default value of "false" if omitted.
         /// </summary>
         bool FaceP2 => this.GetValue<bool>("facep2");
 
         /// <summary>
-        /// If set to 1, any HitDefs which are active at the time of a state transition to this state will remain active.
-        /// If set to 0, (the default), any such HitDefs will be disabled when the state transition is made.
+        /// If set to true, any HitDefs which are active at the time of a state transition to this state will remain active.
+        /// If set to false, (the default), any such HitDefs will be disabled when the state transition is made.
         /// </summary>
         bool HitDefPersist => this.GetValue<bool>("hitdefpersist");
 
         /// <summary>
-        /// If set to 1, the move hit information from the previous state (whether the attack hit or missed, guarded, etc) swill be carried over into this state.
-        /// If set to 0 (the default), this information will be reset upon entry into this state.
+        /// If set to true, the move hit information from the previous state (whether the attack hit or missed, guarded, etc) swill be carried over into this state.
+        /// If set to false, (the default), this information will be reset upon entry into this state.
         /// </summary>
         bool MoveHitPersist => this.GetValue<bool>("movehitpersist");
 
         /// <summary>
-        /// If set to 1, the hit counter (how many hits this attack has done) will be carried over from the previous state to this state.
-        /// If set to 0 (the default), the hit counter will be reset upon state transition.
+        /// If set to true, the hit counter (how many hits this attack has done) will be carried over from the previous state to this state.
+        /// If set to false, (the default), the hit counter will be reset upon state transition.
         /// This parameter does not affect the combo counter which is displayed on the screen. 
         /// </summary>
         bool HitCountPersist => this.GetValue<bool>("hitcountpersist");
