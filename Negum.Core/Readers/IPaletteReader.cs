@@ -1,6 +1,6 @@
 using System.IO;
 using System.Threading.Tasks;
-using Negum.Core.Models;
+using Negum.Core.Models.Palettes;
 
 namespace Negum.Core.Readers
 {

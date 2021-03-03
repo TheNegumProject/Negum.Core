@@ -1,4 +1,4 @@
-namespace Negum.Core.Models
+namespace Negum.Core.Models.Palettes
 {
     /// <summary>
     /// Represents a simple color.

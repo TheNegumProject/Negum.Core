@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Negum.Core.Models
+namespace Negum.Core.Models.Palettes
 {
     /// <summary>
     /// Represents a palette.
