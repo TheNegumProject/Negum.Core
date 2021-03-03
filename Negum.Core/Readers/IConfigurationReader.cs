@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using Negum.Core.Configurations;
+using Negum.Core.Containers;
 
 namespace Negum.Core.Readers
 {
@@ -62,25 +62,15 @@ namespace Negum.Core.Readers
 
         protected virtual async Task<IEnumerable<string>> ReadLinesFromUrlAsync(string url)
         {
-            var request = WebRequest.Create(url);
-            request.Method = "GET";
-
-            var response = await request.GetResponseAsync();
-            
-            return await this.ReadLinesAsync(response.GetResponseStream());
+            var urlReader = NegumContainer.Resolve<IUrlReader>();
+            var stream = await urlReader.ReadAsync(url);
+            return await this.ReadLinesAsync(stream);
         }
         
-        protected virtual async Task<List<string>> ReadLinesAsync(Stream stream)
+        protected virtual async Task<IEnumerable<string>> ReadLinesAsync(Stream stream)
         {
-            using var reader = new StreamReader(stream);
-            string line;
-            var lines = new List<string>();
-
-            while ((line = await reader.ReadLineAsync()) != null)
-            {
-                lines.Add(line);
-            }
-
+            var reader = NegumContainer.Resolve<IStreamLinesReader>();
+            var lines = await reader.ReadAsync(stream);
             return lines;
         }
 

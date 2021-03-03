@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Threading.Tasks;
 using Negum.Core.Configurations;
 using Negum.Core.Containers;
@@ -29,6 +30,13 @@ namespace Negum.Core.Tests
                  * This should not happen is real-life scenario.
                  */
             }
+        }
+
+        protected async Task<Stream> ReadFromUrl(string url)
+        {
+            var urlReader = NegumContainer.Resolve<IUrlReader>();
+            var stream = await urlReader.ReadAsync(url);
+            return stream;
         }
 
         protected async Task<IConfiguration> Parse(string path) => 

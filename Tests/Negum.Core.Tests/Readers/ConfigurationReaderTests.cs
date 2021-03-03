@@ -1,6 +1,8 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Negum.Core.Configurations.Animations;
+using Negum.Core.Containers;
+using Negum.Core.Readers;
 using Xunit;
 
 namespace Negum.Core.Tests.Readers
@@ -73,6 +75,20 @@ namespace Negum.Core.Tests.Readers
             this.InitializeContainer();
             var config = await this.ParseConstants(file);
             Assert.True(config.Any());
+        }
+
+        [Theory]
+        [InlineData("https://github.com/TheNegumProject/DragonBallVsSaintSeiyaMugen/blob/main/chars/Gogeta%20SSJ5/1.act?raw=true")]
+        public async Task Should_Parse_Palette_File(string url)
+        {
+            this.InitializeContainer();
+
+            var stream = await this.ReadFromUrl(url);
+            var paletteReader = NegumContainer.Resolve<IPaletteReader>();
+            var palette = await paletteReader.ReadAsync(stream);
+            
+            Assert.True(palette.Count() == 256);
+            Assert.True(!palette.Any(c => c.Red > 256 || c.Green > 256 || c.Blue > 256));
         }
     }
 }
