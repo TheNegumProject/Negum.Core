@@ -88,7 +88,6 @@ namespace Negum.Core.Tests.Readers
             var palette = await paletteReader.ReadAsync(stream);
             
             Assert.True(palette.Count() == 256);
-            Assert.True(!palette.Any(c => c.Red > 256 || c.Green > 256 || c.Blue > 256));
         }
     }
 }

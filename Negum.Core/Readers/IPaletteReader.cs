@@ -30,15 +30,16 @@ namespace Negum.Core.Readers
 
         protected virtual IPalette Read(Stream stream)
         {
+            var binaryReader = new BinaryReader(stream);
             var palette = new Palette();
 
             for (var i = 0; i < 256; ++i)
             {
                 var color = new Color
                 {
-                    Red = stream.ReadByte(),
-                    Green = stream.ReadByte(),
-                    Blue = stream.ReadByte()
+                    Red = binaryReader.ReadByte(),
+                    Green = binaryReader.ReadByte(),
+                    Blue = binaryReader.ReadByte(),
                 };
 
                 palette.Colors.Push(color);

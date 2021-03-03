@@ -9,9 +9,9 @@ namespace Negum.Core.Models.Palettes
     /// </author>
     public interface IColor
     {
-        int Red { get; }
-        int Green { get; }
-        int Blue { get; }
+        byte Red { get; }
+        byte Green { get; }
+        byte Blue { get; }
     }
 
     /// <summary>
@@ -22,8 +22,8 @@ namespace Negum.Core.Models.Palettes
     /// </author>
     public class Color : IColor
     {
-        public int Red { get; internal init; }
-        public int Green { get; internal init; }
-        public int Blue { get; internal init; }
+        public byte Red { get; internal init; }
+        public byte Green { get; internal init; }
+        public byte Blue { get; internal init; }
     }
 }
