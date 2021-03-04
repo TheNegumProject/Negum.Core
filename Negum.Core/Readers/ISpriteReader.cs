@@ -77,7 +77,8 @@ namespace Negum.Core.Readers
                 {
                     var data = binaryReader.ReadBytes(768);
                     var paletteStream = new MemoryStream(data);
-                    sprite.Palette = await paletteReader.ReadAsync(paletteStream);
+                    var palette = await paletteReader.ReadAsync(paletteStream);
+                    sprite.Palette = palette.Reverse();
                 }
 
                 binaryReader.BaseStream.Position = nextSubFile;

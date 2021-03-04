@@ -13,6 +13,10 @@ namespace Negum.Core.Models.Palettes
     /// </author>
     public interface IPalette : IEnumerable<IColor>
     {
+        /// <summary>
+        /// </summary>
+        /// <returns>Copy of a current palette but in reversed order.</returns>
+        IPalette Reverse();
     }
 
     /// <summary>
@@ -27,6 +31,18 @@ namespace Negum.Core.Models.Palettes
 
         public IEnumerator<IColor> GetEnumerator() =>
             this.Colors.GetEnumerator();
+
+        public IPalette Reverse()
+        {
+            var palette = new Palette();
+
+            foreach (var color in this.Colors)
+            {
+                palette.Colors.Push(color);
+            }
+
+            return palette;
+        }
 
         IEnumerator IEnumerable.GetEnumerator() =>
             GetEnumerator();
