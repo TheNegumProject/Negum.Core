@@ -15,6 +15,13 @@ namespace Negum.Core.Readers
     /// </author>
     public interface IPaletteReader : IStreamReader<IPalette>
     {
+        /// <summary>
+        /// Reads a specified amount of colors from the stream.
+        /// </summary>
+        /// <param name="stream"></param>
+        /// <param name="count"></param>
+        /// <returns>Palette with read colors.</returns>
+        IPalette ReadExact(Stream stream, int count);
     }
 
     /// <summary>
@@ -26,14 +33,14 @@ namespace Negum.Core.Readers
     public class PaletteReader : IPaletteReader
     {
         public async Task<IPalette> ReadAsync(Stream stream) =>
-            await Task.FromResult(this.Read(stream));
+            await Task.FromResult(this.ReadExact(stream, 256));
 
-        protected virtual IPalette Read(Stream stream)
+        public IPalette ReadExact(Stream stream, int count)
         {
             var binaryReader = new BinaryReader(stream);
             var palette = new Palette();
 
-            for (var i = 0; i < 256; ++i)
+            for (var i = 0; i < count; ++i)
             {
                 var color = new Color
                 {
