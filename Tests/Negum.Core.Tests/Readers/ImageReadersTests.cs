@@ -1,3 +1,4 @@
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Negum.Core.Containers;
@@ -35,6 +36,9 @@ namespace Negum.Core.Tests.Readers
             this.InitializeContainer();
 
             var stream = await this.ReadFromUrl(url);
+            var memoryStream = new MemoryStream();
+            stream.CopyTo(memoryStream);
+            
             var spriteReader = NegumContainer.Resolve<ISpriteReader>();
             var sprite = await spriteReader.ReadAsync(stream);
             
