@@ -29,11 +29,7 @@ namespace Negum.Core.Readers
     {
         public async Task<ISprite> ReadAsync(Stream stream)
         {
-            var memoryStream = new MemoryStream();
-            stream.CopyTo(memoryStream);
-            memoryStream.Position = 0;
-            
-            var binaryReader = new BinaryReader(memoryStream);
+            var binaryReader = new BinaryReader(stream);
             var paletteReader = NegumContainer.Resolve<IPaletteReader>();
 
             var sprite = new Sprite
