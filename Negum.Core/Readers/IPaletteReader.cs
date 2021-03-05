@@ -7,7 +7,6 @@ namespace Negum.Core.Readers
     /// <summary>
     /// Reader which is designed to handle Palette (.act) files.
     /// Palette files (.act) are the 256 colour data files that determine what colours go where on a character.
-    /// A single game character can have up to 12 act files that can be read by the game engine - these are determined by the .def file.
     /// </summary>
     /// 
     /// <author>
