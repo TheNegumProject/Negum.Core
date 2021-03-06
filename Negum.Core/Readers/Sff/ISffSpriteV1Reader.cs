@@ -47,7 +47,7 @@ namespace Negum.Core.Readers.Sff
                 var nextSubFile = binaryReader.ReadUInt32();
                 var subFileLength = binaryReader.ReadUInt32();
 
-                var subFile = new SpriteSubFile
+                var subFile = new SpriteSubFileSffV1
                 {
                     X = binaryReader.ReadUInt16(),
                     Y = binaryReader.ReadUInt16(),

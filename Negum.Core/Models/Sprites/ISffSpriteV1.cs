@@ -19,14 +19,14 @@ namespace Negum.Core.Models.Sprites
         byte PaletteType { get; }
         string Blank { get; }
         string Comments { get; }
-        IEnumerable<ISpriteSubFile> SpriteSubFiles { get; }
+        IEnumerable<ISpriteSubFileSffV1> SpriteSubFiles { get; }
         IPalette Palette { get; }
 
         /// <summary>
         /// Convenient method for adding new sub-files.
         /// </summary>
-        /// <param name="subFile"></param>
-        void AddSubFile(ISpriteSubFile subFile);
+        /// <param name="subFileSffV1"></param>
+        void AddSubFile(ISpriteSubFileSffV1 subFileSffV1);
     }
 
     /// <summary>
@@ -45,10 +45,10 @@ namespace Negum.Core.Models.Sprites
         public string Blank { get; internal set; }
         public string Comments { get; internal set; }
 
-        public IEnumerable<ISpriteSubFile> SpriteSubFiles { get; } = new List<ISpriteSubFile>();
+        public IEnumerable<ISpriteSubFileSffV1> SpriteSubFiles { get; } = new List<ISpriteSubFileSffV1>();
         public IPalette Palette { get; internal set; }
 
-        public void AddSubFile(ISpriteSubFile subFile) =>
-            ((List<ISpriteSubFile>) this.SpriteSubFiles).Add(subFile);
+        public void AddSubFile(ISpriteSubFileSffV1 subFileSffV1) =>
+            ((List<ISpriteSubFileSffV1>) this.SpriteSubFiles).Add(subFileSffV1);
     }
 }
