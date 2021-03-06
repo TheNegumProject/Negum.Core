@@ -109,7 +109,7 @@ namespace Negum.Core.Containers
         private static void RegisterMultiple(string ns, Type baseType, Func<Type, Type, Type> func)
         {
             baseType.Assembly.GetTypes()
-                .Where(t => t.Namespace.Equals(ns) && t.IsClass && !t.IsAbstract)
+                .Where(t => t.Namespace.StartsWith(ns) && t.IsClass && !t.IsAbstract)
                 .ToList()
                 .ForEach(type =>
                 {

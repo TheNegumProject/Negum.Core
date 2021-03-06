@@ -1,16 +1,14 @@
 namespace Negum.Core.Models.Sprites
 {
     /// <summary>
-    /// Represents general definition of a single sprite file (.sff)
+    /// Represents a SFFv2 sprite definition.
     /// </summary>
     /// 
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface ISprite
+    public interface ISffSpriteV2 : ISprite
     {
-        string Signature { get; }
-        string Version { get; }
     }
 
     /// <summary>
@@ -19,9 +17,7 @@ namespace Negum.Core.Models.Sprites
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public class Sprite : ISprite
+    public class SffSpriteV2 : Sprite, ISffSpriteV2
     {
-        public string Signature { get; internal set; }
-        public string Version { get; internal set; }
     }
 }

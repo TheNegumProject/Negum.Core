@@ -2,6 +2,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Negum.Core.Containers;
+using Negum.Core.Models.Sprites;
 using Negum.Core.Readers;
 using Xunit;
 
@@ -32,7 +33,7 @@ namespace Negum.Core.Tests.Readers
         [InlineData("https://github.com/TheNegumProject/DragonBallMugenEdition2005/blob/main/chars/Goku%20San/Sprite.sff?raw=true")]
         [InlineData("https://github.com/TheNegumProject/DragonBallVsSaintSeiyaMugen/blob/main/chars/Gogeta%20SSJ5/gogetassj4.sff?raw=true")]
         [InlineData("https://github.com/TheNegumProject/DragonBallVsSaintSeiyaMugen/blob/main/chars/Goku%20SSJ2/kakaroto.sff?raw=true")]
-        public async Task Should_Parse_Sprite_File_And_Images(string url)
+        public async Task Should_Parse_Sprite_File_And_Images_SFFv1(string url)
         {
             this.InitializeContainer();
 
@@ -42,15 +43,15 @@ namespace Negum.Core.Tests.Readers
             var sffStream = await memoryStreamReader.ReadAsync(stream);
             
             var spriteReader = NegumContainer.Resolve<ISpriteReader>();
-            var sprite = await spriteReader.ReadAsync(sffStream);
-            
+            var sprite = (ISffSpriteV1) await spriteReader.ReadAsync(sffStream);
+
             Assert.True(sprite.SpriteSubFiles.Any());
             Assert.True(sprite.SpriteSubFiles.Count() == sprite.Images);
-
+            
             var image = sprite.SpriteSubFiles.ElementAt(0).Image;
             
             Assert.True(image != null);
-
+            
             var pcxStream = new MemoryStream(image);
             
             var pcxReader = NegumContainer.Resolve<IPcxReader>();
