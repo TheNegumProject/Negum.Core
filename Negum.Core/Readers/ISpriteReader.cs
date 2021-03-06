@@ -11,6 +11,11 @@ namespace Negum.Core.Readers
     /// The sprites file (.sff) contains every image (sprite) used by a stage, character, screenpack, etc.
     /// Because game runs off indexed images with 256 colour palettes, transparency has to be a single forced colour rather than actual transparency.
     /// If a sprite isn't indexed, it runs off the palette of the computer's operating system, with the default transparency colour being black.
+    ///
+    /// NOTE:
+    /// Currently ONLY supports SFFv1
+    ///
+    /// TODO: Add support for SFFv2
     /// </summary>
     /// 
     /// <author>
