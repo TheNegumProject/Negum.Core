@@ -9,7 +9,7 @@ using Negum.Core.Containers;
 namespace Negum.Core.Readers
 {
     /// <summary>
-    /// Reader which is designed to handle specific configuration file by it's path.
+    /// Reader which is designed to handle specific configuration file by it's path or URL.
     /// </summary>
     /// 
     /// <author>
