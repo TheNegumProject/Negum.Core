@@ -37,9 +37,9 @@ namespace Negum.Core.Tests.Readers
             this.InitializeContainer();
 
             var stream = await this.ReadFromUrl(url);
-            var sffStream = new MemoryStream();
-            stream.CopyTo(sffStream);
-            sffStream.Position = 0;
+            
+            var memoryStreamReader = NegumContainer.Resolve<IMemoryStreamReader>();
+            var sffStream = await memoryStreamReader.ReadAsync(stream);
             
             var spriteReader = NegumContainer.Resolve<ISpriteReader>();
             var sprite = await spriteReader.ReadAsync(sffStream);
