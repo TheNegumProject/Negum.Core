@@ -15,7 +15,7 @@ namespace Negum.Core.Readers
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface IConfigurationReader : IFileReader<IConfiguration>
+    public interface IConfigurationReader : IReader<string, IConfiguration>
     {
     }
 
