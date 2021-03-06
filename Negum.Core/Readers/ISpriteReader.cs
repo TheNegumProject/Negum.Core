@@ -1,4 +1,5 @@
 using System.IO;
+using System.Text;
 using System.Threading.Tasks;
 using Negum.Core.Containers;
 using Negum.Core.Models.Sprites;
@@ -34,15 +35,15 @@ namespace Negum.Core.Readers
 
             var sprite = new Sprite
             {
-                Signature = new string(binaryReader.ReadChars(12)),
-                Version = new string(binaryReader.ReadChars(4)),
+                Signature = this.BytesToString(binaryReader.ReadBytes(12)),
+                Version = this.GetVersion(binaryReader),
                 Groups = binaryReader.ReadUInt32(),
                 Images = binaryReader.ReadUInt32(),
                 PosFirstSubFile = binaryReader.ReadUInt32(),
                 Length = binaryReader.ReadUInt32(),
                 PaletteType = binaryReader.ReadByte(),
-                Blank = new string(binaryReader.ReadChars(3)),
-                Comments = new string(binaryReader.ReadChars(476))
+                Blank = this.BytesToString(binaryReader.ReadBytes(3)),
+                Comments = this.BytesToString(binaryReader.ReadBytes(476))
             };
 
             for (var i = 0; i < sprite.Images; ++i)
@@ -60,7 +61,7 @@ namespace Negum.Core.Readers
                     SamePalette = binaryReader.ReadByte()
                 };
 
-                var comments = new string(binaryReader.ReadChars(14));
+                var comments = this.BytesToString(binaryReader.ReadBytes(14));
 
                 if (subFile.IndexPreviousCopy == 0)
                 {
@@ -83,6 +84,16 @@ namespace Negum.Core.Readers
             }
 
             return sprite;
+        }
+        
+        protected virtual string BytesToString(byte[] bytes) => 
+            Encoding.UTF8.GetString(bytes);
+
+        protected virtual string GetVersion(BinaryReader binaryReader)
+        {
+            var versionBytes = binaryReader.ReadBytes(4);
+            var versionString = $"{versionBytes[3]}.{versionBytes[2]}{versionBytes[1]}{versionBytes[0]}";
+            return versionString;
         }
     }
 }
