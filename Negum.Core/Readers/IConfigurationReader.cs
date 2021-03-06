@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,7 +15,7 @@ namespace Negum.Core.Readers
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface IConfigurationReader : IFileReader<IConfiguration>, IStreamReader<IConfiguration>
+    public interface IConfigurationReader : IFileReader<IConfiguration>
     {
     }
 
@@ -37,41 +36,16 @@ namespace Negum.Core.Readers
 
         protected ICollection<IConfigurationSectionEntry> Entries { get; set; } =
             new List<IConfigurationSectionEntry>();
-        
-        public async Task<IConfiguration> ReadAsync(Stream stream)
-        {
-            var lines = await ReadLinesAsync(stream);
-            return await this.ReadFromLinesAsync(lines);
-        }
 
         public async Task<IConfiguration> ReadAsync(string path)
         {
-            IEnumerable<string> lines;
+            var fileContentReader = NegumContainer.Resolve<IFileContentReader>();
+            var stream = await fileContentReader.ReadAsync(path);
             
-            if (path.StartsWith("http") || path.StartsWith("www"))
-            {
-                lines = await ReadLinesFromUrlAsync(path);
-            }
-            else
-            {
-                lines =  await File.ReadAllLinesAsync(path);
-            }
+            var streamLinesReader = NegumContainer.Resolve<IStreamLinesReader>();
+            var lines = await streamLinesReader.ReadAsync(stream);
             
             return await this.ReadFromLinesAsync(lines);
-        }
-
-        protected virtual async Task<IEnumerable<string>> ReadLinesFromUrlAsync(string url)
-        {
-            var urlReader = NegumContainer.Resolve<IUrlReader>();
-            var stream = await urlReader.ReadAsync(url);
-            return await this.ReadLinesAsync(stream);
-        }
-        
-        protected virtual async Task<IEnumerable<string>> ReadLinesAsync(Stream stream)
-        {
-            var reader = NegumContainer.Resolve<IStreamLinesReader>();
-            var lines = await reader.ReadAsync(stream);
-            return lines;
         }
 
         protected virtual async Task<IConfiguration> ReadFromLinesAsync(IEnumerable<string> lines)
