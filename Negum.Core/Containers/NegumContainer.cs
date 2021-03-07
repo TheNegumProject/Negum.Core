@@ -106,7 +106,7 @@ namespace Negum.Core.Containers
         /// </summary>
         /// <param name="ns">Namespace name</param>
         /// <param name="baseType"></param>
-        private static void RegisterMultiple(string ns, Type baseType, Func<Type, Type, Type> func)
+        public static void RegisterMultiple(string ns, Type baseType, Func<Type, Type, Type> func)
         {
             baseType.Assembly.GetTypes()
                 .Where(t => t.Namespace.StartsWith(ns) && t.IsClass && !t.IsAbstract)
