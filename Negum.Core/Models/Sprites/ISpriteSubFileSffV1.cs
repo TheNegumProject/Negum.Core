@@ -1,13 +1,13 @@
 namespace Negum.Core.Models.Sprites
 {
     /// <summary>
-    /// Represents a definition of a single sub-file in a sprite file.
+    /// Represents a definition of a single sub-file in a sprite file in SFF v1.
     /// </summary>
     /// 
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface ISpriteSubFile
+    public interface ISpriteSubFileSffV1
     {
         ushort X { get; }
         ushort Y { get; }
@@ -24,7 +24,7 @@ namespace Negum.Core.Models.Sprites
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public class SpriteSubFile : ISpriteSubFile
+    public class SpriteSubFileSffV1 : ISpriteSubFileSffV1
     {
         public ushort X { get; internal set; }
         public ushort Y { get; internal set; }
