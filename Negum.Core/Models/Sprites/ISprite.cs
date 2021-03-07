@@ -41,8 +41,8 @@ namespace Negum.Core.Models.Sprites
     /// </author>
     public class Sprite<TSubFile> : ISprite<TSubFile>
     {
-        public string Signature { get; internal set; }
-        public string Version { get; internal set; }
+        public string Signature { get; set; }
+        public string Version { get; set; }
         public IEnumerable<TSubFile> SpriteSubFiles { get; } = new List<TSubFile>();
 
         public void AddSubFile(TSubFile subFile) =>
