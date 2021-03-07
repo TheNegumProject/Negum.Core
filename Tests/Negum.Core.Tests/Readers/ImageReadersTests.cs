@@ -59,5 +59,37 @@ namespace Negum.Core.Tests.Readers
             
             Assert.True(pcxImage.Pixels.Any());
         }
+        
+        [Theory]
+        [InlineData("https://github.com/TheNegumProject/UnpackedMugen/blob/main/stages/kfm.sff?raw=true")]
+        [InlineData("https://github.com/TheNegumProject/UnpackedMugen/blob/main/stages/stage0-720.sff?raw=true")]
+        [InlineData("https://github.com/TheNegumProject/UnpackedMugen/blob/main/stages/stage0.sff?raw=true")]
+        public async Task Should_Parse_Sprite_File_And_Images_SFFv2(string url)
+        {
+            this.InitializeContainer();
+
+            var stream = await this.ReadFromUrl(url);
+
+            var memoryStreamReader = NegumContainer.Resolve<IMemoryStreamReader>();
+            var memoryStream = await memoryStreamReader.ReadAsync(stream);
+            
+            Assert.True(memoryStream.Length > 0);
+            Assert.True(memoryStream.Position == 0);
+
+            var spriteReader = NegumContainer.Resolve<ISpriteReader>();
+            var sprite = await spriteReader.ReadAsync(memoryStream);
+            
+            Assert.True(sprite != null);
+            Assert.True(sprite is ISffSpriteV2);
+
+            var sffSprite = (ISffSpriteV2) sprite;
+            
+            Assert.True(sffSprite.SpriteSubFiles.Any());
+
+            var firstImage = sffSprite.SpriteSubFiles.FirstOrDefault();
+            
+            Assert.True(firstImage != null);
+            Assert.True(firstImage.Image.Any());
+        }
     }
 }
