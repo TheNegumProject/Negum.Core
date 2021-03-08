@@ -7,7 +7,7 @@ namespace Negum.Core.Models.Sprites
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface ISpriteSubFileSffV1
+    public interface ISpriteSubFileSffV1 : ISpriteSubFile
     {
         ushort X { get; }
         ushort Y { get; }
@@ -15,7 +15,6 @@ namespace Negum.Core.Models.Sprites
         ushort ImageNumber { get; }
         ushort IndexPreviousCopy { get; }
         byte SamePalette { get; }
-        byte[] Image { get; }
     }
 
     /// <summary>
@@ -24,7 +23,7 @@ namespace Negum.Core.Models.Sprites
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public class SpriteSubFileSffV1 : ISpriteSubFileSffV1
+    public class SpriteSubFileSffV1 : SpriteSubFile, ISpriteSubFileSffV1
     {
         public ushort X { get; internal set; }
         public ushort Y { get; internal set; }
@@ -32,6 +31,5 @@ namespace Negum.Core.Models.Sprites
         public ushort ImageNumber { get; internal set; }
         public ushort IndexPreviousCopy { get; internal set; }
         public byte SamePalette { get; internal set; }
-        public byte[] Image { get; internal set; }
     }
 }

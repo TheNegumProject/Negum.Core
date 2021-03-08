@@ -9,7 +9,7 @@ namespace Negum.Core.Models.Sprites
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface ISffSpriteV2 : ISprite<ISpriteSubFileSffV2>
+    public interface ISffSpriteV2 : ISprite
     {
         IEnumerable<byte> Header { get; } // TODO: Unknown 20 bytes
         uint SpriteOffset { get; }
@@ -28,7 +28,7 @@ namespace Negum.Core.Models.Sprites
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public class SffSpriteV2 : Sprite<ISpriteSubFileSffV2>, ISffSpriteV2
+    public class SffSpriteV2 : Sprite, ISffSpriteV2
     {
         public IEnumerable<byte> Header { get; internal set; }
         public uint SpriteOffset { get; internal set; }

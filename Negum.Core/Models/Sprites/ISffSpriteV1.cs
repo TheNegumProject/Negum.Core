@@ -9,7 +9,7 @@ namespace Negum.Core.Models.Sprites
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface ISffSpriteV1 : ISprite<ISpriteSubFileSffV1>
+    public interface ISffSpriteV1 : ISprite
     {
         uint Groups { get; }
         uint Images { get; }
@@ -27,7 +27,7 @@ namespace Negum.Core.Models.Sprites
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public class SffSpriteV1 : Sprite<ISpriteSubFileSffV1>, ISffSpriteV1
+    public class SffSpriteV1 : Sprite, ISffSpriteV1
     {
         public uint Groups { get; internal set; }
         public uint Images { get; internal set; }

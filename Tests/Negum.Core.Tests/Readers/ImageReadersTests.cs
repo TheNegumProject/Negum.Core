@@ -52,7 +52,7 @@ namespace Negum.Core.Tests.Readers
             
             Assert.True(image != null);
             
-            var pcxStream = new MemoryStream(image);
+            var pcxStream = new MemoryStream(image.ToArray());
             
             var pcxReader = NegumContainer.Resolve<IPcxReader>();
             var pcxImage = await pcxReader.ReadAsync(pcxStream);

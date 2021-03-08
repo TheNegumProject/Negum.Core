@@ -13,24 +13,7 @@ namespace Negum.Core.Models.Sprites
     {
         string Signature { get; }
         string Version { get; }
-    }
-
-    /// <summary>
-    /// Adds possibility for sprite to expose multiple sub-files in single sprite.
-    /// </summary>
-    /// 
-    /// <author>
-    /// https://github.com/TheNegumProject/Negum.Core
-    /// </author>
-    public interface ISprite<TSubFile> : ISprite
-    {
-        IEnumerable<TSubFile> SpriteSubFiles { get; }
-
-        /// <summary>
-        /// Convenient method for adding new sub-files.
-        /// </summary>
-        /// <param name="subFile"></param>
-        void AddSubFile(TSubFile subFile);
+        IEnumerable<ISpriteSubFile> SpriteSubFiles { get; }
     }
 
     /// <summary>
@@ -39,13 +22,13 @@ namespace Negum.Core.Models.Sprites
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public class Sprite<TSubFile> : ISprite<TSubFile>
+    public class Sprite : ISprite
     {
         public string Signature { get; set; }
         public string Version { get; set; }
-        public IEnumerable<TSubFile> SpriteSubFiles { get; } = new List<TSubFile>();
+        public IEnumerable<ISpriteSubFile> SpriteSubFiles { get; } = new List<ISpriteSubFile>();
 
-        public void AddSubFile(TSubFile subFile) =>
-            ((List<TSubFile>) this.SpriteSubFiles).Add(subFile);
+        public void AddSubFile(ISpriteSubFile subFile) =>
+            ((List<ISpriteSubFile>) this.SpriteSubFiles).Add(subFile);
     }
 }
