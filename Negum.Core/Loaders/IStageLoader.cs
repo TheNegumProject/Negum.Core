@@ -52,12 +52,8 @@ namespace Negum.Core.Loaders
             
             var manager = (IStageManager) NegumContainer.Resolve<IStageManager>().UseConfiguration(configuration);
 
-            var spriteFilePath = Path.Combine(defFile.DirectoryName, manager.BackgroundDef.SpriteFile);
-            var fileContentReader = NegumContainer.Resolve<IFileContentReader>();
-            var fileContentStream = await fileContentReader.ReadAsync(spriteFilePath);
-
-            var spriteReader = NegumContainer.Resolve<ISpriteReader>();
-            var sprite = await spriteReader.ReadAsync(fileContentStream);
+            var spritePathReader = NegumContainer.Resolve<ISpritePathReader>();
+            var sprite = await spritePathReader.ReadAsync(Path.Combine(defFile.DirectoryName, manager.BackgroundDef.SpriteFile));
 
             return InitializeStage(defFile, manager, sprite);
         }

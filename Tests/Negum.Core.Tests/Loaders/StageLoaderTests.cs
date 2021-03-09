@@ -54,5 +54,25 @@ namespace Negum.Core.Tests.Loaders
             
             Assert.True(sounds.Any());
         }
+        
+        [Theory]
+        [InlineData("/Users/kdobrzynski/Downloads/UnpackedMugen-main/font")]
+        public async Task Should_Read_Fonts_From_Directory(string path)
+        {
+            this.InitializeContainer();
+
+            var directory = new DirectoryInfo(path);
+
+            // Prevent CI/CD from crashing
+            if (!directory.Exists)
+            {
+                return;
+            }
+
+            var fontLoader = NegumContainer.Resolve<IFontLoader>();
+            var fonts = await fontLoader.LoadAsync(directory);
+            
+            Assert.True(fonts.Count() == 19);
+        }
     }
 }
