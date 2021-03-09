@@ -1,5 +1,3 @@
-using System.IO;
-
 namespace Negum.Core.Models.Sounds
 {
     /// <summary>
@@ -9,12 +7,8 @@ namespace Negum.Core.Models.Sounds
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface ISound
+    public interface ISound : IFileReadable
     {
-        /// <summary>
-        /// File from which th current Sound was read.
-        /// </summary>
-        FileInfo File { get; }
     }
 
     /// <summary>
@@ -23,8 +17,7 @@ namespace Negum.Core.Models.Sounds
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public class Sound : ISound
+    public class Sound : FileReadable, ISound
     {
-        public FileInfo File { get; internal set; }
     }
 }
