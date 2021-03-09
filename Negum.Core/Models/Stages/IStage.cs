@@ -1,3 +1,4 @@
+using System.IO;
 using Negum.Core.Managers.Types;
 using Negum.Core.Models.Sprites;
 
@@ -12,6 +13,11 @@ namespace Negum.Core.Models.Stages
     /// </author>
     public interface IStage
     {
+        /// <summary>
+        /// File from which th current Stage was read.
+        /// </summary>
+        FileInfo File { get; }
+        
         /// <summary>
         /// Manager used to operate on the current Stage file.
         /// </summary>
@@ -31,6 +37,7 @@ namespace Negum.Core.Models.Stages
     /// </author>
     public class Stage : IStage
     {
+        public FileInfo File { get; internal set; }
         public IStageManager Manager { get; internal set; }
         public ISprite Sprite { get; internal set; }
     }

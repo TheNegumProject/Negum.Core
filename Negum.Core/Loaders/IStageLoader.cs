@@ -59,13 +59,14 @@ namespace Negum.Core.Loaders
             var spriteReader = NegumContainer.Resolve<ISpriteReader>();
             var sprite = await spriteReader.ReadAsync(fileContentStream);
 
-            return InitializeStage(manager, sprite);
+            return InitializeStage(defFile, manager, sprite);
         }
 
-        protected virtual IStage InitializeStage(IStageManager manager, ISprite sprite)
+        protected virtual IStage InitializeStage(FileInfo defFile, IStageManager manager, ISprite sprite)
         {
             var stage = new Stage
             {
+                File = defFile,
                 Manager = manager,
                 Sprite = sprite
             };
