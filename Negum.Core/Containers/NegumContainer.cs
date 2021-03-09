@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Negum.Core.Configurations;
+using Negum.Core.Loaders;
 using Negum.Core.Managers;
 using Negum.Core.Readers;
 
@@ -99,6 +100,10 @@ namespace Negum.Core.Containers
 
                     return type;
                 });
+            
+            // Loaders
+            RegisterMultiple("Negum.Core.Loaders", typeof(ILoader<,>), 
+                (type, baseType) => type.GetInterfaces().FirstOrDefault(i => i.GetGenericArguments().Length == 0 && i.Name.Equals("I" + type.Name)));
         }
 
         /// <summary>
