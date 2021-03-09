@@ -30,7 +30,7 @@ namespace Negum.Core.Tests.Loaders
             }
             
             var stageLoader = NegumContainer.Resolve<IStageLoader>();
-            var stages = await stageLoader.ReadAsync(directory);
+            var stages = await stageLoader.LoadAsync(directory);
             
             Assert.True(stages.Count() == 3);
         }

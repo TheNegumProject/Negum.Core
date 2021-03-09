@@ -17,7 +17,7 @@ namespace Negum.Core.Loaders
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface IStageLoader : IReader<DirectoryInfo, IEnumerable<IStage>>
+    public interface IStageLoader : ILoader<DirectoryInfo, IEnumerable<IStage>>
     {
     }
 
@@ -29,7 +29,7 @@ namespace Negum.Core.Loaders
     /// </author>
     public class StageLoader : IStageLoader
     {
-        public async Task<IEnumerable<IStage>> ReadAsync(DirectoryInfo dir)
+        public async Task<IEnumerable<IStage>> LoadAsync(DirectoryInfo dir)
         {
             var tasks = dir.GetFiles()
                 .Where(file => file.Extension.Equals(".def"))
