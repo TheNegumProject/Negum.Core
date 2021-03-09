@@ -27,22 +27,14 @@ namespace Negum.Core.Loaders
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public class StageLoader : IStageLoader
+    public class StageLoader : AbstractLoader, IStageLoader
     {
         public async Task<IEnumerable<IStage>> LoadAsync(DirectoryInfo dir)
         {
-            var tasks = dir.GetFiles()
-                .Where(file => file.Extension.Equals(".def"))
-                .Select(this.GetStageAsync)
-                .ToArray();
+            var sources = dir.GetFiles()
+                .Where(file => file.Extension.Equals(".def"));
 
-            Task.WaitAll(tasks);
-
-            var stages = tasks
-                .Select(task => task.Result)
-                .ToList();
-
-            return stages;
+            return await this.LoadMultipleAsync(sources, this.GetStageAsync);
         }
 
         protected virtual async Task<IStage> GetStageAsync(FileInfo defFile)

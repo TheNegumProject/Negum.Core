@@ -26,22 +26,14 @@ namespace Negum.Core.Loaders
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public class FontLoader : IFontLoader
+    public class FontLoader : AbstractLoader, IFontLoader
     {
         public async Task<IEnumerable<IFont>> LoadAsync(DirectoryInfo dir)
         {
-            var tasks = dir.GetFiles()
-                .Where(file => file.Extension.Equals(".def") || file.Extension.Equals(".fnt"))
-                .Select(this.GetFontAsync)
-                .ToArray();
-            
-            Task.WaitAll(tasks);
+            var sources = dir.GetFiles()
+                .Where(file => file.Extension.Equals(".def") || file.Extension.Equals(".fnt"));
 
-            var fonts = tasks
-                .Select(task => task.Result)
-                .ToList();
-            
-            return fonts;
+            return await this.LoadMultipleAsync(sources, this.GetFontAsync);
         }
 
         protected virtual async Task<IFont> GetFontAsync(FileInfo file)
@@ -51,12 +43,12 @@ namespace Negum.Core.Loaders
                 File = file,
                 IsRaw = file.Extension.Equals(".fnt")
             };
-            
+
             if (!font.IsRaw)
             {
                 var reader = NegumContainer.Resolve<IConfigurationWithSubsectionReader>();
                 var configuration = await reader.ReadAsync(file.FullName);
-                
+
                 font.Manager = (IFontManager) NegumContainer.Resolve<IFontManager>().UseConfiguration(configuration);
 
                 var path = Path.Combine(file.DirectoryName, font.Manager.Def.File);
