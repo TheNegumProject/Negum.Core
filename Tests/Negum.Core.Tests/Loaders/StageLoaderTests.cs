@@ -34,5 +34,25 @@ namespace Negum.Core.Tests.Loaders
             
             Assert.True(stages.Count() == 3);
         }
+
+        [Theory]
+        [InlineData("/Users/kdobrzynski/Downloads/UnpackedMugen-main/sound")]
+        public async Task Should_Read_Sounds_From_Directory(string path)
+        {
+            this.InitializeContainer();
+
+            var directory = new DirectoryInfo(path);
+
+            // Prevent CI/CD from crashing
+            if (!directory.Exists)
+            {
+                return;
+            }
+
+            var soundLoader = NegumContainer.Resolve<ISoundLoader>();
+            var sounds = await soundLoader.LoadAsync(directory);
+            
+            Assert.True(sounds.Any());
+        }
     }
 }
