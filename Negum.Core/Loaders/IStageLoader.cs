@@ -17,7 +17,7 @@ namespace Negum.Core.Loaders
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface IStageLoader : ILoader<DirectoryInfo, IEnumerable<IStage>>
+    public interface IStageLoader : IDirectoryLoader<IEnumerable<IStage>>
     {
     }
 
@@ -41,7 +41,7 @@ namespace Negum.Core.Loaders
             var stages = tasks
                 .Select(task => task.Result)
                 .ToList();
-            
+
             return stages;
         }
 
@@ -49,11 +49,12 @@ namespace Negum.Core.Loaders
         {
             var reader = NegumContainer.Resolve<IConfigurationWithSubsectionReader>();
             var configuration = await reader.ReadAsync(defFile.FullName);
-            
+
             var manager = (IStageManager) NegumContainer.Resolve<IStageManager>().UseConfiguration(configuration);
 
             var spritePathReader = NegumContainer.Resolve<ISpritePathReader>();
-            var sprite = await spritePathReader.ReadAsync(Path.Combine(defFile.DirectoryName, manager.BackgroundDef.SpriteFile));
+            var sprite =
+                await spritePathReader.ReadAsync(Path.Combine(defFile.DirectoryName, manager.BackgroundDef.SpriteFile));
 
             return InitializeStage(defFile, manager, sprite);
         }
@@ -66,7 +67,7 @@ namespace Negum.Core.Loaders
                 Manager = manager,
                 Sprite = sprite
             };
-        
+
             return stage;
         }
     }

@@ -16,7 +16,7 @@ namespace Negum.Core.Loaders
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface IFontLoader : ILoader<DirectoryInfo, IEnumerable<IFont>>
+    public interface IFontLoader : IDirectoryLoader<IEnumerable<IFont>>
     {
     }
 

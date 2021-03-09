@@ -13,7 +13,7 @@ namespace Negum.Core.Loaders
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface ISoundLoader : ILoader<DirectoryInfo, IEnumerable<ISound>>
+    public interface ISoundLoader : IDirectoryLoader<IEnumerable<ISound>>
     {
     }
 
