@@ -12,7 +12,7 @@ namespace Negum.Core.Models.Sounds
     public interface ISound
     {
         /// <summary>
-        /// Related sound file.
+        /// File from which th current Sound was read.
         /// </summary>
         FileInfo File { get; }
     }
