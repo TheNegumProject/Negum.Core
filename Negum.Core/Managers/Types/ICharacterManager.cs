@@ -19,7 +19,7 @@ namespace Negum.Core.Managers.Types
 
     public interface ICharacterInfo : IManagerSection
     {
-        string Name => this.GetValue<string>("name");
+        string CharacterName => this.GetValue<string>("name");
         string DisplayName => this.GetValue<string>("displayname");
         ITimeEntry VersionDate => this.GetValue<ITimeEntry>("versiondate");
         string Version => this.GetValue<string>("mugenversion");
