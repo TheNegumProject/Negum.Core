@@ -34,10 +34,10 @@ namespace Negum.Core.Tests.Readers
         [InlineData("https://github.com/TheNegumProject/DragonBallVsSaintSeiyaMugen/blob/main/chars/Gogeta%20SSJ5/gogetassj4.sff?raw=true")] // 1.010
         [InlineData("https://github.com/TheNegumProject/DragonBallVsSaintSeiyaMugen/blob/main/chars/Goku%20SSJ2/kakaroto.sff?raw=true")] // 1.010
         [InlineData("https://github.com/TheNegumProject/DragonBallMugenEdition2007/blob/main/stages/Future.sff?raw=true")] // 1.010
-        [InlineData("/Users/kdobrzynski/Downloads/Sprite.sff")] // 1.010
-        [InlineData("/Users/kdobrzynski/Downloads/gogetassj4.sff")] // 1.010
-        [InlineData("/Users/kdobrzynski/Downloads/kakaroto.sff")] // 1.010
-        [InlineData("/Users/kdobrzynski/Downloads/Future.sff")] // 1.010
+        // [InlineData("/Users/kdobrzynski/Downloads/Sprite.sff")] // 1.010
+        // [InlineData("/Users/kdobrzynski/Downloads/gogetassj4.sff")] // 1.010
+        // [InlineData("/Users/kdobrzynski/Downloads/kakaroto.sff")] // 1.010
+        // [InlineData("/Users/kdobrzynski/Downloads/Future.sff")] // 1.010
         public async Task Should_Parse_Sprite_File_And_Images_SFFv1(string url)
         {
             this.InitializeContainer();
@@ -70,18 +70,18 @@ namespace Negum.Core.Tests.Readers
         [InlineData("https://github.com/TheNegumProject/JumpUltimateStarsMugen/blob/main/chars/Seiya/Seiya.sff?raw=true")] // 2.000
         [InlineData("https://github.com/TheNegumProject/UnpackedMugen/blob/main/stages/stage0-720.sff?raw=true")] // 2.000
         [InlineData("https://github.com/TheNegumProject/UnpackedMugen/blob/main/stages/stage0.sff?raw=true")] // 2.000
-        [InlineData("/Users/kdobrzynski/Downloads/kfm720.sff")] // 2.000
-        [InlineData("/Users/kdobrzynski/Downloads/Seiya.sff")] // 2.000
-        [InlineData("/Users/kdobrzynski/Downloads/stage0-720.sff")] // 2.000
-        [InlineData("/Users/kdobrzynski/Downloads/stage0.sff")] // 2.000
+        // [InlineData("/Users/kdobrzynski/Downloads/kfm720.sff")] // 2.000
+        // [InlineData("/Users/kdobrzynski/Downloads/Seiya.sff")] // 2.000
+        // [InlineData("/Users/kdobrzynski/Downloads/stage0-720.sff")] // 2.000
+        // [InlineData("/Users/kdobrzynski/Downloads/stage0.sff")] // 2.000
         [InlineData("https://github.com/TheNegumProject/DragonBallMugenEditionJusUltimate/blob/main/chars/Goku_JUS/Goku_JUS.sff?raw=true")] // 2.010
         [InlineData("https://github.com/TheNegumProject/DragonBallMugenEditionJusUltimate/blob/main/chars/Vegeta_JUS/Vegeta_JUS.sff?raw=true")] // 2.010
         [InlineData("https://github.com/TheNegumProject/DragonBallMugenEditionJusUltimate/blob/main/stages/Super_Chikara_End.sff?raw=true")] // 2.010
         [InlineData("https://github.com/TheNegumProject/DragonBallMugenEditionJusUltimate/blob/main/stages/TimeChamber.sff?raw=true")] // 2.010
-        [InlineData("/Users/kdobrzynski/Downloads/Goku_JUS.sff")] // 2.010
-        [InlineData("/Users/kdobrzynski/Downloads/Vegeta_JUS.sff")] // 2.010
-        [InlineData("/Users/kdobrzynski/Downloads/Super_Chikara_End.sff")] // 2.010
-        [InlineData("/Users/kdobrzynski/Downloads/TimeChamber.sff")] // 2.010
+        // [InlineData("/Users/kdobrzynski/Downloads/Goku_JUS.sff")] // 2.010
+        // [InlineData("/Users/kdobrzynski/Downloads/Vegeta_JUS.sff")] // 2.010
+        // [InlineData("/Users/kdobrzynski/Downloads/Super_Chikara_End.sff")] // 2.010
+        // [InlineData("/Users/kdobrzynski/Downloads/TimeChamber.sff")] // 2.010
         public async Task Should_Parse_Sprite_File_And_Images_SFFv2(string url)
         {
             this.InitializeContainer();
