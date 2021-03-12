@@ -114,7 +114,7 @@ namespace Negum.Core.Managers.Types
     {
         IVectorEntry Position => this.GetValue<IVectorEntry>("pos");
         ITextEntry Counter => this.GetValue<ITextEntry>("counter");
-        IImageEntry Background => this.GetValue<IImageEntry>(".bg");
+        IImageEntry Background => this.GetValue<IImageEntry>("bg");
 
         /// <summary>
         /// Ticks for each count.
