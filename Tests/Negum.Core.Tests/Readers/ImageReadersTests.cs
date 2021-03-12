@@ -66,9 +66,22 @@ namespace Negum.Core.Tests.Readers
         }
         
         [Theory]
-        [InlineData("https://github.com/TheNegumProject/UnpackedMugen/blob/main/stages/kfm.sff?raw=true")]
-        [InlineData("https://github.com/TheNegumProject/UnpackedMugen/blob/main/stages/stage0-720.sff?raw=true")]
-        [InlineData("https://github.com/TheNegumProject/UnpackedMugen/blob/main/stages/stage0.sff?raw=true")]
+        [InlineData("https://github.com/TheNegumProject/UnpackedMugen/blob/main/chars/kfm720/kfm720.sff?raw=true")] // 2.000
+        [InlineData("https://github.com/TheNegumProject/JumpUltimateStarsMugen/blob/main/chars/Seiya/Seiya.sff?raw=true")] // 2.000
+        [InlineData("https://github.com/TheNegumProject/UnpackedMugen/blob/main/stages/stage0-720.sff?raw=true")] // 2.000
+        [InlineData("https://github.com/TheNegumProject/UnpackedMugen/blob/main/stages/stage0.sff?raw=true")] // 2.000
+        [InlineData("/Users/kdobrzynski/Downloads/kfm720.sff")] // 2.000
+        [InlineData("/Users/kdobrzynski/Downloads/Seiya.sff")] // 2.000
+        [InlineData("/Users/kdobrzynski/Downloads/stage0-720.sff")] // 2.000
+        [InlineData("/Users/kdobrzynski/Downloads/stage0.sff")] // 2.000
+        [InlineData("https://github.com/TheNegumProject/DragonBallMugenEditionJusUltimate/blob/main/chars/Goku_JUS/Goku_JUS.sff?raw=true")] // 2.010
+        [InlineData("https://github.com/TheNegumProject/DragonBallMugenEditionJusUltimate/blob/main/chars/Vegeta_JUS/Vegeta_JUS.sff?raw=true")] // 2.010
+        [InlineData("https://github.com/TheNegumProject/DragonBallMugenEditionJusUltimate/blob/main/stages/Super_Chikara_End.sff?raw=true")] // 2.010
+        [InlineData("https://github.com/TheNegumProject/DragonBallMugenEditionJusUltimate/blob/main/stages/TimeChamber.sff?raw=true")] // 2.010
+        [InlineData("/Users/kdobrzynski/Downloads/Goku_JUS.sff")] // 2.010
+        [InlineData("/Users/kdobrzynski/Downloads/Vegeta_JUS.sff")] // 2.010
+        [InlineData("/Users/kdobrzynski/Downloads/Super_Chikara_End.sff")] // 2.010
+        [InlineData("/Users/kdobrzynski/Downloads/TimeChamber.sff")] // 2.010
         public async Task Should_Parse_Sprite_File_And_Images_SFFv2(string url)
         {
             this.InitializeContainer();
