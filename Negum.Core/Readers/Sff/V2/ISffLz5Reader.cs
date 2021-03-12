@@ -29,37 +29,38 @@ namespace Negum.Core.Readers.Sff.V2
             var ret = new List<byte>();
             var stream = new MemoryStream(input.ToArray());
             var binaryReader = new BinaryReader(stream);
+            var lz5ControlPacket = new Lz5ControlPacket();
+            var lz5RlePacket = new Lz5RlePacket();
+            var lz5LzPacket = new Lz5LzPacket();
             var tmp = new List<byte>();
 
             while (stream.Position != stream.Length)
             {
-                this.ReadLz5ControlPacket(binaryReader, out var flags);
+                lz5ControlPacket.fromStream(binaryReader);
 
-                for (var flag = 0; flag < flags.Length; ++flag)
+                for (var flag = 0; flag < lz5ControlPacket.Flags.Length; ++flag)
                 {
                     if (stream.Position == stream.Length)
                     {
                         break;
                     }
 
-                    if (flags[flag] == 0)
+                    if (lz5ControlPacket.Flags[flag] == 0)
                     {
-                        this.ReadLz5RlePacket(binaryReader, out var color, out var count);
+                        lz5RlePacket.fromStream(binaryReader);
 
-                        for (var i = 0; i < count; ++i)
+                        for (var i = 0; i < lz5RlePacket.Count; ++i)
                         {
-                            ret.Add(color);
+                            ret.Add(lz5RlePacket.Color);
                         }
                     }
-                    else if (flags[flag] == 1)
+                    else if (lz5ControlPacket.Flags[flag] == 1)
                     {
-                        this.ReadLz5LzPacket(binaryReader,
-                            out var length, out var offset,
-                            out var recycled, out var recycledBitsFilled);
+                        lz5LzPacket.fromStream(binaryReader);
 
-                        for (var i = 0; i < length; ++i)
+                        for (var i = 0; i < lz5LzPacket.Length; ++i)
                         {
-                            var off = ret.Count - offset + i;
+                            var off = ret.Count - lz5LzPacket.Offset + i;
 
                             if (off < ret.Count)
                             {
@@ -71,10 +72,10 @@ namespace Negum.Core.Readers.Sff.V2
                             }
                         }
 
-                        if (tmp.Count < length && tmp.Count != 0)
+                        if (tmp.Count < lz5LzPacket.Length && tmp.Count != 0)
                         {
                             var count = tmp.Count;
-                            var len = (length - count) / count;
+                            var len = (lz5LzPacket.Length - count) / count;
                             var tmp2 = tmp.GetRange(0, tmp.Count);
 
                             for (var i = 0; i < len; ++i)
@@ -82,7 +83,7 @@ namespace Negum.Core.Readers.Sff.V2
                                 tmp.AddRange(tmp2);
                             }
 
-                            tmp.AddRange(tmp2.GetRange(0, (length - count) % count));
+                            tmp.AddRange(tmp2.GetRange(0, (lz5LzPacket.Length - count) % count));
                         }
 
                         ret.AddRange(tmp);
@@ -95,93 +96,112 @@ namespace Negum.Core.Readers.Sff.V2
 
             return await Task.FromResult(ret.ToArray());
         }
+    }
 
-        protected virtual void ReadLz5ControlPacket(BinaryReader binaryReader, out byte[] flags)
+    public interface ILz5StreamReader
+    {
+        void fromStream(BinaryReader br);
+    }
+    
+    public class Lz5ControlPacket : ILz5StreamReader
+    {
+        public byte[] Flags { get; private set; }
+        
+        public void fromStream(BinaryReader br)
         {
-            flags = new byte[8];
+            Flags = new byte[8];
 
-            var firstByte = binaryReader.ReadByte();
+            var firstByte = br.ReadByte();
 
-            flags[7] = (byte) ((firstByte & 128) / 128);
-            flags[6] = (byte) ((firstByte & 64) / 64);
-            flags[5] = (byte) ((firstByte & 32) / 32);
-            flags[4] = (byte) ((firstByte & 16) / 16);
-            flags[3] = (byte) ((firstByte & 8) / 8);
-            flags[2] = (byte) ((firstByte & 4) / 4);
-            flags[1] = (byte) ((firstByte & 2) / 2);
-            flags[0] = (byte) (firstByte & 1);
+            Flags[7] = (byte) ((firstByte & 128) / 128);
+            Flags[6] = (byte) ((firstByte & 64) / 64);
+            Flags[5] = (byte) ((firstByte & 32) / 32);
+            Flags[4] = (byte) ((firstByte & 16) / 16);
+            Flags[3] = (byte) ((firstByte & 8) / 8);
+            Flags[2] = (byte) ((firstByte & 4) / 4);
+            Flags[1] = (byte) ((firstByte & 2) / 2);
+            Flags[0] = (byte) (firstByte & 1);
         }
+    }
 
-        protected virtual void ReadLz5RlePacket(BinaryReader binaryReader, out byte color, out int count)
+    public class Lz5RlePacket : ILz5StreamReader
+    {
+        public byte Color { get; private set; }
+        public int Count { get; private set; }
+        
+        public void fromStream(BinaryReader br)
         {
-            var b = binaryReader.ReadByte();
-            count = (b & 224) >> 5;
+            var b = br.ReadByte();
+            Count = (b & 224) >> 5;
 
-            if (count == 0)
+            if (Count == 0)
             {
-                var b2 = binaryReader.ReadByte();
-                count = b2 + 8;
+                var b2 = br.ReadByte();
+                Count = b2 + 8;
             }
 
-            color = (byte) (b & 31);
+            Color = (byte) (b & 31);
         }
+    }
 
-        protected virtual void ReadLz5LzPacket(BinaryReader binaryReader,
-            out int length, out int offset,
-            out byte recycled, out byte recycledBitsFilled)
+    public class Lz5LzPacket : ILz5StreamReader
+    {
+        public int Length { get; private set; }
+        public int Offset { get; private set; }
+        public byte Recycled { get; private set; }
+        public byte RecycledBitsFilled { get; private set; }
+        
+        public void fromStream(BinaryReader br)
         {
-            var b = binaryReader.ReadByte();
+            var b = br.ReadByte();
             byte b2, b3, tmp;
 
-            length = b & 63;
-            recycled = 0;
-            recycledBitsFilled = 0;
-            offset = 0;
+            Length = b & 63;
 
-            if (length == 0)
+            if (Length == 0)
             {
-                b2 = binaryReader.ReadByte();
-                b3 = binaryReader.ReadByte();
-                offset = (b & 192) * 4 + b2 + 1;
-                length = b3 + 3;
+                b2 = br.ReadByte();
+                b3 = br.ReadByte();
+                Offset = (b & 192) * 4 + b2 + 1;
+                Length = b3 + 3;
             }
             else
             {
-                length++;
+                Length++;
                 tmp = (byte) (b & 192);
 
-                if (recycledBitsFilled == 2)
+                if (RecycledBitsFilled == 2)
                 {
                     tmp >>= 2;
                 }
 
-                if (recycledBitsFilled == 4)
+                if (RecycledBitsFilled == 4)
                 {
                     tmp >>= 4;
                 }
 
-                if (recycledBitsFilled == 6)
+                if (RecycledBitsFilled == 6)
                 {
                     tmp >>= 6;
                 }
 
-                recycled += tmp;
-                recycledBitsFilled += 2;
+                Recycled += tmp;
+                RecycledBitsFilled += 2;
 
-                switch (recycledBitsFilled)
+                switch (RecycledBitsFilled)
                 {
                     case < 8:
-                        b2 = binaryReader.ReadByte();
-                        offset = b2;
+                        b2 = br.ReadByte();
+                        Offset = b2;
                         break;
                     case 8:
-                        offset = recycled;
-                        recycled = 0;
-                        recycledBitsFilled = 0;
+                        Offset = Recycled;
+                        Recycled = 0;
+                        RecycledBitsFilled = 0;
                         break;
                 }
 
-                offset += 1;
+                Offset += 1;
             }
         }
     }
