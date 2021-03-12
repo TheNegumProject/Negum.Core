@@ -30,9 +30,14 @@ namespace Negum.Core.Tests.Readers
         }
 
         [Theory]
-        [InlineData("https://github.com/TheNegumProject/DragonBallMugenEdition2005/blob/main/chars/Goku%20San/Sprite.sff?raw=true")]
-        [InlineData("https://github.com/TheNegumProject/DragonBallVsSaintSeiyaMugen/blob/main/chars/Gogeta%20SSJ5/gogetassj4.sff?raw=true")]
-        [InlineData("https://github.com/TheNegumProject/DragonBallVsSaintSeiyaMugen/blob/main/chars/Goku%20SSJ2/kakaroto.sff?raw=true")]
+        [InlineData("https://github.com/TheNegumProject/DragonBallMugenEdition2005/blob/main/chars/Goku%20San/Sprite.sff?raw=true")] // 1.010
+        [InlineData("https://github.com/TheNegumProject/DragonBallVsSaintSeiyaMugen/blob/main/chars/Gogeta%20SSJ5/gogetassj4.sff?raw=true")] // 1.010
+        [InlineData("https://github.com/TheNegumProject/DragonBallVsSaintSeiyaMugen/blob/main/chars/Goku%20SSJ2/kakaroto.sff?raw=true")] // 1.010
+        [InlineData("https://github.com/TheNegumProject/DragonBallMugenEdition2007/blob/main/stages/Future.sff?raw=true")] // 1.010
+        [InlineData("/Users/kdobrzynski/Downloads/Sprite.sff")] // 1.010
+        [InlineData("/Users/kdobrzynski/Downloads/gogetassj4.sff")] // 1.010
+        [InlineData("/Users/kdobrzynski/Downloads/kakaroto.sff")] // 1.010
+        [InlineData("/Users/kdobrzynski/Downloads/Future.sff")] // 1.010
         public async Task Should_Parse_Sprite_File_And_Images_SFFv1(string url)
         {
             this.InitializeContainer();
