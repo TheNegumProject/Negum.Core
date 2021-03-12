@@ -22,6 +22,8 @@ namespace Negum.Core.Readers
     /// </author>
     public class AnimationReader : ConfigurationReader, IAnimationReader
     {
+        public const string SectionName = "Begin Action";
+
         protected override void InitializeConfigurationSection(IConfiguration configuration,
             IConfigurationSection section)
         {
@@ -36,7 +38,7 @@ namespace Negum.Core.Readers
         protected virtual void ParseAnimationSectionData(string sectionName, AnimationSection animationSection)
         {
             // Technically anything else should be understand as an error.
-            animationSection.Name = "Begin Action";
+            animationSection.Name = SectionName;
             
             var numberString = sectionName.Split(" ");
             var number = int.Parse(numberString[^1]);

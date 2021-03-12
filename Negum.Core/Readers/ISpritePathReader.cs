@@ -27,9 +27,12 @@ namespace Negum.Core.Readers
         {
             var fileContentReader = NegumContainer.Resolve<IFileContentReader>();
             var fileContentStream = await fileContentReader.ReadAsync(path);
+
+            var memoryStreamReader = NegumContainer.Resolve<IMemoryStreamReader>();
+            var memoryStream = await memoryStreamReader.ReadAsync(fileContentStream);
             
             var spriteReader = NegumContainer.Resolve<ISpriteReader>();
-            var sprite = await spriteReader.ReadAsync(fileContentStream);
+            var sprite = await spriteReader.ReadAsync(memoryStream);
 
             return sprite;
         }

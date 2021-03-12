@@ -50,7 +50,7 @@ namespace Negum.Core.Managers
     /// </author>
     public abstract class ManagerSection : IManagerSection
     {
-        private IConfigurationSection Section { get; }
+        protected IConfigurationSection Section { get; }
 
         public string Name { get; }
 

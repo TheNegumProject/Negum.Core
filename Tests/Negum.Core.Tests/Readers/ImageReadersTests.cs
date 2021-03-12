@@ -37,18 +37,18 @@ namespace Negum.Core.Tests.Readers
         {
             this.InitializeContainer();
 
-            var stream = await this.ReadFromUrl(url);
+            var spritePathReader = NegumContainer.Resolve<ISpritePathReader>();
+            var sprite = await spritePathReader.ReadAsync(url);
             
-            var memoryStreamReader = NegumContainer.Resolve<IMemoryStreamReader>();
-            var sffStream = await memoryStreamReader.ReadAsync(stream);
-            
-            var spriteReader = NegumContainer.Resolve<ISpriteReader>();
-            var sprite = (ISffSpriteV1) await spriteReader.ReadAsync(sffStream);
+            Assert.True(sprite != null);
+            Assert.True(sprite is ISffSpriteV1);
 
-            Assert.True(sprite.SpriteSubFiles.Any());
-            Assert.True(sprite.SpriteSubFiles.Count() == sprite.Images);
+            var sffSprite = (ISffSpriteV1) sprite;
+
+            Assert.True(sffSprite.SpriteSubFiles.Any());
+            Assert.True(sffSprite.SpriteSubFiles.Count() == sffSprite.Images);
             
-            var image = sprite.SpriteSubFiles.ElementAt(0).Image;
+            var image = sffSprite.SpriteSubFiles.ElementAt(0).Image;
             
             Assert.True(image != null);
             
@@ -67,18 +67,10 @@ namespace Negum.Core.Tests.Readers
         public async Task Should_Parse_Sprite_File_And_Images_SFFv2(string url)
         {
             this.InitializeContainer();
-
-            var stream = await this.ReadFromUrl(url);
-
-            var memoryStreamReader = NegumContainer.Resolve<IMemoryStreamReader>();
-            var memoryStream = await memoryStreamReader.ReadAsync(stream);
             
-            Assert.True(memoryStream.Length > 0);
-            Assert.True(memoryStream.Position == 0);
+            var spritePathReader = NegumContainer.Resolve<ISpritePathReader>();
+            var sprite = await spritePathReader.ReadAsync(url);
 
-            var spriteReader = NegumContainer.Resolve<ISpriteReader>();
-            var sprite = await spriteReader.ReadAsync(memoryStream);
-            
             Assert.True(sprite != null);
             Assert.True(sprite is ISffSpriteV2);
 
