@@ -4,10 +4,8 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Negum.Core.Containers;
-using Negum.Core.Managers;
 using Negum.Core.Managers.Types;
 using Negum.Core.Models.Characters;
-using Negum.Core.Models.Sounds;
 using Negum.Core.Models.Sprites;
 using Negum.Core.Readers;
 
@@ -65,10 +63,9 @@ namespace Negum.Core.Loaders
             var animationConfiguration = await NegumContainer.Resolve<IAnimationReader>().ReadAsync(animationPath);
             character.AnimationManager = (IAnimationManager) NegumContainer.Resolve<IAnimationManager>().UseConfiguration(animationConfiguration);
 
-            character.Sound = new Sound
-            {
-                File = new FileInfo(Path.Combine(characterDefFile.DirectoryName, character.CharacterManager.Files.SoundFile))
-            };
+            var soundPath = Path.Combine(characterDefFile.DirectoryName, character.CharacterManager.Files.SoundFile);
+            var soundReader = NegumContainer.Resolve<ISoundPathReader>();
+            character.Sound = await soundReader.ReadAsync(soundPath);
 
             if (character.CharacterManager.Files.AiHintsDataFile != null)
             {
@@ -144,17 +141,6 @@ namespace Negum.Core.Loaders
             var sprite = await NegumContainer.Resolve<ISpritePathReader>().ReadAsync(spritePath);
 
             return (manager, sprite);
-        }
-
-        protected virtual async Task<TManager> ReadManagerAsync<TManager>(FileInfo file, string path)
-            where TManager : IManager
-        {
-            var fullPath = Path.Combine(file.DirectoryName, path);
-            
-            var configReader = NegumContainer.Resolve<IConfigurationWithSubsectionReader>();
-            var configuration = await configReader.ReadAsync(fullPath);
-        
-            return (TManager) NegumContainer.Resolve<TManager>().UseConfiguration(configuration);
         }
     }
 }

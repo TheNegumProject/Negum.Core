@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
+using Negum.Core.Containers;
 using Negum.Core.Models.Sounds;
+using Negum.Core.Readers;
 
 namespace Negum.Core.Loaders
 {
@@ -29,10 +31,8 @@ namespace Negum.Core.Loaders
 
         protected virtual async Task<ISound> GetSoundAsync(FileInfo file)
         {
-            return await Task.FromResult(new Sound
-            {
-                File = file
-            });
+            var reader = NegumContainer.Resolve<ISoundPathReader>();
+            return await reader.ReadAsync(file.FullName);
         }
     }
 }

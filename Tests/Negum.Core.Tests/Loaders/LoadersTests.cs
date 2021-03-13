@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Negum.Core.Containers;
 using Negum.Core.Loaders;
 using Negum.Core.Models.Characters;
+using Negum.Core.Models.Data;
 using Negum.Core.Models.Fonts;
 using Negum.Core.Models.Sounds;
 using Negum.Core.Models.Stages;
@@ -24,7 +25,7 @@ namespace Negum.Core.Tests.Loaders
         [InlineData("/Users/kdobrzynski/Downloads/UnpackedMugen-main/stages")]
         public async Task Should_Read_Stages_From_Directory(string path)
         {
-            var stages = await this.InitializeMultipleTest<IStage, IStageLoader>(path);
+            var stages = await this.InitializeTest<IEnumerable<IStage>, IStageLoader>(path);
 
             if (stages == null)
             {
@@ -38,7 +39,7 @@ namespace Negum.Core.Tests.Loaders
         [InlineData("/Users/kdobrzynski/Downloads/UnpackedMugen-main/sound")]
         public async Task Should_Read_Sounds_From_Directory(string path)
         {
-            var sounds = await this.InitializeMultipleTest<ISound, ISoundLoader>(path);
+            var sounds = await this.InitializeTest<IEnumerable<ISound>, ISoundLoader>(path);
             
             if (sounds == null)
             {
@@ -52,7 +53,7 @@ namespace Negum.Core.Tests.Loaders
         [InlineData("/Users/kdobrzynski/Downloads/UnpackedMugen-main/font")]
         public async Task Should_Read_Fonts_From_Directory(string path)
         {
-            var fonts = await this.InitializeMultipleTest<IFont, IFontLoader>(path);
+            var fonts = await this.InitializeTest<IEnumerable<IFont>, IFontLoader>(path);
             
             if (fonts == null)
             {
@@ -66,7 +67,7 @@ namespace Negum.Core.Tests.Loaders
         [InlineData("/Users/kdobrzynski/Downloads/UnpackedMugen-main/chars")]
         public async Task Should_Read_Characters_From_Directory(string path)
         {
-            var characters = await this.InitializeMultipleTest<ICharacter, ICharacterLoader>(path);
+            var characters = await this.InitializeTest<IEnumerable<ICharacter>, ICharacterLoader>(path);
             
             if (characters == null)
             {
@@ -75,9 +76,23 @@ namespace Negum.Core.Tests.Loaders
             
             Assert.True(characters.Any());
         }
-
-        private async Task<IEnumerable<TOutput>> InitializeMultipleTest<TOutput, TLoader>(string path)
-            where TLoader : IDirectoryLoader<IEnumerable<TOutput>>
+        
+        [Theory]
+        [InlineData("/Users/kdobrzynski/Downloads/UnpackedMugen-main/data")]
+        public async Task Should_Read_Data_From_Directory(string path)
+        {
+            var data = await this.InitializeTest<IData, IDataLoader>(path);
+            
+            if (data == null)
+            {
+                return;
+            }
+            
+            Assert.True(data != null);
+        }
+        
+        private async Task<TOutput> InitializeTest<TOutput, TLoader>(string path)
+            where TLoader : IDirectoryLoader<TOutput>
         {
             this.InitializeContainer();
 
