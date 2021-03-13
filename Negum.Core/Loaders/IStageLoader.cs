@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Negum.Core.Containers;
+using Negum.Core.Engines;
 using Negum.Core.Managers.Types;
 using Negum.Core.Models.Sprites;
 using Negum.Core.Models.Stages;
@@ -17,7 +18,7 @@ namespace Negum.Core.Loaders
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface IStageLoader : IDirectoryLoader<IEnumerable<IStage>>
+    public interface IStageLoader : IEngineModuleLoader<IEnumerable<IStage>>
     {
     }
 
@@ -29,9 +30,9 @@ namespace Negum.Core.Loaders
     /// </author>
     public class StageLoader : AbstractLoader, IStageLoader
     {
-        public async Task<IEnumerable<IStage>> LoadAsync(DirectoryInfo dir)
+        public async Task<IEnumerable<IStage>> LoadAsync(IEngine engine)
         {
-            var sources = dir.GetFiles()
+            var sources = this.GetFiles(engine, "stages")
                 .Where(file => file.Extension.Equals(".def"));
 
             return await this.LoadMultipleAsync(sources, this.GetStageAsync);

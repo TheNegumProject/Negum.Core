@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Negum.Core.Containers;
+using Negum.Core.Engines;
 using Negum.Core.Managers;
 using Negum.Core.Readers;
 
@@ -18,6 +19,25 @@ namespace Negum.Core.Loaders
     /// </author>
     public abstract class AbstractLoader
     {
+        protected virtual IEnumerable<FileInfo> GetFiles(IEngine engine, string subdirectoryName) =>
+            this.GetDirectory(engine, subdirectoryName).GetFiles();
+
+        protected virtual DirectoryInfo GetDirectory(IEngine engine, string subdirectoryName)
+        {
+            var rootDir = new DirectoryInfo(engine.Path);
+            
+            if (string.IsNullOrWhiteSpace(subdirectoryName))
+            {
+                return rootDir;
+            }
+            
+            var subDir = rootDir
+                .GetDirectories()
+                .FirstOrDefault(dir => dir.Name.ToLower().Equals(subdirectoryName.ToLower()));
+            
+            return subDir;
+        }
+
         protected virtual async Task<IEnumerable<TOutput>> LoadMultipleAsync<TOutput, TEntry>(
             IEnumerable<TEntry> sources,
             Func<TEntry, Task<TOutput>> parseFunction)
@@ -34,7 +54,7 @@ namespace Negum.Core.Loaders
 
             return entities;
         }
-        
+
         protected virtual async Task<TManager> ReadManagerAsync<TManager>(FileInfo file, string path)
             where TManager : IManager
         {
@@ -43,7 +63,7 @@ namespace Negum.Core.Loaders
         }
 
         protected virtual async Task<TManager> ReadManagerAsync<TManager>(FileInfo file)
-            where TManager : IManager => 
+            where TManager : IManager =>
             await this.ReadManagerAsync<TManager>(file.FullName);
 
         protected virtual async Task<TManager> ReadManagerAsync<TManager>(string path)
@@ -51,7 +71,7 @@ namespace Negum.Core.Loaders
         {
             var configReader = NegumContainer.Resolve<IConfigurationWithSubsectionReader>();
             var configuration = await configReader.ReadAsync(path);
-        
+
             return (TManager) NegumContainer.Resolve<TManager>().UseConfiguration(configuration);
         }
     }

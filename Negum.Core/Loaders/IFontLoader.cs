@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Negum.Core.Containers;
+using Negum.Core.Engines;
 using Negum.Core.Managers.Types;
 using Negum.Core.Models.Fonts;
 using Negum.Core.Readers;
@@ -16,7 +17,7 @@ namespace Negum.Core.Loaders
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface IFontLoader : IDirectoryLoader<IEnumerable<IFont>>
+    public interface IFontLoader : IEngineModuleLoader<IEnumerable<IFont>>
     {
     }
 
@@ -28,9 +29,9 @@ namespace Negum.Core.Loaders
     /// </author>
     public class FontLoader : AbstractLoader, IFontLoader
     {
-        public async Task<IEnumerable<IFont>> LoadAsync(DirectoryInfo dir)
+        public async Task<IEnumerable<IFont>> LoadAsync(IEngine engine)
         {
-            var sources = dir.GetFiles()
+            var sources = this.GetFiles(engine, "font")
                 .Where(file => file.Extension.Equals(".def") || file.Extension.Equals(".fnt"));
 
             return await this.LoadMultipleAsync(sources, this.GetFontAsync);

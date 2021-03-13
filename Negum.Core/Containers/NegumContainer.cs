@@ -2,8 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Negum.Core.Configurations;
+using Negum.Core.Engines;
 using Negum.Core.Loaders;
 using Negum.Core.Managers;
+using Negum.Core.Managers.Entries;
+using Negum.Core.Managers.Types;
 using Negum.Core.Readers;
 
 namespace Negum.Core.Containers
@@ -78,19 +81,18 @@ namespace Negum.Core.Containers
         public static void RegisterKnownTypes()
         {
             // Configurations
-            RegisterMultiple("Negum.Core.Configurations", typeof(IConfiguration),
+            RegisterMultiple(typeof(IConfiguration).Namespace, typeof(IConfiguration),
                 (type, baseType) => type);
-            
+
             // Readers
-            RegisterMultiple("Negum.Core.Readers", typeof(IReader<,>), 
-                (type, baseType) => type.GetInterfaces().FirstOrDefault(i => i.GetGenericArguments().Length == 0 && i.Name.Equals("I" + type.Name)));
+            RegisterInterfaceClassPairs(typeof(IReader<,>).Namespace, typeof(IReader<,>));
 
             // Negum Manager Section Entries
-            RegisterMultiple("Negum.Core.Managers.Entries", typeof(IManagerSectionEntry<>), 
+            RegisterMultiple(typeof(StringEntry).Namespace, typeof(IManagerSectionEntry<>),
                 (type, baseType) => type.GetInterfaces().FirstOrDefault(i => i.GetGenericTypeDefinition() == baseType));
 
             // Managers Entries + Sections
-            RegisterMultiple("Negum.Core.Managers.Types", typeof(IManager),
+            RegisterMultiple(typeof(IConfigurationManager).Namespace, typeof(IManager),
                 (type, baseType) =>
                 {
                     type.GetInterfaces()
@@ -100,31 +102,46 @@ namespace Negum.Core.Containers
 
                     return type;
                 });
-            
+
             // Loaders
-            RegisterMultiple("Negum.Core.Loaders", typeof(ILoader<,>), 
-                (type, baseType) => type.GetInterfaces().FirstOrDefault(i => i.GetGenericArguments().Length == 0 && i.Name.Equals("I" + type.Name)));
+            RegisterInterfaceClassPairs(typeof(ILoader<,>).Namespace, typeof(ILoader<,>));
+            
+            // Engine
+            RegisterInterfaceClassPairs(typeof(IEngineProvider).Namespace, typeof(IEngineProvider));
+        }
+
+        /// <summary>
+        /// Registers multiple types from given namespace using a principle that class name must be equal with interface name without "I" prefix.
+        /// </summary>
+        /// <param name="namespace"></param>
+        /// <param name="rootType"></param>
+        public static void RegisterInterfaceClassPairs(string @namespace, Type rootType)
+        {
+            RegisterMultiple(@namespace, rootType,
+                (type, baseType) =>
+                    type.GetInterfaces().FirstOrDefault(i =>
+                        i.GetGenericArguments().Length == 0 && i.Name.Equals("I" + type.Name)));
         }
 
         /// <summary>
         /// Registers multiple types from given namespace.
         /// </summary>
-        /// <param name="ns">Namespace name</param>
+        /// <param name="namespace">Namespace name</param>
         /// <param name="baseType"></param>
-        public static void RegisterMultiple(string ns, Type baseType, Func<Type, Type, Type> func)
+        public static void RegisterMultiple(string @namespace, Type baseType, Func<Type, Type, Type> func)
         {
             baseType.Assembly.GetTypes()
-                .Where(t => t.Namespace.StartsWith(ns) && t.IsClass && !t.IsAbstract)
+                .Where(t => t.Namespace.StartsWith(@namespace) && t.IsClass && !t.IsAbstract)
                 .ToList()
                 .ForEach(type =>
                 {
                     var inType = func?.Invoke(type, baseType);
-        
+
                     if (inType == null)
                     {
                         return;
                     }
-        
+
                     Register(inType, type);
                 });
         }

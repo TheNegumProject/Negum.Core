@@ -1,6 +1,7 @@
 using System.IO;
 using System.Threading.Tasks;
 using Negum.Core.Containers;
+using Negum.Core.Engines;
 using Negum.Core.Managers.Types;
 using Negum.Core.Models.Data;
 using Negum.Core.Readers;
@@ -14,7 +15,7 @@ namespace Negum.Core.Loaders
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface IDataLoader : IDirectoryLoader<IData>
+    public interface IDataLoader : IEngineModuleLoader<IData>
     {
     }
 
@@ -26,10 +27,11 @@ namespace Negum.Core.Loaders
     /// </author>
     public class DataLoader : AbstractLoader, IDataLoader
     {
-        public async Task<IData> LoadAsync(DirectoryInfo dir)
+        public async Task<IData> LoadAsync(IEngine engine)
         {
             const string configFileName = "mugen.cfg";
 
+            var dir = this.GetDirectory(engine, "data");
             var data = new NegumData();
 
             data.ConfigManager = await this.ReadManagerAsync<IConfigurationManager>(this.FindFile(dir, configFileName));

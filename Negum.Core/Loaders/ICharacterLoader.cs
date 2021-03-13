@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Negum.Core.Containers;
+using Negum.Core.Engines;
 using Negum.Core.Managers.Types;
 using Negum.Core.Models.Characters;
 using Negum.Core.Models.Sprites;
@@ -18,7 +19,7 @@ namespace Negum.Core.Loaders
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface ICharacterLoader : IDirectoryLoader<IEnumerable<ICharacter>>
+    public interface ICharacterLoader : IEngineModuleLoader<IEnumerable<ICharacter>>
     {
     }
 
@@ -30,8 +31,8 @@ namespace Negum.Core.Loaders
     /// </author>
     public class CharacterLoader : AbstractLoader, ICharacterLoader
     {
-        public async Task<IEnumerable<ICharacter>> LoadAsync(DirectoryInfo dir) =>
-            await this.LoadMultipleAsync(dir.GetDirectories(), this.GetCharacterAsync);
+        public async Task<IEnumerable<ICharacter>> LoadAsync(IEngine engine) =>
+            await this.LoadMultipleAsync(this.GetDirectory(engine, "chars").GetDirectories(), this.GetCharacterAsync);
 
         protected virtual async Task<ICharacter> GetCharacterAsync(DirectoryInfo dir)
         {

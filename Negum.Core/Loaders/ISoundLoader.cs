@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using Negum.Core.Containers;
+using Negum.Core.Engines;
 using Negum.Core.Models.Sounds;
 using Negum.Core.Readers;
 
@@ -14,7 +15,7 @@ namespace Negum.Core.Loaders
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface ISoundLoader : IDirectoryLoader<IEnumerable<ISound>>
+    public interface ISoundLoader : IEngineModuleLoader<IEnumerable<ISound>>
     {
     }
 
@@ -26,8 +27,8 @@ namespace Negum.Core.Loaders
     /// </author>
     public class SoundLoader : AbstractLoader, ISoundLoader
     {
-        public async Task<IEnumerable<ISound>> LoadAsync(DirectoryInfo dir) =>
-            await this.LoadMultipleAsync(dir.GetFiles(), this.GetSoundAsync);
+        public async Task<IEnumerable<ISound>> LoadAsync(IEngine engine) =>
+            await this.LoadMultipleAsync(this.GetFiles(engine, "sound"), this.GetSoundAsync);
 
         protected virtual async Task<ISound> GetSoundAsync(FileInfo file)
         {
