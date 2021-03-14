@@ -73,7 +73,7 @@ jobs:
         asset_content_type: application/octet-stream
         
     - name: Build Release
-      run: dotnet build --configuration Release -p:Version=0.0.1.${{ env.RELEASE_DATE }}
+      run: dotnet build --configuration Release -p:Version=0.0.${{ env.RELEASE_DATE }}
     
     - name: Pack
       run: dotnet pack --configuration Release
