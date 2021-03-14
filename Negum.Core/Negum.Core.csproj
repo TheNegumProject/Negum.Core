@@ -4,7 +4,7 @@
         <TargetFramework>net5.0</TargetFramework>
         <Nullable>enable</Nullable>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <PackageVersion>0.0.1</PackageVersion>
+        <PackageVersion></PackageVersion>
         <Title>Negum.Core</Title>
         <Authors>The Negum Project</Authors>
         <Copyright>MIT License</Copyright>
