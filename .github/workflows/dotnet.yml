@@ -23,70 +23,62 @@ jobs:
       
     - name: Build
       run: dotnet build --no-restore
-        
-  release:
-    runs-on: ubuntu-latest
+      
+    - name: Get date
+      id: date
+      run: echo "RELEASE_DATE=$(date +%Y%m%d%H%M%s)" >> $GITHUB_ENV
 
-    steps:
-      - name: Get date
-        id: date
-        run: echo "RELEASE_DATE=$(date +%Y%m%d%H%M%s)" >> $GITHUB_ENV
-        
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: Negum.Core-${{ env.RELEASE_DATE }}
-          release_name: Negum.Core-${{ env.RELEASE_DATE }}
-          draft: false
-          prerelease: false
-          
-      - name: Upload Release Asset (dll)
-        id: upload-release-asset-dll
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./Negum.Core/bin/Debug/net5.0/Negum.Core.dll
-          asset_name: Negum.Core-${{ env.RELEASE_DATE }}.dll
-          asset_content_type: application/octet-stream
-          
-      - name: Upload Release Asset (json)
-        id: upload-release-asset-json
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./Negum.Core/bin/Debug/net5.0/Negum.Core.deps.json
-          asset_name: Negum.Core-${{ env.RELEASE_DATE }}.deps.json
-          asset_content_type: application/xml
-          
-      - name: Upload Release Asset (pdb)
-        id: upload-release-asset-pdb
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./Negum.Core/bin/Debug/net5.0/Negum.Core.pdb
-          asset_name: Negum.Core-${{ env.RELEASE_DATE }}.pdb
-          asset_content_type: application/octet-stream
-          
-  package:
-    runs-on: ubuntu-latest
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: Negum.Core-${{ env.RELEASE_DATE }}
+        release_name: Negum.Core-${{ env.RELEASE_DATE }}
+        draft: false
+        prerelease: false
+
+    - name: Upload Release Asset (dll)
+      id: upload-release-asset-dll
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./Negum.Core/bin/Debug/net5.0/Negum.Core.dll
+        asset_name: Negum.Core-${{ env.RELEASE_DATE }}.dll
+        asset_content_type: application/octet-stream
+
+    - name: Upload Release Asset (json)
+      id: upload-release-asset-json
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./Negum.Core/bin/Debug/net5.0/Negum.Core.deps.json
+        asset_name: Negum.Core-${{ env.RELEASE_DATE }}.deps.json
+        asset_content_type: application/xml
+
+    - name: Upload Release Asset (pdb)
+      id: upload-release-asset-pdb
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./Negum.Core/bin/Debug/net5.0/Negum.Core.pdb
+        asset_name: Negum.Core-${{ env.RELEASE_DATE }}.pdb
+        asset_content_type: application/octet-stream
     
-    steps:
-      - name: Publish Nuget
-        id: publish_nuget
-        uses: rohith/publish-nuget@v2
-        with:
-          PROJECT_FILE_PATH: ./Negum.Core/Negum.Core.csproj
-          PACKAGE_NAME: Negum.Core
-          VERSION_STATIC: ${{ env.RELEASE_DATE }}
-          NUGET_KEY: ${{ secrets.NUGET_RW }}
-          NUGET_SOURCE: https://nuget.pkg.github.com
+    - name: Publish Nuget
+      id: publish_nuget
+      uses: rohith/publish-nuget@v2
+      with:
+        PROJECT_FILE_PATH: ./Negum.Core/Negum.Core.csproj
+        PACKAGE_NAME: Negum.Core
+        VERSION_STATIC: ${{ env.RELEASE_DATE }}
+        NUGET_KEY: ${{ secrets.NUGET_RW }}
+        NUGET_SOURCE: https://nuget.pkg.github.com
           INCLUDE_SYMBOLS: true
