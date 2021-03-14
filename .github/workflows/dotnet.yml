@@ -81,4 +81,4 @@ jobs:
         VERSION_STATIC: ${{ env.RELEASE_DATE }}
         NUGET_KEY: ${{ secrets.NUGET_RW }}
         NUGET_SOURCE: https://nuget.pkg.github.com
-          INCLUDE_SYMBOLS: true
+        INCLUDE_SYMBOLS: true
