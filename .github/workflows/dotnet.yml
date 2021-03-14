@@ -71,6 +71,9 @@ jobs:
         asset_path: ./Negum.Core/bin/Debug/net5.0/Negum.Core.pdb
         asset_name: Negum.Core-${{ env.RELEASE_DATE }}.pdb
         asset_content_type: application/octet-stream
+        
+    - name: Build Release
+      run: dotnet build --configuration Release
     
     - name: Pack
       run: dotnet pack --configuration Release
