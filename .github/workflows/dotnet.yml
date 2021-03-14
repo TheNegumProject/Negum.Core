@@ -72,14 +72,8 @@ jobs:
         asset_name: Negum.Core-${{ env.RELEASE_DATE }}.pdb
         asset_content_type: application/octet-stream
         
-    - name: Update version
-      uses: SiqiLu/dotnet-bump-version@master
-      with:
-        version_files: "./Negum.Core/*.csproj"
-        github_token: ${{ secrets.NUGET_RW }}
-        
     - name: Build Release
-      run: dotnet build --configuration Release
+      run: dotnet build --configuration Release -p:Version=0.0.1-${{ env.RELEASE_DATE }}
     
     - name: Pack
       run: dotnet pack --configuration Release
