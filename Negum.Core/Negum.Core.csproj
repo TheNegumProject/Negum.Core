@@ -3,7 +3,6 @@
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
         <Nullable>enable</Nullable>
-        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageVersion>$(Version)</PackageVersion>
         <Title>Negum.Core</Title>
         <Authors>The Negum Project</Authors>
