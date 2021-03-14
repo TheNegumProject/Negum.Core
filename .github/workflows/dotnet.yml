@@ -79,7 +79,7 @@ jobs:
       run: dotnet pack --configuration Release
       
     - name: Rename NUPKG
-      run: mv bin/Release/Negum.Core.0.0.1.nupkg bin/Release/Negum.Core-${{ env.RELEASE_DATE }}.nupkg
+      run: mv ./bin/Release/Negum.Core.0.0.1.nupkg ./bin/Release/Negum.Core-${{ env.RELEASE_DATE }}.nupkg
       
     - name: Nuget Push
       run: dotnet nuget push "./Negum.Core/bin/Release" --api-key ${{ secrets.NUGET_RW }} --source "github"
