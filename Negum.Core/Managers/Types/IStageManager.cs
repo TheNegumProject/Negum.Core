@@ -28,7 +28,7 @@ namespace Negum.Core.Managers.Types
 
     public interface IStageInfo : IManagerSection
     {
-        string Name => this.GetValue<string>("name");
+        string StageName => this.GetValue<string>("name");
         string DisplayName => this.GetValue<string>("displayname");
         ITimeEntry VersionDate => this.GetValue<ITimeEntry>("versiondate");
         string Version => this.GetValue<string>("mugenversion");

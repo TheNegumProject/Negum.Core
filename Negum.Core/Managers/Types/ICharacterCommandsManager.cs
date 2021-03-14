@@ -50,7 +50,7 @@ namespace Negum.Core.Managers.Types
         /// You'll use this name to refer to that command in the state entry, as well as the CNS.
         /// It is case-sensitive (QCB_a is NOT the same as Qcb_a or QCB_A).
         /// </summary>
-        string Name => this.GetValue<string>("name");
+        string CommandName => this.GetValue<string>("name");
 
         /// <summary>
         /// List of buttons or directions, separated by commas.

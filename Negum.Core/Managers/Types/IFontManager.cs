@@ -25,7 +25,7 @@ namespace Negum.Core.Managers.Types
         /// <summary>
         /// Name of this Font.
         /// </summary>
-        string Name => this.GetValue<string>("name");
+        string FontName => this.GetValue<string>("name");
     }
 
     public interface IFontDef : IManagerSection

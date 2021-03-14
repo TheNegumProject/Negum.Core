@@ -54,7 +54,7 @@ namespace Negum.Core.Managers.Types
         /// <summary>
         /// Name of motif.
         /// </summary>
-        string Name => this.GetValue<string>("name");
+        string MotifName => this.GetValue<string>("name");
 
         /// <summary>
         /// Motif author name.
