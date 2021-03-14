@@ -81,5 +81,8 @@ jobs:
     - name: Rename NUPKG
       run: mv ./Negum.Core/bin/Release/Negum.Core.0.0.1.nupkg ./Negum.Core/bin/Release/Negum.Core-${{ env.RELEASE_DATE }}.nupkg
       
+    - name: Add Nuget Source
+      run: dotnet nuget add source "https://nuget.pkg.github.com/TheNegumProject/index.json" -n "github" -u ${{ secrets.NUGET_USER }} -p ${{ secrets.NUGET_RW }}
+      
     - name: Nuget Push
-      run: dotnet nuget push "./Negum.Core/bin/Release" --api-key ${{ secrets.NUGET_RW }}
+      run: dotnet nuget push "./Negum.Core/bin/Release" --api-key ${{ secrets.NUGET_RW }} --source "github"
