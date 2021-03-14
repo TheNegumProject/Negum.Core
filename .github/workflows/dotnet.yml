@@ -13,9 +13,11 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     
-    - name: Get date
-      id: date
-      run: echo "RELEASE_DATE=$(date +%Y%m%d%H%M)" >> $GITHUB_ENV
+    - name: Get Date - Release
+      run: echo "RELEASE_DATE=$(date +%Y%m%d%H%M%s)" >> $GITHUB_ENV
+      
+    - name: Get Date - Nuget
+      run: echo "NUGER_DATE=$(date +%Y).$(date +%m%d).$(date +%H%M)" >> $GITHUB_ENV
     
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
@@ -26,7 +28,7 @@ jobs:
       run: dotnet restore
       
     - name: Build
-      run: dotnet build --no-restore --configuration Release -p:Version=0.0.1.${{ env.RELEASE_DATE }}
+      run: dotnet build --no-restore --configuration Release -p:Version=0.${{ env.NUGER_DATE }}
 
     - name: Create Release
       id: create_release
