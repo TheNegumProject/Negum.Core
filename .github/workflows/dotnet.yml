@@ -15,9 +15,6 @@ jobs:
     
     - name: Get Date - Release
       run: echo "RELEASE_DATE=$(date +%Y%m%d%H%M%s)" >> $GITHUB_ENV
-      
-    - name: Get Date - Nuget
-      run: echo "NUGER_DATE=$(date +%Y).$(date +%m%d).$(date +%H%M)" >> $GITHUB_ENV
     
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
@@ -28,7 +25,7 @@ jobs:
       run: dotnet restore
       
     - name: Build
-      run: dotnet build --no-restore --configuration Release -p:Version=0.${{ env.NUGER_DATE }}
+      run: dotnet build --no-restore
 
     - name: Create Release
       id: create_release
@@ -73,6 +70,12 @@ jobs:
         asset_path: ./Negum.Core/bin/Debug/net5.0/Negum.Core.pdb
         asset_name: Negum.Core-${{ env.RELEASE_DATE }}.pdb
         asset_content_type: application/octet-stream
+        
+    - name: Get Date - Nuget
+      run: echo "NUGER_DATE=$(date +%Y).$(date +%m%d).$(date +%H%M)" >> $GITHUB_ENV
+        
+    - name: Build Release
+      run: dotnet build --no-restore --configuration Release -p:Version=0.${{ env.NUGER_DATE }}
     
     - name: Pack
       run: dotnet pack --configuration Release
