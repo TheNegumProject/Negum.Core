@@ -72,13 +72,11 @@ jobs:
         asset_name: Negum.Core-${{ env.RELEASE_DATE }}.pdb
         asset_content_type: application/octet-stream
     
-    - name: Publish Nuget
-      id: publish_nuget
-      uses: rohith/publish-nuget@v2
-      with:
-        PROJECT_FILE_PATH: ./Negum.Core/Negum.Core.csproj
-        PACKAGE_NAME: Negum.Core
-        VERSION_STATIC: ${{ env.RELEASE_DATE }}
-        NUGET_KEY: ${{ secrets.NUGET_RW }}
-        NUGET_SOURCE: https://nuget.pkg.github.com
-        INCLUDE_SYMBOLS: true
+    - name: Pack
+      run: dotnet pack --configuration Release
+      
+    - name: Rename NUPKG
+      run: mv ./Negum.Core/bin/Release/Negum.Core.0.0.1.nupkg ./Negum.Core/bin/Release/Negum.Core-${{ env.RELEASE_DATE }}.nupkg
+      
+    - name: Nuget Push
+      run: dotnet nuget push "./Negum.Core/bin/Release" --api-key ${{ secrets.NUGET_RW }} --source "github"
