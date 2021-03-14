@@ -72,14 +72,17 @@ jobs:
         asset_name: Negum.Core-${{ env.RELEASE_DATE }}.pdb
         asset_content_type: application/octet-stream
         
+    - name: Update version
+      uses: SiqiLu/dotnet-bump-version@master
+      with:
+        version_files: "./Negum.Core/*.csproj"
+        github_token: ${{ secrets.NUGET_RW }}
+        
     - name: Build Release
-      run: dotnet build --configuration Release -p:Version=${{ env.RELEASE_DATE }}
+      run: dotnet build --configuration Release
     
     - name: Pack
       run: dotnet pack --configuration Release
-      
-    - name: Rename NUPKG
-      run: mv ./Negum.Core/bin/Release/Negum.Core.0.0.1.nupkg ./Negum.Core/bin/Release/Negum.Core-${{ env.RELEASE_DATE }}.nupkg
       
     - name: Add Nuget Source
       run: dotnet nuget add source "https://nuget.pkg.github.com/TheNegumProject/index.json" -n "github" -u ${{ secrets.NUGET_USER }} -p ${{ secrets.NUGET_RW }} --store-password-in-clear-text
