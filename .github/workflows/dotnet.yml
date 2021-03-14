@@ -13,6 +13,10 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     
+    - name: Get date
+      id: date
+      run: echo "RELEASE_DATE=$(date +%Y%m%d%H%M)" >> $GITHUB_ENV
+    
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
@@ -22,11 +26,7 @@ jobs:
       run: dotnet restore
       
     - name: Build
-      run: dotnet build --no-restore
-      
-    - name: Get date
-      id: date
-      run: echo "RELEASE_DATE=$(date +%Y%m%d%H%M%s)" >> $GITHUB_ENV
+      run: dotnet build --no-restore --configuration Release -p:Version=0.0.1.${{ env.RELEASE_DATE }}
 
     - name: Create Release
       id: create_release
@@ -71,18 +71,22 @@ jobs:
         asset_path: ./Negum.Core/bin/Debug/net5.0/Negum.Core.pdb
         asset_name: Negum.Core-${{ env.RELEASE_DATE }}.pdb
         asset_content_type: application/octet-stream
-        
-    - name: Build Release
-      run: dotnet build --configuration Release -p:Version=0.0.1.123
     
     - name: Pack
       run: dotnet pack --configuration Release
       
     - name: Add Nuget Source
-      run: dotnet nuget add source "https://nuget.pkg.github.com/TheNegumProject/index.json" -n "github" -u ${{ secrets.NUGET_USER }} -p ${{ secrets.NUGET_RW }} --store-password-in-clear-text
+      run: dotnet nuget add source \
+        "https://nuget.pkg.github.com/TheNegumProject/index.json" \
+        -n "github" \
+        -u ${{ secrets.NUGET_USER }} \
+        -p ${{ secrets.NUGET_RW }} \
+        --store-password-in-clear-text
       
     - name: Nuget Push
-      run: dotnet nuget push ./Negum.Core/bin/Release/*.nupkg --api-key ${{ secrets.NUGET_RW }} --source "github"
+      run: dotnet nuget push ./Negum.Core/bin/Release/*.nupkg \
+        --api-key ${{ secrets.NUGET_RW }} \
+        --source "github"
       
     - name: Nuget Cleanup
       continue-on-error: true
