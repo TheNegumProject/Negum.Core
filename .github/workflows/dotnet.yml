@@ -79,13 +79,10 @@ jobs:
     
     - name: Pack
       run: dotnet pack --configuration Release -p:Version=0.${{ env.NUGER_DATE }}
-      
-    - name: Add Nuget Source
-      run: dotnet nuget add source "https://api.nuget.org/v3/index.json" -n "nuget_org" -u ${{ secrets.NUGET_USER }} -p ${{ secrets.NUGET_RW }} --store-password-in-clear-text
-      
+
     - name: Nuget Push
       run: dotnet nuget push ./Negum.Core/bin/Release/*.nupkg --api-key ${{ secrets.NUGET_RW }} --source "nuget_org"
       
     - name: Nuget Cleanup
       continue-on-error: true
-      run: dotnet nuget remove source "github"
+      run: dotnet nuget remove source "nuget_org"
