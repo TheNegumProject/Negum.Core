@@ -14,6 +14,8 @@
 Easiest wat to install Negum.Core library is to do it via NuGet like so:
 > dotnet add package Negum.Core
 
+Or check it directly [Here](https://www.nuget.org/packages/Negum.Core/)
+
 ### 2.2. Code
 
 </br>
