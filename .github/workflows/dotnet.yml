@@ -78,7 +78,7 @@ jobs:
       run: dotnet build --no-restore --configuration Release -p:Version=0.${{ env.NUGER_DATE }}
     
     - name: Pack
-      run: dotnet pack --configuration Release -p:Version=0.${{ env.NUGER_DATE }} --include-symbols --include-source
+      run: dotnet pack --configuration Release -p:Version=0.${{ env.NUGER_DATE }}
       
     - name: Add Nuget Source
       run: dotnet nuget add source "https://nuget.pkg.github.com/TheNegumProject/index.json" -n "github" -u ${{ secrets.NUGET_USER }} -p ${{ secrets.NUGET_RW }} --store-password-in-clear-text
