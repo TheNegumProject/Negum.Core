@@ -37,7 +37,42 @@ Easiest wat to install Negum.Core library is to do it via NuGet like so:
 
 Or check it directly [Here](https://www.nuget.org/packages/Negum.Core/)
 
-### 2.2. Code
+### 2.2. Code / Sample Usage
+```csharp
+using Negum.Core.Containers; // We want to initialize and use NegumContainer class
+using Negum.Core.Engines; // Contains main IEngine and IEngineProvider interfaces
+
+// ...
+
+// This step is optional !!!
+// You can override default binding for NegumContainer and assign it to 3rd party Container
+NegumContainer.Registerer = (lifetime, interfaceType, implementationType) => { }; // Used for registering new type
+NegumContainer.Resolver = (typeToResolve) => null; // Used for resolving type
+
+// ...
+
+// You MUST call it once before doing anything with Negum engine
+NegumContainer.RegisterKnownTypes();
+
+// ...
+
+// Take main provider which is used to build IEngine object
+IEngineProvider engineProvider = NegumContainer.Resolve<IEngineProvider>();
+
+// Read data from root directory
+// Root directory is a directory which contains: chars, data, font, stages, sound, etc.
+// This initialization may be used multiple times for various directories
+// Every time this method is used, new IEngine object will be returned
+IEngine engine = await engineProvider.InitializeAsync("path_to_root_directory");
+
+// ...
+
+// As an example we can take a display name of the first character read from chars directory
+string characterName = engine.Characters.FirstOrDefault().CharacterManager.Info.DisplayName;
+
+// ...
+
+```
 
 </br>
 
