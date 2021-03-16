@@ -14,9 +14,18 @@ X | Container | Used to create objects and store them in shared space. Can be cu
 1 | Readers | Readers are generally used to read File or Stream into appropriate output configuration or other type. | [IReader](https://github.com/TheNegumProject/Negum.Core/blob/main/Negum.Core/Readers/IReader.cs)
 2 | Managers | Managers are used to represent various file types and search through them to find values. | [IManager](https://github.com/TheNegumProject/Negum.Core/blob/main/Negum.Core/Managers/IManager.cs)
 3 | Loaders | Loaders are used to load all entities (characters, stages, fonts, etc.) from specified directory or for specified Engine. | [ILoader](https://github.com/TheNegumProject/Negum.Core/blob/main/Negum.Core/Loaders/ILoader.cs)
-3/4 | Engines | Engine represent evrything what was read from specified root directory using [IEngineProvider](https://github.com/TheNegumProject/Negum.Core/blob/main/Negum.Core/Engines/IEngineProvider.cs) | [IEngineProvider](https://github.com/TheNegumProject/Negum.Core/blob/main/Negum.Core/Engines/IEngineProvider.cs)
+3/4 | Engines | Engine represent everything what was read from specified root directory using [IEngineProvider](https://github.com/TheNegumProject/Negum.Core/blob/main/Negum.Core/Engines/IEngineProvider.cs) | [IEngineProvider](https://github.com/TheNegumProject/Negum.Core/blob/main/Negum.Core/Engines/IEngineProvider.cs)
 
 ### 1.2. Features
+- [X] Read files with extensions: cfg, def, sff (v1, v2, v2.1), air, cns, cmd, snd, act
+- [X] Read fields from files
+- [X] Load all characters, stages, fonts, etc.
+- [ ] Load only characters and stages from configuration files
+- [X] Load data from config directory
+- [X] Generate single object with all data from directory - [IEngine](https://github.com/TheNegumProject/Negum.Core/blob/main/Negum.Core/Engines/IEngine.cs)
+- [ ] Multiplayer support (client, server, packets)
+- [ ] Up to 4 players offline
+- [ ] Max numer of players offline (configurable)
 
 </br>
 
