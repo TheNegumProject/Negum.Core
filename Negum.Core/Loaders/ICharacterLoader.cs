@@ -31,8 +31,18 @@ namespace Negum.Core.Loaders
     /// </author>
     public class CharacterLoader : AbstractLoader, ICharacterLoader
     {
-        public async Task<IEnumerable<ICharacter>> LoadAsync(IEngine engine) =>
-            await this.LoadMultipleAsync(this.GetDirectory(engine, "chars").GetDirectories(), this.GetCharacterAsync);
+        public async Task<IEnumerable<ICharacter>> LoadAsync(IEngine engine)
+        {
+            var characterDirectoriesNames = engine.Data.SelectionManager.Characters.Characters
+                .Select(character => character.Name).ToList();
+
+            var characterDirectories = this.GetDirectory(engine, "chars")
+                .GetDirectories()
+                .Where(dir => characterDirectoriesNames.Contains(dir.Name))
+                .ToList();
+
+            return await this.LoadMultipleAsync(characterDirectories, this.GetCharacterAsync);
+        }
 
         protected virtual async Task<ICharacter> GetCharacterAsync(DirectoryInfo dir)
         {
