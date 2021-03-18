@@ -25,7 +25,7 @@ X | Container | Used to create objects and store them in shared space. Can be cu
 - [X] Generate single object with all data from directory - [IEngine](https://github.com/TheNegumProject/Negum.Core/blob/main/Negum.Core/Engines/IEngine.cs)
 - [ ] Multiplayer support (client, server, packets)
 - [ ] Up to 4 players offline
-- [ ] Max numer of players online (configurable)
+- [ ] Max number of players online (configurable)
 
 </br>
 
