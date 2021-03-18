@@ -20,7 +20,7 @@ X | Container | Used to create objects and store them in shared space. Can be cu
 - [X] Read files with extensions: cfg, def, sff (v1, v2, v2.1), air, cns, cmd, snd, act
 - [X] Read fields from files
 - [X] Load all characters, stages, fonts, etc.
-- [ ] Load only characters and stages from configuration files
+- [X] Load only characters and stages from configuration files
 - [X] Load data from config directory
 - [X] Generate single object with all data from directory - [IEngine](https://github.com/TheNegumProject/Negum.Core/blob/main/Negum.Core/Engines/IEngine.cs)
 - [ ] Multiplayer support (client, server, packets)
