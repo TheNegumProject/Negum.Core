@@ -34,7 +34,9 @@ namespace Negum.Core.Loaders
         public async Task<IEnumerable<ICharacter>> LoadAsync(IEngine engine)
         {
             var characterDirectoriesNames = engine.Data.SelectionManager.Characters.Characters
-                .Select(character => character.Name).ToList();
+                .Select(character => character.Name)
+                .Distinct()
+                .ToList();
 
             var characterDirectories = this.GetDirectory(engine, "chars")
                 .GetDirectories()

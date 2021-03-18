@@ -32,8 +32,26 @@ namespace Negum.Core.Loaders
     {
         public async Task<IEnumerable<IStage>> LoadAsync(IEngine engine)
         {
-            var sources = this.GetFiles(engine, "stages")
-                .Where(file => file.Extension.Equals(".def"));
+            var stagePaths = engine.Data.SelectionManager.Characters.Characters
+                .Select(character => character.StageFile)
+                .Distinct()
+                .ToList();
+
+            var extraStages = engine.Data.SelectionManager.Stages.StageFiles
+                .Distinct()
+                .ToList();
+            
+            stagePaths.AddRange(extraStages);
+            
+            var sources = stagePaths
+                .Select(stagePath =>
+                {
+                    var path = Path.Combine(engine.Path, stagePath);
+                    var file = new FileInfo(path);
+                    return file;
+                })
+                .Where(file => file.Exists)
+                .ToList();
 
             return await this.LoadMultipleAsync(sources, this.GetStageAsync);
         }

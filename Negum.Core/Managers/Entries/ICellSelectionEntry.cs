@@ -19,6 +19,9 @@ namespace Negum.Core.Managers.Entries
         /// </summary>
         int CellSpacing { get; }
 
+        /// <summary>
+        /// Background image of the current cell.
+        /// </summary>
         ISpriteSoundEntry CellBg { get; }
 
         /// <summary>

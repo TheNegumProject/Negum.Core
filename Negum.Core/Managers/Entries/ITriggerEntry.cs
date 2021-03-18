@@ -9,6 +9,7 @@ namespace Negum.Core.Managers.Entries
     /// </author>
     public interface ITriggerEntry : IManagerSectionEntry<ITriggerEntry>
     {
+        // TODO: Implement logic for handling triggers
     }
 
     /// <summary>

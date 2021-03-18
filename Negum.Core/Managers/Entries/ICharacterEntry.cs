@@ -15,10 +15,7 @@ namespace Negum.Core.Managers.Entries
         /// <summary>
         /// Name / Nick of the Character.
         /// Example: kfm
-        /// </summary>
-        string Name { get; }
-
-        /// <summary>
+        ///
         /// If you want to load a different def file, you can enter it as a directory plus the def file.
         /// Example: kfm/alt-kfm.def
         ///
@@ -29,7 +26,7 @@ namespace Negum.Core.Managers.Entries
         /// If your def file has the same name as the zip file (eg. suave.def in suave.zip), you can just put the name of the zip file alone.
         /// Example: suave.zip
         /// </summary>
-        string NameFile { get; }
+        string Name { get; }
 
         /// <summary>
         /// Path to the stage file for the character.
@@ -77,13 +74,12 @@ namespace Negum.Core.Managers.Entries
     /// </author>   
     public class CharacterEntry : ManagerSectionEntry<ICharacterEntry>, ICharacterEntry
     {
-        public string Name { get; set; }
-        public string NameFile { get; set; }
-        public string StageFile { get; set; }
-        public string MusicFile { get; set; }
-        public int IncludeStage { get; set; }
-        public int Order { get; set; }
-        public bool IsRandomSelect { get; set; }
+        public string Name { get; private set; }
+        public string StageFile { get; private set; }
+        public string MusicFile { get; private set; }
+        public int IncludeStage { get; private set; }
+        public int Order { get; private set; }
+        public bool IsRandomSelect { get; private set; }
 
         public override ICharacterEntry Get()
         {
@@ -95,7 +91,7 @@ namespace Negum.Core.Managers.Entries
 
             // Must be filled fields
             this.Name = args[0];
-            this.NameFile = args[1];
+            this.StageFile = args[1];
 
             // Optional fields
             this.MusicFile = this.GetArg(args, "music");
