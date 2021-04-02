@@ -157,7 +157,7 @@ namespace Negum.Core.Managers.Types
         /// You can have more than one triggerall condition if you need.
         /// Note that at least one trigger1 must be present, even if you specify triggerall.
         /// </summary>
-        IEnumerable<ITriggerEntry> TriggerAlls => this.GetValues<ITriggerEntry>("triggerall");
+        IEnumerable<ITriggerEntry> TriggerAlls => this.GetValues<ITriggerEntry>(TriggerEntry.TriggerAllKey);
 
         /// <summary>
         /// The first trigger should always be trigger1, and subsequent triggers should be trigger2, then trigger3 and so on.
@@ -208,7 +208,7 @@ namespace Negum.Core.Managers.Types
         /// For instance, this is equivalent to the previous example above.
         ///     trigger1 = ((Vel Y > 0) && (Pos Y > 0)) || Time = 5
         /// </summary>
-        IEnumerable<ITriggerEntry> Triggers => this.GetValues<ITriggerEntry>("trigger");
+        IEnumerable<ITriggerEntry> Triggers => this.GetValues<ITriggerEntry>(TriggerEntry.TriggerKey);
 
         /// <summary>
         /// Should have the number of the state to change to.

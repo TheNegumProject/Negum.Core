@@ -123,9 +123,9 @@ namespace Negum.Core.Managers.Types
         int Value => this.GetValue<int>("value");
 
         /// <summary>
-        /// Parameters which will bbe used for all triggers.
+        /// Parameters which will be used for all triggers.
         /// </summary>
-        IEnumerable<ITriggerEntry> TriggerAlls => this.GetValues<ITriggerEntry>("triggerall");
+        IEnumerable<ITriggerEntry> TriggerAlls => this.GetValues<ITriggerEntry>(TriggerEntry.TriggerAllKey);
 
         /// <summary>
         /// Useful triggers to know:
@@ -143,7 +143,7 @@ namespace Negum.Core.Managers.Types
         /// State entry with a certain command must come before another state entry with a command that is the subset of the first.
         /// For example, command "fwd_a" must be listed before "a", and "fwd_ab" should come before both of the others.
         /// </summary>
-        IEnumerable<ITriggerEntry> Triggers => this.GetValues<ITriggerEntry>("trigger");
+        IEnumerable<ITriggerEntry> Triggers => this.GetValues<ITriggerEntry>(TriggerEntry.TriggerKey);
 
         /// <summary>
         /// Combo conditions.

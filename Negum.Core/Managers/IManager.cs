@@ -79,7 +79,7 @@ namespace Negum.Core.Managers
         public IEnumerable<TManagerSection> GetSubsections<TManagerSection>(string sectionName)
             where TManagerSection : IManagerSection =>
             this.Config
-                .FirstOrDefault(section => section.Name.Equals(sectionName))
+                .FirstOrDefault(section => section.Name.StartsWith(sectionName))
                 .Subsections
                 .Select(subsection => this.GetNewManagerSection(subsection.Name, subsection))
                 .Cast<TManagerSection>()
