@@ -58,6 +58,22 @@ namespace Negum.Core.Loaders
             var motifFightFullPath = this.FindFile(motifFile.Directory, motifFightPath);
             data.FightManager = await this.ReadManagerAsync<IFightManager>(motifFightFullPath);
 
+            var motifLogoPath = data.MotifManager.Files.LogoStoryboardDefinition;
+
+            if (!string.IsNullOrWhiteSpace(motifLogoPath))
+            {
+                var motifLogoFullPath = this.FindFile(motifFile.Directory, motifLogoPath);
+                data.LogoManager = await this.ReadManagerAsync<IStoryboardManager>(motifLogoFullPath);
+            }
+
+            var motifIntroPath = data.MotifManager.Files.IntroStoryboardDefinition;
+
+            if (!string.IsNullOrWhiteSpace(motifIntroPath))
+            {
+                var motifIntroFullPath = this.FindFile(motifFile.Directory, motifIntroPath);
+                data.IntroManager = await this.ReadManagerAsync<IStoryboardManager>(motifIntroFullPath);
+            }
+
             return data;
         }
 

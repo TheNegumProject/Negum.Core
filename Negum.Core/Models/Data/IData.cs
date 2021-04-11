@@ -37,11 +37,21 @@ namespace Negum.Core.Models.Data
         /// Manager which wraps selection definition.
         /// </summary>
         ISelectionManager SelectionManager { get; }
-        
+
         /// <summary>
         /// Manager which wraps fight definition.
         /// </summary>
         IFightManager FightManager { get; }
+
+        /// <summary>
+        /// Manager which wraps logo definition.
+        /// </summary>
+        IStoryboardManager LogoManager { get; }
+
+        /// <summary>
+        /// Manager which wraps intro definition.
+        /// </summary>
+        IStoryboardManager IntroManager { get; }
     }
 
     /// <summary>
@@ -58,5 +68,7 @@ namespace Negum.Core.Models.Data
         public ISound MotifSound { get; internal set; }
         public ISelectionManager SelectionManager { get; internal set; }
         public IFightManager FightManager { get; internal set; }
+        public IStoryboardManager LogoManager { get; internal set; }
+        public IStoryboardManager IntroManager { get; internal set; }
     }
 }
