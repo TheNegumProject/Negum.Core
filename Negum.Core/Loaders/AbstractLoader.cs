@@ -25,16 +25,16 @@ namespace Negum.Core.Loaders
         protected virtual DirectoryInfo GetDirectory(IEngine engine, string subdirectoryName)
         {
             var rootDir = new DirectoryInfo(engine.Path);
-            
+
             if (string.IsNullOrWhiteSpace(subdirectoryName))
             {
                 return rootDir;
             }
-            
+
             var subDir = rootDir
                 .GetDirectories()
                 .FirstOrDefault(dir => dir.Name.ToLower().Equals(subdirectoryName.ToLower()));
-            
+
             return subDir;
         }
 
@@ -66,10 +66,20 @@ namespace Negum.Core.Loaders
             where TManager : IManager =>
             await this.ReadManagerAsync<TManager>(file.FullName);
 
-        protected virtual async Task<TManager> ReadManagerAsync<TManager>(string path)
+        protected virtual async Task<TManager> ReadManagerAsync<TManager, TReader>(FileInfo file)
             where TManager : IManager
+            where TReader : IConfigurationReader =>
+            await this.ReadManagerAsync<TManager, TReader>(file.FullName);
+
+        protected virtual async Task<TManager> ReadManagerAsync<TManager>(string path)
+            where TManager : IManager =>
+            await this.ReadManagerAsync<TManager, IConfigurationWithSubsectionReader>(path);
+
+        protected virtual async Task<TManager> ReadManagerAsync<TManager, TReader>(string path)
+            where TManager : IManager
+            where TReader : IConfigurationReader
         {
-            var configReader = NegumContainer.Resolve<IConfigurationWithSubsectionReader>();
+            var configReader = NegumContainer.Resolve<TReader>();
             var configuration = await configReader.ReadAsync(path);
 
             return (TManager) NegumContainer.Resolve<TManager>().UseConfiguration(configuration);

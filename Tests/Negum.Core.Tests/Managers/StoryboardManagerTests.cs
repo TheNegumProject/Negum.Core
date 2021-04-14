@@ -15,7 +15,8 @@ namespace Negum.Core.Tests.Managers
     public class StoryboardManagerTests : TestBase
     {
         [Theory]
-        [InlineData("https://raw.githubusercontent.com/TheNegumProject/DragonBallMugenEdition2009/main/data/Backup/intro.def")]
+        [InlineData(
+            "https://raw.githubusercontent.com/TheNegumProject/DragonBallMugenEdition2009/main/data/Backup/intro.def")]
         public async Task Should_Count_Number_Of_Scenes_And_Print_Details(string path)
         {
             this.InitializeContainer();
@@ -30,6 +31,18 @@ namespace Negum.Core.Tests.Managers
             var timeDetails = time.GetTimeSpan().Ticks;
 
             Assert.True(timeDetails == 35);
+
+            var introConfig = await this.ParseAnimation(path);
+            var introManager = (IAnimationManager) NegumContainer.Resolve<IAnimationManager>().UseConfiguration(introConfig);
+            var actions = introManager.Animations;
+
+            Assert.True(actions.Count() == 3);
+            Assert.True(actions.ElementAt(0).ActionNumber == 0);
+            Assert.True(actions.ElementAt(0).Parts.Count() == 1);
+            Assert.True(actions.ElementAt(1).ActionNumber == 1);
+            Assert.True(actions.ElementAt(1).Parts.Count() == 1);
+            Assert.True(actions.ElementAt(2).Parts.Count() == 1);
+            Assert.True(actions.ElementAt(2).Parts.ElementAt(0).Frames.Count() == 2301);
         }
     }
 }

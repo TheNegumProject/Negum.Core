@@ -64,6 +64,7 @@ namespace Negum.Core.Loaders
             {
                 var motifLogoFullPath = this.FindFile(motifFile.Directory, motifLogoPath);
                 data.LogoManager = await this.ReadManagerAsync<IStoryboardManager>(motifLogoFullPath);
+                data.LogoAnimationManager = await this.ReadManagerAsync<IAnimationManager, IAnimationReader>(motifLogoFullPath);
             }
 
             var motifIntroPath = data.MotifManager.Files.IntroStoryboardDefinition;
@@ -72,6 +73,7 @@ namespace Negum.Core.Loaders
             {
                 var motifIntroFullPath = this.FindFile(motifFile.Directory, motifIntroPath);
                 data.IntroManager = await this.ReadManagerAsync<IStoryboardManager>(motifIntroFullPath);
+                data.IntroAnimationManager = await this.ReadManagerAsync<IAnimationManager, IAnimationReader>(motifIntroFullPath);
             }
 
             return data;

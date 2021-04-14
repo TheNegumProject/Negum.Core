@@ -49,9 +49,19 @@ namespace Negum.Core.Models.Data
         IStoryboardManager LogoManager { get; }
 
         /// <summary>
+        /// Manager which wraps logo animation.
+        /// </summary>
+        IAnimationManager LogoAnimationManager { get; }
+
+        /// <summary>
         /// Manager which wraps intro definition.
         /// </summary>
         IStoryboardManager IntroManager { get; }
+
+        /// <summary>
+        /// Manager which wraps intro animation.
+        /// </summary>
+        IAnimationManager IntroAnimationManager { get; }
     }
 
     /// <summary>
@@ -69,6 +79,8 @@ namespace Negum.Core.Models.Data
         public ISelectionManager SelectionManager { get; internal set; }
         public IFightManager FightManager { get; internal set; }
         public IStoryboardManager LogoManager { get; internal set; }
+        public IAnimationManager LogoAnimationManager { get; internal set; }
         public IStoryboardManager IntroManager { get; internal set; }
+        public IAnimationManager IntroAnimationManager { get; internal set; }
     }
 }

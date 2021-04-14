@@ -31,8 +31,7 @@ namespace Negum.Core.Readers
                 return false;
             }
 
-            // COMMENT: -3 indicates "def" postfix
-            var lastSectionNamePrefix = lastSection.Name[..^3];
+            var lastSectionNamePrefix = lastSection.Name.ToLower().EndsWith("def") ? lastSection.Name[..^3] : lastSection.Name;
 
             return section.Name.StartsWith(lastSectionNamePrefix);
         }

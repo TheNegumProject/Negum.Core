@@ -71,7 +71,7 @@ namespace Negum.Core.Managers
         public IEnumerable<TManagerSection> GetSections<TManagerSection>(string sectionName)
             where TManagerSection : IManagerSection =>
             this.Config
-                .Where(section => section.Name.Equals(sectionName))
+                .Where(section => section.Name.ToLower().Equals(sectionName.ToLower()))
                 .Select(section => this.GetNewManagerSection(section.Name, section))
                 .Cast<TManagerSection>()
                 .ToList();
@@ -79,7 +79,7 @@ namespace Negum.Core.Managers
         public IEnumerable<TManagerSection> GetSubsections<TManagerSection>(string sectionName)
             where TManagerSection : IManagerSection =>
             this.Config
-                .FirstOrDefault(section => section.Name.StartsWith(sectionName))
+                .FirstOrDefault(section => section.Name.ToLower().StartsWith(sectionName.ToLower()))
                 .Subsections
                 .Select(subsection => this.GetNewManagerSection(subsection.Name, subsection))
                 .Cast<TManagerSection>()

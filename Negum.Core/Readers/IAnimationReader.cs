@@ -27,11 +27,16 @@ namespace Negum.Core.Readers
         protected override void InitializeConfigurationSection(IConfiguration configuration,
             IConfigurationSection section)
         {
+            if (!section.Name.ToLower().StartsWith(SectionName.ToLower()))
+            {
+                return;
+            }
+
             var animationSection = new AnimationSection();
 
             this.ParseAnimationSectionData(section.Name, animationSection);
             this.ParseCollisions(section, animationSection);
-            
+
             configuration.AddSection(animationSection);
         }
 
@@ -39,16 +44,16 @@ namespace Negum.Core.Readers
         {
             // Technically anything else should be understand as an error.
             animationSection.Name = SectionName;
-            
+
             var numberString = sectionName.Split(" ");
-            var number = int.Parse(numberString[^1]);
+            var number = int.Parse(numberString[^1]); // We want to make sure that it is a valid number
             animationSection.ActionNumber = number;
         }
 
         protected virtual void ParseCollisions(IConfigurationSection section, AnimationSection animationSection)
         {
             AnimationSectionEntry animationEntry = null;
-            
+
             foreach (var entry in section)
             {
                 if (entry.Value.StartsWith("Clsn") && entry.Value.Contains(":"))
@@ -57,7 +62,7 @@ namespace Negum.Core.Readers
                     {
                         animationSection.Entries.Add(animationEntry);
                     }
-                    
+
                     animationEntry = new AnimationSectionEntry();
                     this.ParseHeaderData(animationEntry, entry.Value);
                 }
@@ -71,11 +76,11 @@ namespace Negum.Core.Readers
                     {
                         animationEntry = new AnimationSectionEntry();
                     }
-                    
+
                     this.ParseAnimationData(animationEntry, entry.Value);
                 }
             }
-            
+
             if (animationEntry != null)
             {
                 animationSection.Entries.Add(animationEntry);
@@ -88,7 +93,7 @@ namespace Negum.Core.Readers
             animationEntry.TypeId = int.Parse(value.Substring(4, 1));
         }
 
-        protected virtual void ParseBoxData(AnimationSectionEntry animationEntry, string value) => 
+        protected virtual void ParseBoxData(AnimationSectionEntry animationEntry, string value) =>
             animationEntry.AddBox(value);
 
         protected virtual void ParseAnimationData(AnimationSectionEntry animationEntry, string value)
