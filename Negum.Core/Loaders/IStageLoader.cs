@@ -2,12 +2,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Negum.Core.Containers;
 using Negum.Core.Engines;
 using Negum.Core.Managers.Types;
-using Negum.Core.Models.Sprites;
 using Negum.Core.Models.Stages;
-using Negum.Core.Readers;
 
 namespace Negum.Core.Loaders
 {
@@ -40,9 +37,9 @@ namespace Negum.Core.Loaders
             var extraStages = engine.Data.SelectionManager.Stages.StageFiles
                 .Distinct()
                 .ToList();
-            
+
             stagePaths.AddRange(extraStages);
-            
+
             var sources = stagePaths
                 .Select(stagePath =>
                 {
@@ -58,26 +55,11 @@ namespace Negum.Core.Loaders
 
         protected virtual async Task<IStage> GetStageAsync(FileInfo defFile)
         {
-            var reader = NegumContainer.Resolve<IConfigurationWithSubsectionReader>();
-            var configuration = await reader.ReadAsync(defFile.FullName);
+            var stage = new Stage();
 
-            var manager = (IStageManager) NegumContainer.Resolve<IStageManager>().UseConfiguration(configuration);
-
-            var spritePathReader = NegumContainer.Resolve<ISpritePathReader>();
-            var sprite =
-                await spritePathReader.ReadAsync(Path.Combine(defFile.DirectoryName, manager.BackgroundDef.SpriteFile));
-
-            return InitializeStage(defFile, manager, sprite);
-        }
-
-        protected virtual IStage InitializeStage(FileInfo defFile, IStageManager manager, ISprite sprite)
-        {
-            var stage = new Stage
-            {
-                File = defFile,
-                Manager = manager,
-                Sprite = sprite
-            };
+            stage.File = defFile;
+            stage.Manager = await this.ReadManagerAsync<IStageManager>(defFile);
+            stage.Sprite = await this.GetSpriteAsync(defFile.DirectoryName, stage.Manager.BackgroundDef.SpriteFile);
 
             return stage;
         }

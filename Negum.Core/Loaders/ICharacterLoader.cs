@@ -3,12 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Negum.Core.Containers;
 using Negum.Core.Engines;
 using Negum.Core.Managers.Types;
 using Negum.Core.Models.Characters;
-using Negum.Core.Models.Sprites;
-using Negum.Core.Readers;
 
 namespace Negum.Core.Loaders
 {
@@ -68,17 +65,9 @@ namespace Negum.Core.Loaders
             character.ConstantsManager = await this.ReadManagerAsync<ICharacterConstantsManager>(characterDefFile, character.CharacterManager.Files.ConstantsFile);
             character.StatesManager = await this.ReadManagerAsync<ICharacterConstantsManager>(characterDefFile, character.CharacterManager.Files.StatesFile);
             character.CommonStatesManager = await this.ReadCommonStatesAsync(characterDefFile, character.CharacterManager.Files.CommonStatesFile);
-
-            var spritePath = Path.Combine(characterDefFile.DirectoryName, character.CharacterManager.Files.SpriteFiles);
-            character.Sprite = await NegumContainer.Resolve<ISpritePathReader>().ReadAsync(spritePath);
-
-            var animationPath = Path.Combine(characterDefFile.DirectoryName, character.CharacterManager.Files.AnimationFile);
-            var animationConfiguration = await NegumContainer.Resolve<IAnimationReader>().ReadAsync(animationPath);
-            character.AnimationManager = (IAnimationManager) NegumContainer.Resolve<IAnimationManager>().UseConfiguration(animationConfiguration);
-
-            var soundPath = Path.Combine(characterDefFile.DirectoryName, character.CharacterManager.Files.SoundFile);
-            var soundReader = NegumContainer.Resolve<ISoundPathReader>();
-            character.Sound = await soundReader.ReadAsync(soundPath);
+            character.Sprite = await this.GetSpriteAsync(characterDefFile.DirectoryName, character.CharacterManager.Files.SpriteFiles);
+            character.AnimationManager = await this.FindManagerAsync<IAnimationManager>(characterDefFile.DirectoryName, character.CharacterManager.Files.AnimationFile);
+            character.Sound = await this.GetSoundAsync(characterDefFile.DirectoryName, character.CharacterManager.Files.SoundFile);
 
             if (character.CharacterManager.Files.AiHintsDataFile != null)
             {
@@ -91,17 +80,15 @@ namespace Negum.Core.Loaders
             var introStoryboardFile = character.CharacterManager.Arcade.IntroStoryboardFile;
             if (!string.IsNullOrWhiteSpace(introStoryboardFile))
             {
-                var (introManager, introSprite) = await this.ReadCharacterStoryboardAsync(characterDefFile, introStoryboardFile);
-                character.IntroManager = introManager;
-                character.IntroSprite = introSprite;
+                character.IntroManager = await this.ReadManagerAsync<ICharacterStoryboardSceneManager>(characterDefFile, introStoryboardFile);
+                character.IntroSprite = await this.GetSpriteAsync(characterDefFile.DirectoryName, character.IntroManager.SceneDef.SpriteFile);
             }
 
             var endingStoryboardFile = character.CharacterManager.Arcade.EndingStoryboardFile;
             if (!string.IsNullOrWhiteSpace(endingStoryboardFile))
             {
-                var (endingManager, endingSprite) = await this.ReadCharacterStoryboardAsync(characterDefFile, endingStoryboardFile);
-                character.EndingManager = endingManager;
-                character.EndingSprite = endingSprite;
+                character.EndingManager = await this.ReadManagerAsync<ICharacterStoryboardSceneManager>(characterDefFile, endingStoryboardFile);
+                character.EndingSprite = await this.GetSpriteAsync(characterDefFile.DirectoryName, character.EndingManager.SceneDef.SpriteFile);
             }
             
             return character;
@@ -145,15 +132,6 @@ namespace Negum.Core.Loaders
             var commonFile = new FileInfo(commonFilePath);
             
             return await this.ReadManagerAsync<ICharacterConstantsManager>(commonFile, path);
-        }
-
-        protected virtual async Task<(ICharacterStoryboardSceneManager, ISprite)> ReadCharacterStoryboardAsync(FileInfo file, string path)
-        {
-            var manager = await this.ReadManagerAsync<ICharacterStoryboardSceneManager>(file, path);
-            var spritePath = Path.Combine(file.DirectoryName, manager.SceneDef.SpriteFile);
-            var sprite = await NegumContainer.Resolve<ISpritePathReader>().ReadAsync(spritePath);
-
-            return (manager, sprite);
         }
     }
 }

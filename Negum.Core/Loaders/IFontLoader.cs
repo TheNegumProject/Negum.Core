@@ -2,11 +2,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Negum.Core.Containers;
 using Negum.Core.Engines;
 using Negum.Core.Managers.Types;
 using Negum.Core.Models.Fonts;
-using Negum.Core.Readers;
 
 namespace Negum.Core.Loaders
 {
@@ -47,20 +45,8 @@ namespace Negum.Core.Loaders
 
             if (!font.IsRaw)
             {
-                var reader = NegumContainer.Resolve<IConfigurationWithSubsectionReader>();
-                var configuration = await reader.ReadAsync(file.FullName);
-
-                font.Manager = (IFontManager) NegumContainer.Resolve<IFontManager>().UseConfiguration(configuration);
-
-                var path = Path.Combine(file.DirectoryName, font.Manager.Def.File);
-
-                if (File.Exists(path))
-                {
-                    var spritePathReader = NegumContainer.Resolve<ISpritePathReader>();
-                    var glyphs = await spritePathReader.ReadAsync(path);
-
-                    font.Sprite = glyphs;
-                }
+                font.Manager = await this.ReadManagerAsync<IFontManager>(file);
+                font.Sprite = await this.GetSpriteAsync(file.DirectoryName, font.Manager.Def.File);
             }
 
             return font;

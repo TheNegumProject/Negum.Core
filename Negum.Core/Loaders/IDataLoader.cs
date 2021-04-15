@@ -1,6 +1,5 @@
 using System.IO;
 using System.Threading.Tasks;
-using Negum.Core.Containers;
 using Negum.Core.Engines;
 using Negum.Core.Managers.Types;
 using Negum.Core.Models.Data;
@@ -31,38 +30,24 @@ namespace Negum.Core.Loaders
         {
             const string configFileName = "mugen.cfg";
 
-            var dir = this.GetDirectory(engine, "data");
+            var dir = this.GetDirectory(engine, "data").FullName;
             var data = new NegumData();
 
-            data.ConfigManager = await this.ReadManagerAsync<IConfigurationManager>(this.FindFile(dir, configFileName));
+            data.ConfigManager = await this.FindManagerAsync<IConfigurationManager>(dir, configFileName);
 
-            var motifConfigPath = data.ConfigManager.Options.MotifFile;
-            var motifFile = this.FindFile(dir, motifConfigPath);
-            data.MotifManager = await this.ReadManagerAsync<IMotifManager>(motifFile);
-
-            var motifSpritePath = data.MotifManager.Files.SpriteFile;
-            var motifSpriteFullPath = this.FindFile(motifFile.Directory, motifSpritePath).FullName;
-            var spriteReader = NegumContainer.Resolve<ISpritePathReader>();
-            data.MotifSprite = await spriteReader.ReadAsync(motifSpriteFullPath);
-
-            var motifSoundPath = data.MotifManager.Files.SoundFile;
-            var motifSoundFullPath = this.FindFile(motifFile.Directory, motifSoundPath).FullName;
-            var soundReader = NegumContainer.Resolve<ISoundPathReader>();
-            data.MotifSound = await soundReader.ReadAsync(motifSoundFullPath);
-
-            var motifSelectPath = data.MotifManager.Files.SelectionFile;
-            var motifSelectFullPath = this.FindFile(motifFile.Directory, motifSelectPath);
-            data.SelectionManager = await this.ReadManagerAsync<ISelectionManager>(motifSelectFullPath);
-
-            var motifFightPath = data.MotifManager.Files.FightFile;
-            var motifFightFullPath = this.FindFile(motifFile.Directory, motifFightPath);
-            data.FightManager = await this.ReadManagerAsync<IFightManager>(motifFightFullPath);
+            var motifFile = this.FindFile(dir, data.ConfigManager.Options.MotifFile);
+            
+            data.MotifManager = await this.FindManagerAsync<IMotifManager>(dir, data.ConfigManager.Options.MotifFile);
+            data.MotifSprite = await this.GetSpriteAsync(motifFile.Directory.FullName, data.MotifManager.Files.SpriteFile);
+            data.MotifSound = await this.GetSoundAsync(motifFile.Directory.FullName, data.MotifManager.Files.SoundFile);
+            data.SelectionManager = await this.FindManagerAsync<ISelectionManager>(motifFile.Directory.FullName, data.MotifManager.Files.SelectionFile);
+            data.FightManager = await this.FindManagerAsync<IFightManager>(motifFile.Directory.FullName, data.MotifManager.Files.FightFile);
 
             var motifLogoPath = data.MotifManager.Files.LogoStoryboardDefinition;
 
             if (!string.IsNullOrWhiteSpace(motifLogoPath))
             {
-                var motifLogoFullPath = this.FindFile(motifFile.Directory, motifLogoPath);
+                var motifLogoFullPath = this.FindFile(motifFile.Directory.FullName, motifLogoPath);
                 data.LogoManager = await this.ReadManagerAsync<IStoryboardManager>(motifLogoFullPath);
                 data.LogoAnimationManager = await this.ReadManagerAsync<IAnimationManager, IAnimationReader>(motifLogoFullPath);
             }
@@ -71,7 +56,7 @@ namespace Negum.Core.Loaders
 
             if (!string.IsNullOrWhiteSpace(motifIntroPath))
             {
-                var motifIntroFullPath = this.FindFile(motifFile.Directory, motifIntroPath);
+                var motifIntroFullPath = this.FindFile(motifFile.Directory.FullName, motifIntroPath);
                 data.IntroManager = await this.ReadManagerAsync<IStoryboardManager>(motifIntroFullPath);
                 data.IntroAnimationManager = await this.ReadManagerAsync<IAnimationManager, IAnimationReader>(motifIntroFullPath);
             }
@@ -79,28 +64,14 @@ namespace Negum.Core.Loaders
             return data;
         }
 
-        protected virtual FileInfo FindFile(DirectoryInfo dataDir, string fileName)
+        protected override FileInfo FindFile(string dirName, string fileName)
         {
             if (fileName.StartsWith("data/"))
             {
                 fileName = fileName.Replace("data/", "");
             }
-
-            var fullPath = Path.Combine(dataDir.FullName, fileName);
-            var file = new FileInfo(fullPath);
-
-            if (file.Exists)
-            {
-                return file;
-            }
-
-            while (!file.Exists)
-            {
-                fullPath = Path.Combine(file.Directory.Parent.FullName, file.Name);
-                file = new FileInfo(fullPath);
-            }
-
-            return file;
+            
+            return base.FindFile(dirName, fileName);
         }
     }
 }
