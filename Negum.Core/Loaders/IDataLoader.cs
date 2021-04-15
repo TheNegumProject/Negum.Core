@@ -47,21 +47,29 @@ namespace Negum.Core.Loaders
 
             if (!string.IsNullOrWhiteSpace(motifLogoPath))
             {
-                var motifLogoFullPath = this.FindFile(motifFile.Directory.FullName, motifLogoPath);
-                data.LogoManager = await this.ReadManagerAsync<IStoryboardManager>(motifLogoFullPath);
-                data.LogoAnimationManager = await this.ReadManagerAsync<IAnimationManager, IAnimationReader>(motifLogoFullPath);
+                data.Logo = await this.ReadStoryboardAsync(motifFile.Directory.FullName, motifLogoPath);
             }
 
             var motifIntroPath = data.MotifManager.Files.IntroStoryboardDefinition;
 
             if (!string.IsNullOrWhiteSpace(motifIntroPath))
             {
-                var motifIntroFullPath = this.FindFile(motifFile.Directory.FullName, motifIntroPath);
-                data.IntroManager = await this.ReadManagerAsync<IStoryboardManager>(motifIntroFullPath);
-                data.IntroAnimationManager = await this.ReadManagerAsync<IAnimationManager, IAnimationReader>(motifIntroFullPath);
+                data.Intro = await this.ReadStoryboardAsync(motifFile.Directory.FullName, motifIntroPath);
             }
 
             return data;
+        }
+
+        protected virtual async Task<IStoryboard> ReadStoryboardAsync(string dirName, string fileName)
+        {
+            var defFilePath = this.FindFile(dirName, fileName);
+            var storyboard = new Storyboard();
+            
+            storyboard.Manager = await this.ReadManagerAsync<IStoryboardManager>(defFilePath);
+            storyboard.Animation = await this.ReadManagerAsync<IAnimationManager, IAnimationReader>(defFilePath);
+            storyboard.Sprite = await this.GetSpriteAsync(dirName, storyboard.Manager.SceneDef.SpriteFile);
+
+            return storyboard;
         }
 
         protected override FileInfo FindFile(string dirName, string fileName)

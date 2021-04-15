@@ -15,8 +15,7 @@ namespace Negum.Core.Tests.Managers
     public class StoryboardManagerTests : TestBase
     {
         [Theory]
-        [InlineData(
-            "https://raw.githubusercontent.com/TheNegumProject/DragonBallMugenEdition2009/main/data/Backup/intro.def")]
+        [InlineData("https://raw.githubusercontent.com/TheNegumProject/DragonBallMugenEdition2009/main/data/Backup/intro.def")]
         public async Task Should_Count_Number_Of_Scenes_And_Print_Details(string path)
         {
             this.InitializeContainer();

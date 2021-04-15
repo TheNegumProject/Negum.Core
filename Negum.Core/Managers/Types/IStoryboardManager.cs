@@ -21,6 +21,9 @@ namespace Negum.Core.Managers.Types
 
     public interface IStoryboardSceneDef : IManagerSection
     {
+        /// <summary>
+        /// Path to the sprite file.
+        /// </summary>
         string SpriteFile => this.GetValue<string>("spr");
 
         /// <summary>
