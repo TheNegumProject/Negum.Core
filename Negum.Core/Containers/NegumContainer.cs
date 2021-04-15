@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using Negum.Core.Configurations;
@@ -162,7 +163,7 @@ namespace Negum.Core.Containers
         /// Parameters:
         /// Interface Type, Implementation Type
         /// </summary>
-        private static IDictionary<Type, Type> Types { get; } = new Dictionary<Type, Type>();
+        private static IDictionary<Type, Type> Types { get; } = new ConcurrentDictionary<Type, Type>();
 
         /// <summary>
         /// Contains already created instances. Dummy way to keep singletons.
@@ -173,7 +174,7 @@ namespace Negum.Core.Containers
         /// REMEMBER:
         /// When registering an instance in different IoC framework try to make sure it's registered as singleton.
         /// </summary>
-        private static IDictionary<Type, object> Instances { get; } = new Dictionary<Type, object>();
+        private static IDictionary<Type, object> Instances { get; } = new ConcurrentDictionary<Type, object>();
 
         static NegumDummyContainer()
         {
