@@ -1,5 +1,6 @@
 using Negum.Core.Configurations;
 using Negum.Core.Configurations.Animations;
+using Negum.Core.Containers;
 
 namespace Negum.Core.Readers
 {
@@ -98,25 +99,26 @@ namespace Negum.Core.Readers
 
         protected virtual void ParseAnimationData(AnimationSectionEntry animationEntry, string value)
         {
-            var parts = value.Replace(" ", "").Split(",");
+            var reader = NegumContainer.Resolve<IStringVectorReader>();
+            var vector = reader.ReadAsync(value).Result;
 
             var animation = new AnimationElement
             {
-                SpriteGroup = int.Parse(parts[0]),
-                SpriteImage = int.Parse(parts[1]),
-                OffsetX = int.Parse(parts[2]),
-                OffsetY = int.Parse(parts[3]),
-                DisplayTime = int.Parse(parts[4])
+                SpriteGroup = int.Parse(vector[0]),
+                SpriteImage = int.Parse(vector[1]),
+                OffsetX = int.Parse(vector[2]),
+                OffsetY = int.Parse(vector[3]),
+                DisplayTime = int.Parse(vector[4])
             };
 
-            if (parts.Length > 5)
+            if (vector.Length > 5)
             {
-                animation.Flip = parts[5];
+                animation.Flip = vector[5];
             }
 
-            if (parts.Length > 6)
+            if (vector.Length > 6)
             {
-                animation.Color = parts[6];
+                animation.Color = vector[6];
             }
 
             animationEntry.AddAnimationElement(animation);

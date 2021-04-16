@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
+using Negum.Core.Containers;
+using Negum.Core.Readers;
 
 namespace Negum.Core.Managers.Entries
 {
@@ -84,20 +86,18 @@ namespace Negum.Core.Managers.Entries
         public override ICharacterEntry Get()
         {
             var value = this.Section.GetValue<string>(this.FieldKey);
+            var reader = NegumContainer.Resolve<IStringVectorReader>();
+            var vector = reader.ReadAsync(value).Result;
 
-            var args = value
-                .Replace(" ", "")
-                .Split(",");
-
-            // Must be filled fields
-            this.Name = args[0];
-            this.StageFile = args[1];
+            // Fields which must be filled
+            this.Name = vector[0];
+            this.StageFile = vector[1];
 
             // Optional fields
-            this.MusicFile = this.GetArg(args, "music");
-            this.IncludeStage = int.Parse(this.GetArg(args, "includestage") ?? "-1");
-            this.Order = int.Parse(this.GetArg(args, "order") ?? "1");
-            this.IsRandomSelect = bool.Parse(this.GetArg(args, "randomselect") ?? "false");
+            this.MusicFile = this.GetArg(vector, "music");
+            this.IncludeStage = int.Parse(this.GetArg(vector, "includestage") ?? "-1");
+            this.Order = int.Parse(this.GetArg(vector, "order") ?? "1");
+            this.IsRandomSelect = bool.Parse(this.GetArg(vector, "randomselect") ?? "false");
 
             return this;
         }

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Negum.Core.Models.Math;
 using Negum.Core.Readers;
 
 namespace Negum.Core.Managers.Types
@@ -47,7 +48,7 @@ namespace Negum.Core.Managers.Types
         /// <summary>
         /// See: IAnimationSectionEntry.Boxes
         /// </summary>
-        IEnumerable<string> Boxes { get; }
+        IEnumerable<IBox> Boxes { get; }
 
         /// <summary>
         /// See: IAnimationSectionEntry.AnimationElements

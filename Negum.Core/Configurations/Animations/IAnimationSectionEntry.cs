@@ -28,7 +28,7 @@ namespace Negum.Core.Configurations.Animations
 
         /// <summary>
         /// Collection of boxes describing current animations.
-        /// Each box is build out of 4 values which describe 
+        /// Each box is build out of 4 values which describe x1, y1, x2, y2 values.
         /// </summary>
         IEnumerable<string> Boxes { get; }
 
@@ -53,7 +53,7 @@ namespace Negum.Core.Configurations.Animations
 
         public void AddBox(string box) =>
             ((List<string>) this.Boxes).Add(box);
-        
+
         public void AddAnimationElement(IAnimationElement element) =>
             ((List<IAnimationElement>) this.AnimationElements).Add(element);
     }

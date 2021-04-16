@@ -22,8 +22,19 @@ namespace Negum.Core.Tests.Managers
 
             var config = await this.ParseAnimation(path);
             var manager = (IAnimationManager) NegumContainer.Resolve<IAnimationManager>().UseConfiguration(config);
-            
+
             Assert.True(manager.Animations.Count() == 117);
+
+            var animation = manager.Animations.FirstOrDefault(a => a.ActionNumber == 6);
+
+            Assert.NotNull(animation);
+
+            var box = animation.Parts.FirstOrDefault().Boxes.FirstOrDefault();
+
+            Assert.True(box.Point1.X == 10);
+            Assert.True(box.Point1.Y == 0);
+            Assert.True(box.Point2.X == -10);
+            Assert.True(box.Point2.Y == -47);
         }
     }
 }

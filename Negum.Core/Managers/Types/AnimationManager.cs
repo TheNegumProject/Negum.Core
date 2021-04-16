@@ -2,6 +2,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Negum.Core.Configurations;
 using Negum.Core.Configurations.Animations;
+using Negum.Core.Containers;
+using Negum.Core.Models.Math;
+using Negum.Core.Readers;
 
 namespace Negum.Core.Managers.Types
 {
@@ -42,10 +45,10 @@ namespace Negum.Core.Managers.Types
         /// Keep for the reference.
         /// </summary>
         protected IAnimationSectionEntry Entry { get; }
-        
+
         public bool IsDefault { get; }
         public int TypeId { get; }
-        public IEnumerable<string> Boxes { get; }
+        public IEnumerable<IBox> Boxes { get; }
         public IEnumerable<IAnimationFrame> Frames { get; }
 
         public AnimationPart(IAnimationSectionEntry entry)
@@ -54,21 +57,33 @@ namespace Negum.Core.Managers.Types
 
             this.IsDefault = this.Entry.IsDefault;
             this.TypeId = this.Entry.TypeId;
-            this.Boxes = this.Entry.Boxes;
+
+            this.Boxes = this.Entry.Boxes
+                .Select(boxData =>
+                {
+                    var vectorReader = NegumContainer.Resolve<IStringVectorReader>();
+                    var vector = vectorReader.ReadAsync(boxData).Result;
+
+                    var boxReader = NegumContainer.Resolve<IBoxReader>();
+                    var box = boxReader.ReadAsync(vector).Result;
+
+                    return box;
+                })
+                .ToList();
 
             this.Frames = this.Entry.AnimationElements
                 .Select(frame => new AnimationFrame(frame))
                 .ToList();
         }
     }
-    
+
     public class AnimationFrame : IAnimationFrame
     {
         /// <summary>
         /// Keep for the reference.
         /// </summary>
         protected IAnimationElement Frame { get; }
-        
+
         public int SpriteGroup { get; }
         public int SpriteImage { get; }
         public int OffsetX { get; }
@@ -76,7 +91,7 @@ namespace Negum.Core.Managers.Types
         public int DisplayTime { get; }
         public string Flip { get; }
         public string Color { get; }
-        
+
         public AnimationFrame(IAnimationElement frame)
         {
             this.Frame = frame;

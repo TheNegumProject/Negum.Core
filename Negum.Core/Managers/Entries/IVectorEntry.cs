@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
+using Negum.Core.Containers;
+using Negum.Core.Models.Math;
+using Negum.Core.Readers;
 
 namespace Negum.Core.Managers.Entries
 {
@@ -11,14 +13,8 @@ namespace Negum.Core.Managers.Entries
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface IVectorEntry : IManagerSectionEntry<IVectorEntry>, IEnumerable<string>
+    public interface IVectorEntry : IManagerSectionEntry<IVectorEntry>, IVector<string>
     {
-        /// <summary>
-        /// Provides simple way to retrieve value from appropriate slot.
-        /// </summary>
-        /// <param name="index"></param>
-        string this[int index] { get; }
-
         /// <summary>
         /// Raw value passed to current entry.
         /// Exposed for any custom outside operations.
@@ -34,24 +30,23 @@ namespace Negum.Core.Managers.Entries
     /// </author>
     public class VectorEntry : ManagerSectionEntry<IVectorEntry>, IVectorEntry
     {
-        protected IList<string> Values { get; set; }
+        protected IVector<string> Vector { get; set; }
 
-        public string this[int index] => this.Values[index];
+        public string this[int index] => this.Vector[index];
 
         public string RawValue => this.Entry.Value;
+        public int Length => this.Vector.Length;
 
         public override IVectorEntry Get()
         {
-            this.Values = this.RawValue
-                .Replace(" ", "")
-                .Split(",")
-                .ToList();
+            var reader = NegumContainer.Resolve<IStringVectorReader>();
+            this.Vector = reader.ReadAsync(this.RawValue).Result;
 
             return this;
         }
 
         public IEnumerator<string> GetEnumerator() =>
-            this.Values.GetEnumerator();
+            this.Vector.GetEnumerator();
 
         IEnumerator IEnumerable.GetEnumerator() =>
             GetEnumerator();

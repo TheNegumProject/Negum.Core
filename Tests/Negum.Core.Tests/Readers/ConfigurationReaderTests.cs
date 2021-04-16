@@ -30,9 +30,10 @@ namespace Negum.Core.Tests.Readers
         [InlineData("OptionBGdef", 1)]
         public async Task Should_Read_Motif_With_Subsections(string sectionName, int subsectionsCount)
         {
-            const string filePath =
-                "https://raw.githubusercontent.com/TheNegumProject/UnpackedMugen/main/data/mugen1/system.def";
+            const string filePath = "https://raw.githubusercontent.com/TheNegumProject/UnpackedMugen/main/data/mugen1/system.def";
+
             this.InitializeContainer();
+
             var config = await this.ParseWithSubsections(filePath);
             var section = config.FirstOrDefault(s => s.Name.Equals(sectionName));
             Assert.True(section.Subsections.Count() == subsectionsCount);
@@ -43,18 +44,19 @@ namespace Negum.Core.Tests.Readers
         public async Task Should_Read_Animation_File(string path)
         {
             this.InitializeContainer();
+
             var config = await this.ParseAnimation(path);
 
             Assert.True(config.Any());
 
-            Assert.True(((IAnimationSection) config
-                    .Cast<IAnimationSection>()
-                    .FirstOrDefault())
+            Assert.True(config
+                .Cast<IAnimationSection>()
+                .FirstOrDefault()
                 .Count() == 1);
 
-            Assert.True(((IAnimationSection) config
-                    .Cast<IAnimationSection>()
-                    .FirstOrDefault())
+            Assert.True(config
+                .Cast<IAnimationSection>()
+                .FirstOrDefault()
                 .Count() == 1);
 
             Assert.True(((IAnimationSectionEntry) config
@@ -63,15 +65,25 @@ namespace Negum.Core.Tests.Readers
                     .ElementAt(0))
                 .AnimationElements
                 .Count() == 9);
+
+            var section = config
+                .Cast<IAnimationSection>()
+                .FirstOrDefault(s => s.ActionNumber == 6);
+
+            var entry = section.FirstOrDefault() as IAnimationSectionEntry;
+
+            Assert.True(entry.Boxes.Count() == 3);
         }
-        
+
         [Theory]
         [InlineData("https://raw.githubusercontent.com/TheNegumProject/UnpackedMugen/main/data/common1.cns")]
         [InlineData("https://raw.githubusercontent.com/TheNegumProject/UnpackedMugen/main/chars/kfm720/kfm720.cns")]
         public async Task Should_Read_Constants(string file)
         {
             this.InitializeContainer();
+
             var config = await this.ParseConstants(file);
+
             Assert.True(config.Any());
         }
     }
