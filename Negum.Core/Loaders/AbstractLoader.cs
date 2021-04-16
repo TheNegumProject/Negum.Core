@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Negum.Core.Containers;
 using Negum.Core.Engines;
 using Negum.Core.Managers;
+using Negum.Core.Managers.Types;
+using Negum.Core.Models.Data;
 using Negum.Core.Models.Sounds;
 using Negum.Core.Models.Sprites;
 using Negum.Core.Readers;
@@ -21,6 +23,23 @@ namespace Negum.Core.Loaders
     /// </author>
     public abstract class AbstractLoader
     {
+        protected virtual async Task<IStoryboard> ReadStoryboardAsync(string dirName, string fileName)
+        {
+            if (string.IsNullOrWhiteSpace(fileName))
+            {
+                return null;
+            }
+
+            var defFilePath = this.FindFile(dirName, fileName);
+            var storyboard = new Storyboard();
+
+            storyboard.Manager = await this.ReadManagerAsync<IStoryboardManager>(defFilePath);
+            storyboard.Animation = await this.ReadManagerAsync<IAnimationManager, IAnimationReader>(defFilePath);
+            storyboard.Sprite = await this.GetSpriteAsync(dirName, storyboard.Manager.SceneDef.SpriteFile);
+
+            return storyboard;
+        }
+
         protected virtual async Task<ISound> GetSoundAsync(string dirName, string soundPath)
         {
             var file = this.FindFile(dirName, soundPath);

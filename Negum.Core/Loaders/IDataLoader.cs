@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using Negum.Core.Engines;
 using Negum.Core.Managers.Types;
 using Negum.Core.Models.Data;
-using Negum.Core.Readers;
 
 namespace Negum.Core.Loaders
 {
@@ -35,41 +34,25 @@ namespace Negum.Core.Loaders
 
             data.ConfigManager = await this.FindManagerAsync<IConfigurationManager>(dir, configFileName);
 
-            var motifFile = this.FindFile(dir, data.ConfigManager.Options.MotifFile);
-            
+            var motifFileName = data.ConfigManager.Options.MotifFile;
+            var motifFile = this.FindFile(dir, motifFileName);
+
+            if (motifFile == null)
+            {
+                throw new FileNotFoundException($"Cannot find motif file: {motifFileName}");
+            }
+
+            var motifDirFullName = motifFile.Directory.FullName;
+
             data.MotifManager = await this.FindManagerAsync<IMotifManager>(dir, data.ConfigManager.Options.MotifFile);
-            data.MotifSprite = await this.GetSpriteAsync(motifFile.Directory.FullName, data.MotifManager.Files.SpriteFile);
-            data.MotifSound = await this.GetSoundAsync(motifFile.Directory.FullName, data.MotifManager.Files.SoundFile);
-            data.SelectionManager = await this.FindManagerAsync<ISelectionManager>(motifFile.Directory.FullName, data.MotifManager.Files.SelectionFile);
-            data.FightManager = await this.FindManagerAsync<IFightManager>(motifFile.Directory.FullName, data.MotifManager.Files.FightFile);
-
-            var motifLogoPath = data.MotifManager.Files.LogoStoryboardDefinition;
-
-            if (!string.IsNullOrWhiteSpace(motifLogoPath))
-            {
-                data.Logo = await this.ReadStoryboardAsync(motifFile.Directory.FullName, motifLogoPath);
-            }
-
-            var motifIntroPath = data.MotifManager.Files.IntroStoryboardDefinition;
-
-            if (!string.IsNullOrWhiteSpace(motifIntroPath))
-            {
-                data.Intro = await this.ReadStoryboardAsync(motifFile.Directory.FullName, motifIntroPath);
-            }
+            data.MotifSprite = await this.GetSpriteAsync(motifDirFullName, data.MotifManager.Files.SpriteFile);
+            data.MotifSound = await this.GetSoundAsync(motifDirFullName, data.MotifManager.Files.SoundFile);
+            data.SelectionManager = await this.FindManagerAsync<ISelectionManager>(motifDirFullName, data.MotifManager.Files.SelectionFile);
+            data.FightManager = await this.FindManagerAsync<IFightManager>(motifDirFullName, data.MotifManager.Files.FightFile);
+            data.Logo = await this.ReadStoryboardAsync(motifDirFullName, data.MotifManager.Files.LogoStoryboardDefinition);
+            data.Intro = await this.ReadStoryboardAsync(motifDirFullName, data.MotifManager.Files.IntroStoryboardDefinition);
 
             return data;
-        }
-
-        protected virtual async Task<IStoryboard> ReadStoryboardAsync(string dirName, string fileName)
-        {
-            var defFilePath = this.FindFile(dirName, fileName);
-            var storyboard = new Storyboard();
-            
-            storyboard.Manager = await this.ReadManagerAsync<IStoryboardManager>(defFilePath);
-            storyboard.Animation = await this.ReadManagerAsync<IAnimationManager, IAnimationReader>(defFilePath);
-            storyboard.Sprite = await this.GetSpriteAsync(dirName, storyboard.Manager.SceneDef.SpriteFile);
-
-            return storyboard;
         }
 
         protected override FileInfo FindFile(string dirName, string fileName)
@@ -78,7 +61,7 @@ namespace Negum.Core.Loaders
             {
                 fileName = fileName.Replace("data/", "");
             }
-            
+
             return base.FindFile(dirName, fileName);
         }
     }

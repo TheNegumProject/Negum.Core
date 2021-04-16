@@ -51,7 +51,7 @@ namespace Negum.Core.Loaders
 
             if (characterDefFile == null)
             {
-                throw new ArgumentException($"Missing DEF file in: \"{dir.FullName}\" with name: \"{ dir.Name }.def\"");
+                throw new ArgumentException($"Missing DEF file in: \"{dir.FullName}\" with name: \"{dir.Name}.def\"");
             }
 
             var character = new Character
@@ -68,30 +68,26 @@ namespace Negum.Core.Loaders
             character.Sprite = await this.GetSpriteAsync(characterDefFile.DirectoryName, character.CharacterManager.Files.SpriteFiles);
             character.AnimationManager = await this.FindManagerAsync<IAnimationManager>(characterDefFile.DirectoryName, character.CharacterManager.Files.AnimationFile);
             character.Sound = await this.GetSoundAsync(characterDefFile.DirectoryName, character.CharacterManager.Files.SoundFile);
-
-            if (character.CharacterManager.Files.AiHintsDataFile != null)
-            {
-                character.AiHints = new CharacterAiHints
-                {
-                    File = new FileInfo(Path.Combine(characterDefFile.DirectoryName, character.CharacterManager.Files.AiHintsDataFile))
-                };
-            }
-
-            var introStoryboardFile = character.CharacterManager.Arcade.IntroStoryboardFile;
-            if (!string.IsNullOrWhiteSpace(introStoryboardFile))
-            {
-                character.IntroManager = await this.ReadManagerAsync<ICharacterStoryboardSceneManager>(characterDefFile, introStoryboardFile);
-                character.IntroSprite = await this.GetSpriteAsync(characterDefFile.DirectoryName, character.IntroManager.SceneDef.SpriteFile);
-            }
-
-            var endingStoryboardFile = character.CharacterManager.Arcade.EndingStoryboardFile;
-            if (!string.IsNullOrWhiteSpace(endingStoryboardFile))
-            {
-                character.EndingManager = await this.ReadManagerAsync<ICharacterStoryboardSceneManager>(characterDefFile, endingStoryboardFile);
-                character.EndingSprite = await this.GetSpriteAsync(characterDefFile.DirectoryName, character.EndingManager.SceneDef.SpriteFile);
-            }
+            character.AiHints = this.ReadAiHints(characterDefFile.DirectoryName, character.CharacterManager.Files.AiHintsDataFile);
+            character.Intro = await this.ReadStoryboardAsync(characterDefFile.FullName, character.CharacterManager.Arcade.IntroStoryboardFile);
+            character.Ending = await this.ReadStoryboardAsync(characterDefFile.FullName, character.CharacterManager.Arcade.EndingStoryboardFile);
             
             return character;
+        }
+
+        protected virtual ICharacterAiHints ReadAiHints(string dirName, string dataFile)
+        {
+            if (string.IsNullOrWhiteSpace(dataFile))
+            {
+                return null;
+            }
+            
+            var aiHints = new CharacterAiHints
+            {
+                File = new FileInfo(Path.Combine(dirName, dataFile))
+            };
+
+            return aiHints;
         }
 
         protected virtual async Task<ICharacterConstantsManager> ReadCommonStatesAsync(FileInfo characterDefFile, string path)

@@ -15,6 +15,21 @@ namespace Negum.Core.Tests.Managers
     public class StoryboardManagerTests : TestBase
     {
         [Theory]
+        [InlineData("https://raw.githubusercontent.com/TheNegumProject/UnpackedMugen/main/chars/kfm720/intro.def", 5)]
+        [InlineData("https://raw.githubusercontent.com/TheNegumProject/UnpackedMugen/main/chars/kfm720/ending.def", 3)]
+        [InlineData("https://raw.githubusercontent.com/TheNegumProject/UnpackedMugen/main/chars/kfm/intro.def", 5)]
+        public async Task Should_Count_Number_Of_Scenes(string path, int sceneCount)
+        {
+            this.InitializeContainer();
+
+            var config = await this.ParseWithSubsections(path);
+            var manager = (IStoryboardManager) NegumContainer.Resolve<IStoryboardManager>().UseConfiguration(config);
+            var scenes = manager.Scenes;
+
+            Assert.True(scenes.Count() == sceneCount);
+        }
+
+        [Theory]
         [InlineData("https://raw.githubusercontent.com/TheNegumProject/DragonBallMugenEdition2009/main/data/Backup/intro.def")]
         public async Task Should_Count_Number_Of_Scenes_And_Print_Details(string path)
         {
@@ -32,7 +47,8 @@ namespace Negum.Core.Tests.Managers
             Assert.True(timeDetails == 35);
 
             var introConfig = await this.ParseAnimation(path);
-            var introManager = (IAnimationManager) NegumContainer.Resolve<IAnimationManager>().UseConfiguration(introConfig);
+            var introManager =
+                (IAnimationManager) NegumContainer.Resolve<IAnimationManager>().UseConfiguration(introConfig);
             var actions = introManager.Animations;
 
             Assert.True(actions.Count() == 3);
