@@ -1,5 +1,4 @@
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using Negum.Core.Containers;
 using Negum.Core.Extensions;
@@ -63,7 +62,7 @@ namespace Negum.Core.Readers.Sff
                 {
                     binaryReader.BaseStream.Position -= 1;
                     var count = (int) (subFile.NextSubFileOffset - binaryReader.BaseStream.Position);
-                    subFile.Image = binaryReader.ReadBytes(count);
+                    subFile.RawImage = binaryReader.ReadBytes(count);
                 }
 
                 if (i == 0)
@@ -74,11 +73,11 @@ namespace Negum.Core.Readers.Sff
                     sprite.Palette = palette.Reverse();
                 }
 
-                if (subFile.Image != null)
+                if (subFile.RawImage != null)
                 {
                     var pcxDetails = new PcxDetails
                     {
-                        Stream = new MemoryStream(subFile.Image.ToArray()),
+                        Stream = new MemoryStream(subFile.RawImage),
                         Palette = subFile.SamePalette == 1 ? sprite.Palette : null
                     };
 
