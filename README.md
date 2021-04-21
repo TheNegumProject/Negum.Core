@@ -74,7 +74,7 @@ string characterName = engine.Characters.FirstOrDefault().CharacterManager.Info.
 </br>
 
 ## 3. Default Usage
-Default usage of Negum.Core can be found in [Negum.Unity](https://github.com/TheNegumProject/Negum.Unity) </br>
+Default usage of Negum.Core can be found in [Negum.Game](https://github.com/TheNegumProject/Negum.Game) </br>
 It should not have any external dependencies except .NET libraries.
 
 </br>
