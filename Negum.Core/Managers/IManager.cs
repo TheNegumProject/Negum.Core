@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -66,7 +67,8 @@ namespace Negum.Core.Managers
         public TManagerSection GetSection<TManagerSection>(string sectionName)
             where TManagerSection : IManagerSection =>
             this.GetSections<TManagerSection>(sectionName)
-                .FirstOrDefault();
+                .FirstOrDefault()
+            ?? throw new ArgumentException($"Cannot find section: {sectionName}", nameof(sectionName));
 
         public IEnumerable<TManagerSection> GetSections<TManagerSection>(string sectionName)
             where TManagerSection : IManagerSection =>
