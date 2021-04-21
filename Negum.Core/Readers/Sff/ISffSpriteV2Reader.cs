@@ -59,7 +59,7 @@ namespace Negum.Core.Readers.Sff
 
             var subFile = new SpriteSubFileSffV2
             {
-                Group = binaryReader.ReadUInt16(),
+                GroupNumber = binaryReader.ReadUInt16(),
                 ItemNumber = binaryReader.ReadUInt16(),
                 Width = binaryReader.ReadUInt16(),
                 Height = binaryReader.ReadUInt16(),

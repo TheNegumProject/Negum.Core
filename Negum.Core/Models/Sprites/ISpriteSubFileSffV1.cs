@@ -13,11 +13,7 @@ namespace Negum.Core.Models.Sprites
     {
         uint NextSubFileOffset { get; }
         uint PcxDataLength { get; }
-        ushort X { get; }
-        ushort Y { get; }
-        ushort GroupNumber { get; }
         ushort ImageNumber { get; }
-        ushort Index { get; }
         byte SamePalette { get; }
         IPcxImage PcxImage { get; }
         string Comment { get; }
@@ -33,13 +29,11 @@ namespace Negum.Core.Models.Sprites
     {
         public uint NextSubFileOffset { get; internal set; }
         public uint PcxDataLength { get; internal set; }
-        public ushort X { get; internal set; }
-        public ushort Y { get; internal set; }
-        public ushort GroupNumber { get; internal set; }
         public ushort ImageNumber { get; internal set; }
-        public ushort Index { get; internal set; }
         public byte SamePalette { get; internal set; }
         public IPcxImage PcxImage { get; internal set; }
         public string Comment { get; internal set; }
+        public override ushort Width => this.PcxImage.Width;
+        public override ushort Height => this.PcxImage.Height;
     }
 }
