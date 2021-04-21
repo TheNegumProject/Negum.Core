@@ -50,8 +50,7 @@ namespace Negum.Core.Readers
 
             const int paletteColors = 16; // 16 colors RGB
             var paletteBuffer = binaryReader.ReadBytes(paletteColors * 3); // 16 colors * RGB
-            var paletteStream = new MemoryStream(paletteBuffer);
-            var colorPalette = paletteReader.ReadExact(paletteStream, paletteColors);
+            var colorPalette = paletteReader.ReadExact(paletteBuffer, paletteColors, false);
             image.ColorPalette = colorPalette.Reverse();
 
             image.Reserved = binaryReader.ReadByte();
@@ -66,8 +65,7 @@ namespace Negum.Core.Readers
                 image.Signature = binaryReader.ReadByte();
 
                 paletteBuffer = binaryReader.ReadBytes(768); // 256 colors * RGB
-                paletteStream = new MemoryStream(paletteBuffer);
-                var palette = await paletteReader.ReadAsync(paletteStream);
+                var palette = await paletteReader.ReadAsync(paletteBuffer);
                 image.Palette = palette.Reverse();
             }
             else
@@ -110,7 +108,7 @@ namespace Negum.Core.Readers
                         pixels.Add(color.Red);
                         pixels.Add(color.Green);
                         pixels.Add(color.Blue);
-                        pixels.Add(255);
+                        pixels.Add(color.Alpha);
                     }
 
                     x++;

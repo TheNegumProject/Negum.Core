@@ -12,15 +12,25 @@ namespace Negum.Core.Readers
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface IPaletteReader : IStreamReader<IPalette>
+    public interface IPaletteReader : IStreamReader<IPalette>, IReader<byte[], IPalette>
     {
         /// <summary>
         /// Reads a specified amount of colors from the stream.
         /// </summary>
-        /// <param name="stream"></param>
-        /// <param name="count"></param>
+        /// <param name="paletteData">Array of palette data.</param>
+        /// <param name="count">Number of colors in palette.</param>
+        /// <param name="readAlpha">True if should read alpha; false otherwise - by default will set alpha to 255.</param>
         /// <returns>Palette with read colors.</returns>
-        IPalette ReadExact(Stream stream, int count);
+        IPalette ReadExact(byte[] paletteData, int count, bool readAlpha);
+
+        /// <summary>
+        /// Reads a specified amount of colors from the stream.
+        /// </summary>
+        /// <param name="stream">Stream with the palette data.</param>
+        /// <param name="count">Number of colors in palette.</param>
+        /// <param name="readAlpha">True if should read alpha; false otherwise - by default will set alpha to 255.</param>
+        /// <returns>Palette with read colors.</returns>
+        IPalette ReadExact(Stream stream, int count, bool readAlpha);
     }
 
     /// <summary>
@@ -31,10 +41,16 @@ namespace Negum.Core.Readers
     /// </author>
     public class PaletteReader : IPaletteReader
     {
-        public async Task<IPalette> ReadAsync(Stream stream) =>
-            await Task.FromResult(this.ReadExact(stream, 256));
+        public async Task<IPalette> ReadAsync(byte[] input) =>
+            await this.ReadAsync(new MemoryStream(input));
 
-        public IPalette ReadExact(Stream stream, int count)
+        public async Task<IPalette> ReadAsync(Stream stream) =>
+            await Task.FromResult(this.ReadExact(stream, 256, false));
+
+        public IPalette ReadExact(byte[] paletteData, int count, bool readAlpha) =>
+            this.ReadExact(new MemoryStream(paletteData), count, readAlpha);
+
+        public IPalette ReadExact(Stream stream, int count, bool readAlpha)
         {
             var binaryReader = new BinaryReader(stream);
             var palette = new Palette();
@@ -46,6 +62,7 @@ namespace Negum.Core.Readers
                     Red = binaryReader.ReadByte(),
                     Green = binaryReader.ReadByte(),
                     Blue = binaryReader.ReadByte(),
+                    Alpha = readAlpha ? binaryReader.ReadByte() : (byte) 255
                 };
 
                 palette.Colors.Push(color);

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Negum.Core.Models.Palettes;
 
 namespace Negum.Core.Models.Sprites
 {
@@ -45,6 +46,11 @@ namespace Negum.Core.Models.Sprites
         /// Index of the current sprite.
         /// </summary>
         ushort Index { get; }
+
+        /// <summary>
+        /// Palette used for the current image.
+        /// </summary>
+        IPalette Palette { get; }
     }
 
     /// <summary>
@@ -62,5 +68,6 @@ namespace Negum.Core.Models.Sprites
         public virtual ushort X { get; internal set; }
         public virtual ushort Y { get; internal set; }
         public virtual ushort Index { get; internal set; }
+        public virtual IPalette Palette { get; internal set; }
     }
 }

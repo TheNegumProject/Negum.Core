@@ -1,6 +1,7 @@
 using System.IO;
 using System.Threading.Tasks;
 using Negum.Core.Containers;
+using Negum.Core.Models.Palettes;
 using Negum.Core.Models.Sprites;
 using Negum.Core.Readers.Sff.V2;
 
@@ -137,7 +138,7 @@ namespace Negum.Core.Readers.Sff
             return subFile;
         }
 
-        protected virtual byte[] GetPaletteData(BinaryReader binaryReader, ushort paletteIndex, ISffSpriteV2 sprite)
+        protected virtual IPalette GetPaletteData(BinaryReader binaryReader, ushort paletteIndex, ISffSpriteV2 sprite)
         {
             binaryReader.BaseStream.Seek(sprite.PaletteOffset + paletteIndex * 16, SeekOrigin.Begin);
 
@@ -150,7 +151,12 @@ namespace Negum.Core.Readers.Sff
 
             binaryReader.BaseStream.Seek(sprite.LDataLength + paletteLDataOffset, SeekOrigin.Begin);
 
-            return binaryReader.ReadBytes((int) paletteLDataLength);
+            var paletteData = binaryReader.ReadBytes((int) paletteLDataLength);
+
+            var paletteReader = NegumContainer.Resolve<IPaletteReader>();
+            var palette = paletteReader.ReadExact(paletteData, 256, true);
+
+            return palette;
         }
     }
 }

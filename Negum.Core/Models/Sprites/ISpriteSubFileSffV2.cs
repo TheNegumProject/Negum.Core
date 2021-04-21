@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace Negum.Core.Models.Sprites
 {
     /// <summary>
@@ -18,7 +16,6 @@ namespace Negum.Core.Models.Sprites
         uint DataLength { get; }
         ushort PaletteIndex { get; }
         ushort Flags { get; }
-        IEnumerable<byte> Palette { get; }
         byte PngFormat { get; }
     }
 
@@ -37,7 +34,6 @@ namespace Negum.Core.Models.Sprites
         public uint DataLength { get; internal set; }
         public ushort PaletteIndex { get; internal set; }
         public ushort Flags { get; internal set; }
-        public IEnumerable<byte> Palette { get; internal set; }
         public byte PngFormat { get; internal set; }
     }
 }

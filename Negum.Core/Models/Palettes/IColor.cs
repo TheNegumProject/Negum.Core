@@ -12,6 +12,7 @@ namespace Negum.Core.Models.Palettes
         byte Red { get; }
         byte Green { get; }
         byte Blue { get; }
+        byte Alpha { get; }
     }
 
     /// <summary>
@@ -25,5 +26,6 @@ namespace Negum.Core.Models.Palettes
         public byte Red { get; internal init; }
         public byte Green { get; internal init; }
         public byte Blue { get; internal init; }
+        public byte Alpha { get; internal init; }
     }
 }

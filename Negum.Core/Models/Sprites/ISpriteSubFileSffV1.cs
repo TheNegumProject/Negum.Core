@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Negum.Core.Models.Palettes;
 using Negum.Core.Models.Pcx;
 
 namespace Negum.Core.Models.Sprites
@@ -39,5 +40,6 @@ namespace Negum.Core.Models.Sprites
         public override IEnumerable<byte> Image => this.PcxImage.Pixels;
         public override ushort Width => this.PcxImage.Width;
         public override ushort Height => this.PcxImage.Height;
+        public override IPalette Palette => this.PcxImage.Palette;
     }
 }

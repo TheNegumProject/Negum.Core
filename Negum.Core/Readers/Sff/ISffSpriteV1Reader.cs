@@ -68,8 +68,7 @@ namespace Negum.Core.Readers.Sff
                 if (i == 0)
                 {
                     var paletteData = binaryReader.ReadBytes(768);
-                    var paletteStream = new MemoryStream(paletteData);
-                    var palette = await paletteReader.ReadAsync(paletteStream);
+                    var palette = await paletteReader.ReadAsync(paletteData);
                     sprite.Palette = palette.Reverse();
                 }
 
