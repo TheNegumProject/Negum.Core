@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -75,13 +76,13 @@ namespace Negum.Core.Readers
             }
 
             binaryReader.BaseStream.Position = 128;
-            
+
             image.Width++;
             image.Height++;
 
             var x = image.X;
             var y = image.Y;
-            var pixels = new byte[image.Width * image.Height * 4]; // width * height * RGBA
+            var pixels = new List<byte>();
 
             while (y < image.Height)
             {
@@ -104,11 +105,12 @@ namespace Negum.Core.Readers
                 {
                     if (value != 0)
                     {
-                        var pos = (x + y * image.Width) * 4;
-                        pixels[pos + 0] = image.Palette.ElementAt(value).Red;
-                        pixels[pos + 1] = image.Palette.ElementAt(value).Green;
-                        pixels[pos + 2] = image.Palette.ElementAt(value).Blue;
-                        pixels[pos + 3] = 255;
+                        var color = image.Palette.ElementAt(value);
+
+                        pixels.Add(color.Red);
+                        pixels.Add(color.Green);
+                        pixels.Add(color.Blue);
+                        pixels.Add(255);
                     }
 
                     x++;
