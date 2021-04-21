@@ -60,12 +60,12 @@ namespace Negum.Core.Readers.Sff
             var subFile = new SpriteSubFileSffV2
             {
                 Group = binaryReader.ReadUInt16(),
-                Index = binaryReader.ReadUInt16(),
+                ItemNumber = binaryReader.ReadUInt16(),
                 Width = binaryReader.ReadUInt16(),
                 Height = binaryReader.ReadUInt16(),
                 X = binaryReader.ReadUInt16(),
                 Y = binaryReader.ReadUInt16(),
-                LinkIndex = binaryReader.ReadUInt16(),
+                Index = binaryReader.ReadUInt16(),
                 Format = binaryReader.ReadByte(),
                 Depth = binaryReader.ReadByte(),
                 DataOffset = binaryReader.ReadUInt32(),
@@ -76,7 +76,7 @@ namespace Negum.Core.Readers.Sff
 
             if (subFile.DataLength == 0)
             {
-                return await this.ReadSubFileAsync(binaryReader, sprite, subFile.LinkIndex);
+                return await this.ReadSubFileAsync(binaryReader, sprite, subFile.Index);
             }
 
             binaryReader.BaseStream.Seek((subFile.Flags == 1 ? sprite.TDataOffset : sprite.LDataOffset) +
@@ -103,6 +103,8 @@ namespace Negum.Core.Readers.Sff
                     subFile.Palette = this.GetPaletteData(binaryReader, subFile.PaletteIndex, sprite);
                     subFile.Image = await sffRle8Reader.ReadAsync(subFile.Image);
                     break;
+
+                // TODO: case 3: // rle5 type
 
                 case 4:
                     var sffLz5Reader = NegumContainer.Resolve<ISffLz5Reader>();
@@ -140,9 +142,9 @@ namespace Negum.Core.Readers.Sff
             binaryReader.BaseStream.Seek(sprite.PaletteOffset + paletteIndex * 16, SeekOrigin.Begin);
 
             var paletteGroup = binaryReader.ReadUInt16();
-            var index = binaryReader.ReadUInt16(); // TODO: PaletteIndex ???
+            var paletteItemNumber = binaryReader.ReadUInt16();
             var paletteColorNumber = binaryReader.ReadUInt16();
-            var paletteLinkIndex = binaryReader.ReadUInt16();
+            var index = binaryReader.ReadUInt16();
             var paletteLDataOffset = binaryReader.ReadUInt32();
             var paletteLDataLength = binaryReader.ReadUInt32();
 

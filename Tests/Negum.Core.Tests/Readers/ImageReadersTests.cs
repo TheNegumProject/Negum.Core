@@ -1,4 +1,3 @@
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Negum.Core.Containers;
@@ -38,6 +37,8 @@ namespace Negum.Core.Tests.Readers
         // [InlineData("/Users/kdobrzynski/Downloads/gogetassj4.sff")] // 1.010
         // [InlineData("/Users/kdobrzynski/Downloads/kakaroto.sff")] // 1.010
         // [InlineData("/Users/kdobrzynski/Downloads/Future.sff")] // 1.010
+        [InlineData("/Users/kdobrzynski/Downloads/UnpackedMugen-main/chars/Goku-SSJ2/samplesprite.sff")]
+        [InlineData("/Users/kdobrzynski/Downloads/UnpackedMugen-main/chars/Goku-SSJ2/gokuhd.sff")]
         public async Task Should_Parse_Sprite_File_And_Images_SFFv1(string url)
         {
             this.InitializeContainer();
@@ -52,17 +53,6 @@ namespace Negum.Core.Tests.Readers
 
             Assert.True(sffSprite.SpriteSubFiles.Any());
             Assert.True(sffSprite.SpriteSubFiles.Count() == sffSprite.Images);
-            
-            var image = sffSprite.SpriteSubFiles.ElementAt(0).Image;
-            
-            Assert.True(image != null);
-            
-            var pcxStream = new MemoryStream(image.ToArray());
-            
-            var pcxReader = NegumContainer.Resolve<IPcxReader>();
-            var pcxImage = await pcxReader.ReadAsync(pcxStream);
-            
-            Assert.True(pcxImage.Pixels.Any());
         }
         
         [Theory]
@@ -82,6 +72,8 @@ namespace Negum.Core.Tests.Readers
         // [InlineData("/Users/kdobrzynski/Downloads/Vegeta_JUS.sff")] // 2.010
         // [InlineData("/Users/kdobrzynski/Downloads/Super_Chikara_End.sff")] // 2.010
         // [InlineData("/Users/kdobrzynski/Downloads/TimeChamber.sff")] // 2.010
+        [InlineData("/Users/kdobrzynski/Downloads/UnpackedMugen-main/chars/kfm/kfm.sff")] // 2.010
+        [InlineData("/Users/kdobrzynski/Downloads/UnpackedMugen-main/chars/kfm720/kfm720.sff")] // 2.010
         public async Task Should_Parse_Sprite_File_And_Images_SFFv2(string url)
         {
             this.InitializeContainer();

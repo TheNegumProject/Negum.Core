@@ -16,7 +16,7 @@ namespace Negum.Core.Readers
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface IPcxReader : IStreamReader<IPcxImage>
+    public interface IPcxReader : IReader<IPcxDetails, IPcxImage>
     {
     }
 
@@ -28,9 +28,9 @@ namespace Negum.Core.Readers
     /// </author>
     public class PcxReader : IPcxReader
     {
-        public async Task<IPcxImage> ReadAsync(Stream stream)
+        public async Task<IPcxImage> ReadAsync(IPcxDetails pcxDetails)
         {
-            var binaryReader = new BinaryReader(stream);
+            var binaryReader = new BinaryReader(pcxDetails.Stream);
             var paletteReader = NegumContainer.Resolve<IPaletteReader>();
 
             var image = new PcxImage
@@ -41,13 +41,13 @@ namespace Negum.Core.Readers
                 BitPerPixel = binaryReader.ReadByte(),
                 X = binaryReader.ReadUInt16(),
                 Y = binaryReader.ReadUInt16(),
-                Width = (ushort) (binaryReader.ReadUInt16() + 1), // We can't increment it later
-                Height = (ushort) (binaryReader.ReadUInt16() + 1), // Same as above
+                Width = binaryReader.ReadUInt16(),
+                Height = binaryReader.ReadUInt16(),
                 HRes = binaryReader.ReadUInt16(),
                 VRes = binaryReader.ReadUInt16()
             };
 
-            const int paletteColors = 16;
+            const int paletteColors = 16; // 16 colors RGB
             var paletteBuffer = binaryReader.ReadBytes(paletteColors * 3); // 16 colors * RGB
             var paletteStream = new MemoryStream(paletteBuffer);
             var colorPalette = paletteReader.ReadExact(paletteStream, paletteColors);
@@ -58,16 +58,26 @@ namespace Negum.Core.Readers
             image.Bpl = binaryReader.ReadByte();
             image.PaletteInfo = binaryReader.ReadUInt16();
 
-            // 769 => (256 colors * RGB) + 1 for signature
-            binaryReader.BaseStream.Position = binaryReader.BaseStream.Length - 769;
-            image.Signature = binaryReader.ReadByte();
+            if (pcxDetails.Palette == null)
+            {
+                // 769 => (256 colors * RGB) + 1 for signature
+                binaryReader.BaseStream.Position = binaryReader.BaseStream.Length - 769;
+                image.Signature = binaryReader.ReadByte();
 
-            paletteBuffer = binaryReader.ReadBytes(768); // 256 colors * RGB
-            paletteStream = new MemoryStream(paletteBuffer);
-            var palette = await paletteReader.ReadAsync(paletteStream);
-            image.Palette = palette.Reverse();
+                paletteBuffer = binaryReader.ReadBytes(768); // 256 colors * RGB
+                paletteStream = new MemoryStream(paletteBuffer);
+                var palette = await paletteReader.ReadAsync(paletteStream);
+                image.Palette = palette.Reverse();
+            }
+            else
+            {
+                image.Palette = pcxDetails.Palette;
+            }
 
             binaryReader.BaseStream.Position = 128;
+            
+            image.Width++;
+            image.Height++;
 
             var x = image.X;
             var y = image.Y;

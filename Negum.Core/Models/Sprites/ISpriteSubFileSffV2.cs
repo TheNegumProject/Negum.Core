@@ -12,12 +12,12 @@ namespace Negum.Core.Models.Sprites
     public interface ISpriteSubFileSffV2 : ISpriteSubFile
     {
         ushort Group { get; }
-        ushort Index { get; }
+        ushort ItemNumber { get; }
         ushort Width { get; }
         ushort Height { get; }
         ushort X { get; }
         ushort Y { get; }
-        ushort LinkIndex { get; }
+        ushort Index { get; }
         byte Format { get; }
         byte Depth { get; }
         uint DataOffset { get; }
@@ -37,12 +37,12 @@ namespace Negum.Core.Models.Sprites
     public class SpriteSubFileSffV2 : SpriteSubFile, ISpriteSubFileSffV2
     {
         public ushort Group { get; internal set; }
-        public ushort Index { get; internal set; }
+        public ushort ItemNumber { get; internal set; }
         public ushort Width { get; internal set; }
         public ushort Height { get; internal set; }
         public ushort X { get; internal set; }
         public ushort Y { get; internal set; }
-        public ushort LinkIndex { get; internal set; }
+        public ushort Index { get; internal set; }
         public byte Format { get; internal set; }
         public byte Depth { get; internal set; }
         public uint DataOffset { get; internal set; }

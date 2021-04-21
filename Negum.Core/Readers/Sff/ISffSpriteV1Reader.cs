@@ -1,7 +1,9 @@
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using Negum.Core.Containers;
 using Negum.Core.Extensions;
+using Negum.Core.Models.Pcx;
 using Negum.Core.Models.Sprites;
 
 namespace Negum.Core.Readers.Sff
@@ -44,37 +46,47 @@ namespace Negum.Core.Readers.Sff
 
             for (var i = 0; i < sprite.Images; ++i)
             {
-                var nextSubFile = binaryReader.ReadUInt32();
-                var subFileLength = binaryReader.ReadUInt32();
-
                 var subFile = new SpriteSubFileSffV1
                 {
+                    NextSubFileOffset = binaryReader.ReadUInt32(),
+                    PcxDataLength = binaryReader.ReadUInt32(),
                     X = binaryReader.ReadUInt16(),
                     Y = binaryReader.ReadUInt16(),
                     GroupNumber = binaryReader.ReadUInt16(),
                     ImageNumber = binaryReader.ReadUInt16(),
-                    IndexPreviousCopy = binaryReader.ReadUInt16(),
-                    SamePalette = binaryReader.ReadByte()
+                    Index = binaryReader.ReadUInt16(),
+                    SamePalette = binaryReader.ReadByte(),
+                    Comment = binaryReader.ReadBytes(14).ToUtf8String()
                 };
 
-                var comments = binaryReader.ReadBytes(14).ToUtf8String();
-
-                if (subFile.IndexPreviousCopy == 0)
+                if (subFile.Index == 0)
                 {
                     binaryReader.BaseStream.Position -= 1;
-                    var count = (int) (nextSubFile - binaryReader.BaseStream.Position);
+                    var count = (int) (subFile.NextSubFileOffset - binaryReader.BaseStream.Position);
                     subFile.Image = binaryReader.ReadBytes(count);
                 }
 
                 if (i == 0)
                 {
-                    var data = binaryReader.ReadBytes(768);
-                    var paletteStream = new MemoryStream(data);
+                    var paletteData = binaryReader.ReadBytes(768);
+                    var paletteStream = new MemoryStream(paletteData);
                     var palette = await paletteReader.ReadAsync(paletteStream);
                     sprite.Palette = palette.Reverse();
                 }
 
-                binaryReader.BaseStream.Position = nextSubFile;
+                if (subFile.Image != null)
+                {
+                    var pcxDetails = new PcxDetails
+                    {
+                        Stream = new MemoryStream(subFile.Image.ToArray()),
+                        Palette = subFile.SamePalette == 1 ? sprite.Palette : null
+                    };
+
+                    var pcxReader = NegumContainer.Resolve<IPcxReader>();
+                    subFile.PcxImage = await pcxReader.ReadAsync(pcxDetails);
+                }
+
+                binaryReader.BaseStream.Position = subFile.NextSubFileOffset;
 
                 sprite.AddSubFile(subFile);
             }
