@@ -81,42 +81,35 @@ namespace Negum.Core.Readers
             var x = image.X;
             var y = image.Y;
             var pixels = new List<byte>();
+            var firstColorInPalette = image.Palette.ElementAt(0);
 
             while (y < image.Height)
             {
-                var b = binaryReader.ReadByte();
-                int runCount;
-                int value;
+                var isCompressed = binaryReader.ReadByte();
+                int numberOfPixels;
+                int paletteColorIndex;
 
-                if ((b & 0xC0) == 0xC0)
+                if ((isCompressed & 0xC0) == 0xC0)
                 {
-                    runCount = b & 0x3F;
-                    value = binaryReader.ReadByte();
+                    numberOfPixels = isCompressed & 0x3F;
+                    paletteColorIndex = binaryReader.ReadByte();
                 }
                 else
                 {
-                    runCount = 1;
-                    value = b;
+                    numberOfPixels = 1;
+                    paletteColorIndex = isCompressed;
                 }
 
-                for (var i = 0; i < runCount; ++i)
+                for (var i = 0; i < numberOfPixels; ++i)
                 {
-                    if (value != 0)
-                    {
-                        var color = image.Palette.ElementAt(value);
+                    var color = paletteColorIndex != 0
+                        ? image.Palette.ElementAt(paletteColorIndex)
+                        : firstColorInPalette;
 
-                        pixels.Add(color.Red);
-                        pixels.Add(color.Green);
-                        pixels.Add(color.Blue);
-                        pixels.Add(color.Alpha);
-                    }
-                    else
-                    {
-                        pixels.Add(255);
-                        pixels.Add(0);
-                        pixels.Add(255);
-                        pixels.Add(255);
-                    }
+                    pixels.Add(color.Red);
+                    pixels.Add(color.Green);
+                    pixels.Add(color.Blue);
+                    pixels.Add(color.Alpha);
 
                     x++;
 

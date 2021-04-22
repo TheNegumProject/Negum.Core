@@ -1,4 +1,5 @@
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using Negum.Core.Containers;
 using Negum.Core.Extensions;
@@ -77,7 +78,7 @@ namespace Negum.Core.Readers.Sff
                     var pcxDetails = new PcxDetails
                     {
                         Stream = new MemoryStream(subFile.RawImage),
-                        Palette = subFile.SamePalette == 1 ? sprite.Palette : null
+                        Palette = subFile.SamePalette == 1 ? sprite.SpriteSubFiles.ElementAt(0).Palette : null
                     };
 
                     var pcxReader = NegumContainer.Resolve<IPcxReader>();
