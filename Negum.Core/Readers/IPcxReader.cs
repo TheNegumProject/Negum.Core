@@ -110,6 +110,13 @@ namespace Negum.Core.Readers
                         pixels.Add(color.Blue);
                         pixels.Add(color.Alpha);
                     }
+                    else
+                    {
+                        pixels.Add(255);
+                        pixels.Add(0);
+                        pixels.Add(255);
+                        pixels.Add(255);
+                    }
 
                     x++;
 
