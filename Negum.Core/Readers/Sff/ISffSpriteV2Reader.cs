@@ -154,7 +154,7 @@ namespace Negum.Core.Readers.Sff
             var paletteData = binaryReader.ReadBytes((int) paletteLDataLength);
 
             var paletteReader = NegumContainer.Resolve<IPaletteReader>();
-            var palette = paletteReader.ReadExact(paletteData, 256, true);
+            var palette = paletteReader.ReadExact(paletteData, paletteData.Length / 4, true); // Divide by 4 because we want RGBA
 
             return palette;
         }
