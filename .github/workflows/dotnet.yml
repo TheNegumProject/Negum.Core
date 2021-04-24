@@ -72,13 +72,13 @@ jobs:
         asset_content_type: application/octet-stream
         
     - name: Get Date - Nuget
-      run: echo "NUGER_DATE=$(date +%Y).$(date +%m%d).$(date +%H%M)" >> $GITHUB_ENV
+      run: echo "NUGET_DATE=$(date +%Y).$(date +%m%d).$(date +%H%M)" >> $GITHUB_ENV
         
     - name: Build Release
-      run: dotnet build --no-restore --configuration Release -p:Version=0.${{ env.NUGER_DATE }}
+      run: dotnet build --no-restore --configuration Release -p:Version=0.${{ env.NUGET_DATE }}
     
     - name: Pack
-      run: dotnet pack --configuration Release -p:Version=0.${{ env.NUGER_DATE }}
+      run: dotnet pack --configuration Release -p:Version=0.${{ env.NUGET_DATE }}
 
     - name: Nuget Push
       run: dotnet nuget push ./Negum.Core/bin/Release/*.nupkg --api-key ${{ secrets.NUGET_RW }} --source https://api.nuget.org/v3/index.json
