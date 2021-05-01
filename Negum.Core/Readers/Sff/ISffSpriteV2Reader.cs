@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using Negum.Core.Containers;
 using Negum.Core.Models.Palettes;
@@ -30,133 +32,191 @@ namespace Negum.Core.Readers.Sff
         {
             var sprite = new SffSpriteV2
             {
-                Signature = signature,
-                Version = version,
-                Header = binaryReader.ReadBytes(20), // TODO: Unknown 20 bytes
-                SpriteOffset = binaryReader.ReadUInt32(),
-                SpriteNumber = binaryReader.ReadUInt32(),
-                PaletteOffset = binaryReader.ReadUInt32(),
-                PaletteNumber = binaryReader.ReadUInt32(),
-                LDataOffset = binaryReader.ReadUInt32(),
-                LDataLength = binaryReader.ReadUInt32(),
-                TDataOffset = binaryReader.ReadUInt32(),
-                TDataLength = binaryReader.ReadUInt32()
+                Signature = signature, // 12 bytes
+                Version = version, // 4 bytes
+                Unknown1 = binaryReader.ReadBytes(10), // TODO: ???
+                PaletteMapOffset = binaryReader.ReadUInt32(),
+                Unknown2 = binaryReader.ReadBytes(6), // TODO: ???
+                SpriteOffset = binaryReader.ReadUInt32(), // First sprite offset
+                SpriteCount = binaryReader.ReadUInt32(), // Number of sprites
+                PaletteOffset = binaryReader.ReadUInt32(), // First palette offset
+                PaletteCount = binaryReader.ReadUInt32(), // Number of palettes
+                LDataOffset = binaryReader.ReadUInt32(), // Literal Block Data Information
+                LDataLength = binaryReader.ReadUInt32(), // Palettes + SpritesData(OnDemand)
+                TDataOffset = binaryReader.ReadUInt32(), // Translated Data Block Information
+                TDataLength = binaryReader.ReadUInt32(), // SpritesData(OnLoad)
+                Comment = binaryReader.ReadBytes(444) // Space for comment
             };
 
-            for (var i = 0; i < sprite.SpriteNumber; ++i)
-            {
-                var subFile = await this.ReadSubFileAsync(binaryReader, sprite, i);
-                sprite.AddSubFile(subFile);
-            }
+            this.ReadSubFiles(binaryReader, sprite);
+
+            this.ReadPalettesInfo(binaryReader, sprite);
+
+            this.ReadPalettesColors(binaryReader, sprite);
+
+            await this.ReadSubFilesDataAsync(binaryReader, sprite);
 
             return sprite;
         }
 
-        protected virtual async Task<ISpriteSubFileSffV2> ReadSubFileAsync(BinaryReader binaryReader,
-            ISffSpriteV2 sprite, int index)
+        protected virtual void ReadSubFiles(BinaryReader binaryReader, SffSpriteV2 sprite)
         {
-            // Where 28 is the number of bytes read next for sub-file properties.
-            binaryReader.BaseStream.Seek(sprite.SpriteOffset + 28 * index, SeekOrigin.Begin);
+            // Go to first sub file
+            binaryReader.BaseStream.Seek(sprite.SpriteOffset, SeekOrigin.Begin);
 
-            var subFile = new SpriteSubFileSffV2
+            // Read all sprites
+            for (var i = 0; i < sprite.SpriteCount; ++i)
             {
-                GroupNumber = binaryReader.ReadUInt16(),
-                ItemNumber = binaryReader.ReadUInt16(),
-                Width = binaryReader.ReadUInt16(),
-                Height = binaryReader.ReadUInt16(),
-                X = binaryReader.ReadUInt16(),
-                Y = binaryReader.ReadUInt16(),
-                Index = binaryReader.ReadUInt16(),
-                Format = binaryReader.ReadByte(),
-                Depth = binaryReader.ReadByte(),
-                DataOffset = binaryReader.ReadUInt32(),
-                DataLength = binaryReader.ReadUInt32(),
-                PaletteIndex = binaryReader.ReadUInt16(),
-                Flags = binaryReader.ReadUInt16()
+                var subFile = new SpriteSubFileSffV2
+                {
+                    SpriteGroup = binaryReader.ReadUInt16(),
+                    SpriteNumber = binaryReader.ReadUInt16(),
+                    SpriteImageWidth = binaryReader.ReadUInt16(),
+                    SpriteImageHeight = binaryReader.ReadUInt16(),
+                    SpriteImageXAxis = binaryReader.ReadUInt16(),
+                    SpriteImageYAxis = binaryReader.ReadUInt16(),
+                    SpriteLinkedIndex = binaryReader.ReadUInt16(),
+                    CompressionMethod = binaryReader.ReadByte(),
+                    ColorDepth = binaryReader.ReadByte(),
+                    DataOffset = binaryReader.ReadUInt32(), // Offset to data
+                    DataLength = binaryReader.ReadUInt32(),
+                    PaletteIndex = binaryReader.ReadUInt16(),
+                    LoadMode = binaryReader.ReadUInt16()
+                };
+
+                sprite.AddSubFile(subFile);
+            }
+        }
+
+        protected virtual void ReadPalettesInfo(BinaryReader binaryReader, SffSpriteV2 sprite)
+        {
+            // Go to first palette
+            binaryReader.BaseStream.Seek(sprite.PaletteOffset, SeekOrigin.Begin);
+
+            // Read all palettes
+            for (var i = 0; i < sprite.PaletteCount; ++i)
+            {
+                var palette = new Palette
+                {
+                    GroupNumber = binaryReader.ReadUInt16(),
+                    ItemNumber = binaryReader.ReadUInt16(),
+                    ColorNumber = binaryReader.ReadUInt16(),
+                    LinkedIndex = binaryReader.ReadUInt16(),
+                    LDataOffset = binaryReader.ReadUInt32(),
+                    LDataLength = binaryReader.ReadUInt32()
+                };
+
+                sprite.AddPalette(palette);
+            }
+        }
+
+        protected virtual void ReadPalettesColors(BinaryReader binaryReader, SffSpriteV2 sprite)
+        {
+            foreach (var palette in sprite.Palettes)
+            {
+                // Go to palette data
+                binaryReader.BaseStream.Seek(sprite.LDataOffset + palette.LDataOffset, SeekOrigin.Begin);
+
+                var paletteData = binaryReader.ReadBytes((int) palette.LDataLength);
+
+                var paletteReader = NegumContainer.Resolve<IPaletteReader>();
+
+                // Read colors of palette - create temporary palette
+                var paletteWithColors = paletteReader.ReadExact(paletteData, palette.ColorNumber, true);
+
+                // Copy colors to destination palette
+                paletteWithColors.CopyTo(palette);
+            }
+        }
+
+        protected virtual async Task ReadSubFilesDataAsync(BinaryReader binaryReader, SffSpriteV2 sprite)
+        {
+            // Read all sprites pixels
+            foreach (var subFileSffV2 in sprite.SpriteSubFiles)
+            {
+                var subFile = subFileSffV2 as SpriteSubFileSffV2;
+
+                binaryReader.BaseStream.Seek(
+                    (subFile.LoadMode == 1 ? sprite.TDataOffset : sprite.LDataOffset) + subFile.DataOffset,
+                    SeekOrigin.Begin);
+
+                if (subFile.CompressionMethod == 0) // No conversion
+                {
+                    subFile.ImageSize = 0; // Indicate that there was no compression
+                    subFile.RawImage = binaryReader.ReadBytes((int) subFile.DataLength);
+                }
+                else
+                {
+                    const byte totalBytesPerImageSize = 4;
+
+                    subFile.ImageSize = binaryReader.ReadUInt32();
+                    subFile.RawImage = binaryReader.ReadBytes((int) (subFile.DataLength - totalBytesPerImageSize));
+                }
+
+                if (subFile.DataLength == 0)
+                {
+                    // TODO: Process sprite from linked index -> subFile.SpriteLinkedIndex
+                    continue;
+                }
+
+                switch (subFile.CompressionMethod)
+                {
+                    case 0: // Raw Data
+                        subFile.Image = subFile.RawImage;
+                        break;
+
+                    case 1: // Invalid
+                        break;
+
+                    case 2: // RLE8 (Run-Length Encoding at 8 bits-per-pixel pixmap)
+                        var sffRle8Reader = NegumContainer.Resolve<ISffRle8Reader>();
+                        subFile.Image = await sffRle8Reader.ReadAsync(subFile.RawImage);
+                        break;
+
+                    case 3: // RLE5 (Run-Length Encoding at 5 bits-per-pixel pixmap)
+                        var sffRle5Reader = NegumContainer.Resolve<ISffRle5Reader>();
+                        subFile.Image = await sffRle5Reader.ReadAsync(subFile.RawImage);
+                        break;
+
+                    case 4: // LZ5
+                        var sffLz5Reader = NegumContainer.Resolve<ISffLz5Reader>();
+                        subFile.Image = await sffLz5Reader.ReadAsync(subFile.RawImage);
+                        break;
+
+                    case 10: // PNG8
+                        subFile.Image = await ParsePngAsync(sprite, subFile, 8);
+                        break;
+
+                    case 11: // PNG24
+                        subFile.Image = await ParsePngAsync(sprite, subFile, 24);
+                        break;
+
+                    case 12: // PNG32
+                        subFile.Image = await ParsePngAsync(sprite, subFile, 32);
+                        break;
+                }
+            }
+        }
+
+        protected virtual async Task<IEnumerable<byte>> ParsePngAsync(SffSpriteV2 sprite, ISpriteSubFileSffV2 subFile,
+            int pngFormat)
+        {
+            var sffPngReader = NegumContainer.Resolve<ISffPngReader>();
+
+            var ctx = new SffPngReaderContext
+            {
+                PngFormat = pngFormat,
+                RawImage = subFile.RawImage
             };
 
-            if (subFile.DataLength == 0)
+            if (sprite.Palettes.Count() > subFile.PaletteIndex)
             {
-                return await this.ReadSubFileAsync(binaryReader, sprite, subFile.Index);
+                ctx.Palette = sprite.Palettes.ElementAt(subFile.PaletteIndex);
             }
 
-            binaryReader.BaseStream.Seek((subFile.Flags == 1 ? sprite.TDataOffset : sprite.LDataOffset) +
-                                         subFile.DataOffset, SeekOrigin.Begin);
+            var image = await sffPngReader.ReadAsync(ctx);
 
-            if (subFile.Format == 0) // No conversion
-            {
-                subFile.Image = binaryReader.ReadBytes((int) subFile.DataLength);
-            }
-            else
-            {
-                var imageSize = binaryReader.ReadUInt32();
-                subFile.Image = binaryReader.ReadBytes((int) (subFile.DataLength - 4));
-            }
-
-            switch (subFile.Format)
-            {
-                case 0:
-                    subFile.Palette = this.GetPaletteData(binaryReader, subFile.PaletteIndex, sprite);
-                    break;
-
-                case 2:
-                    var sffRle8Reader = NegumContainer.Resolve<ISffRle8Reader>();
-                    subFile.Palette = this.GetPaletteData(binaryReader, subFile.PaletteIndex, sprite);
-                    subFile.Image = await sffRle8Reader.ReadAsync(subFile.Image);
-                    break;
-
-                // TODO: case 3: // rle5 type
-
-                case 4:
-                    var sffLz5Reader = NegumContainer.Resolve<ISffLz5Reader>();
-                    subFile.Palette = this.GetPaletteData(binaryReader, subFile.PaletteIndex, sprite);
-                    subFile.Image = await sffLz5Reader.ReadAsync(subFile.Image);
-                    break;
-
-                case 10:
-                    return await this.ReadPngAsync(binaryReader, sprite, subFile, 8);
-
-                case 11:
-                    return await this.ReadPngAsync(binaryReader, sprite, subFile, 24);
-
-                case 12:
-                    return await this.ReadPngAsync(binaryReader, sprite, subFile, 32);
-            }
-
-            return subFile;
-        }
-
-        protected virtual async Task<ISpriteSubFileSffV2> ReadPngAsync(BinaryReader binaryReader, ISffSpriteV2 sprite,
-            SpriteSubFileSffV2 subFile, byte pngFormat)
-        {
-            subFile.PngFormat = pngFormat;
-            subFile.Palette = this.GetPaletteData(binaryReader, subFile.PaletteIndex, sprite);
-
-            var sffPngReader = NegumContainer.Resolve<ISffPngReader>();
-            subFile.Image = await sffPngReader.ReadAsync(subFile);
-
-            return subFile;
-        }
-
-        protected virtual IPalette GetPaletteData(BinaryReader binaryReader, ushort paletteIndex, ISffSpriteV2 sprite)
-        {
-            binaryReader.BaseStream.Seek(sprite.PaletteOffset + paletteIndex * 16, SeekOrigin.Begin);
-
-            var paletteGroup = binaryReader.ReadUInt16();
-            var paletteItemNumber = binaryReader.ReadUInt16();
-            var paletteColorNumber = binaryReader.ReadUInt16();
-            var index = binaryReader.ReadUInt16();
-            var paletteLDataOffset = binaryReader.ReadUInt32();
-            var paletteLDataLength = binaryReader.ReadUInt32();
-
-            binaryReader.BaseStream.Seek(sprite.LDataLength + paletteLDataOffset, SeekOrigin.Begin);
-
-            var paletteData = binaryReader.ReadBytes((int) paletteLDataLength);
-
-            var paletteReader = NegumContainer.Resolve<IPaletteReader>();
-            var palette = paletteReader.ReadExact(paletteData, paletteData.Length / 4, true); // Divide by 4 because we want RGBA
-
-            return palette;
+            return image;
         }
     }
 }
