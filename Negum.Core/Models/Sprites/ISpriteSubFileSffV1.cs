@@ -38,8 +38,8 @@ namespace Negum.Core.Models.Sprites
         public string Comment { get; internal set; }
         public byte[] RawImage { get; internal set; }
         public override IEnumerable<byte> Image => this.PcxImage.Pixels;
-        public override ushort Width => this.PcxImage.Width;
-        public override ushort Height => this.PcxImage.Height;
+        public override ushort SpriteImageWidth => this.PcxImage.Width;
+        public override ushort SpriteImageHeight => this.PcxImage.Height;
         public override IPalette Palette => this.PcxImage.Palette;
     }
 }

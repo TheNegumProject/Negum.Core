@@ -20,32 +20,32 @@ namespace Negum.Core.Models.Sprites
         /// <summary>
         /// Width of the image.
         /// </summary>
-        ushort Width { get; }
+        ushort SpriteImageWidth { get; }
 
         /// <summary>
         /// Height of the image.
         /// </summary>
-        ushort Height { get; }
+        ushort SpriteImageHeight { get; }
 
         /// <summary>
         /// Number of the group in which the current sprite is.
         /// </summary>
-        ushort GroupNumber { get; }
+        ushort SpriteGroup { get; }
 
         /// <summary>
         /// X-axis offset.
         /// </summary>
-        ushort X { get; }
+        ushort SpriteImageXAxis { get; }
 
         /// <summary>
         /// Y-axis offset.
         /// </summary>
-        ushort Y { get; }
+        ushort SpriteImageYAxis { get; }
 
         /// <summary>
         /// Index of the current sprite.
         /// </summary>
-        ushort Index { get; }
+        ushort SpriteLinkedIndex { get; }
 
         /// <summary>
         /// Palette used for the current image.
@@ -62,12 +62,12 @@ namespace Negum.Core.Models.Sprites
     public abstract class SpriteSubFile : ISpriteSubFile
     {
         public virtual IEnumerable<byte> Image { get; internal set; }
-        public virtual ushort Width { get; internal set; }
-        public virtual ushort Height { get; internal set; }
-        public virtual ushort GroupNumber { get; internal set; }
-        public virtual ushort X { get; internal set; }
-        public virtual ushort Y { get; internal set; }
-        public virtual ushort Index { get; internal set; }
+        public virtual ushort SpriteImageWidth { get; internal set; }
+        public virtual ushort SpriteImageHeight { get; internal set; }
+        public virtual ushort SpriteGroup { get; internal set; }
+        public virtual ushort SpriteImageXAxis { get; internal set; }
+        public virtual ushort SpriteImageYAxis { get; internal set; }
+        public virtual ushort SpriteLinkedIndex { get; internal set; }
         public virtual IPalette Palette { get; internal set; }
     }
 }
