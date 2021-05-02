@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Negum.Core.Containers;
 using Negum.Core.Models.Palettes;
 using Negum.Core.Models.Sprites;
+using Negum.Core.Models.Sprites.Png;
 using Negum.Core.Readers.Sff.V2;
 
 namespace Negum.Core.Readers.Sff

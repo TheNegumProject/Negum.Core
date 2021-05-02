@@ -1,6 +1,11 @@
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
-using Negum.Core.Models.Sprites;
+using Negum.Core.Containers;
+using Negum.Core.Models.Sprites.Png;
+using Negum.Core.Readers.Sff.V2.Png;
+using Negum.Core.Readers.Sff.V2.Png.Decoders;
 
 namespace Negum.Core.Readers.Sff.V2
 {
@@ -11,7 +16,7 @@ namespace Negum.Core.Readers.Sff.V2
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface ISffPngReader : IReader<ISpriteSubFileSffV2, IEnumerable<byte>>
+    public interface ISffPngReader : IReader<ISffPngReaderContext, IEnumerable<byte>>
     {
     }
 
@@ -23,10 +28,20 @@ namespace Negum.Core.Readers.Sff.V2
     /// </author>
     public class SffPngReader : ISffPngReader
     {
-        public async Task<IEnumerable<byte>> ReadAsync(ISpriteSubFileSffV2 subFile)
+        public async Task<IEnumerable<byte>> ReadAsync(ISffPngReaderContext input)
         {
-            // TODO: Implement appropriate logic for handling PNG; (Does any stage / character really use SFFv2 ???)
-            return await Task.FromResult(subFile.Image);
+            var rawImageStream = new MemoryStream(input.RawImage.ToArray());
+
+            var pngImageHeaderReader = NegumContainer.Resolve<ISffPngImageHeaderReader>();
+            var pngImageHeader = await pngImageHeaderReader.ReadAsync(rawImageStream);
+
+            var pngImageDecoder = NegumContainer.Resolve<ISffPngDecoder>();
+            var decodedPngImage = await pngImageDecoder.DecodeAsync(rawImageStream, pngImageHeader);
+
+            var pngPaletteApplier = NegumContainer.Resolve<ISffPngPaletteApplier>();
+            var pngImageWithPalette = await pngPaletteApplier.ApplyAsync(pngImageHeader, decodedPngImage, input.Palette);
+
+            return pngImageWithPalette;
         }
     }
 }
