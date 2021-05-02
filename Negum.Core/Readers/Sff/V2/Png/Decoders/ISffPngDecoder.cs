@@ -43,12 +43,12 @@ namespace Negum.Core.Readers.Sff.V2.Png.Decoders
 
             while (true)
             {
-                var chunkHeader = await chunkHeaderReader.ReadAsync(stream);
-
                 if (chunkProcessorContainer.IsProcessingFinished(chunkProcessorState))
                 {
                     break;
                 }
+
+                var chunkHeader = await chunkHeaderReader.ReadAsync(stream);
 
                 var chunkData = new byte[chunkHeader.Length];
 

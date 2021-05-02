@@ -38,7 +38,7 @@ namespace Negum.Core.Readers.Sff.V2.Png.Processors
         /// Allows for additional operations after the image has been read from stream.
         /// </summary>
         /// <param name="chunkProcessorState"></param>
-        void PerformPostProcessing(Dictionary<string, object> chunkProcessorState)
+        void PerformPostProcessing(IDictionary<string, object> chunkProcessorState)
         {
         }
 
@@ -47,6 +47,6 @@ namespace Negum.Core.Readers.Sff.V2.Png.Processors
         /// </summary>
         /// <param name="chunkProcessorState">Common state used across all chunk processors.</param>
         /// <returns>Stream with read image data.</returns>
-        byte[] GetOutputBytes(Dictionary<string, object> chunkProcessorState) => null;
+        byte[] GetOutputBytes(IDictionary<string, object> chunkProcessorState) => null;
     }
 }

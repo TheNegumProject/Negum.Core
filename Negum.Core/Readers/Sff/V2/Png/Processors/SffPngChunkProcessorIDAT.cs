@@ -31,13 +31,13 @@ namespace Negum.Core.Readers.Sff.V2.Png.Processors
             else
             {
                 stream = new MemoryStream();
-                chunkProcessorState.TryAdd(chunkName, stream);
+                chunkProcessorState.Add(chunkName, stream);
             }
 
             stream.Write(chunkData);
         }
 
-        public void PerformPostProcessing(Dictionary<string, object> chunkProcessorState)
+        public void PerformPostProcessing(IDictionary<string, object> chunkProcessorState)
         {
             var chunkName = this.GetChunkName();
 
@@ -59,10 +59,10 @@ namespace Negum.Core.Readers.Sff.V2.Png.Processors
                 deflateStream.Close();
             }
 
-            chunkProcessorState.TryAdd(this.GetOutputStreamKey(), outputStream);
+            chunkProcessorState.Add(this.GetOutputStreamKey(), outputStream);
         }
 
-        public byte[] GetOutputBytes(Dictionary<string, object> chunkProcessorState)
+        public byte[] GetOutputBytes(IDictionary<string, object> chunkProcessorState)
         {
             var key = this.GetOutputStreamKey();
 
@@ -71,10 +71,13 @@ namespace Negum.Core.Readers.Sff.V2.Png.Processors
                 return null;
             }
 
-            var outputStream = chunkProcessorState[key] as Stream;
+            var cachedOutputStream = chunkProcessorState[key] as Stream;
+            cachedOutputStream.Position = 0;
 
-            var outputBytes = new byte[outputStream.Length];
-            outputStream.Write(outputBytes);
+            var outputStream = new MemoryStream();
+            cachedOutputStream.CopyTo(outputStream);
+
+            var outputBytes = outputStream.ToArray();
 
             return outputBytes;
         }

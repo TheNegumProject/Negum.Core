@@ -42,14 +42,14 @@ namespace Negum.Core.Readers.Sff.V2.Png.Processors
         /// Allows for additional processing of an image after the image was read from stream.
         /// </summary>
         /// <param name="chunkProcessorState">Common state used across all chunk processors.</param>
-        void PerformPostProcessing(Dictionary<string, object> chunkProcessorState);
+        void PerformPostProcessing(IDictionary<string, object> chunkProcessorState);
 
         /// <summary>
         /// Method which is used by IDAT chunk to return read image data. 
         /// </summary>
         /// <param name="chunkProcessorState">Common state used across all chunk processors.</param>
         /// <returns>Stream with read image data.</returns>
-        byte[] GetOutputBytes(Dictionary<string, object> chunkProcessorState);
+        byte[] GetOutputBytes(IDictionary<string, object> chunkProcessorState);
     }
 
     /// <summary>
@@ -94,7 +94,7 @@ namespace Negum.Core.Readers.Sff.V2.Png.Processors
         public bool IsProcessingFinished(IDictionary<string, object> chunkProcessorState) =>
             Processors.Any(proc => proc.IsProcessingFinished(chunkProcessorState));
 
-        public void PerformPostProcessing(Dictionary<string, object> chunkProcessorState)
+        public void PerformPostProcessing(IDictionary<string, object> chunkProcessorState)
         {
             foreach (var processor in Processors)
             {
@@ -102,7 +102,7 @@ namespace Negum.Core.Readers.Sff.V2.Png.Processors
             }
         }
 
-        public byte[] GetOutputBytes(Dictionary<string, object> chunkProcessorState)
+        public byte[] GetOutputBytes(IDictionary<string, object> chunkProcessorState)
         {
             foreach (var processor in Processors)
             {
