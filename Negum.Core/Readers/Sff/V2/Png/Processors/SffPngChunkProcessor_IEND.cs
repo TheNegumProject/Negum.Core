@@ -9,7 +9,7 @@ namespace Negum.Core.Readers.Sff.V2.Png.Processors
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public class SffPngChunkProcessorIEND : ISffPngChunkProcessor
+    public class SffPngChunkProcessor_IEND : ISffPngChunkProcessor
     {
         public string GetChunkName() => "IEND";
 

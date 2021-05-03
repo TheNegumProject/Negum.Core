@@ -12,7 +12,7 @@ namespace Negum.Core.Readers.Sff.V2.Png.Processors
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public class SffPngChunkProcessorIDAT : ISffPngChunkProcessor
+    public class SffPngChunkProcessor_IDAT : ISffPngChunkProcessor
     {
         public string GetChunkName() => "IDAT";
 

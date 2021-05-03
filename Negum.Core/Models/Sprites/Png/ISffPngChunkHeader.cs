@@ -12,7 +12,7 @@ namespace Negum.Core.Models.Sprites.Png
         /// <summary>
         /// Length of the chunk header.
         /// </summary>
-        int Length { get; }
+        uint Length { get; }
 
         /// <summary>
         /// Name of the chunk.
@@ -28,7 +28,7 @@ namespace Negum.Core.Models.Sprites.Png
     /// </author>
     public class SffPngChunkHeader : ISffPngChunkHeader
     {
-        public int Length { get; internal set; }
+        public uint Length { get; internal set; }
         public string Name { get; internal set; }
     }
 }

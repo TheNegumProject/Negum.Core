@@ -68,8 +68,14 @@ namespace Negum.Core.Readers.Sff.V2.Png.Processors
 
         static SffPngChunkProcessorContainer()
         {
-            Processors.TryAdd(new SffPngChunkProcessorIDAT());
-            Processors.TryAdd(new SffPngChunkProcessorIEND());
+            // Critical
+            Processors.TryAdd(new SffPngChunkProcessor_PLTE());
+            Processors.TryAdd(new SffPngChunkProcessor_IDAT());
+            Processors.TryAdd(new SffPngChunkProcessor_IEND());
+
+            // Ancillary
+            Processors.TryAdd(new SffPngChunkProcessor_pHYs());
+            Processors.TryAdd(new SffPngChunkProcessor_sBIT());
         }
 
         public void RegisterChunkProcessor(ISffPngChunkProcessor processor)

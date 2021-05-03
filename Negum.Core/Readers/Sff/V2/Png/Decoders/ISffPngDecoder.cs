@@ -39,6 +39,8 @@ namespace Negum.Core.Readers.Sff.V2.Png.Decoders
             var chunkHeaderReader = NegumContainer.Resolve<ISffPngChunkHeaderReader>();
             var chunkProcessorContainer = NegumContainer.Resolve<ISffPngChunkProcessorContainer>();
 
+            // State shared between all chunk processors.
+            // Processors can use data read by other processors.
             var chunkProcessorState = new Dictionary<string, object>();
 
             while (true)
@@ -66,7 +68,7 @@ namespace Negum.Core.Readers.Sff.V2.Png.Decoders
                     throw new ArgumentException($"Cannot read CRC data for chunk: {chunkHeader.Name}");
                 }
 
-                // TODO: Do we need to validate CRC ???
+                // TODO: Do we need to validate CRC ??? (only critical)
             }
 
             chunkProcessorContainer.PerformPostProcessing(chunkProcessorState);

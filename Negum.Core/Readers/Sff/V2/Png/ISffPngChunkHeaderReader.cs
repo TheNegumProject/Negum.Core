@@ -1,4 +1,5 @@
 using System;
+using System.Buffers.Binary;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
@@ -41,7 +42,7 @@ namespace Negum.Core.Readers.Sff.V2.Png
                 throw new ArgumentException($"Cannot read chunk header name.");
             }
 
-            var length = SffPngHelper.ReadBigEndian(lengthBytes, 0);
+            var length = BinaryPrimitives.ReadUInt32BigEndian(new ReadOnlySpan<byte>(lengthBytes));
             var name = Encoding.ASCII.GetString(nameBytes, 0, 4);
 
             var chunkHeader = new SffPngChunkHeader
