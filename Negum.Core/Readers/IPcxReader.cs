@@ -56,7 +56,7 @@ namespace Negum.Core.Readers
             image.Reserved = binaryReader.ReadByte();
             image.NbPlanes = binaryReader.ReadByte();
             image.BitesPerLine = binaryReader.ReadByte();
-            image.PaletteInfo = binaryReader.ReadUInt16();
+            image.PaletteIndex = binaryReader.ReadUInt16();
 
             if (pcxDetails.Palette == null)
             {

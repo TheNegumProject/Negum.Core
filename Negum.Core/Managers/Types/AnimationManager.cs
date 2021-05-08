@@ -58,15 +58,14 @@ namespace Negum.Core.Managers.Types
             this.IsDefault = this.Entry.IsDefault;
             this.TypeId = this.Entry.TypeId;
 
+            var vectorReader = NegumContainer.Resolve<IStringVectorReader>();
+            var boxReader = NegumContainer.Resolve<IBoxReader>();
+
             this.Boxes = this.Entry.Boxes
                 .Select(boxData =>
                 {
-                    var vectorReader = NegumContainer.Resolve<IStringVectorReader>();
                     var vector = vectorReader.ReadAsync(boxData).Result;
-
-                    var boxReader = NegumContainer.Resolve<IBoxReader>();
                     var box = boxReader.ReadAsync(vector).Result;
-
                     return box;
                 })
                 .ToList();

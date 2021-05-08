@@ -23,4 +23,8 @@
       <ProjectReference Include="..\..\Negum.Core\Negum.Core.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Readers\Png\Pics" />
+    </ItemGroup>
+
 </Project>

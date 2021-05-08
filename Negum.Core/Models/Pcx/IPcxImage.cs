@@ -26,7 +26,7 @@ namespace Negum.Core.Models.Pcx
         byte Reserved { get; }
         byte NbPlanes { get; }
         ushort BitesPerLine { get; }
-        ushort PaletteInfo { get; }
+        ushort PaletteIndex { get; }
         IPalette Palette { get; }
         byte Signature { get; }
 
@@ -58,7 +58,7 @@ namespace Negum.Core.Models.Pcx
         public byte Reserved { get; internal set; }
         public byte NbPlanes { get; internal set; }
         public ushort BitesPerLine { get; internal set; }
-        public ushort PaletteInfo { get; internal set; }
+        public ushort PaletteIndex { get; internal set; }
         public IPalette Palette { get; internal set; }
         public byte Signature { get; internal set; }
         public IEnumerable<byte> Pixels { get; internal set; }

@@ -25,9 +25,9 @@ namespace Negum.Core.Readers.Sff
     /// </author>
     public abstract class SffSpriteReader : ISffSpriteReader
     {
-        public async Task<ISprite> ReadAsync(Stream input)
+        public virtual async Task<ISprite> ReadAsync(Stream input)
         {
-            throw new NotSupportedException("Please use ISpriteReader");
+            throw new NotSupportedException("Please use ISpriteReader.ReadAsync(BinaryReader, Signature, Version) method overload");
         }
 
         public abstract Task<ISprite> ReadAsync(BinaryReader binaryReader, string signature, string version);

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Negum.Core.Models.Palettes;
 
 namespace Negum.Core.Models.Sprites
 {
@@ -27,8 +28,12 @@ namespace Negum.Core.Models.Sprites
         public string Signature { get; set; }
         public string Version { get; set; }
         public IEnumerable<ISpriteSubFile> SpriteSubFiles { get; } = new List<ISpriteSubFile>();
+        public IEnumerable<IPalette> Palettes { get; } = new List<IPalette>();
 
         public void AddSubFile(ISpriteSubFile subFile) =>
             ((List<ISpriteSubFile>) this.SpriteSubFiles).Add(subFile);
+
+        public void AddPalette(IPalette palette) =>
+            ((List<IPalette>) this.Palettes).Add(palette);
     }
 }

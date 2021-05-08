@@ -37,7 +37,6 @@ namespace Negum.Core.Tests.Readers
         // [InlineData("/Users/kdobrzynski/Downloads/gogetassj4.sff")] // 1.010
         // [InlineData("/Users/kdobrzynski/Downloads/kakaroto.sff")] // 1.010
         // [InlineData("/Users/kdobrzynski/Downloads/Future.sff")] // 1.010
-        [InlineData("/Users/kdobrzynski/Downloads/UnpackedMugen-main/chars/Goku-SSJ2/samplesprite.sff")]
         [InlineData("/Users/kdobrzynski/Downloads/UnpackedMugen-main/chars/Goku-SSJ2/gokuhd.sff")]
         public async Task Should_Parse_Sprite_File_And_Images_SFFv1(string url)
         {
@@ -52,7 +51,7 @@ namespace Negum.Core.Tests.Readers
             var sffSprite = (ISffSpriteV1) sprite;
 
             Assert.True(sffSprite.SpriteSubFiles.Any());
-            Assert.True(sffSprite.SpriteSubFiles.Count() == sffSprite.Images);
+            Assert.True(sffSprite.SpriteSubFiles.Count() == sffSprite.ImageCount);
         }
         
         [Theory]
@@ -74,6 +73,7 @@ namespace Negum.Core.Tests.Readers
         // [InlineData("/Users/kdobrzynski/Downloads/TimeChamber.sff")] // 2.010
         [InlineData("/Users/kdobrzynski/Downloads/UnpackedMugen-main/chars/kfm/kfm.sff")] // 2.010
         [InlineData("/Users/kdobrzynski/Downloads/UnpackedMugen-main/chars/kfm720/kfm720.sff")] // 2.010
+        [InlineData("/Users/kdobrzynski/Downloads/UnpackedMugen-main/stages/stage0-720.sff")] // 2.010
         public async Task Should_Parse_Sprite_File_And_Images_SFFv2(string url)
         {
             this.InitializeContainer();

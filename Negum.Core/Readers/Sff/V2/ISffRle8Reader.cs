@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace Negum.Core.Readers.Sff.V2
 {
     /// <summary>
-    /// Reader used to decode SFF image using RLE-8 (Run Length Encoding).
+    /// Reader used to decode SFF image using RLE-8 (Run Length Encoding at 8 bits-per-pixel pixmap).
     /// </summary>
     /// 
     /// <author>
@@ -34,10 +34,10 @@ namespace Negum.Core.Readers.Sff.V2
             {
                 var character = binaryReader.ReadByte();
 
-                if ((character & 192) == 64)
+                if ((character & 192) == 64) // 192 == 0xC0; 64 == 0x40
                 {
                     var color = binaryReader.ReadByte();
-                    var length = character & 63;
+                    var length = character & 63; // 63 == 0x3F
 
                     for (var i = 0; i < length; ++i)
                     {
