@@ -73,12 +73,9 @@ namespace Negum.Core.Readers.Sff.V2.Png.Decoders
 
             chunkProcessorContainer.PerformPostProcessing(chunkProcessorState);
 
-            var outputBytes = chunkProcessorContainer.GetOutputBytes(chunkProcessorState);
+            var deflateImage = chunkProcessorContainer.GetOutputBytes(chunkProcessorState);
 
-            var pngInterlaceDecoder = NegumContainer.Resolve<ISffPngInterlaceDecoder>();
-            var decodedOutputBytes = await pngInterlaceDecoder.DecodeAsync(outputBytes, imageHeader);
-
-            return decodedOutputBytes;
+            return deflateImage;
         }
     }
 }

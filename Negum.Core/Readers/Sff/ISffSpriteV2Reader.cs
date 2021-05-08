@@ -151,7 +151,15 @@ namespace Negum.Core.Readers.Sff
                     const byte totalBytesPerImageSize = 4;
 
                     subFile.ImageSize = binaryReader.ReadUInt32();
-                    subFile.RawImage = binaryReader.ReadBytes((int) (subFile.DataLength - totalBytesPerImageSize));
+
+                    if (subFile.DataLength >= totalBytesPerImageSize)
+                    {
+                        subFile.RawImage = binaryReader.ReadBytes((int) (subFile.DataLength - totalBytesPerImageSize));
+                    }
+                    else
+                    {
+                        continue;
+                    }
                 }
 
                 if (subFile.DataLength == 0)

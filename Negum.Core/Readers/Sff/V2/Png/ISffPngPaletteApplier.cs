@@ -36,164 +36,43 @@ namespace Negum.Core.Readers.Sff.V2.Png
     {
         public async Task<byte[]> ApplyAsync(ISffPngImageHeader imageHeader, byte[] imageData, IPalette palette)
         {
-            var imageWithPalette = new List<byte>();
-
-            for (var pixelPosY = 0; pixelPosY < imageHeader.Height; ++pixelPosY)
+            // (Scanline filter byte + imageHeader.Width * 4 RGBA bytes) * imageHeader.Height == imageData.Length
+            if ((1 + imageHeader.Width * 4) * imageHeader.Height == imageData.Length)
             {
-                for (var pixelPosX = 0; pixelPosX < imageHeader.Width; ++pixelPosX)
+                // Already in RGBA format
+                return imageData;
+            }
+
+            if (palette == null)
+            {
+                throw new ArgumentNullException($"Palette is required to decode PNG image.");
+            }
+
+
+            var coloredImage = new List<byte>();
+
+            var scanlineLength = imageHeader.BytesInRow;
+
+            for (var index = 0; index < imageData.Length; ++index)
+            {
+                var paletteIndex = imageData[index];
+
+                // For scanline filter type we don't want to perform colorization
+                if (index == 0 || index % scanlineLength == 0)
                 {
-                    if (palette != null)
-                    {
-                        this.ApplyPalette(imageHeader, imageData, palette, imageWithPalette, pixelPosX, pixelPosY);
-                    }
-                    else
-                    {
-                        this.ApplyDefaultPalette(imageHeader, imageData, imageWithPalette, pixelPosX, pixelPosY);
-                    }
+                    coloredImage.Add(paletteIndex);
+                    continue;
                 }
+
+                var color = palette.ElementAt(paletteIndex);
+
+                coloredImage.Add(color.Red);
+                coloredImage.Add(color.Green);
+                coloredImage.Add(color.Blue);
+                coloredImage.Add(color.Alpha);
             }
 
-            return imageWithPalette.ToArray();
-        }
-
-        protected virtual void ApplyPalette(ISffPngImageHeader imageHeader, byte[] imageData, IPalette palette,
-            ICollection<byte> imageWithPalette,
-            int pixelPosX, int pixelPosY)
-        {
-            var pixelsPerByte = imageHeader.PixelsPerByte;
-            var bytesInRow = imageHeader.BytesInRow;
-            var byteIndexInRow = pixelPosX / pixelsPerByte;
-            var paletteIndex = (1 + (pixelPosY * bytesInRow)) + byteIndexInRow;
-            var b = imageData[paletteIndex];
-
-            if (imageHeader.BitDepth == 8)
-            {
-                var color = palette.ElementAt(b);
-
-                imageWithPalette.Add(color.Red);
-                imageWithPalette.Add(color.Green);
-                imageWithPalette.Add(color.Blue);
-                imageWithPalette.Add(color.Alpha);
-
-                return;
-            }
-
-            var withinByteIndex = pixelPosX % pixelsPerByte;
-            var rightShift = 8 - ((withinByteIndex + 1) * imageHeader.BitDepth);
-            var indexActual = (b >> rightShift) & ((1 << imageHeader.BitDepth) - 1);
-
-            var colorActual = palette.ElementAt(indexActual);
-
-            imageWithPalette.Add(colorActual.Red);
-            imageWithPalette.Add(colorActual.Green);
-            imageWithPalette.Add(colorActual.Blue);
-            imageWithPalette.Add(colorActual.Alpha);
-        }
-
-        protected virtual void ApplyDefaultPalette(ISffPngImageHeader imageHeader, byte[] imageData,
-            ICollection<byte> imageWithPalette,
-            int pixelPosX, int pixelPosY)
-        {
-            var bytesPerPixel = imageHeader.GetBytesPerPixel();
-            var rowStartPixel = (imageHeader.RowOffset + (imageHeader.RowOffset * pixelPosY)) +
-                                (bytesPerPixel * imageHeader.Width * pixelPosY);
-            var pixelStartIndex = rowStartPixel + (bytesPerPixel * pixelPosX);
-            var first = imageData[pixelStartIndex];
-
-            switch (bytesPerPixel)
-            {
-                case 1:
-                    imageWithPalette.Add(first);
-                    imageWithPalette.Add(first);
-                    imageWithPalette.Add(first);
-                    imageWithPalette.Add(255);
-
-                    break;
-                case 2:
-                    switch (imageHeader.ColorType)
-                    {
-                        case 0:
-                        {
-                            var second = imageData[pixelStartIndex + 1];
-                            var value = ToSingleByte(first, second);
-
-                            imageWithPalette.Add(value);
-                            imageWithPalette.Add(value);
-                            imageWithPalette.Add(value);
-                            imageWithPalette.Add(255);
-
-                            break;
-                        }
-                        default:
-                            imageWithPalette.Add(first);
-                            imageWithPalette.Add(first);
-                            imageWithPalette.Add(first);
-                            imageWithPalette.Add(imageData[pixelStartIndex + 1]);
-
-                            break;
-                    }
-
-                    break;
-                case 3:
-                    imageWithPalette.Add(first);
-                    imageWithPalette.Add(imageData[pixelStartIndex + 1]);
-                    imageWithPalette.Add(imageData[pixelStartIndex + 2]);
-                    imageWithPalette.Add(255);
-
-                    break;
-                case 4:
-                    switch (imageHeader.ColorType)
-                    {
-                        case 0 | 4:
-                        {
-                            var second = imageData[pixelStartIndex + 1];
-                            var firstAlpha = imageData[pixelStartIndex + 2];
-                            var secondAlpha = imageData[pixelStartIndex + 3];
-                            var gray = ToSingleByte(first, second);
-                            var alpha = ToSingleByte(firstAlpha, secondAlpha);
-
-                            imageWithPalette.Add(gray);
-                            imageWithPalette.Add(gray);
-                            imageWithPalette.Add(gray);
-                            imageWithPalette.Add(alpha);
-
-                            break;
-                        }
-                        default:
-                            imageWithPalette.Add(first);
-                            imageWithPalette.Add(imageData[pixelStartIndex + 1]);
-                            imageWithPalette.Add(imageData[pixelStartIndex + 2]);
-                            imageWithPalette.Add(imageData[pixelStartIndex + 3]);
-
-                            break;
-                    }
-
-                    break;
-                case 6:
-                    imageWithPalette.Add(first);
-                    imageWithPalette.Add(imageData[pixelStartIndex + 2]);
-                    imageWithPalette.Add(imageData[pixelStartIndex + 4]);
-                    imageWithPalette.Add(255);
-
-                    break;
-                case 8:
-                    imageWithPalette.Add(first);
-                    imageWithPalette.Add(imageData[pixelStartIndex + 2]);
-                    imageWithPalette.Add(imageData[pixelStartIndex + 4]);
-                    imageWithPalette.Add(imageData[pixelStartIndex + 6]);
-
-                    break;
-                default:
-                    throw new InvalidOperationException(
-                        $"Unrecognized number of bytes per pixel: {bytesPerPixel}.");
-            }
-        }
-
-        protected virtual byte ToSingleByte(byte first, byte second)
-        {
-            var us = (first << 8) + second;
-            var result = (byte) Math.Round((255 * us) / (double) ushort.MaxValue);
-            return result;
+            return coloredImage.ToArray();
         }
     }
 }

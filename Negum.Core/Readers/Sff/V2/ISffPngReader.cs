@@ -36,12 +36,15 @@ namespace Negum.Core.Readers.Sff.V2
             var pngImageHeader = await pngImageHeaderReader.ReadAsync(rawImageStream);
 
             var pngImageDecoder = NegumContainer.Resolve<ISffPngDecoder>();
-            var decodedPngImage = await pngImageDecoder.DecodeAsync(rawImageStream, pngImageHeader);
+            var deflateImage = await pngImageDecoder.DecodeAsync(rawImageStream, pngImageHeader);
 
             var pngPaletteApplier = NegumContainer.Resolve<ISffPngPaletteApplier>();
-            var pngImageWithPalette = await pngPaletteApplier.ApplyAsync(pngImageHeader, decodedPngImage, input.Palette);
+            var pngImageWithPalette = await pngPaletteApplier.ApplyAsync(pngImageHeader, deflateImage, input.Palette);
 
-            return pngImageWithPalette;
+            var pngInterlaceDecoder = NegumContainer.Resolve<ISffPngInterlaceDecoder>();
+            var decodedOutputBytes = await pngInterlaceDecoder.DecodeAsync(pngImageWithPalette, pngImageHeader);
+
+            return decodedOutputBytes;
         }
     }
 }

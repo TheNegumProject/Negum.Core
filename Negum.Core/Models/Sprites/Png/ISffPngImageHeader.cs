@@ -69,7 +69,7 @@ namespace Negum.Core.Models.Sprites.Png
         /// <summary>
         /// </summary>
         /// <returns>Number of bytes per line.</returns>
-        int GetBytesPerLine();
+        int GetBytesPerLine(int width = -1);
 
         /// <summary>
         /// </summary>
@@ -120,25 +120,34 @@ namespace Negum.Core.Models.Sprites.Png
         public byte GetSamplesPerPixel() =>
             this.ColorType switch
             {
-                0 => 1, // Greyscale
+                0 => (byte) (this.BitDepth == 16 ? 2 : 1), // Grayscale
                 1 => 1, // Colors are stored in a palette rather than directly in the data
-                2 => 3, // The image uses color
-                3 => 3, // Indexed color
-                4 => 2, // The image has an alpha channel
-                2 | 4 => 4,
-                _ => 0
+                2 => (byte) (this.BitDepth == 16 ? 6 : 3), // RGB
+                3 => 1, // Indexed color (Palette)
+                4 => (byte) (this.BitDepth == 16 ? 4 : 2), // Grayscale + alpha channel
+                6 => (byte) (this.BitDepth == 16 ? 8 : 4), // RGB + alpha channel
+                _ => (byte) (this.BitDepth == 16 ? 8 : 4) // Default ==>> RGB + alpha
             };
 
-        public int GetBytesPerLine() =>
-            this.BitDepth switch
+        public int GetBytesPerLine(int width = -1)
+        {
+            if (width == -1)
             {
-                1 => (this.Width + 7) / 8,
-                2 => (this.Width + 3) / 4,
-                4 => (this.Width + 1) / 2,
-                8 => this.Width * this.GetSamplesPerPixel() * (this.BitDepth / 8),
-                16 => this.Width * this.GetSamplesPerPixel() * (this.BitDepth / 8),
-                _ => 0
-            };
+                width = this.Width;
+            }
+            
+            var mod = this.BitDepth == 16 ? 16 : 8;
+            var scanlineLength = width * this.BitDepth * this.GetBytesPerPixel();
+            var amount = scanlineLength % mod;
+            
+            if (amount != 0)
+            {
+                scanlineLength += mod - amount;
+            }
+
+            // +1 ==>> We want to read bytes from at least one byte
+            return scanlineLength / mod + 1;
+        }
 
         public virtual byte GetBytesPerPixel()
         {
