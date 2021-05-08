@@ -113,14 +113,14 @@ namespace Negum.Core.Readers.Sff
 
         protected virtual void ReadPalettesColors(BinaryReader binaryReader, SffSpriteV2 sprite)
         {
+            var paletteReader = NegumContainer.Resolve<IPaletteReader>();
+
             foreach (var palette in sprite.Palettes)
             {
                 // Go to palette data
                 binaryReader.BaseStream.Seek(sprite.LDataOffset + palette.LDataOffset, SeekOrigin.Begin);
 
                 var paletteData = binaryReader.ReadBytes((int) palette.LDataLength);
-
-                var paletteReader = NegumContainer.Resolve<IPaletteReader>();
 
                 // Read colors of palette - create temporary palette
                 var paletteWithColors = paletteReader.ReadExact(paletteData, palette.ColorNumber, true);
@@ -132,6 +132,11 @@ namespace Negum.Core.Readers.Sff
 
         protected virtual async Task ReadSubFilesDataAsync(BinaryReader binaryReader, SffSpriteV2 sprite)
         {
+            var sffRle8Reader = NegumContainer.Resolve<ISffRle8Reader>();
+            var sffRle5Reader = NegumContainer.Resolve<ISffRle5Reader>();
+            var sffLz5Reader = NegumContainer.Resolve<ISffLz5Reader>();
+            var sffPngReader = NegumContainer.Resolve<ISffPngReader>();
+
             // Read all sprites pixels
             foreach (var subFileSffV2 in sprite.SpriteSubFiles)
             {
@@ -178,40 +183,36 @@ namespace Negum.Core.Readers.Sff
                         break;
 
                     case 2: // RLE8 (Run-Length Encoding at 8 bits-per-pixel pixmap)
-                        var sffRle8Reader = NegumContainer.Resolve<ISffRle8Reader>();
                         subFile.Image = await sffRle8Reader.ReadAsync(subFile.RawImage);
                         break;
 
                     case 3: // RLE5 (Run-Length Encoding at 5 bits-per-pixel pixmap)
-                        var sffRle5Reader = NegumContainer.Resolve<ISffRle5Reader>();
                         subFile.Image = await sffRle5Reader.ReadAsync(subFile.RawImage);
                         break;
 
                     case 4: // LZ5
-                        var sffLz5Reader = NegumContainer.Resolve<ISffLz5Reader>();
                         subFile.Image = await sffLz5Reader.ReadAsync(subFile.RawImage);
                         break;
 
                     case 10: // PNG8
-                        subFile.Image = await ParsePngAsync(sprite, subFile, 8);
+                        subFile.Image = await ParsePngAsync(sffPngReader, sprite, subFile, 8);
                         break;
 
                     case 11: // PNG24
-                        subFile.Image = await ParsePngAsync(sprite, subFile, 24);
+                        subFile.Image = await ParsePngAsync(sffPngReader, sprite, subFile, 24);
                         break;
 
                     case 12: // PNG32
-                        subFile.Image = await ParsePngAsync(sprite, subFile, 32);
+                        subFile.Image = await ParsePngAsync(sffPngReader, sprite, subFile, 32);
                         break;
                 }
             }
         }
 
-        protected virtual async Task<IEnumerable<byte>> ParsePngAsync(SffSpriteV2 sprite, ISpriteSubFileSffV2 subFile,
+        protected virtual async Task<IEnumerable<byte>> ParsePngAsync(ISffPngReader sffPngReader, SffSpriteV2 sprite,
+            ISpriteSubFileSffV2 subFile,
             int pngFormat)
         {
-            var sffPngReader = NegumContainer.Resolve<ISffPngReader>();
-
             var ctx = new SffPngReaderContext
             {
                 PngFormat = pngFormat,

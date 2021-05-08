@@ -30,6 +30,7 @@ namespace Negum.Core.Readers.Sff
         public override async Task<ISprite> ReadAsync(BinaryReader binaryReader, string signature, string version)
         {
             var paletteReader = NegumContainer.Resolve<IPaletteReader>();
+            var pcxReader = NegumContainer.Resolve<IPcxReader>();
 
             var sprite = new SffSpriteV1
             {
@@ -39,22 +40,22 @@ namespace Negum.Core.Readers.Sff
                 ImageCount = binaryReader.ReadUInt32(),
                 PosFirstSubFileOffset = binaryReader.ReadUInt32(), // Next Sub File Offset
                 Length = binaryReader.ReadUInt32(), // Sub-Header Size
-                PaletteType = binaryReader.ReadByte(), // Shared Palette Byte
+                PaletteType = binaryReader.ReadByte(), // Shared Palette Byte; 0 - individual, 1 - shared
                 Blank = binaryReader.ReadBytes(3).ToUtf8String(),
                 Comments = binaryReader.ReadBytes(476).ToUtf8String()
             };
 
             for (var i = 0; i < sprite.ImageCount; ++i)
             {
-                var subFile = await ReadSubFileAsync(binaryReader, i, paletteReader, sprite);
+                var subFile = await ReadSubFileAsync(pcxReader, binaryReader, i, paletteReader, sprite);
                 sprite.AddSubFile(subFile);
             }
 
             return sprite;
         }
 
-        protected virtual async Task<ISpriteSubFile> ReadSubFileAsync(BinaryReader binaryReader, int index,
-            IPaletteReader paletteReader, SffSpriteV1 sprite)
+        protected virtual async Task<ISpriteSubFile> ReadSubFileAsync(IPcxReader pcxReader, BinaryReader binaryReader,
+            int index, IPaletteReader paletteReader, SffSpriteV1 sprite)
         {
             var subFile = new SpriteSubFileSffV1
             {
@@ -65,7 +66,7 @@ namespace Negum.Core.Readers.Sff
                 SpriteGroup = binaryReader.ReadUInt16(),
                 SpriteNumber = binaryReader.ReadUInt16(),
                 SpriteLinkedIndex = binaryReader.ReadUInt16(),
-                SamePalette = binaryReader.ReadByte(),
+                SamePalette = binaryReader.ReadByte(), // 1 - if the palette is the same as in previous sprite, 0 - new
                 Comment = binaryReader.ReadBytes(14).ToUtf8String()
             };
 
@@ -76,7 +77,7 @@ namespace Negum.Core.Readers.Sff
                 subFile.RawImage = binaryReader.ReadBytes(count);
             }
 
-            if (index == 0)
+            if (index == 0) // TODO: Load only if palette available
             {
                 var paletteData = binaryReader.ReadBytes(768);
                 var palette = await paletteReader.ReadAsync(paletteData);
@@ -91,7 +92,6 @@ namespace Negum.Core.Readers.Sff
                     Palette = subFile.SamePalette == 1 ? sprite.SpriteSubFiles.ElementAt(0).Palette : null
                 };
 
-                var pcxReader = NegumContainer.Resolve<IPcxReader>();
                 subFile.PcxImage = await pcxReader.ReadAsync(pcxDetails);
             }
 

@@ -37,7 +37,6 @@ namespace Negum.Core.Tests.Readers
         // [InlineData("/Users/kdobrzynski/Downloads/gogetassj4.sff")] // 1.010
         // [InlineData("/Users/kdobrzynski/Downloads/kakaroto.sff")] // 1.010
         // [InlineData("/Users/kdobrzynski/Downloads/Future.sff")] // 1.010
-        [InlineData("/Users/kdobrzynski/Downloads/UnpackedMugen-main/chars/Goku-SSJ2/samplesprite.sff")]
         [InlineData("/Users/kdobrzynski/Downloads/UnpackedMugen-main/chars/Goku-SSJ2/gokuhd.sff")]
         public async Task Should_Parse_Sprite_File_And_Images_SFFv1(string url)
         {

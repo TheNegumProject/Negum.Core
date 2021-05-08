@@ -74,14 +74,15 @@ namespace Negum.Core.Managers
         public IEnumerable<TValue> GetAll<TValue>() =>
             this.InitializeEntries<TValue>(this.Section, null);
 
-        protected virtual IEnumerable<TValue> InitializeEntries<TValue>(IEnumerable<IConfigurationSectionEntry> entries, 
+        protected virtual IEnumerable<TValue> InitializeEntries<TValue>(IEnumerable<IConfigurationSectionEntry> entries,
             string fieldKey)
         {
+            var entry = NegumContainer.Resolve<IManagerSectionEntry<TValue>>();
+
             return entries
                 .Select((sectionEntry, index) =>
                 {
                     var key = fieldKey == null ? index.ToString() : fieldKey;
-                    var entry = NegumContainer.Resolve<IManagerSectionEntry<TValue>>();
                     entry.Initialize(this, key, sectionEntry);
                     return entry.Get();
                 })
