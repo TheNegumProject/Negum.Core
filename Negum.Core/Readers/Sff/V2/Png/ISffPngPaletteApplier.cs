@@ -47,18 +47,15 @@ namespace Negum.Core.Readers.Sff.V2.Png
             {
                 throw new ArgumentNullException($"Palette is required to decode PNG image.");
             }
-
-
+            
             var coloredImage = new List<byte>();
-
-            var scanlineLength = imageHeader.BytesInRow;
 
             for (var index = 0; index < imageData.Length; ++index)
             {
                 var paletteIndex = imageData[index];
 
                 // For scanline filter type we don't want to perform colorization
-                if (index == 0 || index % scanlineLength == 0)
+                if (index == 0 || index % imageHeader.BytesInRow == 0)
                 {
                     coloredImage.Add(paletteIndex);
                     continue;
