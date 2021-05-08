@@ -58,12 +58,12 @@ namespace Negum.Core.Readers.Sff
         {
             var subFile = new SpriteSubFileSffV1
             {
-                NextSubFileOffset = binaryReader.ReadUInt32(),
-                PcxDataLength = binaryReader.ReadUInt32(),
+                DataOffset = binaryReader.ReadUInt32(),
+                DataLength = binaryReader.ReadUInt32(),
                 SpriteImageXAxis = binaryReader.ReadUInt16(),
                 SpriteImageYAxis = binaryReader.ReadUInt16(),
                 SpriteGroup = binaryReader.ReadUInt16(),
-                ImageNumber = binaryReader.ReadUInt16(),
+                SpriteNumber = binaryReader.ReadUInt16(),
                 SpriteLinkedIndex = binaryReader.ReadUInt16(),
                 SamePalette = binaryReader.ReadByte(),
                 Comment = binaryReader.ReadBytes(14).ToUtf8String()
@@ -72,7 +72,7 @@ namespace Negum.Core.Readers.Sff
             if (subFile.SpriteLinkedIndex == 0)
             {
                 binaryReader.BaseStream.Position -= 1;
-                var count = (int) (subFile.NextSubFileOffset - binaryReader.BaseStream.Position);
+                var count = (int) (subFile.DataOffset - binaryReader.BaseStream.Position);
                 subFile.RawImage = binaryReader.ReadBytes(count);
             }
 
@@ -95,7 +95,7 @@ namespace Negum.Core.Readers.Sff
                 subFile.PcxImage = await pcxReader.ReadAsync(pcxDetails);
             }
 
-            binaryReader.BaseStream.Position = subFile.NextSubFileOffset;
+            binaryReader.BaseStream.Position = subFile.DataOffset;
 
             return subFile;
         }

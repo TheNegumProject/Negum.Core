@@ -13,7 +13,7 @@ namespace Negum.Core.Models.Sprites
     public interface ISpriteSubFile
     {
         /// <summary>
-        /// Contains image raw data.
+        /// Image returned from reader.
         /// </summary>
         IEnumerable<byte> Image { get; }
 
@@ -51,6 +51,31 @@ namespace Negum.Core.Models.Sprites
         /// Palette used for the current image.
         /// </summary>
         IPalette Palette { get; }
+
+        /// <summary>
+        /// Raw image read from SFF file.
+        /// </summary>
+        byte[] RawImage { get; }
+
+        /// <summary>
+        /// Sprite number in SFF file.
+        /// </summary>
+        ushort SpriteNumber { get; }
+
+        /// <summary>
+        /// Offset to sprite data.
+        /// </summary>
+        uint DataOffset { get; }
+
+        /// <summary>
+        /// Sprite's size.
+        /// </summary>
+        uint DataLength { get; }
+
+        /// <summary>
+        /// Palette used to color this sprite.
+        /// </summary>
+        ushort PaletteIndex { get; }
     }
 
     /// <summary>
@@ -69,5 +94,10 @@ namespace Negum.Core.Models.Sprites
         public virtual ushort SpriteImageYAxis { get; internal set; }
         public virtual ushort SpriteLinkedIndex { get; internal set; }
         public virtual IPalette Palette { get; internal set; }
+        public virtual byte[] RawImage { get; internal set; }
+        public virtual ushort SpriteNumber { get; internal set; }
+        public virtual uint DataOffset { get; internal set; }
+        public virtual uint DataLength { get; internal set; }
+        public virtual ushort PaletteIndex { get; internal set; }
     }
 }
