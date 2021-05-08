@@ -6,6 +6,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{5E55F8BB
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Negum.Core.Tests", "Tests\Negum.Core.Tests\Negum.Core.Tests.csproj", "{FD7E17DA-B085-4336-867F-F201B689C164}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Negum.Core.Tests.SDL.Png", "Tests\Negum.Core.Tests.SDL.Png\Negum.Core.Tests.SDL.Png.csproj", "{A7A2FA1B-6E0E-476D-BD2B-75AE62A50510}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,8 +22,13 @@ Global
 		{FD7E17DA-B085-4336-867F-F201B689C164}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FD7E17DA-B085-4336-867F-F201B689C164}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FD7E17DA-B085-4336-867F-F201B689C164}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7A2FA1B-6E0E-476D-BD2B-75AE62A50510}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7A2FA1B-6E0E-476D-BD2B-75AE62A50510}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7A2FA1B-6E0E-476D-BD2B-75AE62A50510}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7A2FA1B-6E0E-476D-BD2B-75AE62A50510}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{FD7E17DA-B085-4336-867F-F201B689C164} = {5E55F8BB-B97E-4E0F-B41F-A139DC46B9CD}
+		{A7A2FA1B-6E0E-476D-BD2B-75AE62A50510} = {5E55F8BB-B97E-4E0F-B41F-A139DC46B9CD}
 	EndGlobalSection
 EndGlobal

@@ -9,14 +9,10 @@ namespace Negum.Core.Models.Sprites
     /// </author>
     public interface ISpriteSubFileSffV2 : ISpriteSubFile
     {
-        ushort ItemNumber { get; }
-        byte Format { get; }
-        byte Depth { get; }
-        uint DataOffset { get; }
-        uint DataLength { get; }
-        ushort PaletteIndex { get; }
-        ushort Flags { get; }
-        byte PngFormat { get; }
+        byte CompressionMethod { get; }
+        byte ColorDepth { get; }
+        ushort LoadMode { get; }
+        uint ImageSize { get; }
     }
 
     /// <summary>
@@ -27,13 +23,9 @@ namespace Negum.Core.Models.Sprites
     /// </author>
     public class SpriteSubFileSffV2 : SpriteSubFile, ISpriteSubFileSffV2
     {
-        public ushort ItemNumber { get; internal set; }
-        public byte Format { get; internal set; }
-        public byte Depth { get; internal set; }
-        public uint DataOffset { get; internal set; }
-        public uint DataLength { get; internal set; }
-        public ushort PaletteIndex { get; internal set; }
-        public ushort Flags { get; internal set; }
-        public byte PngFormat { get; internal set; }
+        public byte CompressionMethod { get; internal set; }
+        public byte ColorDepth { get; internal set; }
+        public ushort LoadMode { get; internal set; }
+        public uint ImageSize { get; internal set; }
     }
 }

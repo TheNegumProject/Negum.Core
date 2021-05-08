@@ -106,7 +106,7 @@ namespace Negum.Core.Containers
 
             // Loaders
             RegisterInterfaceClassPairs(typeof(ILoader<,>).Namespace, typeof(ILoader<,>));
-            
+
             // Engine
             RegisterInterfaceClassPairs(typeof(IEngineProvider).Namespace, typeof(IEngineProvider));
         }
@@ -132,7 +132,10 @@ namespace Negum.Core.Containers
         public static void RegisterMultiple(string @namespace, Type baseType, Func<Type, Type, Type> func)
         {
             baseType.Assembly.GetTypes()
-                .Where(t => t.Namespace.StartsWith(@namespace) && t.IsClass && !t.IsAbstract)
+                .Where(t => t.Namespace != null
+                            && t.Namespace.StartsWith(@namespace)
+                            && t.IsClass
+                            && !t.IsAbstract)
                 .ToList()
                 .ForEach(type =>
                 {
