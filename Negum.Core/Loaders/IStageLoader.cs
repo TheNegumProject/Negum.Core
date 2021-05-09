@@ -2,9 +2,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Negum.Core.Containers;
 using Negum.Core.Engines;
 using Negum.Core.Managers.Types;
 using Negum.Core.Models.Stages;
+using Negum.Core.Readers;
 
 namespace Negum.Core.Loaders
 {
@@ -55,11 +57,13 @@ namespace Negum.Core.Loaders
 
         protected virtual async Task<IStage> GetStageAsync(FileInfo defFile)
         {
+            var reader = NegumContainer.Resolve<IFilePathReader>();
+            
             var stage = new Stage();
 
             stage.File = defFile;
             stage.Manager = await this.ReadManagerAsync<IStageManager>(defFile);
-            stage.Sprite = await this.GetSpriteAsync(defFile.DirectoryName, stage.Manager.BackgroundDef.SpriteFile);
+            stage.Sprite = await reader.GetSpriteAsync(defFile.DirectoryName, stage.Manager.BackgroundDef.SpriteFile);
 
             return stage;
         }

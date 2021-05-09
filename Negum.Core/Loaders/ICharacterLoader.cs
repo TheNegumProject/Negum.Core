@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Negum.Core.Containers;
 using Negum.Core.Engines;
 using Negum.Core.Managers.Types;
 using Negum.Core.Models.Characters;
+using Negum.Core.Readers;
 
 namespace Negum.Core.Loaders
 {
@@ -60,14 +62,16 @@ namespace Negum.Core.Loaders
                 Directory = dir
             };
 
+            var reader = NegumContainer.Resolve<IFilePathReader>();
+
             character.CharacterManager = await this.ReadManagerAsync<ICharacterManager>(characterDefFile, characterDefFile.Name);
             character.CommandsManager = await this.ReadManagerAsync<ICharacterCommandsManager>(characterDefFile, character.CharacterManager.Files.CommandFile);
             character.ConstantsManager = await this.ReadManagerAsync<ICharacterConstantsManager>(characterDefFile, character.CharacterManager.Files.ConstantsFile);
             character.StatesManager = await this.ReadManagerAsync<ICharacterConstantsManager>(characterDefFile, character.CharacterManager.Files.StatesFile);
             character.CommonStatesManager = await this.ReadCommonStatesAsync(characterDefFile, character.CharacterManager.Files.CommonStatesFile);
-            character.Sprite = await this.GetSpriteAsync(characterDefFile.DirectoryName, character.CharacterManager.Files.SpriteFiles);
+            character.Sprite = await reader.GetSpriteAsync(characterDefFile.DirectoryName, character.CharacterManager.Files.SpriteFiles);
             character.AnimationManager = await this.FindManagerAsync<IAnimationManager>(characterDefFile.DirectoryName, character.CharacterManager.Files.AnimationFile);
-            character.Sound = await this.GetSoundAsync(characterDefFile.DirectoryName, character.CharacterManager.Files.SoundFile);
+            character.Sound = await reader.GetSoundAsync(characterDefFile.DirectoryName, character.CharacterManager.Files.SoundFile);
             character.AiHints = this.ReadAiHints(characterDefFile.DirectoryName, character.CharacterManager.Files.AiHintsDataFile);
             character.Intro = await this.ReadStoryboardAsync(characterDefFile.FullName, character.CharacterManager.Arcade.IntroStoryboardFile);
             character.Ending = await this.ReadStoryboardAsync(characterDefFile.FullName, character.CharacterManager.Arcade.EndingStoryboardFile);

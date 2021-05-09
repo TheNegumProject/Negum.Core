@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,7 +16,7 @@ namespace Negum.Core.Readers
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface IConfigurationReader : IReader<string, IConfiguration>
+    public interface IConfigurationReader : IStreamReader<IConfiguration>, IReader<string, IConfiguration>
     {
     }
 
@@ -39,12 +40,13 @@ namespace Negum.Core.Readers
 
         public async Task<IConfiguration> ReadAsync(string path)
         {
-            var fileContentReader = NegumContainer.Resolve<IFileContentReader>();
-            var stream = await fileContentReader.ReadAsync(path);
-            
-            var streamLinesReader = NegumContainer.Resolve<IStreamLinesReader>();
-            var lines = await streamLinesReader.ReadAsync(stream);
-            
+            var stream = await NegumContainer.Resolve<IFileContentReader>().ReadAsync(path);
+            return await this.ReadAsync(stream);
+        }
+
+        public async Task<IConfiguration> ReadAsync(Stream stream)
+        {
+            var lines = await NegumContainer.Resolve<IStreamLinesReader>().ReadAsync(stream);
             return await this.ReadFromLinesAsync(lines);
         }
 
@@ -110,11 +112,11 @@ namespace Negum.Core.Readers
         {
             var key = string.Empty;
             var value = string.Empty;
-            
+
             if (line.Contains(EqualsSymbol))
             {
                 var index = line.IndexOf(EqualsSymbol, StringComparison.Ordinal);
-            
+
                 key = line[..index]
                     .Trim();
 
@@ -128,7 +130,7 @@ namespace Negum.Core.Readers
                 key = this.Entries.Count.ToString();
                 value = line;
             }
-            
+
             this.ProcessEntry(line, key, value);
         }
 
