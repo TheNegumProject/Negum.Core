@@ -8,8 +8,6 @@ using Negum.Core.Engines;
 using Negum.Core.Managers;
 using Negum.Core.Managers.Types;
 using Negum.Core.Models.Data;
-using Negum.Core.Models.Sounds;
-using Negum.Core.Models.Sprites;
 using Negum.Core.Readers;
 
 namespace Negum.Core.Loaders
@@ -30,63 +28,16 @@ namespace Negum.Core.Loaders
                 return null;
             }
 
-            var defFilePath = this.FindFile(dirName, fileName);
+            var reader = NegumContainer.Resolve<IFilePathReader>();
+
+            var defFilePath = reader.FindFile(dirName, fileName);
             var storyboard = new Storyboard();
 
             storyboard.Manager = await this.ReadManagerAsync<IStoryboardManager>(defFilePath);
             storyboard.Animation = await this.ReadManagerAsync<IAnimationManager, IAnimationReader>(defFilePath);
-            storyboard.Sprite = await this.GetSpriteAsync(dirName, storyboard.Manager.SceneDef.SpriteFile);
+            storyboard.Sprite = await reader.GetSpriteAsync(dirName, storyboard.Manager.SceneDef.SpriteFile);
 
             return storyboard;
-        }
-
-        protected virtual async Task<ISound> GetSoundAsync(string dirName, string soundPath)
-        {
-            var file = this.FindFile(dirName, soundPath);
-
-            if (file == null)
-            {
-                return null;
-            }
-
-            var soundReader = NegumContainer.Resolve<ISoundPathReader>();
-            var sound = await soundReader.ReadAsync(file.FullName);
-
-            return sound;
-        }
-
-        protected virtual async Task<ISprite> GetSpriteAsync(string dirName, string spritePath)
-        {
-            var file = this.FindFile(dirName, spritePath);
-
-            if (file == null)
-            {
-                return null;
-            }
-
-            var reader = NegumContainer.Resolve<ISpritePathReader>();
-            var sprite = await reader.ReadAsync(file.FullName);
-
-            return sprite;
-        }
-
-        protected virtual FileInfo FindFile(string dirName, string fileName)
-        {
-            var path = Path.Combine(dirName, fileName);
-            var file = new FileInfo(path);
-
-            while (!file.Exists)
-            {
-                if (file.Directory.Parent == null)
-                {
-                    return null;
-                }
-
-                path = Path.Combine(file.Directory.Parent.FullName, file.Name);
-                file = new FileInfo(path);
-            }
-
-            return file;
         }
 
         protected virtual IEnumerable<FileInfo> GetFiles(IEngine engine, string subdirectoryName) =>
@@ -159,7 +110,9 @@ namespace Negum.Core.Loaders
         protected virtual async Task<TManager> FindManagerAsync<TManager>(string dirName, string filePath)
             where TManager : IManager
         {
-            var file = this.FindFile(dirName, filePath);
+            var reader = NegumContainer.Resolve<IFilePathReader>();
+
+            var file = reader.FindFile(dirName, filePath);
             var manager = await this.ReadManagerAsync<TManager>(file);
 
             return manager;

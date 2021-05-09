@@ -27,7 +27,7 @@ namespace Negum.Core.Readers.Sff.V2.Png.Processors
             var physicalChunkData = new SffPngPhysicalChunkData
             {
                 PixelsPerUnitX = hResolution,
-                PixelsPerUnityY = vResolution,
+                PixelsPerUnitY = vResolution,
                 Unit = unit,
             };
 

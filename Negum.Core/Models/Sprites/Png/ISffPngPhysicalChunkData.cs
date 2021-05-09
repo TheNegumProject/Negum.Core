@@ -11,7 +11,7 @@ namespace Negum.Core.Models.Sprites.Png
     public interface ISffPngPhysicalChunkData
     {
         uint PixelsPerUnitX { get; }
-        uint PixelsPerUnityY { get; }
+        uint PixelsPerUnitY { get; }
 
         /// <summary>
         /// 0: Unknown - defines aspect ratio only
@@ -29,7 +29,7 @@ namespace Negum.Core.Models.Sprites.Png
     public class SffPngPhysicalChunkData : ISffPngPhysicalChunkData
     {
         public uint PixelsPerUnitX { get; internal set; }
-        public uint PixelsPerUnityY { get; internal set; }
+        public uint PixelsPerUnitY { get; internal set; }
         public byte Unit { get; internal set; }
     }
 }
