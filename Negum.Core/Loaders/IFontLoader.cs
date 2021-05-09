@@ -2,9 +2,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Negum.Core.Containers;
 using Negum.Core.Engines;
-using Negum.Core.Managers.Types;
 using Negum.Core.Models.Fonts;
+using Negum.Core.Readers;
 
 namespace Negum.Core.Loaders
 {
@@ -30,26 +31,15 @@ namespace Negum.Core.Loaders
         public async Task<IEnumerable<IFont>> LoadAsync(IEngine engine)
         {
             var sources = this.GetFiles(engine, "font")
-                .Where(file => file.Extension.Equals(".def") || file.Extension.Equals(".fnt"));
+                .Where(file => file.Extension.Equals(".fnt") || file.Extension.Equals(".def"));
 
             return await this.LoadMultipleAsync(sources, this.GetFontAsync);
         }
 
         protected virtual async Task<IFont> GetFontAsync(FileInfo file)
         {
-            var font = new Font
-            {
-                File = file,
-                IsRaw = file.Extension.Equals(".fnt")
-            };
-
-            if (!font.IsRaw)
-            {
-                font.Manager = await this.ReadManagerAsync<IFontManager>(file);
-                font.Sprite = await this.GetSpriteAsync(file.DirectoryName, font.Manager.Def.File);
-            }
-
-            return font;
+            var reader = NegumContainer.Resolve<IFontPathReader>();
+            return await reader.ReadAsync(file.FullName);
         }
     }
 }

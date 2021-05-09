@@ -1,5 +1,4 @@
-using Negum.Core.Managers.Types;
-using Negum.Core.Models.Sprites;
+using Negum.Core.Models.Math;
 
 namespace Negum.Core.Models.Fonts
 {
@@ -13,21 +12,26 @@ namespace Negum.Core.Models.Fonts
     public interface IFont : IFileReadable
     {
         /// <summary>
-        /// Returns true if the current font was read from FNT file.
+        /// Size of font: width, height.
+        /// Width is used for spaces.
         /// </summary>
-        bool IsRaw { get; }
+        IPoint Size { get; }
 
         /// <summary>
-        /// Manager used to read this Font.
-        /// Could be null if IsRaw == true.
+        /// Spacing between font glyphs: width, height.
         /// </summary>
-        IFontManager Manager { get; }
+        IPoint Spacing { get; }
 
         /// <summary>
-        /// Sprite which contains information about glyphs used in the file.
-        /// Could be null if IsRaw == true OR if the file is TTF.
+        /// Drawing offset: x, y.
         /// </summary>
-        ISprite Sprite { get; }
+        IPoint Offset { get; }
+
+        /// <summary>
+        /// Type of font.
+        /// I.e.: bitmap, Fixed, etc.
+        /// </summary>
+        string Type { get; }
     }
 
     /// <summary>
@@ -38,8 +42,9 @@ namespace Negum.Core.Models.Fonts
     /// </author>
     public class Font : FileReadable, IFont
     {
-        public bool IsRaw { get; internal set; }
-        public IFontManager Manager { get; internal set; }
-        public ISprite Sprite { get; internal set; }
+        public IPoint Size { get; internal set; }
+        public IPoint Spacing { get; internal set; }
+        public IPoint Offset { get; internal set; }
+        public string Type { get; internal set; }
     }
 }

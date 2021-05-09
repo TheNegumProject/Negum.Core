@@ -11,7 +11,7 @@ namespace Negum.Core.Readers
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface IStringVectorReader : IReader<string, IVector<string>>
+    public interface IIntVectorReader : IReader<string, IVector<int>>
     {
     }
 
@@ -21,15 +21,15 @@ namespace Negum.Core.Readers
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public class StringVectorReader : CommonVectorReader, IStringVectorReader
+    public class IntVectorReader : CommonVectorReader, IIntVectorReader
     {
-        public async Task<IVector<string>> ReadAsync(string input)
+        public async Task<IVector<int>> ReadAsync(string input)
         {
-            var vector = new Vector<string>();
+            var vector = new Vector<int>();
 
             this.SplitValues(input)
                 .ToList()
-                .ForEach(value => vector.Add(value));
+                .ForEach(value => vector.Add(int.Parse(value)));
 
             return vector;
         }
