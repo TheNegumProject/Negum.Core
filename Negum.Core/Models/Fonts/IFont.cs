@@ -9,7 +9,7 @@ namespace Negum.Core.Models.Fonts
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public interface IFont : IFileReadable
+    public interface IFont
     {
         /// <summary>
         /// Size of font: width, height.
@@ -40,7 +40,7 @@ namespace Negum.Core.Models.Fonts
     /// <author>
     /// https://github.com/TheNegumProject/Negum.Core
     /// </author>
-    public class Font : FileReadable, IFont
+    public class Font : IFont
     {
         public IPoint Size { get; internal set; }
         public IPoint Spacing { get; internal set; }
