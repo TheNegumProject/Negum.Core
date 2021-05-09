@@ -51,10 +51,7 @@ namespace Negum.Core.Readers
                 return null;
             }
 
-            var soundReader = NegumContainer.Resolve<ISoundPathReader>();
-            var sound = await soundReader.ReadAsync(file.FullName);
-
-            return sound;
+            return await NegumContainer.Resolve<ISoundPathReader>().ReadAsync(file.FullName);
         }
 
         public virtual async Task<ISprite> GetSpriteAsync(string dirName, string spritePath)
@@ -66,10 +63,7 @@ namespace Negum.Core.Readers
                 return null;
             }
 
-            var reader = NegumContainer.Resolve<ISpritePathReader>();
-            var sprite = await reader.ReadAsync(file.FullName);
-
-            return sprite;
+            return await NegumContainer.Resolve<ISpritePathReader>().ReadAsync(file.FullName);
         }
 
         public virtual FileInfo FindFile(string dirName, string fileName)
