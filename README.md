@@ -29,7 +29,7 @@ X | Container | Used to create objects and store them in shared space. Can be cu
 ## 2. How To Use
 
 ### 2.1. Installation (NuGet)
-Easiest wat to install Negum.Core library is to do it via NuGet like so:
+Easiest way to install Negum.Core library is via NuGet like so:
 > dotnet add package Negum.Core
 
 Or check it directly [Here](https://www.nuget.org/packages/Negum.Core/)
