@@ -71,12 +71,6 @@ public static class NegumContainer
     public static TInterface Resolve<TInterface>() =>
         (TInterface) Resolver(typeof(TInterface));
 
-    /// <summary>
-    /// Registers known types to container.
-    ///
-    /// REMEMBER:
-    /// Call it at least once before using the engine.
-    /// </summary>
     static NegumContainer()
     {
         // Configurations
@@ -86,7 +80,7 @@ public static class NegumContainer
         // Readers
         RegisterInterfaceClassPairs(typeof(IReader<,>).Namespace, typeof(IReader<,>));
 
-        // Negum Manager Section Entries
+        // Manager Section Entries
         RegisterMultiple(typeof(StringEntry).Namespace, typeof(IManagerSectionEntry<>),
             (type, baseType) => 
                 type.GetInterfaces().FirstOrDefault(i => i.GetGenericTypeDefinition() == baseType));
