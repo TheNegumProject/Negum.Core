@@ -45,7 +45,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./Negum.Core/bin/Debug/net5.0/Negum.Core.dll
+        asset_path: ./Negum.Core/bin/Debug/net7.0/Negum.Core.dll
         asset_name: Negum.Core-${{ env.RELEASE_DATE }}.dll
         asset_content_type: application/octet-stream
 
@@ -56,7 +56,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./Negum.Core/bin/Debug/net5.0/Negum.Core.deps.json
+        asset_path: ./Negum.Core/bin/Debug/net7.0/Negum.Core.deps.json
         asset_name: Negum.Core-${{ env.RELEASE_DATE }}.deps.json
         asset_content_type: application/xml
 
@@ -67,7 +67,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./Negum.Core/bin/Debug/net5.0/Negum.Core.pdb
+        asset_path: ./Negum.Core/bin/Debug/net7.0/Negum.Core.pdb
         asset_name: Negum.Core-${{ env.RELEASE_DATE }}.pdb
         asset_content_type: application/octet-stream
         
