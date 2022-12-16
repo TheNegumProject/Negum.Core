@@ -48,11 +48,6 @@ NegumContainer.Resolver = (typeToResolve) => null; // Used for resolving type
 
 // ...
 
-// You MUST call it once before doing anything with Negum engine
-NegumContainer.RegisterKnownTypes();
-
-// ...
-
 // Take main provider which is used to build IEngine object
 IEngineProvider engineProvider = NegumContainer.Resolve<IEngineProvider>();
 
