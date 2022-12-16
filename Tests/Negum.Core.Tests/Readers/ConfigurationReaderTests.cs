@@ -3,88 +3,80 @@ using System.Threading.Tasks;
 using Negum.Core.Configurations.Animations;
 using Xunit;
 
-namespace Negum.Core.Tests.Readers
+namespace Negum.Core.Tests.Readers;
+
+/// <summary>
+/// </summary>
+/// 
+/// <author>
+/// https://github.com/TheNegumProject/Negum.Core
+/// </author>
+public class ConfigurationReaderTests : TestBase
 {
-    /// <summary>
-    /// </summary>
-    /// 
-    /// <author>
-    /// https://github.com/TheNegumProject/Negum.Core
-    /// </author>
-    public class ConfigurationReaderTests : TestBase
+    [Theory]
+    [InlineData("https://raw.githubusercontent.com/TheNegumProject/UnpackedMugen/main/data/mugen.cfg")]
+    public async Task Should_Read_Configuration(string file)
     {
-        [Theory]
-        [InlineData("https://raw.githubusercontent.com/TheNegumProject/UnpackedMugen/main/data/mugen.cfg")]
-        public async Task Should_Read_Configuration(string file)
-        {
-            this.InitializeContainer();
-            var config = await this.Parse(file);
-            Assert.True(config.Any());
-        }
+        var config = await Parse(file);
+        Assert.True(config.Any());
+    }
 
-        [Theory]
-        [InlineData("TitleBGdef", 6)]
-        [InlineData("SelectBGdef", 4)]
-        [InlineData("VersusBGdef", 13)]
-        [InlineData("VictoryBGdef", 3)]
-        [InlineData("OptionBGdef", 1)]
-        public async Task Should_Read_Motif_With_Subsections(string sectionName, int subsectionsCount)
-        {
-            const string filePath = "https://raw.githubusercontent.com/TheNegumProject/UnpackedMugen/main/data/mugen1/system.def";
+    [Theory]
+    [InlineData("TitleBGdef", 6)]
+    [InlineData("SelectBGdef", 4)]
+    [InlineData("VersusBGdef", 13)]
+    [InlineData("VictoryBGdef", 3)]
+    [InlineData("OptionBGdef", 1)]
+    public async Task Should_Read_Motif_With_Subsections(string sectionName, int subsectionsCount)
+    {
+        const string filePath = "https://raw.githubusercontent.com/TheNegumProject/UnpackedMugen/main/data/mugen1/system.def";
+            
+        var config = await ParseWithSubsections(filePath);
+        var section = config.FirstOrDefault(s => s.Name.Equals(sectionName));
+        Assert.True(section.Subsections.Count() == subsectionsCount);
+    }
 
-            this.InitializeContainer();
+    [Theory]
+    [InlineData("https://raw.githubusercontent.com/TheNegumProject/UnpackedMugen/main/chars/kfm720/kfm720.air")]
+    public async Task Should_Read_Animation_File(string path)
+    {
+        var config = await ParseAnimation(path);
 
-            var config = await this.ParseWithSubsections(filePath);
-            var section = config.FirstOrDefault(s => s.Name.Equals(sectionName));
-            Assert.True(section.Subsections.Count() == subsectionsCount);
-        }
+        Assert.True(config.Any());
 
-        [Theory]
-        [InlineData("https://raw.githubusercontent.com/TheNegumProject/UnpackedMugen/main/chars/kfm720/kfm720.air")]
-        public async Task Should_Read_Animation_File(string path)
-        {
-            this.InitializeContainer();
+        Assert.True(config
+            .Cast<IAnimationSection>()
+            .FirstOrDefault()
+            .Count() == 1);
 
-            var config = await this.ParseAnimation(path);
+        Assert.True(config
+            .Cast<IAnimationSection>()
+            .FirstOrDefault()
+            .Count() == 1);
 
-            Assert.True(config.Any());
-
-            Assert.True(config
+        Assert.True(((IAnimationSectionEntry) config
                 .Cast<IAnimationSection>()
-                .FirstOrDefault()
-                .Count() == 1);
+                .FirstOrDefault(s => s.ActionNumber == 170)
+                .ElementAt(0))
+            .AnimationElements
+            .Count() == 9);
 
-            Assert.True(config
-                .Cast<IAnimationSection>()
-                .FirstOrDefault()
-                .Count() == 1);
+        var section = config
+            .Cast<IAnimationSection>()
+            .FirstOrDefault(s => s.ActionNumber == 6);
 
-            Assert.True(((IAnimationSectionEntry) config
-                    .Cast<IAnimationSection>()
-                    .FirstOrDefault(s => s.ActionNumber == 170)
-                    .ElementAt(0))
-                .AnimationElements
-                .Count() == 9);
+        var entry = section.FirstOrDefault() as IAnimationSectionEntry;
 
-            var section = config
-                .Cast<IAnimationSection>()
-                .FirstOrDefault(s => s.ActionNumber == 6);
+        Assert.True(entry.Boxes.Count() == 3);
+    }
 
-            var entry = section.FirstOrDefault() as IAnimationSectionEntry;
+    [Theory]
+    [InlineData("https://raw.githubusercontent.com/TheNegumProject/UnpackedMugen/main/data/common1.cns")]
+    [InlineData("https://raw.githubusercontent.com/TheNegumProject/UnpackedMugen/main/chars/kfm720/kfm720.cns")]
+    public async Task Should_Read_Constants(string file)
+    {
+        var config = await ParseConstants(file);
 
-            Assert.True(entry.Boxes.Count() == 3);
-        }
-
-        [Theory]
-        [InlineData("https://raw.githubusercontent.com/TheNegumProject/UnpackedMugen/main/data/common1.cns")]
-        [InlineData("https://raw.githubusercontent.com/TheNegumProject/UnpackedMugen/main/chars/kfm720/kfm720.cns")]
-        public async Task Should_Read_Constants(string file)
-        {
-            this.InitializeContainer();
-
-            var config = await this.ParseConstants(file);
-
-            Assert.True(config.Any());
-        }
+        Assert.True(config.Any());
     }
 }
