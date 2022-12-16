@@ -3,57 +3,56 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Negum.Core.Readers.Sff.V2
+namespace Negum.Core.Readers.Sff.V2;
+
+/// <summary>
+/// Reader used to decode SFF image using RLE-8 (Run Length Encoding at 8 bits-per-pixel pixmap).
+/// </summary>
+/// 
+/// <author>
+/// https://github.com/TheNegumProject/Negum.Core
+/// </author>
+public interface ISffRle8Reader : IReader<IEnumerable<byte>, IEnumerable<byte>>
 {
-    /// <summary>
-    /// Reader used to decode SFF image using RLE-8 (Run Length Encoding at 8 bits-per-pixel pixmap).
-    /// </summary>
-    /// 
-    /// <author>
-    /// https://github.com/TheNegumProject/Negum.Core
-    /// </author>
-    public interface ISffRle8Reader : IReader<IEnumerable<byte>, IEnumerable<byte>>
-    {
-    }
+}
 
-    /// <summary>
-    /// </summary>
-    /// 
-    /// <author>
-    /// https://github.com/TheNegumProject/Negum.Core
-    /// </author>
-    public class SffRle8Reader : ISffRle8Reader
+/// <summary>
+/// </summary>
+/// 
+/// <author>
+/// https://github.com/TheNegumProject/Negum.Core
+/// </author>
+public class SffRle8Reader : ISffRle8Reader
+{
+    public async Task<IEnumerable<byte>> ReadAsync(IEnumerable<byte> input)
     {
-        public async Task<IEnumerable<byte>> ReadAsync(IEnumerable<byte> input)
+        var ret = new List<byte>();
+        var stream = new MemoryStream(input.ToArray());
+        var binaryReader = new BinaryReader(stream);
+
+        while (stream.Position != stream.Length)
         {
-            var ret = new List<byte>();
-            var stream = new MemoryStream(input.ToArray());
-            var binaryReader = new BinaryReader(stream);
+            var character = binaryReader.ReadByte();
 
-            while (stream.Position != stream.Length)
+            if ((character & 192) == 64) // 192 == 0xC0; 64 == 0x40
             {
-                var character = binaryReader.ReadByte();
+                var color = binaryReader.ReadByte();
+                var length = character & 63; // 63 == 0x3F
 
-                if ((character & 192) == 64) // 192 == 0xC0; 64 == 0x40
+                for (var i = 0; i < length; ++i)
                 {
-                    var color = binaryReader.ReadByte();
-                    var length = character & 63; // 63 == 0x3F
-
-                    for (var i = 0; i < length; ++i)
-                    {
-                        ret.Add(color);
-                    }
-                }
-                else
-                {
-                    ret.Add(character);
+                    ret.Add(color);
                 }
             }
-
-            binaryReader.Close();
-            await stream.DisposeAsync();
-
-            return ret.ToArray();
+            else
+            {
+                ret.Add(character);
+            }
         }
+
+        binaryReader.Close();
+        await stream.DisposeAsync();
+
+        return ret.ToArray();
     }
 }

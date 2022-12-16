@@ -1,20 +1,21 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net5.0</TargetFramework>
+        <TargetFramework>net7.0</TargetFramework>
         <Nullable>enable</Nullable>
         <PackageVersion>$(Version)</PackageVersion>
         <Title>Negum.Core</Title>
         <Authors>The Negum Project</Authors>
         <Copyright>MIT License</Copyright>
         <PackageProjectUrl>https://github.com/TheNegumProject/Negum.Core</PackageProjectUrl>
-        <PackageLicenseUrl>https://github.com/TheNegumProject/Negum.Core</PackageLicenseUrl>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <RepositoryUrl>https://github.com/TheNegumProject/Negum.Core</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
         <AssemblyVersion>$(Version)</AssemblyVersion>
         <FileVersion>$(Version)</FileVersion>
         <NeutralLanguage>en</NeutralLanguage>
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     </PropertyGroup>
 
 </Project>
