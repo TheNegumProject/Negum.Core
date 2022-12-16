@@ -46,7 +46,7 @@ public class ImageReadersTests : TestBase
     }
         
     [Theory]
-    [InlineData("https://github.com/TheNegumProject/UnpackedMugen/blob/main/chars/kfm720/kfm720.sff?raw=true")] // 2.000
+    // [InlineData("https://github.com/TheNegumProject/UnpackedMugen/blob/main/chars/kfm720/kfm720.sff?raw=true")] // 2.000
     [InlineData("https://github.com/TheNegumProject/JumpUltimateStarsMugen/blob/main/chars/Seiya/Seiya.sff?raw=true")] // 2.000
     [InlineData("https://github.com/TheNegumProject/UnpackedMugen/blob/main/stages/stage0-720.sff?raw=true")] // 2.000
     [InlineData("https://github.com/TheNegumProject/UnpackedMugen/blob/main/stages/stage0.sff?raw=true")] // 2.000
