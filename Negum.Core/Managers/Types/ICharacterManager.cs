@@ -1,61 +1,60 @@
 using Negum.Core.Managers.Entries;
 
-namespace Negum.Core.Managers.Types
+namespace Negum.Core.Managers.Types;
+
+/// <summary>
+/// Manager which handles Character configuration.
+/// </summary>
+/// 
+/// <author>
+/// https://github.com/TheNegumProject/Negum.Core
+/// </author>
+public interface ICharacterManager : IManager
 {
+    ICharacterInfo Info => GetSection<ICharacterInfo>("Info");
+    ICharacterFiles Files => GetSection<ICharacterFiles>("Files");
+    ICharacterPaletteKeymap Keymap => GetSection<ICharacterPaletteKeymap>("Palette Keymap");
+    ICharacterArcade Arcade => GetSection<ICharacterArcade>("Arcade");
+}
+
+public interface ICharacterInfo : IManagerSection
+{
+    string? CharacterName => GetValue<string>("name");
+    string? DisplayName => GetValue<string>("displayname");
+    ITimeEntry? VersionDate => GetValue<ITimeEntry>("versiondate");
+    string? Version => GetValue<string>("mugenversion");
+    string? Author => GetValue<string>("author");
+
     /// <summary>
-    /// Manager which handles Character configuration.
+    /// Default palettes in order of preference (up to 4).
     /// </summary>
-    /// 
-    /// <author>
-    /// https://github.com/TheNegumProject/Negum.Core
-    /// </author>
-    public interface ICharacterManager : IManager
-    {
-        ICharacterInfo Info => this.GetSection<ICharacterInfo>("Info");
-        ICharacterFiles Files => this.GetSection<ICharacterFiles>("Files");
-        ICharacterPaletteKeymap Keymap => this.GetSection<ICharacterPaletteKeymap>("Palette Keymap");
-        ICharacterArcade Arcade => this.GetSection<ICharacterArcade>("Arcade");
-    }
+    IVectorEntry? PaletteDefaults => GetValue<IVectorEntry>("pal.defaults");
+}
 
-    public interface ICharacterInfo : IManagerSection
-    {
-        string CharacterName => this.GetValue<string>("name");
-        string DisplayName => this.GetValue<string>("displayname");
-        ITimeEntry VersionDate => this.GetValue<ITimeEntry>("versiondate");
-        string Version => this.GetValue<string>("mugenversion");
-        string Author => this.GetValue<string>("author");
+public interface ICharacterFiles : IManagerSection
+{
+    string? CommandFile => GetValue<string>("cmd");
+    string? ConstantsFile => GetValue<string>("cns");
+    string? StatesFile => GetValue<string>("st");
+    string? CommonStatesFile => GetValue<string>("stcommon");
+    string? SpriteFiles => GetValue<string>("sprite");
+    string? AnimationFile => GetValue<string>("anim");
+    string? SoundFile => GetValue<string>("sound");
+    string? AiHintsDataFile => GetValue<string>("ai");
+}
 
-        /// <summary>
-        /// Default palettes in order of preference (up to 4).
-        /// </summary>
-        IVectorEntry PaletteDefaults => this.GetValue<IVectorEntry>("pal.defaults");
-    }
+public interface ICharacterPaletteKeymap : IManagerSection
+{
+    int? A => GetValue<int>("a");
+    int? B => GetValue<int>("b");
+    int? C => GetValue<int>("c");
+    int? X => GetValue<int>("x");
+    int? Y => GetValue<int>("y");
+    int? Z => GetValue<int>("z");
+}
 
-    public interface ICharacterFiles : IManagerSection
-    {
-        string CommandFile => this.GetValue<string>("cmd");
-        string ConstantsFile => this.GetValue<string>("cns");
-        string StatesFile => this.GetValue<string>("st");
-        string CommonStatesFile => this.GetValue<string>("stcommon");
-        string SpriteFiles => this.GetValue<string>("sprite");
-        string AnimationFile => this.GetValue<string>("anim");
-        string SoundFile => this.GetValue<string>("sound");
-        string AiHintsDataFile => this.GetValue<string>("ai");
-    }
-
-    public interface ICharacterPaletteKeymap : IManagerSection
-    {
-        int A => this.GetValue<int>("a");
-        int B => this.GetValue<int>("b");
-        int C => this.GetValue<int>("c");
-        int X => this.GetValue<int>("x");
-        int Y => this.GetValue<int>("y");
-        int Z => this.GetValue<int>("z");
-    }
-
-    public interface ICharacterArcade : IManagerSection
-    {
-        string IntroStoryboardFile => this.GetValue<string>("intro.storyboard");
-        string EndingStoryboardFile => this.GetValue<string>("ending.storyboard");
-    }
+public interface ICharacterArcade : IManagerSection
+{
+    string? IntroStoryboardFile => GetValue<string>("intro.storyboard");
+    string? EndingStoryboardFile => GetValue<string>("ending.storyboard");
 }

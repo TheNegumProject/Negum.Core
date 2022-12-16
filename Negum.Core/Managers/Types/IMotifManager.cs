@@ -1,308 +1,304 @@
 using System.Collections.Generic;
 using Negum.Core.Managers.Entries;
 
-namespace Negum.Core.Managers.Types
+namespace Negum.Core.Managers.Types;
+
+/// <summary>
+/// Manager which handles Motif configuration.
+/// </summary>
+/// 
+/// <author>
+/// https://github.com/TheNegumProject/Negum.Core
+/// </author>
+public interface IMotifManager : IManager
+{
+    IMotifInfo Info => GetSection<IMotifInfo>("Info");
+    IMotifFiles Files => GetSection<IMotifFiles>("Files");
+    IMotifMusic Music => GetSection<IMotifMusic>("Music");
+    IMotifTitleInfo TitleInfo => GetSection<IMotifTitleInfo>("Title Info");
+    IMotifScreenBgDef TitleBgDef => GetSection<IMotifScreenBgDef>("TitleBGdef");
+    IEnumerable<IMotifScreenBg> TitleBgs => GetSubsections<IMotifScreenBg>("TitleBGdef");
+    IMotifInfobox Infobox => GetSection<IMotifInfobox>("Infobox");
+    IMotifSelectInfo SelectInfo => GetSection<IMotifSelectInfo>("Select Info");
+    IMotifScreenBgDef SelectBgDef => GetSection<IMotifScreenBgDef>("SelectBGdef");
+    IEnumerable<IMotifScreenBg> SelectBgs => GetSubsections<IMotifScreenBg>("SelectBGdef");
+    IMotifVsScreen VsScreen => GetSection<IMotifVsScreen>("VS Screen");
+    IMotifScreenBgDef VersusBgDef => GetSection<IMotifScreenBgDef>("VersusBGdef");
+    IEnumerable<IMotifScreenBg> VersusBgs => GetSubsections<IMotifScreenBg>("VersusBGdef");
+    IMotifDemoMode DemoMode => GetSection<IMotifDemoMode>("Demo Mode");
+    IMotifContinueScreen ContinueScreen => GetSection<IMotifContinueScreen>("Continue Screen");
+    IMotifGameOverScreen GameOverScreen => GetSection<IMotifGameOverScreen>("Game Over Screen");
+    IMotifVictoryScreen VictoryScreen => GetSection<IMotifVictoryScreen>("Victory Screen");
+    IMotifScreenBgDef VictoryBgDef => GetSection<IMotifScreenBgDef>("VictoryBGdef");
+    IEnumerable<IMotifScreenBg> VictoryBgs => GetSubsections<IMotifScreenBg>("VictoryBGdef");
+    IMotifWinScreen WinScreen => GetSection<IMotifWinScreen>("Win Screen");
+    IMotifDefaultEnding DefaultEnding => GetSection<IMotifDefaultEnding>("Default Ending");
+    IMotifEndCredits EndCredits => GetSection<IMotifEndCredits>("End Credits");
+    IMotifSurvivalResultsScreen SurvivalResultsScreen => GetSection<IMotifSurvivalResultsScreen>("Survival Results Screen");
+    IMotifScreenBgDef OptionInfo => GetSection<IMotifScreenBgDef>("Option Info");
+    IMotifScreenBgDef OptionBgDef => GetSection<IMotifScreenBgDef>("OptionBGdef");
+    IEnumerable<IMotifScreenBg> OptionBgs => GetSubsections<IMotifScreenBg>("OptionBGdef");
+}
+
+public interface IMotifScreenBgDef : IManagerSection
+{
+    string? SpriteFile => GetValue<string>("spr");
+    IVectorEntry? BgClearColor => GetValue<IVectorEntry>("bgclearcolor");
+}
+
+public interface IMotifInfo : IManagerSection
 {
     /// <summary>
-    /// Manager which handles Motif configuration.
+    /// Name of motif.
     /// </summary>
-    /// 
-    /// <author>
-    /// https://github.com/TheNegumProject/Negum.Core
-    /// </author>
-    public interface IMotifManager : IManager
-    {
-        IMotifInfo Info => this.GetSection<IMotifInfo>("Info");
-        IMotifFiles Files => this.GetSection<IMotifFiles>("Files");
-        IMotifMusic Music => this.GetSection<IMotifMusic>("Music");
-        IMotifTitleInfo TitleInfo => this.GetSection<IMotifTitleInfo>("Title Info");
-        IMotifScreenBgDef TitleBgDef => this.GetSection<IMotifScreenBgDef>("TitleBGdef");
-        IEnumerable<IMotifScreenBg> TitleBgs => this.GetSubsections<IMotifScreenBg>("TitleBGdef");
-        IMotifInfobox Infobox => this.GetSection<IMotifInfobox>("Infobox");
-        IMotifSelectInfo SelectInfo => this.GetSection<IMotifSelectInfo>("Select Info");
-        IMotifScreenBgDef SelectBgDef => this.GetSection<IMotifScreenBgDef>("SelectBGdef");
-        IEnumerable<IMotifScreenBg> SelectBgs => this.GetSubsections<IMotifScreenBg>("SelectBGdef");
-        IMotifVsScreen VsScreen => this.GetSection<IMotifVsScreen>("VS Screen");
-        IMotifScreenBgDef VersusBgDef => this.GetSection<IMotifScreenBgDef>("VersusBGdef");
-        IEnumerable<IMotifScreenBg> VersusBgs => this.GetSubsections<IMotifScreenBg>("VersusBGdef");
-        IMotifDemoMode DemoMode => this.GetSection<IMotifDemoMode>("Demo Mode");
-        IMotifContinueScreen ContinueScreen => this.GetSection<IMotifContinueScreen>("Continue Screen");
-        IMotifGameOverScreen GameOverScreen => this.GetSection<IMotifGameOverScreen>("Game Over Screen");
-        IMotifVictoryScreen VictoryScreen => this.GetSection<IMotifVictoryScreen>("Victory Screen");
-        IMotifScreenBgDef VictoryBgDef => this.GetSection<IMotifScreenBgDef>("VictoryBGdef");
-        IEnumerable<IMotifScreenBg> VictoryBgs => this.GetSubsections<IMotifScreenBg>("VictoryBGdef");
-        IMotifWinScreen WinScreen => this.GetSection<IMotifWinScreen>("Win Screen");
-        IMotifDefaultEnding DefaultEnding => this.GetSection<IMotifDefaultEnding>("Default Ending");
-        IMotifEndCredits EndCredits => this.GetSection<IMotifEndCredits>("End Credits");
+    string? MotifName => GetValue<string>("name");
 
-        IMotifSurvivalResultsScreen SurvivalResultsScreen =>
-            this.GetSection<IMotifSurvivalResultsScreen>("Survival Results Screen");
+    /// <summary>
+    /// Motif author name.
+    /// </summary>
+    string? Author => GetValue<string>("author");
 
-        IMotifScreenBgDef OptionInfo => this.GetSection<IMotifScreenBgDef>("Option Info");
-        IMotifScreenBgDef OptionBgDef => this.GetSection<IMotifScreenBgDef>("OptionBGdef");
-        IEnumerable<IMotifScreenBg> OptionBgs => this.GetSubsections<IMotifScreenBg>("OptionBGdef");
-    }
+    /// <summary>
+    /// Version date of motif.
+    /// </summary>
+    ITimeEntry? VersionDate => GetValue<ITimeEntry>("versiondate");
 
-    public interface IMotifScreenBgDef : IManagerSection
-    {
-        string SpriteFile => this.GetValue<string>("spr");
-        IVectorEntry BgClearColor => this.GetValue<IVectorEntry>("bgclearcolor");
-    }
+    /// <summary>
+    /// Version of motif.
+    /// </summary>
+    float? Version => GetValue<float>("mugenversion");
+}
 
-    public interface IMotifInfo : IManagerSection
-    {
-        /// <summary>
-        /// Name of motif.
-        /// </summary>
-        string MotifName => this.GetValue<string>("name");
+public interface IMotifFiles : IManagerSection
+{
+    /// <summary>
+    /// Filename of sprite data.
+    /// </summary>
+    string? SpriteFile => GetValue<string>("spr");
 
-        /// <summary>
-        /// Motif author name.
-        /// </summary>
-        string Author => this.GetValue<string>("author");
+    /// <summary>
+    /// Filename of sound data.
+    /// </summary>
+    string? SoundFile => GetValue<string>("snd");
 
-        /// <summary>
-        /// Version date of motif.
-        /// </summary>
-        ITimeEntry VersionDate => this.GetValue<ITimeEntry>("versiondate");
+    /// <summary>
+    /// Logo storyboard definition (optional).
+    /// </summary>
+    string? LogoStoryboardDefinition => GetValue<string>("logo.storyboard");
 
-        /// <summary>
-        /// Version of motif.
-        /// </summary>
-        float Version => this.GetValue<float>("mugenversion");
-    }
+    /// <summary>
+    /// Intro storyboard definition (optional).
+    /// </summary>
+    string? IntroStoryboardDefinition => GetValue<string>("intro.storyboard");
 
-    public interface IMotifFiles : IManagerSection
-    {
-        /// <summary>
-        /// Filename of sprite data.
-        /// </summary>
-        string SpriteFile => this.GetValue<string>("spr");
+    /// <summary>
+    /// Character and stage selection list.
+    /// </summary>
+    string? SelectionFile => GetValue<string>("select");
 
-        /// <summary>
-        /// Filename of sound data.
-        /// </summary>
-        string SoundFile => this.GetValue<string>("snd");
+    /// <summary>
+    /// Fight definition filename.
+    /// </summary>
+    string? FightFile => GetValue<string>("fight");
 
-        /// <summary>
-        /// Logo storyboard definition (optional).
-        /// </summary>
-        string LogoStoryboardDefinition => this.GetValue<string>("logo.storyboard");
+    /// <summary>
+    /// System fonts.
+    /// </summary>
+    IEnumerable<string> FontFiles => GetValues<string>("font");
+}
 
-        /// <summary>
-        /// Intro storyboard definition (optional).
-        /// </summary>
-        string IntroStoryboardDefinition => this.GetValue<string>("intro.storyboard");
+public interface IMotifMusic : IManagerSection
+{
+    /// <summary>
+    /// Music to play at title screen.
+    /// </summary>
+    IAudioEntry? Title => GetValue<IAudioEntry>("title.bgm");
 
-        /// <summary>
-        /// Character and stage selection list.
-        /// </summary>
-        string SelectionFile => this.GetValue<string>("select");
+    /// <summary>
+    /// Music to play at char select screen.
+    /// </summary>
+    IAudioEntry? Select => GetValue<IAudioEntry>("select.bgm");
 
-        /// <summary>
-        /// Fight definition filename.
-        /// </summary>
-        string FightFile => this.GetValue<string>("fight");
+    /// <summary>
+    /// Music to play at versus screen.
+    /// </summary>
+    IAudioEntry? Vs => GetValue<IAudioEntry>("vs.bgm");
 
-        /// <summary>
-        /// System fonts.
-        /// </summary>
-        IEnumerable<string> FontFiles => this.GetValues<string>("font");
-    }
+    /// <summary>
+    /// Music to play at victory screen.
+    /// </summary>
+    IAudioEntry? Victory => GetValue<IAudioEntry>("victory.bgm");
+}
 
-    public interface IMotifMusic : IManagerSection
-    {
-        /// <summary>
-        /// Music to play at title screen.
-        /// </summary>
-        IAudioEntry Title => this.GetValue<IAudioEntry>("title.bgm");
+public interface IMotifTitleInfo : IManagerSection
+{
+    ITimeEntry? FadeInTime => GetValue<ITimeEntry>("fadein.time");
+    ITimeEntry? FadeOutTime => GetValue<ITimeEntry>("fadeout.time");
+    IVectorEntry? MenuPosition => GetValue<IVectorEntry>("menu.pos");
+    ITextEntry? MenuItem => GetValue<ITextEntry>("menu.item");
+    ITextEntry? MenuItemActive => GetValue<ITextEntry>("menu.item.active");
+    string? MenuItemNameArcade => GetValue<string>("menu.itemname.arcade");
+    string? MenuItemNameVersus => GetValue<string>("menu.itemname.versus");
+    string? MenuItemNameTeamArcade => GetValue<string>("menu.itemname.teamarcade");
+    string? MenuItemNameTeamVersus => GetValue<string>("menu.itemname.teamversus");
+    string? MenuItemNameTeamCoop => GetValue<string>("menu.itemname.teamcoop");
+    string? MenuItemNameSurvival => GetValue<string>("menu.itemname.survival");
+    string? MenuItemNameSurvivalCoop => GetValue<string>("menu.itemname.survivalcoop");
+    string? MenuItemNameTraining => GetValue<string>("menu.itemname.training");
+    string? MenuItemNameWatch => GetValue<string>("menu.itemname.watch");
+    string? MenuItemNameOptions => GetValue<string>("menu.itemname.options");
+    string? MenuItemNameExit => GetValue<string>("menu.itemname.exit");
+    IVectorEntry? MenuWindowMarginsY => GetValue<IVectorEntry>("menu.window.margins.y");
+    int? MenuWindowVisibleItems => GetValue<int>("menu.window.visibleitems");
 
-        /// <summary>
-        /// Music to play at char select screen.
-        /// </summary>
-        IAudioEntry Select => this.GetValue<IAudioEntry>("select.bgm");
+    /// <summary>
+    /// Set it to true to enable default cursor display.
+    /// Set it to false to disable default cursor display.
+    /// </summary>
+    bool? IsMenuBoxCursorVisible => GetValue<bool>("menu.boxcursor.visible");
 
-        /// <summary>
-        /// Music to play at versus screen.
-        /// </summary>
-        IAudioEntry Vs => this.GetValue<IAudioEntry>("vs.bgm");
+    IVectorEntry? MenuBoxCursorCoords => GetValue<IVectorEntry>("menu.boxcursor.coords");
+    IMovementStateEntry? Cursor => GetValue<IMovementStateEntry>("cursor");
+    ISpriteSoundEntry? Cancel => GetValue<ISpriteSoundEntry>("cancel");
+}
 
-        /// <summary>
-        /// Music to play at victory screen.
-        /// </summary>
-        IAudioEntry Victory => this.GetValue<IAudioEntry>("victory.bgm");
-    }
+public interface IMotifScreenBg : IManagerSection
+{
+    string? Type => GetValue<string>("type");
+    IVectorEntry? SpriteNumber => GetValue<IVectorEntry>("spriteno");
+    int? LayerNumber => GetValue<int>("layerno");
+    IVectorEntry? Start => GetValue<IVectorEntry>("start");
+    IVectorEntry? Tile => GetValue<IVectorEntry>("tile");
+    IVectorEntry? Velocity => GetValue<IVectorEntry>("velocity");
+    IVectorEntry? Window => GetValue<IVectorEntry>("window");
+    string? Trans => GetValue<string>("trans");
+    int? Mask => GetValue<int>("mask");
+    IVectorEntry? Delta => GetValue<IVectorEntry>("delta");
+}
 
-    public interface IMotifTitleInfo : IManagerSection
-    {
-        ITimeEntry FadeInTime => this.GetValue<ITimeEntry>("fadein.time");
-        ITimeEntry FadeOutTime => this.GetValue<ITimeEntry>("fadeout.time");
-        IVectorEntry MenuPosition => this.GetValue<IVectorEntry>("menu.pos");
-        ITextEntry MenuItem => this.GetValue<ITextEntry>("menu.item");
-        ITextEntry MenuItemActive => this.GetValue<ITextEntry>("menu.item.active");
-        string MenuItemNameArcade => this.GetValue<string>("menu.itemname.arcade");
-        string MenuItemNameVersus => this.GetValue<string>("menu.itemname.versus");
-        string MenuItemNameTeamArcade => this.GetValue<string>("menu.itemname.teamarcade");
-        string MenuItemNameTeamVersus => this.GetValue<string>("menu.itemname.teamversus");
-        string MenuItemNameTeamCoop => this.GetValue<string>("menu.itemname.teamcoop");
-        string MenuItemNameSurvival => this.GetValue<string>("menu.itemname.survival");
-        string MenuItemNameSurvivalCoop => this.GetValue<string>("menu.itemname.survivalcoop");
-        string MenuItemNameTraining => this.GetValue<string>("menu.itemname.training");
-        string MenuItemNameWatch => this.GetValue<string>("menu.itemname.watch");
-        string MenuItemNameOptions => this.GetValue<string>("menu.itemname.options");
-        string MenuItemNameExit => this.GetValue<string>("menu.itemname.exit");
-        IVectorEntry MenuWindowMarginsY => this.GetValue<IVectorEntry>("menu.window.margins.y");
-        int MenuWindowVisibleItems => this.GetValue<int>("menu.window.visibleitems");
+public interface IMotifInfobox : IManagerSection
+{
+    // TODO: What is this ??? Get an example
+}
 
-        /// <summary>
-        /// Set it to true to enable default cursor display.
-        /// Set it to false to disable default cursor display.
-        /// </summary>
-        bool IsMenuBoxCursorVisible => this.GetValue<bool>("menu.boxcursor.visible");
+public interface IMotifSelectInfo : IManagerSection
+{
+    ITimeEntry? FadeInTime => GetValue<ITimeEntry>("fadein.time");
+    ITimeEntry? FadeOutTime => GetValue<ITimeEntry>("fadeout.time");
+    int? Rows => GetValue<int>("rows");
+    int? Columns => GetValue<int>("columns");
 
-        IVectorEntry MenuBoxCursorCoords => this.GetValue<IVectorEntry>("menu.boxcursor.coords");
-        IMovementStateEntry Cursor => this.GetValue<IMovementStateEntry>("cursor");
-        ISpriteSoundEntry Cancel => this.GetValue<ISpriteSoundEntry>("cancel");
-    }
+    /// <summary>
+    /// Values:
+    /// 0 - default
+    /// 1 - cursor wraps around
+    /// </summary>
+    int? Wrapping => GetValue<int>("wrapping");
 
-    public interface IMotifScreenBg : IManagerSection
-    {
-        string Type => this.GetValue<string>("type");
-        IVectorEntry SpriteNumber => this.GetValue<IVectorEntry>("spriteno");
-        int LayerNumber => this.GetValue<int>("layerno");
-        IVectorEntry Start => this.GetValue<IVectorEntry>("start");
-        IVectorEntry Tile => this.GetValue<IVectorEntry>("tile");
-        IVectorEntry Velocity => this.GetValue<IVectorEntry>("velocity");
-        IVectorEntry Window => this.GetValue<IVectorEntry>("window");
-        string Trans => this.GetValue<string>("trans");
-        int Mask => this.GetValue<int>("mask");
-        IVectorEntry Delta => this.GetValue<IVectorEntry>("delta");
-    }
+    /// <summary>
+    /// Position to draw to.
+    /// </summary>
+    IVectorEntry? Position => GetValue<IVectorEntry>("pos");
 
-    public interface IMotifInfobox : IManagerSection
-    {
-        // TODO: What is this ??? Get an example
-    }
+    bool? ShowEmptyBoxes => GetValue<bool>("showemptyboxes");
+    bool? CanMoveOverEmptyBoxes => GetValue<bool>("moveoveremptyboxes");
+    ICellSelectionEntry? Cell => GetValue<ICellSelectionEntry>("cell");
 
-    public interface IMotifSelectInfo : IManagerSection
-    {
-        ITimeEntry FadeInTime => this.GetValue<ITimeEntry>("fadein.time");
-        ITimeEntry FadeOutTime => this.GetValue<ITimeEntry>("fadeout.time");
-        int Rows => this.GetValue<int>("rows");
-        int Columns => this.GetValue<int>("columns");
+    /// <summary>
+    /// Player 1 selection.
+    /// </summary>
+    IPlayerSelectionEntry? Player1 => GetValue<IPlayerSelectionEntry>("p1");
 
-        /// <summary>
-        /// Values:
-        /// 0 - default
-        /// 1 - cursor wraps around
-        /// </summary>
-        int Wrapping => this.GetValue<int>("wrapping");
+    /// <summary>
+    /// Player 2 selection.
+    /// </summary>
+    IPlayerSelectionEntry? Player2 => GetValue<IPlayerSelectionEntry>("p2");
 
-        /// <summary>
-        /// Position to draw to.
-        /// </summary>
-        IVectorEntry Position => this.GetValue<IVectorEntry>("pos");
+    IMovementStateEntry? Random => GetValue<IMovementStateEntry>("random");
+    ISpriteSoundEntry? Cancel => GetValue<ISpriteSoundEntry>("cancel");
+    IImageEntry? Portrait => GetValue<IImageEntry>("portrait");
+    ITextEntry? Title => GetValue<ITextEntry>("title");
+    IStageSelectionEntry? Stage => GetValue<IStageSelectionEntry>("stage");
+    bool? TeamMenuMoveWrapping => GetValue<bool>("teammenu.move.wrapping");
+}
 
-        bool ShowEmptyBoxes => this.GetValue<bool>("showemptyboxes");
-        bool CanMoveOverEmptyBoxes => this.GetValue<bool>("moveoveremptyboxes");
-        ICellSelectionEntry Cell => this.GetValue<ICellSelectionEntry>("cell");
+public interface IMotifVsScreen : IManagerSection
+{
+    ITimeEntry? Time => GetValue<ITimeEntry>("time");
+    ITimeEntry? FadeInTime => GetValue<ITimeEntry>("fadein.time");
+    ITimeEntry? FadeOutTime => GetValue<ITimeEntry>("fadeout.time");
+    ITextEntry? Match => GetValue<ITextEntry>("match");
+    IPlayerSelectionEntry? Player1 => GetValue<IPlayerSelectionEntry>("p1");
+    IPlayerSelectionEntry? Player2 => GetValue<IPlayerSelectionEntry>("p2");
+}
 
-        /// <summary>
-        /// Player 1 selection.
-        /// </summary>
-        IPlayerSelectionEntry Player1 => this.GetValue<IPlayerSelectionEntry>("p1");
+public interface IMotifDemoMode : IManagerSection
+{
+    bool? IsEnabled => GetValue<bool>("enabled");
+    ITimeEntry? WaitTime => GetValue<ITimeEntry>("title.waittime");
+    IDemoModeFightEntry? Fight => GetValue<IDemoModeFightEntry>("fight");
+    int? IntroWaitCycles => GetValue<int>("intro.waitcycles");
+    bool? ShowDebugInfo => GetValue<bool>("debuginfo");
+}
 
-        /// <summary>
-        /// Player 2 selection.
-        /// </summary>
-        IPlayerSelectionEntry Player2 => this.GetValue<IPlayerSelectionEntry>("p2");
+public interface IMotifContinueScreen : IManagerSection
+{
+    bool? IsEnabled => GetValue<bool>("enabled");
+    IVectorEntry? Position => GetValue<IVectorEntry>("pos");
+    ITextEntry? ContinueText => GetValue<ITextEntry>("continue");
+    ITextEntry? YesText => GetValue<ITextEntry>("yes");
+    ITextEntry? YesActiveText => GetValue<ITextEntry>("yes.active");
+    ITextEntry? NoText => GetValue<ITextEntry>("no");
+    ITextEntry? NoActiveText => GetValue<ITextEntry>("no.active");
+}
 
-        IMovementStateEntry Random => this.GetValue<IMovementStateEntry>("random");
-        ISpriteSoundEntry Cancel => this.GetValue<ISpriteSoundEntry>("cancel");
-        IImageEntry Portrait => this.GetValue<IImageEntry>("portrait");
-        ITextEntry Title => this.GetValue<ITextEntry>("title");
-        IStageSelectionEntry Stage => this.GetValue<IStageSelectionEntry>("stage");
-        bool TeamMenuMoveWrapping => this.GetValue<bool>("teammenu.move.wrapping");
-    }
+public interface IMotifGameOverScreen : IManagerSection
+{
+    bool? IsEnabled => GetValue<bool>("enabled");
+    string? StoryboardFile => GetValue<string>("storyboard");
+}
 
-    public interface IMotifVsScreen : IManagerSection
-    {
-        ITimeEntry Time => this.GetValue<ITimeEntry>("time");
-        ITimeEntry FadeInTime => this.GetValue<ITimeEntry>("fadein.time");
-        ITimeEntry FadeOutTime => this.GetValue<ITimeEntry>("fadeout.time");
-        ITextEntry Match => this.GetValue<ITextEntry>("match");
-        IPlayerSelectionEntry Player1 => this.GetValue<IPlayerSelectionEntry>("p1");
-        IPlayerSelectionEntry Player2 => this.GetValue<IPlayerSelectionEntry>("p2");
-    }
+public interface IMotifVictoryScreen : IManagerSection
+{
+    bool? IsEnabled => GetValue<bool>("enabled");
+    ITimeEntry? Time => GetValue<ITimeEntry>("time");
+    ITimeEntry? FadeInTime => GetValue<ITimeEntry>("fadein.time");
+    ITimeEntry? FadeOutTime => GetValue<ITimeEntry>("fadeout.time");
+    IPlayerSelectionEntry? Player1 => GetValue<IPlayerSelectionEntry>("p1");
+    ITextEntry? WinQuote => GetValue<ITextEntry>("winquote");
+}
 
-    public interface IMotifDemoMode : IManagerSection
-    {
-        bool IsEnabled => this.GetValue<bool>("enabled");
-        ITimeEntry WaitTime => this.GetValue<ITimeEntry>("title.waittime");
-        IDemoModeFightEntry Fight => this.GetValue<IDemoModeFightEntry>("fight");
-        int IntroWaitCycles => this.GetValue<int>("intro.waitcycles");
-        bool ShowDebugInfo => this.GetValue<bool>("debuginfo");
-    }
+public interface IMotifWinScreen : IManagerSection
+{
+    bool? IsEnabled => GetValue<bool>("enabled");
+    ITextEntry? WinText => GetValue<ITextEntry>("wintext");
+    ITimeEntry? FadeInTime => GetValue<ITimeEntry>("fadein.time");
+    ITimeEntry? FadeOutTime => GetValue<ITimeEntry>("fadeout.time");
+    ITimeEntry? PoseTime => GetValue<ITimeEntry>("pos.time");
+}
 
-    public interface IMotifContinueScreen : IManagerSection
-    {
-        bool IsEnabled => this.GetValue<bool>("enabled");
-        IVectorEntry Position => this.GetValue<IVectorEntry>("pos");
-        ITextEntry ContinueText => this.GetValue<ITextEntry>("continue");
-        ITextEntry YesText => this.GetValue<ITextEntry>("yes");
-        ITextEntry YesActiveText => this.GetValue<ITextEntry>("yes.active");
-        ITextEntry NoText => this.GetValue<ITextEntry>("no");
-        ITextEntry NoActiveText => this.GetValue<ITextEntry>("no.active");
-    }
+public interface IMotifDefaultEnding : IManagerSection
+{
+    bool? IsEnabled => GetValue<bool>("enabled");
+    string? StoryboardFile => GetValue<string>("storyboard");
+}
 
-    public interface IMotifGameOverScreen : IManagerSection
-    {
-        bool IsEnabled => this.GetValue<bool>("enabled");
-        string StoryboardFile => this.GetValue<string>("storyboard");
-    }
+public interface IMotifEndCredits : IManagerSection
+{
+    bool? IsEnabled => GetValue<bool>("enabled");
+    string? StoryboardFile => GetValue<string>("storyboard");
+}
 
-    public interface IMotifVictoryScreen : IManagerSection
-    {
-        bool IsEnabled => this.GetValue<bool>("enabled");
-        ITimeEntry Time => this.GetValue<ITimeEntry>("time");
-        ITimeEntry FadeInTime => this.GetValue<ITimeEntry>("fadein.time");
-        ITimeEntry FadeOutTime => this.GetValue<ITimeEntry>("fadeout.time");
-        IPlayerSelectionEntry Player1 => this.GetValue<IPlayerSelectionEntry>("p1");
-        ITextEntry WinQuote => this.GetValue<ITextEntry>("winquote");
-    }
+public interface IMotifSurvivalResultsScreen : IManagerSection
+{
+    bool? IsEnabled => GetValue<bool>("enabled");
+    ITextEntry? WinText => GetValue<ITextEntry>("wintext");
+    ITimeEntry? FadeInTime => GetValue<ITimeEntry>("fadein.time");
+    ITimeEntry? FadeOutTime => GetValue<ITimeEntry>("fadeout.time");
+    ITimeEntry? ShowTime => GetValue<ITimeEntry>("show.time");
 
-    public interface IMotifWinScreen : IManagerSection
-    {
-        bool IsEnabled => this.GetValue<bool>("enabled");
-        ITextEntry WinText => this.GetValue<ITextEntry>("wintext");
-        ITimeEntry FadeInTime => this.GetValue<ITimeEntry>("fadein.time");
-        ITimeEntry FadeOutTime => this.GetValue<ITimeEntry>("fadeout.time");
-        ITimeEntry PoseTime => this.GetValue<ITimeEntry>("pos.time");
-    }
-
-    public interface IMotifDefaultEnding : IManagerSection
-    {
-        bool IsEnabled => this.GetValue<bool>("enabled");
-        string StoryboardFile => this.GetValue<string>("storyboard");
-    }
-
-    public interface IMotifEndCredits : IManagerSection
-    {
-        bool IsEnabled => this.GetValue<bool>("enabled");
-        string StoryboardFile => this.GetValue<string>("storyboard");
-    }
-
-    public interface IMotifSurvivalResultsScreen : IManagerSection
-    {
-        bool IsEnabled => this.GetValue<bool>("enabled");
-        ITextEntry WinText => this.GetValue<ITextEntry>("wintext");
-        ITimeEntry FadeInTime => this.GetValue<ITimeEntry>("fadein.time");
-        ITimeEntry FadeOutTime => this.GetValue<ITimeEntry>("fadeout.time");
-        ITimeEntry ShowTime => this.GetValue<ITimeEntry>("show.time");
-
-        /// <summary>
-        /// Number of rounds to get win pose (lose pose otherwise).
-        /// </summary>
-        int RoundsToWin => this.GetValue<int>("roundstowin");
-    }
+    /// <summary>
+    /// Number of rounds to get win pose (lose pose otherwise).
+    /// </summary>
+    int? RoundsToWin => GetValue<int>("roundstowin");
 }
