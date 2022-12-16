@@ -122,6 +122,11 @@ public class SffSpriteV2Reader : SffSpriteReader, ISffSpriteV2Reader
 
             var paletteData = binaryReader.ReadBytes((int) palette.LDataLength);
 
+            if (paletteData.Length == 0)
+            {
+                continue;
+            }
+
             // Read colors of palette - create temporary palette
             var paletteWithColors = paletteReader.ReadExact(paletteData, palette.ColorNumber, true);
 
