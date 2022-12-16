@@ -8,7 +8,7 @@
         <Authors>The Negum Project</Authors>
         <Copyright>MIT License</Copyright>
         <PackageProjectUrl>https://github.com/TheNegumProject/Negum.Core</PackageProjectUrl>
-        <PackageLicense>https://github.com/TheNegumProject/Negum.Core</PackageLicense>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <RepositoryUrl>https://github.com/TheNegumProject/Negum.Core</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
