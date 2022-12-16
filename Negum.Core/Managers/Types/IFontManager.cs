@@ -1,64 +1,63 @@
 using Negum.Core.Managers.Entries;
 
-namespace Negum.Core.Managers.Types
+namespace Negum.Core.Managers.Types;
+
+/// <summary>
+/// Manager which handles Font configuration.
+/// </summary>
+/// 
+/// <author>
+/// https://github.com/TheNegumProject/Negum.Core
+/// </author>
+public interface IFontManager : IManager
+{
+    IFontFontV2 FontV2 => GetSection<IFontFontV2>("FNT V2");
+    IFontDef Def => GetSection<IFontDef>("Def");
+}
+
+public interface IFontFontV2 : IManagerSection
 {
     /// <summary>
-    /// Manager which handles Font configuration.
+    /// Version of this Font.
     /// </summary>
-    /// 
-    /// <author>
-    /// https://github.com/TheNegumProject/Negum.Core
-    /// </author>
-    public interface IFontManager : IManager
-    {
-        IFontFontV2 FontV2 => this.GetSection<IFontFontV2>("FNT V2");
-        IFontDef Def => this.GetSection<IFontDef>("Def");
-    }
+    string? Version => GetValue<string>("fntversion");
 
-    public interface IFontFontV2 : IManagerSection
-    {
-        /// <summary>
-        /// Version of this Font.
-        /// </summary>
-        string Version => this.GetValue<string>("fntversion");
+    /// <summary>
+    /// Name of this Font.
+    /// </summary>
+    string? FontName => GetValue<string>("name");
+}
 
-        /// <summary>
-        /// Name of this Font.
-        /// </summary>
-        string FontName => this.GetValue<string>("name");
-    }
+public interface IFontDef : IManagerSection
+{
+    /// <summary>
+    /// Type of this Font.
+    /// Example: bitmap
+    /// </summary>
+    string? Type => GetValue<string>("Type");
 
-    public interface IFontDef : IManagerSection
-    {
-        /// <summary>
-        /// Type of this Font.
-        /// Example: bitmap
-        /// </summary>
-        string Type => this.GetValue<string>("Type");
+    /// <summary>
+    /// Bank numbers are mapped to palette numbers (0, bank).
+    /// </summary>
+    string? BankType => GetValue<string>("BankType");
 
-        /// <summary>
-        /// Bank numbers are mapped to palette numbers (0, bank).
-        /// </summary>
-        string BankType => this.GetValue<string>("BankType");
+    /// <summary>
+    /// Size of font: width, height.  Width is used for spaces.
+    /// </summary>
+    IVectorEntry? Size => GetValue<IVectorEntry>("Size");
 
-        /// <summary>
-        /// Size of font: width, height.  Width is used for spaces.
-        /// </summary>
-        IVectorEntry Size => this.GetValue<IVectorEntry>("Size");
+    /// <summary>
+    /// Spacing between font glyphs: width, height.
+    /// </summary>
+    IVectorEntry? Spacing => GetValue<IVectorEntry>("Spacing");
 
-        /// <summary>
-        /// Spacing between font glyphs: width, height.
-        /// </summary>
-        IVectorEntry Spacing => this.GetValue<IVectorEntry>("Spacing");
+    /// <summary>
+    /// Drawing offset: x, y.
+    /// </summary>
+    IVectorEntry? Offset => GetValue<IVectorEntry>("Offset");
 
-        /// <summary>
-        /// Drawing offset: x, y.
-        /// </summary>
-        IVectorEntry Offset => this.GetValue<IVectorEntry>("Offset");
-
-        /// <summary>
-        /// Filename of the sff containing the glyphs.
-        /// </summary>
-        string File => this.GetValue<string>("File");
-    }
+    /// <summary>
+    /// Filename of the sff containing the glyphs.
+    /// </summary>
+    string? File => GetValue<string>("File");
 }
